@@ -1,0 +1,62 @@
+@use "@/styles/color";
+@import "@/styles/media";
+
+.footer {
+  margin-top: auto;
+  width: 100%;
+  color: color.$gray-300;
+  background-color: color.$gray-900;
+
+  .footerContent {
+    --grid-cols: 2;
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin-inline: auto;
+    padding-top: var(--section-spacing);
+    display: grid;
+    gap: var(--section-spacing);
+    grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+    @include media(">md") {
+      --grid-cols: 4;
+    }
+
+    .footerSection {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+
+      &.brand {
+        grid-column: span 2 / span 2;
+
+        .logo {
+          color: color.$gray-100;
+          font-size: 1.25rem;
+          font-weight: 500;
+        }
+      }
+
+      .categoryTitle {
+        color: color.$gray-100;
+      }
+
+      .categoryLinks {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        .link {
+          display: flex;
+          gap: 0.5rem;
+          align-items: center;
+        }
+      }
+    }
+
+    .footerCopyright {
+      grid-column: 1 / -1;
+      padding-block: 1.5rem;
+      border-top: 1px solid color.$gray-800;
+    }
+  }
+}

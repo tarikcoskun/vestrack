@@ -1,0 +1,80 @@
+@use "@/styles/color";
+@import "@/styles/media";
+
+.navbar {
+  width: 100%;
+  height: var(--content-nav-height);
+  color: color.$gray-300;
+  background-color: color.$gray-900;
+
+  .navbarContent {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: var(--content-max-width);
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    margin-inline: auto;
+
+    .brandLogo {
+      color: color.$gray-100;
+      font-size: 1.25rem;
+      font-weight: 500;
+    }
+
+    .navigation {
+      @include media("<phone") {
+        pointer-events: none;
+        position: absolute;
+        inset: calc(var(--content-spacing) * -1);
+        top: var(--content-nav-height);
+        z-index: 10;
+        height: 100vh;
+        opacity: 0;
+        background: var(--theme-background);
+
+        &[data-menu-state="active"] {
+          pointer-events: initial;
+          opacity: 1;
+        }
+      }
+
+      .links {
+        list-style: none;
+        display: flex;
+        @include media("<phone") {
+          flex-direction: column;
+        }
+
+        .link {
+          display: block;
+          padding-inline: 1rem;
+          @include media("<phone") {
+            padding-block: 1rem;
+          }
+        }
+      }
+    }
+
+    .search {
+      flex-grow: 1;
+
+      .searchButton {
+        color: var(--theme-text-body);
+      }
+    }
+
+    .menus {
+      margin-left: auto;
+      display: flex;
+      gap: 0.5rem;
+
+      .mobileMenu {
+        @include media(">phone") {
+          display: none;
+        }
+      }
+    }
+  }
+}
