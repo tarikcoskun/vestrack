@@ -1,0 +1,31 @@
+@use "@/styles/util";
+
+.movieCard {
+  position: relative;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+
+  .moviePoster {
+    aspect-ratio: 2/3;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border: 1px solid var(--theme-outline);
+    background-color: var(--dynamic-gray-150);
+  }
+
+  .movieInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: flex-end;
+
+    .movieTitle {
+      color: var(--theme-text-heading);
+      font-size: 1.125rem;
+      @include util.line-clamp(1);
+    }
+  }
+}

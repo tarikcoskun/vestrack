@@ -1,0 +1,65 @@
+@keyframes dialogOpen {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.dialog:modal {
+  margin: auto;
+  width: 100%;
+  max-width: var(--content-max-width);
+  color: var(--theme-text-body);
+  background-color: var(--dynamic-gray-150);
+  border-radius: 8px;
+
+  &[open] {
+    animation: dialogOpen 150ms;
+  }
+
+  &::backdrop {
+    background-color: rgb(0, 0, 0, 0.5);
+  }
+
+  .modalDismiss {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+
+  .modalHeader {
+    padding: 2rem 2.5rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+  }
+
+  .modalContent {
+    overflow-y: auto;
+    padding: 2.5rem;
+    padding-top: 0;
+    min-width: 300px;
+    min-height: 150px;
+    max-height: 40rem;
+
+    &::-webkit-scrollbar {
+      background: transparent;
+      border-radius: 0 0.25rem 0.25rem 0;
+      height: 100%;
+      width: 0.75rem;
+
+      &-thumb {
+        background: var(--dynamic-gray-500);
+        border: 0.25rem solid var(--dynamic-gray-150);
+        border-radius: 100rem;
+        &:hover {
+          background: var(--dynamic-gray-600);
+        }
+      }
+    }
+  }
+}

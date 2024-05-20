@@ -1,0 +1,28 @@
+@use "@/styles/util";
+
+.videos {
+  padding-block: var(--section-spacing);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  .videoList {
+    gap: 2rem;
+  }
+}
+
+.fullVideoList {
+  display: grid;
+  gap: 4rem 2rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  .video {
+    .thumbnailLink {
+      width: auto;
+
+      .videoThumbnail {
+        width: 100%;
+      }
+    }
+  }
+}

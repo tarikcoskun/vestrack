@@ -1,0 +1,97 @@
+@use "sass:color" as sass-color;
+@use "@/styles/color";
+
+$variants: "solid", "soft", "ghost";
+$colors: (
+  "gray": (
+    text: var(--dynamic-gray-900),
+    base: color.$gray-600,
+  ),
+  "red": (
+    text: var(--dynamic-red-700),
+    base: color.$red-600,
+  ),
+  "blue": (
+    text: var(--dynamic-blue-700),
+    base: color.$blue-600,
+  ),
+);
+
+.button {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+  transition: 150ms background-color;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &.paddingBase {
+    padding: 8px 12px;
+  }
+
+  &.paddingSquare {
+    padding: 8px;
+  }
+
+  &.roundedBase {
+    border-radius: 6px;
+  }
+
+  &.roundedFull {
+    border-radius: 100rem;
+  }
+
+  &.size-lg {
+    font-size: 1.125rem;
+  }
+
+  &.size-sm {
+    font-size: 0.875rem;
+  }
+
+  @mixin generate-color-variant($colors, $variant, $color) {
+    @if $variant == "solid" {
+      background-color: map-get($colors, $color, "base");
+      &:hover {
+        background-color: sass-color.scale(
+          map-get($colors, $color, "base"),
+          $lightness: -25%
+        );
+      }
+    } @else if $variant == "soft" {
+      color: map-get($colors, $color, "text");
+      background-color: sass-color.scale(
+        map-get($colors, $color, "base"),
+        $alpha: -70%
+      );
+      &:hover {
+        background-color: sass-color.scale(
+          map-get($colors, $color, "base"),
+          $alpha: -50%
+        );
+      }
+    } @else if $variant == "ghost" {
+      color: map-get($colors, $color, "text");
+      background-color: transparent;
+      &:hover {
+        background-color: sass-color.scale(
+          map-get($colors, $color, "base"),
+          $alpha: -70%
+        );
+      }
+    } @else {
+      @error "Unsupported variant: #{$variant}";
+    }
+  }
+
+  @each $variant in $variants {
+    @each $color in map-keys($colors) {
+      &.#{$variant}-#{$color} {
+        @include generate-color-variant($colors, $variant, $color);
+      }
+    }
+  }
+}

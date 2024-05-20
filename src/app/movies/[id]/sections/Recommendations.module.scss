@@ -1,0 +1,17 @@
+@import "@/styles/media";
+
+.recommendations {
+  padding-block: var(--section-spacing);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  .recommendationList {
+    gap: 2rem;
+
+    .recommendationCard {
+      flex-basis: 200px;
+      flex-shrink: 0;
+    }
+  }
+}

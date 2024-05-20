@@ -1,0 +1,22 @@
+@use "@/styles/util";
+
+.reviews {
+  padding-block: var(--section-spacing);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  .reviewList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.fullReviewList {
+  composes: reviewList;
+
+  .reviewCard {
+    background-color: var(--dynamic-gray-200);
+  }
+}

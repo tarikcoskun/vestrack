@@ -1,0 +1,90 @@
+.skeletonSection {
+  max-width: 1112px;
+  overflow: hidden;
+
+  header {
+    height: 37px;
+  }
+}
+
+.overviewSkeleton {
+  composes: overview from "./sections/Overview.module.scss";
+
+  .overviewInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-block: 1.25rem;
+    }
+
+    .crewOverview {
+      display: flex;
+      gap: 1rem;
+      flex-direction: column;
+      margin-top: 1.25rem;
+    }
+  }
+}
+
+.castSkeleton {
+  composes: cast from "./sections/Cast.module.scss";
+
+  .castList {
+    display: flex;
+    gap: 2rem;
+
+    .person {
+      height: 265.2px;
+      display: flex;
+      gap: 0.5rem;
+      flex-direction: column;
+    }
+  }
+}
+
+.videosSkeleton {
+  composes: videos from "./sections/Videos.module.scss";
+
+  .videoList {
+    display: flex;
+    gap: 2rem;
+
+    .video {
+      height: 252.08px;
+      display: flex;
+      gap: 0.5rem;
+      flex-direction: column;
+    }
+  }
+}
+
+.reviewsSkeleton {
+  composes: reviews from "./sections/Reviews.module.scss";
+}
+
+.recommendationsSkeleton {
+  composes: recommendations from "./sections/Recommendations.module.scss";
+
+  header {
+    height: 32px;
+  }
+
+  .recommendationList {
+    display: flex;
+    gap: 2rem;
+    max-width: 1112px;
+    overflow: hidden;
+
+    .movieCard {
+      height: 358.3px;
+      display: flex;
+      gap: 0.5rem;
+      flex-direction: column;
+    }
+  }
+}

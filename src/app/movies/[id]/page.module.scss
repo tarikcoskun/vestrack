@@ -1,0 +1,71 @@
+.movieInfoPage {
+  .pageLayout {
+    --sidebar-width: 8rem;
+    --gap: 4rem;
+    display: flex;
+    gap: var(--gap);
+    align-items: flex-start;
+
+    .pageContent {
+      flex-grow: 1;
+      width: calc(100% - var(--sidebar-width) - var(--gap));
+
+      > section {
+        > header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          h1 {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+          }
+
+          :global(.scrollerControls) {
+            display: flex;
+            gap: 0.5rem;
+          }
+        }
+      }
+    }
+
+    .pageSidebar {
+      z-index: 10;
+      width: var(--sidebar-width);
+      position: sticky;
+      top: calc(var(--content-nav-height) + 4rem);
+
+      .sidebarLinks {
+        list-style: none;
+
+        .sidebarLink {
+          color: var(--theme-text-body);
+          padding-left: 1rem;
+          padding-block: 0.5rem;
+          border-left: 2px solid var(--dynamic-gray-300);
+          cursor: pointer;
+
+          &:hover {
+            color: var(--theme-text-heading);
+          }
+
+          &[data-state="active"] {
+            color: var(--theme-text-heading);
+            font-weight: 500;
+            border-color: var(--dynamic-gray-900);
+          }
+        }
+      }
+
+      .buttons {
+        margin-top: 1rem;
+
+        > * {
+          justify-content: center;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

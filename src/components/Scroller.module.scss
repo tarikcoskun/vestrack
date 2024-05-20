@@ -1,0 +1,43 @@
+.scrollerContainer {
+  position: relative;
+
+  &::before {
+    left: -12px;
+    background-image: linear-gradient(
+      to left,
+      transparent,
+      var(--theme-background)
+    );
+  }
+
+  &::after {
+    right: -12px;
+    background-image: linear-gradient(
+      to right,
+      transparent,
+      var(--theme-background)
+    );
+  }
+
+  &[data-scroll-position="start"]::before {
+    opacity: 0;
+  }
+
+  &[data-scroll-position="end"]::after {
+    opacity: 0;
+  }
+
+  .scrollerTrack {
+    display: flex;
+    max-width: var(--content-max-width);
+    overflow: hidden;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-block: var(--content-spacing);
+    margin-block: calc(var(--content-spacing) * -1);
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

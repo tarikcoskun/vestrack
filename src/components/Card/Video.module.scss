@@ -1,0 +1,29 @@
+@use "@/styles/util";
+
+.videoCard {
+  display: flex;
+  flex-direction: column;
+
+  .thumbnailLink {
+    display: flex;
+
+    .videoThumbnail {
+      width: 350px;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      border: 1px solid var(--theme-outline);
+      background-color: var(--dynamic-gray-150);
+    }
+  }
+
+  .videoName {
+    margin-top: 1rem;
+    font-size: 1.125rem;
+    color: var(--theme-text-heading);
+    @include util.line-clamp(1);
+  }
+
+  .publishedAt {
+    margin-top: 0.5rem;
+  }
+}

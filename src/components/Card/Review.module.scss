@@ -1,0 +1,38 @@
+@use "@/styles/util";
+
+.reviewCard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: var(--dynamic-gray-100);
+  padding: 1.5rem;
+  border-radius: 6px;
+
+  .reviewHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .reviewRating {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .ratingIcon {
+        color: var(--dynamic-yellow-600);
+      }
+
+      .vote {
+        color: var(--theme-text-heading);
+      }
+    }
+
+    .reviewDetails :not(:first-child)::before {
+      @include util.circular-divider;
+    }
+  }
+
+  &[data-line-clamp] .reviewContent {
+    @include util.line-clamp(4);
+  }
+}

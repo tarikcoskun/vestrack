@@ -1,0 +1,42 @@
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background-color: var(--dynamic-gray-200);
+  border-radius: 6px;
+
+  .innerContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    cursor: text;
+
+    .input {
+      color: var(--theme-text-heading);
+      background-color: transparent;
+      padding: 8px 12px;
+      flex-grow: 1;
+
+      &:focus {
+        outline: none;
+      }
+
+      &::placeholder {
+        color: var(--theme-text-subtext);
+      }
+    }
+
+    .leading {
+      display: flex;
+      padding-left: 12px;
+      padding-block: 8px;
+    }
+
+    .trailing {
+      display: flex;
+      padding-right: 12px;
+      padding-block: 8px;
+    }
+  }
+}

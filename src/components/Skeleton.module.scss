@@ -1,0 +1,32 @@
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}
+
+.skeleton {
+  background-color: var(--dynamic-gray-150);
+  animation: pulse 2s infinite;
+
+  &.roundedBase {
+    border-radius: 4px;
+  }
+
+  &.roundedFull {
+    border-radius: 100rem;
+  }
+}
+
+.skeletonParagraphContainer {
+  display: flex;
+  gap: 6px;
+  flex-direction: column;
+
+  > * {
+    flex: 1;
+  }
+}
