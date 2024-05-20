@@ -35,18 +35,21 @@ export default function Loading() {
               width={180}
               height={16.09}
               type="text"
+              lineHeight={1.25}
             />
             <Skeleton
               id="crewOverview"
               width={320}
               height={16.09}
               type="text"
+              lineHeight={1.25}
             />
             <Skeleton
               id="crewOverview"
               width={400}
               height={16.09}
               type="text"
+              lineHeight={1.25}
             />
           </div>
         </div>

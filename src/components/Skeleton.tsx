@@ -5,6 +5,7 @@ interface SkeletonProps extends React.HTMLAttributes<HTMLElement> {
   width?: number;
   height?: number;
   rounded?: boolean | "full";
+  lineHeight?: number;
   type?: "text";
 }
 
@@ -15,6 +16,7 @@ function SkeletonRoot(props: SkeletonProps) {
     width,
     height,
     rounded = true,
+    lineHeight = 1.15,
     type,
     style,
     className,
@@ -26,10 +28,10 @@ function SkeletonRoot(props: SkeletonProps) {
       {...skeletonProps}
       style={{
         width: width + "px",
-        height: type === "text" ? Number(height) * 1.15 : height + "px",
+        height: type === "text" ? Number(height) * lineHeight : height + "px",
         marginBlock:
           type === "text"
-            ? Number(height) - Number(height) * 1.15 + 1 + "px"
+            ? Number(height) - Number(height) * lineHeight + 1 + "px"
             : "",
         ...style,
       }}

@@ -1,3 +1,5 @@
+@import "@/styles/media";
+
 .movieInfoPage {
   .pageLayout {
     --sidebar-width: 8rem;
@@ -35,6 +37,9 @@
       width: var(--sidebar-width);
       position: sticky;
       top: calc(var(--content-nav-height) + 4rem);
+      @include media("<lg") {
+        display: none;
+      }
 
       .sidebarLinks {
         list-style: none;

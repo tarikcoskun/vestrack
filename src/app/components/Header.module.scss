@@ -24,7 +24,7 @@
     }
 
     .navigation {
-      @include media("<phone") {
+      @include media("<md") {
         pointer-events: none;
         position: absolute;
         inset: calc(var(--content-spacing) * -1);
@@ -51,14 +51,18 @@
           display: block;
           padding-inline: 1rem;
           @include media("<phone") {
-            padding-block: 1rem;
+            padding-block: 1.5rem;
+            padding-inline: var(--content-spacing);
           }
         }
       }
     }
 
-    .search {
+    .searchBar {
       flex-grow: 1;
+      @include media("<phone") {
+        display: none;
+      }
 
       .searchButton {
         color: var(--theme-text-body);
@@ -70,8 +74,14 @@
       display: flex;
       gap: 0.5rem;
 
+      .userMenu {
+        @include media("<md") {
+          display: none;
+        }
+      }
+
       .mobileMenu {
-        @include media(">phone") {
+        @include media(">md") {
           display: none;
         }
       }

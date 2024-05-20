@@ -130,17 +130,13 @@ function CrewGroup(props: CrewGroupProps) {
       <span className={cx("title")}>
         {title + (people.length > 1 ? "s" : "")}
       </span>
-      <div className={cx("personGroup")}>
+      <ul className={cx("personGroup")}>
         {people.slice(0, 3).map((person) => (
-          <Link
-            key={person.name}
-            href={`/person/${person.id}`}
-            className={cx("person")}
-          >
-            {person.name}
-          </Link>
+          <li key={person.name} className={cx("person")}>
+            <Link href={`/person/${person.id}`}>{person.name}</Link>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }

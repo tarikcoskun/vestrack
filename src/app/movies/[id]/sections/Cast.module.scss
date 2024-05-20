@@ -9,15 +9,21 @@
 
   .castList {
     gap: 2rem;
+    @include media("<md") {
+      gap: 1rem;
+    }
 
     .person {
       display: flex;
+      width: 12rem;
       flex-direction: column;
+      @include media("<md") {
+        width: 8rem;
+      }
 
       .personPhoto,
       .personInitials {
         aspect-ratio: 4/5;
-        width: 12rem;
         border: 1px solid var(--theme-outline);
         background-color: var(--dynamic-gray-150);
       }
@@ -37,7 +43,7 @@
         margin-top: 1rem;
         font-size: 1.125rem;
         color: var(--theme-text-heading);
-        @include util.line-clamp(1);
+        @include util.truncate();
       }
 
       .personCharacter {
@@ -121,7 +127,7 @@
       .person {
         border-block: 2px solid transparent;
 
-        &:nth-child(even) {
+        &:nth-child(odd) {
           td {
             background-color: var(--dynamic-gray-200);
           }

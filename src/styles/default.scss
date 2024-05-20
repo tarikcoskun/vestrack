@@ -129,11 +129,11 @@ h3 {
 }
 
 h1 {
-  font-size: var(--font-size-h1);
+  font-size: clamp(1.25rem, 2.5vw, var(--font-size-h1));
 }
 
 h2 {
-  font-size: var(--font-size-h2);
+  font-size: clamp(1rem, 2vw, var(--font-size-h2));
 }
 
 h3 {

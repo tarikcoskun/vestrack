@@ -1,15 +1,22 @@
 @use "@/styles/util";
+@import "@/styles/media";
 
 .overview {
   padding-block: 4rem;
   display: flex;
   gap: 2.5rem;
   // @include util.full-width-background(var(--dynamic-gray-100));
+  @include media("<desktop") {
+    padding-block: var(--content-spacing);
+  }
+  @include media("<md") {
+    flex-direction: column;
+  }
 
   .moviePoster {
     aspect-ratio: 2/3;
-    width: 300px;
-    height: 450px;
+    width: clamp(150px, 50%, 300px);
+    height: 100%;
     flex-shrink: 0;
     border: 1px solid var(--theme-outline);
     background-color: var(--dynamic-gray-150);
@@ -21,7 +28,7 @@
     gap: 1rem;
 
     .movieTitle {
-      font-size: 2rem;
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
       color: var(--theme-text-heading);
     }
 
@@ -46,28 +53,34 @@
     .actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
-      margin-block: 1.25rem;
+      gap: 0.5rem 1rem;
+      margin-block: 1rem;
     }
 
     .crewOverview {
       display: flex;
       gap: 1rem;
       flex-direction: column;
-      margin-top: 1.25rem;
+      margin-top: 0.5rem;
 
       .crewGroup {
         display: flex;
         gap: 1rem;
+        @include media("<phone") {
+          flex-direction: column;
+        }
 
         .title {
           width: 60px;
         }
 
         .personGroup {
-          display: flex;
+          list-style: none;
 
           .person {
+            display: inline;
+            word-break: break-word;
+            line-height: 1.5;
             color: var(--dynamic-blue-600);
 
             &:not(:first-child)::before {

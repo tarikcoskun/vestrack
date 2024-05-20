@@ -24,15 +24,16 @@ export function MovieInfoCast({ movie }: { movie: MovieInfo }) {
         <h1>
           Top cast
           <Button
-            size="lg"
             color="gray"
-            variant="soft"
-            trailing={<Icon icon="chevron-right" />}
+            variant="ghost"
+            padding="square"
+            rounded="full"
+            aria-label="See all"
             onClick={() => {
               setModalOpen(true);
             }}
           >
-            See all
+            <Icon icon="arrow-right" size={20} />
           </Button>
         </h1>
         <div className="scrollerControls">

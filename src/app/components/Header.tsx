@@ -51,7 +51,7 @@ export function Header() {
         <Input
           type="search"
           placeholder="Search for movies, tv shows, people..."
-          containerClassName={cx("search")}
+          containerClassName={cx("searchBar")}
           trailing={
             <Button
               padding={false}
@@ -68,15 +68,7 @@ export function Header() {
           <Button
             color="gray"
             variant="ghost"
-            leading={<Icon icon="bookmark" size={20} />}
-            style={{ color: "var(--theme-text-button)" }}
-          >
-            Watchlist
-          </Button>
-
-          <Button
-            color="gray"
-            variant="ghost"
+            className={cx("userMenu")}
             leading={<Icon icon="user" size={20} />}
             style={{ color: "var(--theme-text-button)" }}
           >
