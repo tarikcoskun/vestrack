@@ -31,10 +31,10 @@ export function MovieInfoRecommendations({ movie }: { movie: MovieInfo }) {
       </header>
 
       <Scroller className={cx("recommendationList")} ref={scrollerRef}>
-        {movie.recommendations.results.map((movie) => (
+        {movie.recommendations.results.map((recommendedMovie) => (
           <MovieCard
-            key={movie.id}
-            movie={movie}
+            key={recommendedMovie.id}
+            movie={recommendedMovie}
             type="movie"
             className={cx("recommendationCard")}
           />

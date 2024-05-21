@@ -1,6 +1,6 @@
 .skeletonSection {
-  max-width: 1112px;
   overflow: hidden;
+  max-width: 1112px;
 
   header {
     height: 37px;
@@ -24,9 +24,9 @@
 
     .crewOverview {
       display: flex;
-      gap: 1.25rem;
       flex-direction: column;
       margin-top: 1rem;
+      gap: 1.25rem;
     }
   }
 }
@@ -39,10 +39,10 @@
     gap: 2rem;
 
     .person {
-      height: 265.2px;
       display: flex;
-      gap: 0.5rem;
+      height: 265.2px;
       flex-direction: column;
+      gap: 0.5rem;
     }
   }
 }
@@ -55,10 +55,10 @@
     gap: 2rem;
 
     .video {
-      height: 252.08px;
       display: flex;
-      gap: 0.5rem;
+      height: 252.08px;
       flex-direction: column;
+      gap: 0.5rem;
     }
   }
 }
@@ -76,15 +76,15 @@
 
   .recommendationList {
     display: flex;
-    gap: 2rem;
-    max-width: 1112px;
     overflow: hidden;
+    max-width: 1112px;
+    gap: 2rem;
 
     .movieCard {
-      height: 358.3px;
       display: flex;
-      gap: 0.5rem;
+      height: 358.3px;
       flex-direction: column;
+      gap: 0.5rem;
     }
   }
 }

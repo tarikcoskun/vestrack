@@ -2,23 +2,19 @@
 @import "@/styles/media";
 
 .overview {
-  padding-block: 4rem;
   display: flex;
   gap: 2.5rem;
+  padding-block: 4rem;
   // @include util.full-width-background(var(--dynamic-gray-100));
-  @include media("<desktop") {
-    padding-block: var(--content-spacing);
-  }
-  @include media("<md") {
-    flex-direction: column;
-  }
+  @include media("<desktop") { padding-block: var(--content-spacing); }
+  @include media("<md") { flex-direction: column; }
 
   .moviePoster {
-    aspect-ratio: 2/3;
     width: clamp(150px, 50%, 300px);
     height: 100%;
     flex-shrink: 0;
     border: 1px solid var(--theme-outline);
+    aspect-ratio: 2/3;
     background-color: var(--dynamic-gray-150);
   }
 
@@ -28,26 +24,18 @@
     gap: 1rem;
 
     .movieTitle {
-      font-size: clamp(1.5rem, 2.5vw, 2rem);
       color: var(--theme-text-heading);
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
     }
 
-    .movieDetails :not(:first-child)::before {
-      @include util.circular-divider;
-    }
-
+    .movieDetails :not(:first-child)::before { @include util.circular-divider; }
     .movieRating {
       display: flex;
       align-items: center;
       gap: 0.5rem;
 
-      .ratingIcon {
-        color: var(--dynamic-yellow-600);
-      }
-
-      .voteAverage {
-        color: var(--theme-text-heading);
-      }
+      .ratingIcon { color: var(--dynamic-yellow-600); }
+      .voteAverage { color: var(--theme-text-heading); }
     }
 
     .actions {
@@ -59,33 +47,28 @@
 
     .crewOverview {
       display: flex;
-      gap: 1rem;
       flex-direction: column;
       margin-top: 0.5rem;
+      gap: 1rem;
 
       .crewGroup {
         display: flex;
         gap: 1rem;
-        @include media("<phone") {
-          flex-direction: column;
-        }
+        @include media("<phone") { flex-direction: column; }
 
-        .title {
-          width: 60px;
-        }
-
+        .title { width: 60px; }
         .personGroup {
           list-style: none;
 
           .person {
             display: inline;
-            word-break: break-word;
-            line-height: 1.5;
             color: var(--dynamic-blue-600);
+            line-height: 1.5;
+            word-break: break-word;
 
             &:not(:first-child)::before {
               color: var(--theme-text-body);
-              @include util.circular-divider;
+              @include util.circular-divider();
             }
           }
         }
@@ -93,9 +76,9 @@
     }
 
     .movieOverview {
+      max-width: 60ch;
       color: var(--theme-text-heading);
       font-size: 1.125rem;
-      max-width: 60ch;
       @include util.line-clamp(5);
     }
   }

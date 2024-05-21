@@ -1,23 +1,19 @@
 @import "@/styles/media";
 
 .recommendations {
-  padding-block: var(--section-spacing);
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  padding-block: var(--section-spacing);
 
   .recommendationList {
     gap: 2rem;
-    @include media("<md") {
-      gap: 1rem;
-    }
+    @include media("<md") { gap: 1rem; }
 
     .recommendationCard {
       flex-basis: 200px;
       flex-shrink: 0;
-      @include media("<md") {
-        flex-basis: 150px;
-      }
+      @include media("<md") { flex-basis: 150px; }
     }
   }
 }

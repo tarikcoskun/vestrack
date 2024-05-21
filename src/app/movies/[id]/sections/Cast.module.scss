@@ -2,29 +2,25 @@
 @import "@/styles/media";
 
 .cast {
-  padding-block: var(--section-spacing);
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  padding-block: var(--section-spacing);
 
   .castList {
     gap: 2rem;
-    @include media("<md") {
-      gap: 1rem;
-    }
+    @include media("<md") { gap: 1rem; }
 
     .person {
       display: flex;
       width: 12rem;
       flex-direction: column;
-      @include media("<md") {
-        width: 8rem;
-      }
+      @include media("<md") { width: 8rem; }
 
       .personPhoto,
       .personInitials {
-        aspect-ratio: 4/5;
         border: 1px solid var(--theme-outline);
+        aspect-ratio: 4/5;
         background-color: var(--dynamic-gray-150);
       }
 
@@ -35,14 +31,14 @@
 
       .personInitials {
         display: grid;
-        place-content: center;
         font-size: 3rem;
+        place-content: center;
       }
 
       .personName {
         margin-top: 1rem;
-        font-size: 1.125rem;
         color: var(--theme-text-heading);
+        font-size: 1.125rem;
         @include util.truncate();
       }
 
@@ -55,14 +51,14 @@
 
 .castModalLayout {
   display: flex;
-  gap: 1rem;
   align-items: flex-start;
+  gap: 1rem;
 
   .departmentList {
     position: sticky;
     top: 0;
-    width: 20%;
     display: flex;
+    width: 20%;
     flex-direction: column;
     gap: 1rem;
     list-style: none;
@@ -71,23 +67,20 @@
       position: relative;
       color: var(--theme-text-body);
 
-      &:hover {
-        color: var(--theme-text-heading);
-      }
-
+      &:hover { color: var(--theme-text-heading); }
       &[data-state="active"] {
         color: var(--theme-text-heading);
         font-weight: 500;
 
         &::before {
-          content: "";
-          padding: 2px;
           display: inline-block;
-          margin: 0 0.5rem 0.125rem calc(-3px - 0.5rem);
+          padding: 2px;
           padding: 1.5px;
           border-radius: 50%;
-          vertical-align: middle;
+          margin: 0 0.5rem 0.125rem calc(-3px - 0.5rem);
           background-color: currentColor;
+          content: "";
+          vertical-align: middle;
         }
       }
     }
@@ -100,9 +93,7 @@
       width: 100%;
       border-collapse: collapse;
 
-      &:not(:first-child) {
-        margin-top: 2rem;
-      }
+      &:not(:first-child) { margin-top: 2rem; }
 
       thead {
         position: sticky;
@@ -111,43 +102,32 @@
         padding-top: 2rem;
 
         .groupTitle {
+          position: absolute;
+          width: 100%;
+          padding-bottom: 1rem;
+          background-color: var(--dynamic-gray-150);
           font-size: 1.125rem;
           font-weight: 500;
-          padding-bottom: 1rem;
-          position: absolute;
-          background-color: var(--dynamic-gray-150);
-          width: 100%;
         }
       }
 
-      tr {
-        text-align: left;
-      }
+      tr { text-align: left; }
 
       .person {
         border-block: 2px solid transparent;
 
-        &:nth-child(odd) {
-          td {
-            background-color: var(--dynamic-gray-200);
-          }
-        }
+        &:nth-child(odd) td { background-color: var(--dynamic-gray-200); }
 
         td {
-          &:first-of-type {
-            width: 80px;
-          }
-
-          &:last-of-type {
-            width: 50%;
-          }
+          &:first-of-type { width: 80px; }
+          &:last-of-type { width: 50%; }
         }
 
         .personPhoto,
         .personInitials {
-          aspect-ratio: 4/5;
           width: 4rem;
           border: 1px solid var(--theme-outline);
+          aspect-ratio: 4/5;
           background-color: var(--dynamic-gray-200);
         }
 
@@ -159,8 +139,8 @@
 
         .personInitials {
           display: grid;
-          place-content: center;
           font-size: 1.25rem;
+          place-content: center;
         }
       }
     }

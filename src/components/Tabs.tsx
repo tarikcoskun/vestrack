@@ -60,7 +60,7 @@ const TabsRoot = forwardRef<HTMLDivElement, TabsProps>(
       <TabsProvider
         value={value}
         setValue={setValue}
-        onValueChange={(value) => props.onValueChange?.(value)}
+        onValueChange={(val) => props.onValueChange?.(val)}
       >
         <div
           {...tabsProps}
@@ -91,9 +91,8 @@ const TabsList = forwardRef<HTMLDivElement, TabsListProps>(
 
     useEffect(() => {
       const listener = () => {
-        const rect = tableHeadRef.current?.getBoundingClientRect() as DOMRect,
-          parentRect =
-            tableHeadRef.current?.parentElement?.getBoundingClientRect() as DOMRect;
+        const rect = tableHeadRef.current?.getBoundingClientRect() as DOMRect;
+        const parentRect = tableHeadRef.current?.parentElement?.getBoundingClientRect() as DOMRect;
 
         if (parentRect.height - rect.top <= 0) {
           setSticked(true);

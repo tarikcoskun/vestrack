@@ -19,69 +19,34 @@ $colors: (
 
 .button {
   display: flex;
-  gap: 8px;
   align-items: center;
   cursor: pointer;
+  gap: 8px;
   transition: 150ms background-color;
 
-  &:hover {
-    text-decoration: none;
-  }
-
-  &.paddingBase {
-    padding: 8px 12px;
-  }
-
-  &.paddingSquare {
-    padding: 8px;
-  }
-
-  &.roundedBase {
-    border-radius: 6px;
-  }
-
-  &.roundedFull {
-    border-radius: 100rem;
-  }
-
-  &.size-lg {
-    font-size: 1.125rem;
-  }
-
-  &.size-sm {
-    font-size: 0.875rem;
-  }
+  &:hover { text-decoration: none; }
+  &.paddingBase { padding: 8px 12px; }
+  &.paddingSquare { padding: 8px; }
+  &.roundedBase { border-radius: 6px; }
+  &.roundedFull { border-radius: 100rem; }
+  &.size-lg { font-size: 1.125rem; }
+  &.size-sm { font-size: 0.875rem; }
 
   @mixin generate-color-variant($colors, $variant, $color) {
     @if $variant == "solid" {
       background-color: map-get($colors, $color, "base");
-      &:hover {
-        background-color: sass-color.scale(
-          map-get($colors, $color, "base"),
-          $lightness: -25%
-        );
-      }
+
+      &:hover { background-color: sass-color.scale(map-get($colors, $color, "base"), $lightness: -25%); }
     } @else if $variant == "soft" {
+      background-color: sass-color.scale(map-get($colors, $color, "base"), $alpha: -80%);
       color: map-get($colors, $color, "text");
-      background-color: sass-color.scale(
-        map-get($colors, $color, "base"),
-        $alpha: -70%
-      );
-      &:hover {
-        background-color: sass-color.scale(
-          map-get($colors, $color, "base"),
-          $alpha: -50%
-        );
-      }
+
+      &:hover { background-color: sass-color.scale(map-get($colors, $color, "base"), $alpha: -65%); }
     } @else if $variant == "ghost" {
-      color: map-get($colors, $color, "text");
       background-color: transparent;
-      &:hover {
-        background-color: sass-color.scale(
-          map-get($colors, $color, "base"),
-          $alpha: -70%
-        );
-      }
+      color: map-get($colors, $color, "text");
+
+      &:hover {background-color: sass-color.scale(map-get($colors, $color, "base"), $alpha: -65%); }
     } @else {
       @error "Unsupported variant: #{$variant}";
     }

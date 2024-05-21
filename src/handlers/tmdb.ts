@@ -28,7 +28,8 @@ class TmdbHandler {
     const urlConstruct = new URL("http://api.themoviedb.org/3" + url);
     urlConstruct.searchParams.append("api_key", this.apiKey);
 
-    return axios.get<T>(urlConstruct.toString()).then((res) => res.data);
+    const res = await axios.get<T>(urlConstruct.toString());
+    return res.data;
   }
 
   async getTrending(type: "movie" | "tv" | "people") {
@@ -63,9 +64,8 @@ class TmdbHandler {
   }
 
   async getDiscovery() {
-    return this.fetch<{ results: DiscoveryResult[] }>("/discover/movie").then(
-      (res) => res.results
-    );
+    const res = await this.fetch<{ results: DiscoveryResult[]; }>("/discover/movie");
+    return res.results;
   }
 
   async query(query: string) {

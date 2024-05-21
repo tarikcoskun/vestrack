@@ -1,3 +1,5 @@
+@import "@/styles/media";
+
 .scrollerContainer {
   position: relative;
 
@@ -19,25 +21,23 @@
     );
   }
 
-  &[data-scroll-position="start"]::before {
-    opacity: 0;
-  }
-
-  &[data-scroll-position="end"]::after {
-    opacity: 0;
-  }
+  &[data-scroll-position="start"]::before { opacity: 0; }
+  &[data-scroll-position="end"]::after { opacity: 0; }
 
   .scrollerTrack {
     display: flex;
-    max-width: var(--content-max-width);
     overflow: hidden;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    padding-block: var(--content-spacing);
+    max-width: var(--content-max-width);
     margin-block: calc(var(--content-spacing) * -1);
+    overflow-x: auto;
+    padding-block: var(--content-spacing);
+    scroll-behavior: smooth;
 
-    &::-webkit-scrollbar {
-      display: none;
+    @include media("<md") {
+      margin-inline: calc(var(--content-spacing) * -1);
+      padding-inline: var(--content-spacing);
     }
+
+    &::-webkit-scrollbar { display: none; }
   }
 }

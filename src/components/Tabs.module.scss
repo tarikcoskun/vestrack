@@ -1,43 +1,37 @@
 .tabsRoot {
   display: flex;
-  &[data-orientation="horizontal"] {
-    flex-direction: column;
-  }
+
+  &[data-orientation="horizontal"] { flex-direction: column; }
 
   .tabsList {
-    flex-shrink: 0;
     position: sticky;
     top: 0;
     display: flex;
+    flex-shrink: 0;
     gap: var(--size-8);
 
-    &.sticked {
-      z-index: 10;
-    }
+    &.sticked { z-index: 10; }
 
     .tabsTrigger {
-      cursor: pointer;
-      user-select: none;
-      font-weight: 500;
-      padding-block: var(--size-4);
-      background-color: transparent;
-      font-size: var(--scale-0);
-      text-transform: uppercase;
       position: relative;
+      background-color: transparent;
+      cursor: pointer;
+      font-size: var(--scale-0);
+      font-weight: 500;
       letter-spacing: 1px;
-
-      &:hover {
-      }
+      padding-block: var(--size-4);
+      text-transform: uppercase;
+      user-select: none;
 
       &[data-state="active"] {
         &::after {
-          content: "";
-          width: 6px;
-          height: 6px;
-          border-radius: var(--radius-full);
           position: absolute;
           top: 100%;
           left: 50%;
+          width: 6px;
+          height: 6px;
+          border-radius: var(--radius-full);
+          content: "";
           transform: translate(-50%, -50%);
         }
       }

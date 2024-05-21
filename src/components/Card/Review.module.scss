@@ -3,10 +3,10 @@
 .reviewCard {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  background-color: var(--dynamic-gray-100);
   padding: 1.5rem;
   border-radius: 6px;
+  background-color: var(--dynamic-gray-100);
+  gap: 1rem;
 
   .reviewHeader {
     display: flex;
@@ -18,18 +18,11 @@
       align-items: center;
       gap: 0.5rem;
 
-      .ratingIcon {
-        color: var(--dynamic-yellow-600);
-      }
-
-      .vote {
-        color: var(--theme-text-heading);
-      }
+      .ratingIcon { color: var(--dynamic-yellow-600); }
+      .vote { color: var(--theme-text-heading); }
     }
 
-    .reviewDetails :not(:first-child)::before {
-      @include util.circular-divider;
-    }
+    .reviewDetails :not(:first-child)::before { @include util.circular-divider(); }
   }
 
   &[data-line-clamp] .reviewContent {

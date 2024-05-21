@@ -1,20 +1,9 @@
 @import "media";
 @import "default";
 
-.pagePadding {
-  padding-block: var(--content-spacing);
-}
-
-.contentWidth {
-  max-width: var(--content-max-width);
-}
-
+.inlineCenter { margin-inline: auto; }
+.pagePadding { padding-block: var(--content-spacing); }
+.contentWidth { max-width: var(--content-max-width); }
 .contentPadding {
-  @include media("<desktop") {
-    padding-inline: var(--content-spacing);
-  }
-}
-
-.inlineCenter {
-  margin-inline: auto;
+  @include media("<desktop") { padding-inline: var(--content-spacing); }
 }

@@ -92,12 +92,10 @@ export function MovieInfoCast({ movie }: { movie: MovieInfo }) {
           Object.keys(obj).length &&
           obj[title] &&
           obj[title].find((person) => person.name === curr.name)
-        )
-          obj[title]
+        ) obj[title]
             .find((person) => person.name === curr.name)
             ?.titles.push(personTitle);
-        else
-          (obj[title] = obj[title] || []).push({
+        else (obj[title] = obj[title] || []).push({
             ...curr,
             titles: [personTitle],
           });
@@ -160,7 +158,7 @@ export function MovieInfoCast({ movie }: { movie: MovieInfo }) {
                   data-state={activeId === title ? "active" : "inactive"}
                   className={cx("departmentTitle")}
                   onClick={() => {
-                    Array.from(crewListRef.current?.children!)
+                    Array.from(crewListRef.current?.children as ArrayLike<Element>)
                       .find((el) => el.id === title)!
                       .scrollIntoView({ behavior: "smooth" });
                   }}

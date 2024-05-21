@@ -13,7 +13,7 @@ export default function Loading() {
         id="overview"
         className={cx("overviewSkeleton", "skeletonSection")}
       >
-        <Skeleton id="moviePoster" width={300} height={450} rounded={false} />
+        <Skeleton id="moviePoster" rounded={false} style={{ width: "clamp(150px, 50%, 300px)", height: "100%", aspectRatio: "2/3" }} />
         <div className={cx("overviewInfo")}>
           <Skeleton id="movieTitle" width={300} height={32.19} />
           <Skeleton id="movieDetails" width={100} height={16.09} type="text" />

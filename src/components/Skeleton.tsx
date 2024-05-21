@@ -18,7 +18,7 @@ function SkeletonRoot(props: SkeletonProps) {
     rounded = true,
     lineHeight = 1.15,
     type,
-    style,
+    style: elementStyle,
     className,
     ...skeletonProps
   } = props;
@@ -33,7 +33,7 @@ function SkeletonRoot(props: SkeletonProps) {
           type === "text"
             ? Number(height) - Number(height) * lineHeight + 1 + "px"
             : "",
-        ...style,
+        ...elementStyle,
       }}
       className={cx("skeleton", className, {
         roundedBase: rounded === true,

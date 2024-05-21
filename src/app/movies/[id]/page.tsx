@@ -50,22 +50,22 @@ const sections = [
 
 export default function Page({ params: { id } }: { params: { id: string } }) {
   const contentRef = useRef<HTMLDivElement>(null);
-  const [data, setData] = useState<MovieInfo | null>(null);
+  const [movie, setMovie] = useState<MovieInfo | null>(null);
   const { copyToClipboard, isCopied } = useClipboard();
 
   useEffect(() => {
     fetchData()
       .then((data) => {
-        setData(data);
+        setMovie(data);
       })
       .catch((err) => {
         notifyError(err);
       });
 
-    async function fetchData() {
-      const data = await getMovieInfo(id, "movie");
-      return data;
-    }
+      async function fetchData() {
+        const data = await getMovieInfo(id, "movie");
+        return data;
+      }
   });
 
   const activeId = useScrollSpy(
@@ -78,13 +78,13 @@ export default function Page({ params: { id } }: { params: { id: string } }) {
     <main className={cx("movieInfoPage")}>
       <div className={cx("pageLayout")}>
         <div className={cx("pageContent")} ref={contentRef}>
-          {data ? (
+          {movie ? (
             <>
-              <MovieInfoOverview movie={data} />
-              <MovieInfoCast movie={data} />
-              <MovieInfoVideos movie={data} />
-              <MovieInfoReviews movie={data} />
-              <MovieInfoRecommendations movie={data} />
+              <MovieInfoOverview movie={movie} />
+              <MovieInfoCast movie={movie} />
+              <MovieInfoVideos movie={movie} />
+              <MovieInfoReviews movie={movie} />
+              <MovieInfoRecommendations movie={movie} />
             </>
           ) : (
             <Loading />
@@ -100,7 +100,7 @@ export default function Page({ params: { id } }: { params: { id: string } }) {
                   data-state={activeId === section.id ? "active" : "inactive"}
                   className={cx("sidebarLink")}
                   onClick={() => {
-                    Array.from(contentRef.current?.children!)
+                    Array.from(contentRef.current?.children as ArrayLike<Element>)
                       .find((el) => el.id === section.id)!
                       .scrollIntoView({ behavior: "smooth" });
                   }}

@@ -1,30 +1,25 @@
 .inputContainer {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  background-color: var(--dynamic-gray-200);
   border-radius: 6px;
+  background-color: var(--dynamic-gray-200);
+  gap: 4px;
 
   .innerContainer {
     position: relative;
     display: flex;
-    align-items: center;
     flex-grow: 1;
+    align-items: center;
     cursor: text;
 
     .input {
-      color: var(--theme-text-heading);
-      background-color: transparent;
-      padding: 8px 12px;
       flex-grow: 1;
+      padding: 8px 12px;
+      background-color: transparent;
+      color: var(--theme-text-heading);
 
-      &:focus {
-        outline: none;
-      }
-
-      &::placeholder {
-        color: var(--theme-text-subtext);
-      }
+      &:focus { outline: none; }
+      &::placeholder { color: var(--theme-text-subtext); }
     }
 
     .leading {

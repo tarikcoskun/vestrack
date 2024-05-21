@@ -63,7 +63,7 @@ export function MovieInfoOverview({ movie }: { movie: MovieInfo }) {
           </span>
           <span>
             (
-            {Intl.NumberFormat("en-US", {
+            {new Intl.NumberFormat("en-US", {
               notation: "compact",
             }).format(movie.vote_count)}
             )

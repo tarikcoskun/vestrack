@@ -9,24 +9,17 @@
 }
 
 .skeleton {
-  background-color: var(--dynamic-gray-150);
   animation: pulse 2s infinite;
+  background-color: var(--dynamic-gray-150);
 
-  &.roundedBase {
-    border-radius: 4px;
-  }
-
-  &.roundedFull {
-    border-radius: 100rem;
-  }
+  &.roundedBase { border-radius: 4px; }
+  &.roundedFull { border-radius: 100rem; }
 }
 
 .skeletonParagraphContainer {
   display: flex;
-  gap: 6px;
   flex-direction: column;
+  gap: 6px;
 
-  > * {
-    flex: 1;
-  }
+  > * { flex: 1; }
 }

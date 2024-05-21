@@ -11,8 +11,8 @@ const lineProps = {
 } as const;
 
 export const icons = {
-  // lucide:menu
-  menu: <path {...lineProps} d="M4 6h16M4 12h16M4 18h16" />,
+  // tabler:menu-deep
+  menu: <path {...lineProps} d="M4 6h16M7 12h13m-10 6h10" />,
   // tabler:star-filled
   star: (
     <path

@@ -1,10 +1,10 @@
 @use "color";
 
 * {
-  margin: 0;
+  box-sizing: border-box;
   padding: 0;
   border: none;
-  box-sizing: border-box;
+  margin: 0;
   font-family: inherit;
 }
 
@@ -68,80 +68,15 @@
   --content-nav-height: 64px;
   --section-spacing: 48px;
   --hover-scale: 1.025;
+  background-color: var(--theme-background);
+  color: var(--theme-text-body);
 
   font-size: var(--font-size-base);
   line-height: 1.15;
-  color: var(--theme-text-body);
-  background-color: var(--theme-background);
   scroll-behavior: smooth;
   scrollbar-gutter: stable;
 
-  &::-webkit-scrollbar {
-    background: transparent;
-    border-radius: 0 0.25rem 0.25rem 0;
-    height: 100%;
-    width: 0.75rem;
-
-    &-thumb {
-      background: var(--dynamic-gray-500);
-      border: 0.25rem solid var(--theme-background);
-      border-radius: 100rem;
-      &:hover {
-        background: var(--dynamic-gray-600);
-      }
-    }
-  }
-}
-
-html,
-body {
-  height: 100%;
-  width: 100%;
-}
-
-html:has(dialog[open]) {
-  overflow: hidden !important;
-}
-
-p {
-  line-height: 1.5;
-}
-
-a {
-  text-decoration: none;
-  color: var(--dynamic-text-link);
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
-button {
-  color: var(--theme-text-button);
-  background-color: transparent;
-  cursor: pointer;
-}
-
-h1,
-h2,
-h3 {
-  font-weight: 500;
-  color: var(--theme-text-heading);
-}
-
-h1 {
-  font-size: clamp(1.25rem, 2.5vw, var(--font-size-h1));
-}
-
-h2 {
-  font-size: clamp(1rem, 2vw, var(--font-size-h2));
-}
-
-h3 {
-  font-size: var(--font-size-h3);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
+  @media (prefers-color-scheme: dark) {
     // Colors
     --dynamic-gray-50: #{color.$gray-950};
     --dynamic-gray-100: #{color.$gray-900};
@@ -184,4 +119,52 @@ h3 {
     --dynamic-yellow-500: #{color.$yellow-600};
     --dynamic-yellow-600: #{color.$yellow-500};
   }
+
+  &::-webkit-scrollbar {
+    width: 0.75rem;
+    height: 100%;
+    border-radius: 0 0.25rem 0.25rem 0;
+    background-color: transparent;
+
+    &-thumb {
+      border: 0.25rem solid var(--theme-background);
+      border-radius: 100rem;
+      background-color: var(--dynamic-gray-500);
+
+      &:hover { background-color: var(--dynamic-gray-600); }
+    }
+  }
 }
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+html:has(dialog[open]) { overflow: hidden !important; }
+p { line-height: 1.5; }
+
+a {
+  color: var(--dynamic-text-link);
+  text-decoration: none;
+
+  &:hover { text-decoration: underline; }
+}
+
+button {
+  background-color: transparent;
+  color: var(--theme-text-button);
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--theme-text-heading);
+  font-weight: 500;
+}
+
+h1 { font-size: clamp(1.25rem, 2.5vw, var(--font-size-h1)); }
+h2 { font-size: clamp(1rem, 2vw, var(--font-size-h2)); }
+h3 { font-size: var(--font-size-h3); }

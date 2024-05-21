@@ -4,11 +4,7 @@ const clamp = (value: number) => Math.max(0, value);
 const isBetween = (value: number, floor: number, ceil: number) =>
   value >= floor && value <= ceil;
 
-export const useScrollSpy = (
-  ids: string[],
-  offset: number = 0,
-  defaultValue?: string
-) => {
+export const useScrollSpy = (ids: string[], offset: number, defaultValue?: string) => {
   const [activeId, setActiveId] = useState(defaultValue || "");
 
   useEffect(() => {

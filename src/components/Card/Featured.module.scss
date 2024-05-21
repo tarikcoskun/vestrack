@@ -6,64 +6,57 @@
   border: 1px solid var(--theme-outline);
 
   .backdrop {
-    z-index: -1;
     position: absolute;
-    inset: 0;
+    z-index: -1;
     width: 100%;
     height: 100%;
-    background-size: cover;
     background-position: center;
+    background-size: cover;
+    inset: 0;
   }
 
   .infoContainer {
     display: flex;
-    background-image: linear-gradient(
-      rgb(255, 255, 255, 0.75),
-      rgb(255, 255, 255, 0.95)
-    );
     backdrop-filter: blur(8px);
-    @media (prefers-color-scheme: dark) {
-      background-image: linear-gradient(rgb(0, 0, 0, 0.75), rgb(0, 0, 0, 0.95));
-    }
+    background-image: linear-gradient(rgb(255, 255, 255, 0.75), rgb(255, 255, 255, 0.95));
+    @media (prefers-color-scheme: dark) { background-image: linear-gradient(rgb(0, 0, 0, 0.75), rgb(0, 0, 0, 0.95)); }
 
     .posterLink {
+      display: flex;
       width: 25%;
       flex-shrink: 0;
-      display: flex;
 
       .moviePoster {
-        aspect-ratio: 2/3;
         width: 100%;
         height: 100%;
+        aspect-ratio: 2/3;
+        background-color: var(--dynamic-gray-150);
         object-fit: cover;
         object-position: center;
-        transition: 150ms scale;
         outline: 1px solid var(--theme-outline);
-        background-color: var(--dynamic-gray-150);
+        transition: 150ms scale;
       }
     }
 
     .movieInfo {
-      padding: 1.5rem;
       display: flex;
-      gap: 1rem;
       flex-direction: column;
       justify-content: flex-end;
+      padding: 1.5rem;
+      gap: 1rem;
 
       .movieRating {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
         color: var(--theme-text-heading);
+        gap: 0.5rem;
 
-        .ratingIcon {
-          color: var(--dynamic-yellow-600);
-        }
+        .ratingIcon { color: var(--dynamic-yellow-600); }
       }
 
       .movieTitle {
-        font-size: 1.375rem;
         color: var(--theme-text-heading);
+        font-size: 1.375rem;
       }
 
       .movieOverview {
@@ -74,9 +67,9 @@
       .actions {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.5rem;
-        margin-left: -8px;
         margin-bottom: -8px;
+        margin-left: -8px;
+        gap: 0.5rem;
       }
     }
   }

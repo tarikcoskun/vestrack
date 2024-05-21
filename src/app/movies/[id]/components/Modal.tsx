@@ -35,3 +35,4 @@ export const MovieInfoModal = forwardRef<
     </Modal>
   );
 });
+

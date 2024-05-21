@@ -2,16 +2,14 @@
 @import "@/styles/media";
 
 .videos {
-  padding-block: var(--section-spacing);
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  padding-block: var(--section-spacing);
 
   .videoList {
     gap: 2rem;
-    @include media("<md") {
-      gap: 1rem;
-    }
+    @include media("<md") { gap: 1rem; }
   }
 }
 
@@ -24,9 +22,7 @@
     .thumbnailLink {
       width: auto;
 
-      .videoThumbnail {
-        width: 100%;
-      }
+      .videoThumbnail { width: 100%; }
     }
   }
 }
