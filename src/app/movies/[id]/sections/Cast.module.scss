@@ -19,6 +19,7 @@
 
       .personPhoto,
       .personInitials {
+        width: inherit;
         border: 1px solid var(--theme-outline);
         aspect-ratio: 4/5;
         background-color: var(--dynamic-gray-150);
