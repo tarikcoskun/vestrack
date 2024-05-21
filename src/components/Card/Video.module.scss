@@ -9,7 +9,8 @@
     display: flex;
 
     .videoThumbnail {
-      width: 350px;
+      width: 100%;
+      min-width: 320px;
       border: 1px solid var(--theme-outline);
       aspect-ratio: 16/9;
       background-color: var(--dynamic-gray-150);
