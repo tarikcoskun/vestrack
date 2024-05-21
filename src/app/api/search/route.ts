@@ -6,8 +6,7 @@ export async function GET(req: NextRequest) {
   const params = req.nextUrl.searchParams;
   const query = params.get("query") as string;
 
-  if (!query)
-    Response.json(
+  if (!query) Response.json(
       { error: "No :query provided" },
       {
         status: 400,

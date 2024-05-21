@@ -27,23 +27,21 @@ const ScrollerRoot = forwardRef<HTMLDivElement, ScrollerProps>(
 
     useEffect(() => {
       const scroller = scrollerRef.current;
+      if (!scroller) return;
 
       const listener = () => {
-        const position =
-          scroller?.scrollLeft === 0
-            ? "start"
-            : scroller?.scrollLeft! + scroller?.clientWidth! ===
-                scroller?.scrollWidth
-              ? "end"
-              : "middle";
+        let position = "middle";
+        if (scroller.scrollLeft === 0) position = "start";
+        else if (scroller.scrollLeft + scroller.clientWidth === scroller.scrollWidth) position = "end";
+        else position = "middle";
 
         setScrollerPosition(position);
       };
 
-      scroller?.addEventListener("scroll", listener);
+      scroller.addEventListener("scroll", listener);
 
       return () => {
-        scroller?.removeEventListener("scroll", listener);
+        scroller.removeEventListener("scroll", listener);
       };
     }, []);
 

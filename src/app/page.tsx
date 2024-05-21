@@ -10,8 +10,8 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(style);
 
-export default async function Page() {
-  const data = await getHomeData();
+export default function Page() {
+  const data = getHomeData();
 
   return (
     <main className={cx("moviesPage")}>
@@ -36,6 +36,6 @@ export default async function Page() {
   );
 }
 
-async function getHomeData() {
+function getHomeData() {
   return homedata;
 }
