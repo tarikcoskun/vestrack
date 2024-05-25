@@ -1,18 +1,7 @@
 @use "sass:color" as sass-color;
 @use "@/styles/color";
 
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.75;
-  }
-}
-
 .skeleton {
-  animation: pulse 2s infinite;
   background-color: sass-color.scale(color.$gray-500, $alpha: -85%);
 
   &.roundedBase { border-radius: 4px; }

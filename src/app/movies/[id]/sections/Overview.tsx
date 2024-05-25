@@ -113,7 +113,7 @@ function MovieInfoOverviewSkeleton() {
       id="overview"
       className={cx("overviewSkeleton", "skeletonSection")}
     >
-      <Skeleton id="moviePoster" style={{ width: "var(--poster-width)", height: "100%", marginTop: "calc(var(--poster-width) * -2/3)", aspectRatio: "2/3", backgroundColor: "#d5d5d5" }} />
+      <Skeleton id="moviePoster" className={cx("posterSkeleton")} style={{ width: "var(--poster-width)", height: "100%", marginTop: "calc(var(--poster-width) * -2/3)", aspectRatio: "2/3" }} />
       <div className={cx("columnRight")}>
         <div className={cx("overviewInfo")}>
           <div className={cx("metadataList")}>
