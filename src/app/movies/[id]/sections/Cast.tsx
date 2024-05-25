@@ -223,7 +223,7 @@ function MovieInfoCastRoot({ movie }: { movie: MovieInfo }) {
 
 function MovieInfoCastSkeleton() {
   return (
-    <section id="cast" className={cx("castSkeleton", "skeletonSection")}>
+    <section id="cast" className={cx("castSkeleton")}>
       <header style={{ height: "36px" }}>
         <Skeleton width={120} height={28.17} />
       </header>

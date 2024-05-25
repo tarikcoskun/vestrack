@@ -57,7 +57,7 @@
 
     .movieDetailList {
       display: flex;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
       gap: 1.5rem;
       @include media(">md") { color: sass-color.scale(color.$gray-100, $alpha: -25%); }
       @include media("<md") { flex-direction: column; }

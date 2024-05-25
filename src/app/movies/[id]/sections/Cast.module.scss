@@ -165,9 +165,10 @@
     gap: 2rem;
 
     .person {
-      display: flex;
+      width: 168px;
       height: 265.2px;
       flex-direction: column;
+      flex-shrink: 0;
       gap: 0.5rem;
     }
   }

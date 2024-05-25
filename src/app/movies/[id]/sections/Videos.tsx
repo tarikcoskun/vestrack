@@ -91,7 +91,7 @@ export function MovieInfoVideosRoot({ movie }: { movie: MovieInfo }) {
 
 function MovieInfoVideosSkeleton() {
   return (
-    <section id="videos" className={cx("videosSkeleton", "skeletonSection")}>
+    <section id="videos" className={cx("videosSkeleton")}>
       <header style={{ height: "36px" }}>
         <Skeleton width={100} height={28.17} />
       </header>

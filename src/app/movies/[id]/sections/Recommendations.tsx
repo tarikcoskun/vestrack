@@ -49,7 +49,7 @@ function MovieInfoRecommendationsSkeleton() {
   return (
     <section
       id="recommendations"
-      className={cx("recommendationsSkeleton", "skeletonSection")}
+      className={cx("recommendationsSkeleton")}
     >
       <header style={{ height: "32px" }}>
         <Skeleton width={160} height={28.17} />

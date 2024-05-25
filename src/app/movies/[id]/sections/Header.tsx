@@ -63,9 +63,35 @@ function MovieInfoHeaderSkeleton() {
   return (
     <header
       id="header"
-      className={cx("headerSkeleton", "skeletonSection")}
+      className={cx("headerSkeleton")}
     >
-      <Skeleton id="movieTitle" style={{ position: "absolute", zIndex: "-1", top: "var(--content-nav-height)", right: "0", left: "0", height: "inherit" }} />
+      <Skeleton id="movieBackdrop" style={{ position: "absolute", zIndex: "-1", top: "var(--content-nav-height)", right: "0", left: "0", height: "inherit" }} />
+      <Skeleton id="moviePoster" className={cx("moviePoster", "posterSkeleton")} />
+      <section className={cx("movieHeader")}>
+        <Skeleton
+          id="movieTitle"
+          width={180}
+          height={20}
+          type="text"
+        />
+        <div className={cx("movieDetailList")}>
+          <Skeleton
+            id="metadataItem"
+            width={140}
+            height={32.19}
+          />
+          <Skeleton
+            id="metadataItem"
+            width={120}
+            height={32.19}
+          />
+          <Skeleton
+            id="metadataItem"
+            width={100}
+            height={32.19}
+          />
+        </div>
+      </section>
     </header>
   );
 }
