@@ -91,13 +91,18 @@ interface CrewGroupProps {
 function CrewGroup(props: CrewGroupProps) {
   const { title, people } = props;
 
+  const filteredPeople = people.reduce((arr: Cast[], curr) => {
+    if (!arr.map((person) => person.name).includes(curr.name)) arr.push(curr);
+    return arr;
+  }, []);
+
   return (
     <div className={cx("metadataItem")}>
       <span className={cx("title")}>
         {title + (people.length > 1 ? "s" : "")}
       </span>
       <ul className={cx("personGroup")}>
-        {people.slice(0, 3).map((person) => (
+        {filteredPeople.map((person) => (
           <li key={person.name} className={cx("person")}>
             <Link href={`/person/${person.id}`}>{person.name}</Link>
           </li>

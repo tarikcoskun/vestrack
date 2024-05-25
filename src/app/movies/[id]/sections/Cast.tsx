@@ -188,7 +188,7 @@ function MovieInfoCastRoot({ movie }: { movie: MovieInfo }) {
                 </thead>
                 <tbody>
                   {group.map((person) => (
-                    <tr key={person.id} className={cx("person")}>
+                    <tr key={"modal" + person.id} className={cx("person")}>
                       <td aria-label="Photo">
                         {person.profile_path ? (
                           <img

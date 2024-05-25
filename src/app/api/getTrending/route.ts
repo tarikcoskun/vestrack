@@ -16,5 +16,5 @@ export async function GET(req: NextRequest) {
   }
 
   const data = await TmdbApi.getTrending(type);
-  return Response.json({ data });
+  return Response.json(data);
 }

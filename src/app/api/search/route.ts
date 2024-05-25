@@ -7,12 +7,12 @@ export async function GET(req: NextRequest) {
   const query = params.get("query") as string;
 
   if (!query) Response.json(
-      { error: "No :query provided" },
-      {
-        status: 400,
-      }
-    );
+    { error: "No :query provided" },
+    {
+      status: 400,
+    }
+  );
 
   const data = await TmdbApi.query(query);
-  return Response.json({ data });
+  return Response.json(data);
 }

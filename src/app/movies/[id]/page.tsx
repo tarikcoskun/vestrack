@@ -1,6 +1,6 @@
 "use client";
 
-import axios from "axios";
+import axios from "@/lib/axios";
 import { toast } from "sonner";
 import { useEffect, useRef, useState } from "react";
 import { notifyError } from "@/util/notifyError";
@@ -62,7 +62,7 @@ export default function Page({ params: { id } }: { params: { id: string } }) {
       const data = await getMovieInfo(id, "movie");
       return data;
     }
-  });
+  }, [id]);
 
   const activeId = useScrollSpy(sections.map((i) => i.id), 48);
 
@@ -141,9 +141,9 @@ export default function Page({ params: { id } }: { params: { id: string } }) {
 }
 
 function getMovieInfo(id: string, type: "movie" | "tv" = "movie") {
-  return new Promise<MovieInfo>((resolve) => {
+  /* return new Promise<MovieInfo>((resolve) => {
     resolve(movieinfo as MovieInfo);
-  });
+  }); */
 
   const data = axios
     .get<MovieInfo>("/getMovieInfo", {

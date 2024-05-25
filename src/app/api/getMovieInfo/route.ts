@@ -17,5 +17,5 @@ export async function GET(req: NextRequest) {
   }
 
   const data = await TmdbApi.getMovieInfo(id, type);
-  return Response.json({ data });
+  return Response.json(data);
 }
