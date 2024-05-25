@@ -7,14 +7,16 @@ import { Icon } from "@/components/Icon";
 import { Button } from "@/components/Button";
 import { Scroller } from "@/components/Scroller";
 import { MovieInfoModal } from "../components/Modal";
+import { Skeleton } from "@/components/Skeleton";
 
 // Styles
 import style from "./Cast.module.scss";
 import classNames from "classnames/bind";
+import Link from "next/link";
 
 const cx = classNames.bind(style);
 
-export function MovieInfoCast({ movie }: { movie: MovieInfo }) {
+function MovieInfoCastRoot({ movie }: { movie: MovieInfo }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -22,7 +24,7 @@ export function MovieInfoCast({ movie }: { movie: MovieInfo }) {
     <section id="cast" className={cx("cast")}>
       <header>
         <h1>
-          Top cast
+          Cast & Crew
           <Button
             color="gray"
             variant="ghost"
@@ -38,10 +40,10 @@ export function MovieInfoCast({ movie }: { movie: MovieInfo }) {
         </h1>
         <div className="scrollerControls">
           <Scroller.Trigger trackRef={scrollRef} direction="left">
-            <Icon icon="chevron-left" />
+            <Icon icon="caret-left" />
           </Scroller.Trigger>
           <Scroller.Trigger trackRef={scrollRef} direction="right">
-            <Icon icon="chevron-right" />
+            <Icon icon="caret-right" />
           </Scroller.Trigger>
         </div>
       </header>
@@ -51,26 +53,28 @@ export function MovieInfoCast({ movie }: { movie: MovieInfo }) {
           .sort((a, b) => a.order! - b.order!)
           .slice(0, 14)
           .map((person) => (
-            <div key={person.id} className={cx("person")}>
-              {person.profile_path ? (
-                <img
-                  src={`https://image.tmdb.org/t/p/w342${person.profile_path}`}
-                  alt={person.name}
-                  className={cx("personPhoto")}
-                />
-              ) : (
-                <div className={cx("personInitials")}>
-                  {person.name
-                    ?.split(/\s/)
-                    .slice(0, 2)
-                    .map((word) => word.slice(0, 1))}
-                </div>
-              )}
-              <span title={person.name} className={cx("personName")}>
-                {person.name}
-              </span>
-              <span className={cx("personCharacter")}>{person.character}</span>
-            </div>
+            <article key={person.id} className={cx("person")}>
+              <Link href={`/person/${person.id}`} className={cx("photoLink")}>
+                {person.profile_path ? (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w342${person.profile_path}`}
+                    alt={person.name}
+                    className={cx("personPhoto")}
+                  />
+                ) : (
+                  <div className={cx("personInitials")}>
+                    {person.name
+                      ?.split(/\s/)
+                      .slice(0, 2)
+                      .map((word) => word.slice(0, 1))}
+                  </div>
+                )}
+              </Link>
+              <Link href={`/person/${person.id}`} className={cx("personName")}>
+                <span title={person.name}>{person.name}</span>
+              </Link>
+              <div className={cx("personCharacter")}>{person.character}</div>
+            </article>
           ))}
       </Scroller>
 
@@ -93,19 +97,19 @@ export function MovieInfoCast({ movie }: { movie: MovieInfo }) {
           obj[title] &&
           obj[title].find((person) => person.name === curr.name)
         ) obj[title]
-            .find((person) => person.name === curr.name)
-            ?.titles.push(personTitle);
+          .find((person) => person.name === curr.name)
+          ?.titles.push(personTitle);
         else (obj[title] = obj[title] || []).push({
-            ...curr,
-            titles: [personTitle],
-          });
+          ...curr,
+          titles: [personTitle],
+        });
         return obj;
       },
       {}
     );
 
     useEffect(() => {
-      const offset = 246;
+      const offset = 248;
       const clamp = (value: number) => Math.max(0, value);
       const isBetween = (value: number, floor: number, ceil: number) =>
         value >= floor && value <= ceil;
@@ -216,3 +220,32 @@ export function MovieInfoCast({ movie }: { movie: MovieInfo }) {
     );
   }
 }
+
+function MovieInfoCastSkeleton() {
+  return (
+    <section id="cast" className={cx("castSkeleton", "skeletonSection")}>
+      <header style={{ height: "36px" }}>
+        <Skeleton width={120} height={28.17} />
+      </header>
+      <div className={cx("castList")}>
+        {Array(6)
+          .fill(0)
+          .map((_, idx) => (
+            <div key={idx} className={cx("person")}>
+              <Skeleton
+                width={168}
+                height={210}
+                style={{ marginBottom: "0.5rem" }}
+              />
+              <Skeleton width={140} height={18.11} type="text" />
+              <Skeleton width={100} height={16.09} type="text" />
+            </div>
+          ))}
+      </div>
+    </section>
+  );
+}
+
+export const MovieInfoCast = Object.assign(MovieInfoCastRoot, {
+  Skeleton: MovieInfoCastSkeleton
+});

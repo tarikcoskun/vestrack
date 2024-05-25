@@ -1,4 +1,15 @@
 {
-  "extends": ["stylelint-config-idiomatic-order"],
-  "customSyntax": "postcss-scss"
+  "customSyntax": "postcss-scss",
+  "extends": "stylelint-config-idiomatic-order",
+  "rules": {
+    "declaration-block-no-duplicate-custom-properties": true,
+    "declaration-block-no-duplicate-properties": true,
+    "string-no-newline": true,
+    "unit-no-unknown": true,
+    "length-zero-no-unit": true,
+    "alpha-value-notation": "number",
+    "color-function-notation": "modern",
+    "declaration-block-no-redundant-longhand-properties": true,
+    "shorthand-property-no-redundant-values": true
+  }
 }

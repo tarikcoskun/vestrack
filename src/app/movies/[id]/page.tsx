@@ -5,11 +5,12 @@ import { toast } from "sonner";
 import { useEffect, useRef, useState } from "react";
 import { notifyError } from "@/util/notifyError";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
-import { useClipboard } from "@/util/copyToClipboard";
+import { useClipboard } from "@/hooks/useClipboard";
 
 import movieinfo from "@/data/placeholder-movieinfo.json";
 
 // Components
+import { MovieInfoHeader } from "./sections/Header";
 import { MovieInfoOverview } from "./sections/Overview";
 import { MovieInfoCast } from "./sections/Cast";
 import { MovieInfoVideos } from "./sections/Videos";
@@ -17,7 +18,6 @@ import { MovieInfoReviews } from "./sections/Reviews";
 import { MovieInfoRecommendations } from "./sections/Recommendations";
 import { Button } from "@/components/Button";
 import { Icon } from "@/components/Icon";
-import Loading from "./loading";
 
 // Styles
 import style from "./page.module.scss";
@@ -27,11 +27,7 @@ const cx = classNames.bind(style);
 
 const sections = [
   {
-    label: "Overview",
-    id: "overview",
-  },
-  {
-    label: "Top cast",
+    label: "Cast & Crew",
     id: "cast",
   },
   {
@@ -39,11 +35,11 @@ const sections = [
     id: "videos",
   },
   {
-    label: "User reviews",
+    label: "User Reviews",
     id: "reviews",
   },
   {
-    label: "More like this",
+    label: "Recommendations",
     id: "recommendations",
   },
 ];
@@ -62,68 +58,83 @@ export default function Page({ params: { id } }: { params: { id: string } }) {
         notifyError(err);
       });
 
-      async function fetchData() {
-        const data = await getMovieInfo(id, "movie");
-        return data;
-      }
+    async function fetchData() {
+      const data = await getMovieInfo(id, "movie");
+      return data;
+    }
   });
 
-  const activeId = useScrollSpy(
-    sections.map((i) => i.id),
-    64,
-    "overview"
-  );
+  const activeId = useScrollSpy(sections.map((i) => i.id), 48);
 
   return (
     <main className={cx("movieInfoPage")}>
-      <div className={cx("pageLayout")}>
-        <div className={cx("pageContent")} ref={contentRef}>
-          {movie ? (
-            <>
-              <MovieInfoOverview movie={movie} />
-              <MovieInfoCast movie={movie} />
-              <MovieInfoVideos movie={movie} />
-              <MovieInfoReviews movie={movie} />
-              <MovieInfoRecommendations movie={movie} />
-            </>
-          ) : (
-            <Loading />
-          )}
-        </div>
+      <div className={cx("pageContent")} ref={contentRef}>
+        {movie ? (
+          <>
+            <MovieInfoHeader movie={movie} />
+            <div className={cx("layout")}>
+              <div className={cx("content")}>
+                <MovieInfoOverview movie={movie} />
+                <MovieInfoCast movie={movie} />
+                <MovieInfoVideos movie={movie} />
+                <MovieInfoReviews movie={movie} />
+                <MovieInfoRecommendations movie={movie} />
+              </div>
+              <div className={cx("sidebar")}>
+                <ol className={cx("sidebarLinks")}>
+                  {sections.map((section) => (
+                    <li key={section.label}>
+                      <button
+                        role="button"
+                        data-state={activeId === section.id ? "active" : "inactive"}
+                        className={cx("sidebarLink")}
+                        onClick={() => {
+                          document.querySelector(`#${section.id}`)?.scrollIntoView({ behavior: "smooth" });
+                        }}
+                      >
+                        {section.label}
+                      </button>
+                    </li>
+                  ))}
+                </ol>
+                <div className={cx("actions")}>
+                  <Button.Group>
+                    <Button
+                      color="blue"
+                      leading={<Icon icon="bookmark" variant="fill" size={18} />}
+                    >
+                      Add to Watchlist
+                    </Button>
+                    <Button color="blue" padding="square">
+                      <Icon icon="caret-down" size={18} />
+                    </Button>
+                  </Button.Group>
 
-        <div className={cx("pageSidebar")}>
-          <ol className={cx("sidebarLinks")}>
-            {sections.map((section) => (
-              <li key={section.label}>
-                <button
-                  role="button"
-                  data-state={activeId === section.id ? "active" : "inactive"}
-                  className={cx("sidebarLink")}
-                  onClick={() => {
-                    Array.from(contentRef.current?.children as ArrayLike<Element>)
-                      .find((el) => el.id === section.id)!
-                      .scrollIntoView({ behavior: "smooth" });
-                  }}
-                >
-                  {section.label}
-                </button>
-              </li>
-            ))}
-          </ol>
-          <div className={cx("buttons")}>
-            <Button
-              color="gray"
-              variant="soft"
-              leading={<Icon icon={isCopied ? "check" : "share"} />}
-              onClick={() => {
-                copyToClipboard(location.href);
-                toast.info("Copied to clipboard");
-              }}
-            >
-              Share
-            </Button>
-          </div>
-        </div>
+                  <Button
+                    color="gray"
+                    variant="soft"
+                    leading={<Icon icon={isCopied ? "check" : "share"} variant="fill" />}
+                    onClick={() => {
+                      copyToClipboard(location.href);
+                      toast.info("Copied to clipboard");
+                    }}
+                  >
+                    Share
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <MovieInfoHeader.Skeleton />
+            <MovieInfoOverview.Skeleton />
+            <MovieInfoCast.Skeleton />
+            <MovieInfoVideos.Skeleton />
+            <MovieInfoReviews.Skeleton />
+            <MovieInfoRecommendations.Skeleton />
+          </>
+        )}
       </div>
     </main>
   );

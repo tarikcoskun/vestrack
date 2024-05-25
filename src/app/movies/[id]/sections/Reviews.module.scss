@@ -20,3 +20,9 @@
     background-color: var(--dynamic-gray-200);
   }
 }
+
+.reviewsSkeleton {
+  composes: reviews;
+  overflow: hidden;
+  max-width: 1048px;
+}

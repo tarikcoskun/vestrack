@@ -1,8 +1,8 @@
 import homedata from "@/data/placeholder-homedata.json";
 
 // Components
-import { MovieCard } from "@/components/Card/Movie";
-import { FeaturedCard } from "@/components/Card/Featured";
+import { MovieCard } from "@/components/cards/Movie";
+import { FeaturedCard } from "@/components/cards/Featured";
 
 // Styles
 import style from "./page.module.scss";

@@ -1,27 +1,24 @@
+import type { IconList } from "@/components/Icon";
+
 export interface GenericLink {
   label: string;
   href: string;
-  external?: boolean;
 }
 
-export const navbarLinks: (GenericLink & { isButton?: boolean })[] = [
+export const navbarLinks: (GenericLink & { icon: IconList; })[] = [
   {
     label: "Movies",
     href: "/movies",
+    icon: "film"
   },
   {
     label: "TV Shows",
     href: "/shows",
-  },
-  {
-    label: "People",
-    href: "/people",
+    icon: "tv"
   },
 ];
 
-export const navbarUserActions: Record<string, GenericLink[]> = {};
-
-export const footerLinks: Record<string, GenericLink[]> = {
+export const footerLinks: Record<string, (GenericLink & { external?: boolean })[]> = {
   Community: [
     {
       label: "Twitter",

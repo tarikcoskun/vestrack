@@ -89,12 +89,18 @@ const ScrollerTrigger = forwardRef<HTMLButtonElement, ScrollerTriggerProps>(
         const scrollAmount =
           (trackRef.current.children[0].clientWidth +
             parseInt(getComputedStyle(trackRef.current).gap)) *
-          4;
+          3;
 
         if (direction === "left") {
-          trackRef.current.scrollLeft -= scrollAmount;
+          trackRef.current.scrollBy({
+            left: -scrollAmount,
+            behavior: "smooth"
+          });
         } else {
-          trackRef.current.scrollLeft += scrollAmount;
+          trackRef.current.scrollBy({
+            left: scrollAmount,
+            behavior: "smooth"
+          });
         }
       }
     };

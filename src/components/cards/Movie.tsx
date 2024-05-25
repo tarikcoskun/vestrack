@@ -16,7 +16,7 @@ export function MovieCard(props: MovieCardProps) {
   const { movie, type, className, ...cardProps } = props;
 
   const infoPageUrl = `/${type === "movie" ? "movies" : "shows"}/${movie.id}`;
-  const posterUrl = `https://image.tmdb.org/t/p/w342${movie.poster_path}`;
+  const posterUrl = `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`;
 
   return (
     <article
@@ -38,9 +38,9 @@ export function MovieCard(props: MovieCardProps) {
             {movie.title}
           </span>
         </Link>
-        <span className={cx("releaseYear")}>
+        <div className={cx("releaseYear")}>
           {new Date(movie.release_date).getFullYear()}
-        </span>
+        </div>
       </div>
     </article>
   );

@@ -19,10 +19,10 @@
       gap: 0.5rem;
 
       .ratingIcon { color: var(--dynamic-yellow-600); }
-      .vote { color: var(--theme-text-heading); }
+      .ratingAmount { color: var(--theme-text-title); }
     }
 
-    .reviewDetails :not(:first-child)::before { @include util.circular-divider(); }
+    .reviewDetails > :not(:first-child)::before { @include util.circular-divider(); }
   }
 
   &[data-line-clamp] .reviewContent {

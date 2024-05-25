@@ -3,14 +3,14 @@ import type {
   PolymorphicRef,
 } from "~/types/polymorphic";
 
-import { forwardRef } from "react";
+import React, { forwardRef } from "react";
 
 // Styles
 import style from "./Button.module.scss";
 import classNames from "classnames/bind";
 
 interface Props {
-  color?: "gray" | "red" | "blue";
+  color?: "white" | "gray" | "red" | "blue";
   variant?: "solid" | "soft" | "ghost";
   size?: "sm" | "lg";
   padding?: boolean | "square";
@@ -25,11 +25,11 @@ type ButtonProps<C extends React.ElementType> =
 
 type ButtonComponent = <
   C extends React.ElementType = "button",
->({}: ButtonProps<C>) => React.ReactNode;
+>({ }: ButtonProps<C>) => React.ReactNode;
 
 const cx = classNames.bind(style);
 
-export const Button: ButtonComponent = forwardRef(
+const ButtonRoot: ButtonComponent = forwardRef(
   <C extends React.ElementType = "button">(
     props: ButtonProps<C>,
     ref: PolymorphicRef<C>
@@ -71,3 +71,18 @@ export const Button: ButtonComponent = forwardRef(
   }
 );
 
+type ButtonGroupProps = React.HTMLAttributes<HTMLElement>;
+
+function ButtonGroup(props: ButtonGroupProps) {
+  const { className, children, ...groupProps } = props;
+
+  return (
+    <div {...groupProps} className={cx("buttonGroup", className)}>
+      {children}
+    </div>
+  );
+}
+
+export const Button = Object.assign(ButtonRoot, {
+  Group: ButtonGroup
+});

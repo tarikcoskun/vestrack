@@ -17,3 +17,21 @@
     }
   }
 }
+
+.recommendationsSkeleton {
+  composes: recommendations;
+  overflow: hidden;
+  max-width: 1048px;
+
+  .recommendationList {
+    display: flex;
+    gap: 2rem;
+
+    .movieCard {
+      display: flex;
+      height: 358.3px;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+}

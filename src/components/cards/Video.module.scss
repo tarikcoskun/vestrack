@@ -15,13 +15,16 @@
       aspect-ratio: 16/9;
       background-color: var(--dynamic-gray-150);
       object-fit: cover;
+      transition: scale 150ms;
       @include media("<lg") { width: 250px; }
+
+      &:hover { scale: 1.05; }
     }
   }
 
   .videoName {
     margin-top: 1rem;
-    color: var(--theme-text-heading);
+    color: var(--theme-text-title);
     font-size: 1.125rem;
     @include util.line-clamp(1);
   }

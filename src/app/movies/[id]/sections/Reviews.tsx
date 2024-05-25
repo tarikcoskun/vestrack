@@ -6,22 +6,23 @@ import { useState } from "react";
 import { Icon } from "@/components/Icon";
 import { Button } from "@/components/Button";
 import { MovieInfoModal } from "../components/Modal";
+import { Skeleton } from "@/components/Skeleton";
 
 // Styles
 import style from "./Reviews.module.scss";
 import classNames from "classnames/bind";
-import { ReviewCard } from "@/components/Card/Review";
+import { ReviewCard } from "@/components/cards/Review";
 
 const cx = classNames.bind(style);
 
-export function MovieInfoReviews({ movie }: { movie: MovieInfo }) {
+function MovieInfoReviewsRoot({ movie }: { movie: MovieInfo }) {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <section id="reviews" className={cx("reviews")}>
       <header>
         <h1>
-          User reviews
+          User Reviews
           <Button
             color="gray"
             variant="ghost"
@@ -68,3 +69,25 @@ export function MovieInfoReviews({ movie }: { movie: MovieInfo }) {
     );
   }
 }
+
+function MovieInfoReviewsSkeleton() {
+  return (
+    <section
+      id="reviews"
+      className={cx("reviewsSkeleton", "skeletonSection")}
+    >
+      <header style={{ height: "36px" }}>
+        <Skeleton width={160} height={28.17} />
+      </header>
+      <div className={cx("reviewList")}>
+        <div className={cx("review")}>
+          <Skeleton height={196.69} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export const MovieInfoReviews = Object.assign(MovieInfoReviewsRoot, {
+  Skeleton: MovieInfoReviewsSkeleton
+});

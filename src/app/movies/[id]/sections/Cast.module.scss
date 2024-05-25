@@ -6,6 +6,7 @@
   flex-direction: column;
   gap: 1.5rem;
   padding-block: var(--section-spacing);
+}
 
   .castList {
     gap: 2rem;
@@ -17,28 +18,36 @@
       flex-direction: column;
       @include media("<md") { width: 8rem; }
 
-      .personPhoto,
-      .personInitials {
+      .photoLink {
+        display: flex;
         width: inherit;
-        border: 1px solid var(--theme-outline);
-        aspect-ratio: 4/5;
-        background-color: var(--dynamic-gray-150);
-      }
 
-      .personPhoto {
-        object-fit: cover;
-        object-position: center;
-      }
+        .personPhoto {
+          object-fit: cover;
+          object-position: center;
+        }
 
-      .personInitials {
-        display: grid;
-        font-size: 3rem;
-        place-content: center;
+        .personInitials {
+          display: grid;
+          font-size: 3rem;
+          place-content: center;
+        }
+
+        .personPhoto,
+        .personInitials {
+          width: inherit;
+          border: 1px solid var(--theme-outline);
+          aspect-ratio: 4/5;
+          background-color: var(--dynamic-gray-150);
+          transition: scale 150ms;
+
+          &:hover { scale: 1.05; }
+        }
       }
 
       .personName {
         margin-top: 1rem;
-        color: var(--theme-text-heading);
+        color: var(--theme-text-title);
         font-size: 1.125rem;
         @include util.truncate();
       }
@@ -48,7 +57,6 @@
       }
     }
   }
-}
 
 .castModalLayout {
   display: flex;
@@ -68,14 +76,13 @@
       position: relative;
       color: var(--theme-text-body);
 
-      &:hover { color: var(--theme-text-heading); }
+      &:hover { color: var(--theme-text-title); }
       &[data-state="active"] {
-        color: var(--theme-text-heading);
+        color: var(--theme-text-title);
         font-weight: 500;
 
         &::before {
           display: inline-block;
-          padding: 2px;
           padding: 1.5px;
           border-radius: 50%;
           margin: 0 0.5rem 0.125rem calc(-3px - 0.5rem);
@@ -117,20 +124,12 @@
       .person {
         border-block: 2px solid transparent;
 
-        &:nth-child(odd) td { background-color: var(--dynamic-gray-200); }
-
         td {
           &:first-of-type { width: 80px; }
           &:last-of-type { width: 50%; }
         }
 
-        .personPhoto,
-        .personInitials {
-          width: 4rem;
-          border: 1px solid var(--theme-outline);
-          aspect-ratio: 4/5;
-          background-color: var(--dynamic-gray-200);
-        }
+        &:nth-child(odd) td { background-color: var(--dynamic-gray-200); }
 
         .personPhoto {
           display: grid;
@@ -143,7 +142,33 @@
           font-size: 1.25rem;
           place-content: center;
         }
+
+        .personPhoto,
+        .personInitials {
+          width: 4rem;
+          border: 1px solid var(--theme-outline);
+          aspect-ratio: 4/5;
+          background-color: var(--dynamic-gray-200);
+        }
       }
+    }
+  }
+}
+
+.castSkeleton {
+  composes: cast;
+  overflow: hidden;
+  max-width: 1048px;
+
+  .castList {
+    display: flex;
+    gap: 2rem;
+
+    .person {
+      display: flex;
+      height: 265.2px;
+      flex-direction: column;
+      gap: 0.5rem;
     }
   }
 }

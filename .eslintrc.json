@@ -20,7 +20,10 @@
     "array-bracket-newline": "off",
     "array-bracket-spacing": "error",
     "array-callback-return": "off",
-    "array-element-newline": ["error", "consistent"],
+    "array-element-newline": [
+      "error",
+      "consistent"
+    ],
     "arrow-body-style": "off",
     "arrow-parens": "off",
     "arrow-spacing": "error",
@@ -36,7 +39,10 @@
     "consistent-this": "error",
     "default-case-last": "error",
     "default-param-last": "error",
-    "dot-location": ["error", "property"],
+    "dot-location": [
+      "error",
+      "property"
+    ],
     "dot-notation": "error",
     "eol-last": "error",
     "eqeqeq": "error",
@@ -50,7 +56,10 @@
         "allowArrowFunctions": true
       }
     ],
-    "function-call-argument-newline": ["error", "consistent"],
+    "function-call-argument-newline": [
+      "error",
+      "consistent"
+    ],
     "function-paren-newline": "off",
     "generator-star-spacing": "error",
     "global-require": "error",
@@ -69,7 +78,9 @@
     ],
     "init-declarations": "error",
     "jsx-quotes": "error",
-    "key-spacing": ["error"],
+    "key-spacing": [
+      "error"
+    ],
     "keyword-spacing": "off",
     "line-comment-position": "off",
     "lines-around-comment": "off",
@@ -182,7 +193,10 @@
     "no-whitespace-before-property": "error",
     "nonblock-statement-body-position": "error",
     "object-curly-newline": "error",
-    "object-curly-spacing": ["error", "always"],
+    "object-curly-spacing": [
+      "error",
+      "always"
+    ],
     "object-property-newline": [
       "error",
       {
@@ -190,10 +204,16 @@
       }
     ],
     "object-shorthand": "error",
-    "one-var": ["error", "never"],
+    "one-var": [
+      "error",
+      "never"
+    ],
     "operator-assignment": "error",
     "operator-linebreak": "error",
-    "padded-blocks": ["error", "never"],
+    "padded-blocks": [
+      "error",
+      "never"
+    ],
     "padding-line-between-statements": "off",
     "prefer-arrow-callback": "error",
     "prefer-const": "error",
@@ -234,7 +254,10 @@
         "asyncArrow": "always"
       }
     ],
-    "space-in-parens": ["error", "never"],
+    "space-in-parens": [
+      "error",
+      "never"
+    ],
     "space-infix-ops": "error",
     "space-unary-ops": [
       "error",

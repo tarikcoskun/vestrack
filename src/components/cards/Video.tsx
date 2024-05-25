@@ -35,9 +35,9 @@ export function VideoCard(props: VideoCardProps) {
       >
         {video.name}
       </a>
-      <span className={cx("publishedAt")}>
+      <div className={cx("publishedAt")}>
         {new Date(video.published_at).toLocaleDateString("en-US", DATE_FORMAT)}
-      </span>
+      </div>
     </div>
   );
 }

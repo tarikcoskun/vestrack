@@ -16,7 +16,7 @@ const cx = classNames.bind(style);
 export function FeaturedCard(props: MovieCardProps) {
   const { movie } = props;
 
-  const posterUrl = `https://image.tmdb.org/t/p/w342${movie.poster_path}`;
+  const posterUrl = `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`;
   const backdropUrl = `https://image.tmdb.org/t/p/original${movie.backdrop_path}`;
 
   return (
@@ -38,7 +38,7 @@ export function FeaturedCard(props: MovieCardProps) {
         </Link>
         <div className={cx("movieInfo")}>
           <div className={cx("movieRating")}>
-            <Icon icon="star" className={cx("ratingIcon")} />
+            <Icon icon="star" variant="fill" className={cx("ratingIcon")} />
             <span>{movie.vote_average.toFixed(1).replace(".0", "")}</span>
           </div>
           <Link href={`/movies/${movie.id}`}>
@@ -46,13 +46,13 @@ export function FeaturedCard(props: MovieCardProps) {
           </Link>
           <p className={cx("movieOverview")}>{movie.overview}</p>
           <div className={cx("actions")}>
-            <Button color="gray" variant="ghost" leading={<Icon icon="play" />}>
+            <Button color="gray" variant="ghost" leading={<Icon icon="play" variant="fill" />}>
               Play Trailer
             </Button>
             <Button
               color="gray"
               variant="ghost"
-              leading={<Icon icon="bookmark" />}
+              leading={<Icon icon="bookmark" variant="fill" />}
             >
               Add to Watchlist
             </Button>

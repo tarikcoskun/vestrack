@@ -1,16 +1,20 @@
 @import "@/styles/media";
 
 .movieInfoPage {
-  .pageLayout {
-    --sidebar-width: 8rem;
-    --gap: 4rem;
+  --poster-width: clamp(120px, 50%, 300px);
+  --sidebar-width: 200px;
+  --gap: 4rem;
+
+  .layout {
     display: flex;
     align-items: flex-start;
     gap: var(--gap);
 
-    .pageContent {
-      width: calc(100% - var(--sidebar-width) - var(--gap));
-      flex-grow: 1;
+    .content {
+      width: 100%;
+      @include media(">desktop") {
+        width: calc(100% - var(--sidebar-width) - var(--gap));
+      }
 
       > section {
         > header {
@@ -34,12 +38,13 @@
       }
     }
 
-    .pageSidebar {
+    .sidebar {
       position: sticky;
       z-index: 10;
-      top: calc(var(--content-nav-height) + 4rem);
+      top: var(--content-spacing);
       width: var(--sidebar-width);
-      @include media("<lg") { display: none; }
+      margin-top: var(--content-spacing);
+      @include media("<desktop") { display: none; }
 
       .sidebarLinks {
         list-style: none;
@@ -51,21 +56,23 @@
           cursor: pointer;
           padding-block: 0.5rem;
 
-          &:hover { color: var(--theme-text-heading); }
+          &:hover { color: var(--theme-text-title); }
           &[data-state="active"] {
             border-color: var(--dynamic-gray-900);
-            color: var(--theme-text-heading);
+            color: var(--theme-text-title);
             font-weight: 500;
           }
         }
       }
 
-      .buttons {
+      .actions {
+        display: flex;
+        flex-direction: column;
         margin-top: 1rem;
+        gap: 0.5rem;
 
         > * {
           width: 100%;
-          justify-content: center;
         }
       }
     }

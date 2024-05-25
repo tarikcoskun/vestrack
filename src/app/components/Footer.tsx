@@ -16,13 +16,13 @@ export function Footer() {
     <footer className={cx("footer") + " contentPadding"}>
       <div className={cx("footerContent")}>
         <section className={cx("footerSection", "brand")}>
-          <span className={cx("logo")}>Vestrack</span>
-          <span>Data provided by TMDB</span>
+          <div className={cx("brandLogo")}>Vestrack</div>
+          <div>Data provided by TMDB</div>
         </section>
 
         {Object.entries(footerLinks).map(([category, links]) => (
           <section key={category} className={cx("footerSection")}>
-            <span className={cx("categoryTitle")}>{category}</span>
+            <div className={cx("categoryTitle")}>{category}</div>
             <ul className={cx("categoryLinks")}>
               {links.map((link) => (
                 <li key={link.label}>

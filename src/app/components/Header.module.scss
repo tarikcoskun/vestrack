@@ -46,7 +46,9 @@
         @include media("<phone") { flex-direction: column; }
 
         .link {
-          display: block;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
           padding-inline: 1rem;
           @include media("<phone") {
             padding-block: 1.5rem;

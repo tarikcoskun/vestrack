@@ -1,4 +1,16 @@
 @use "color";
+@use "sass:color" as sass-color;
+
+@font-face {
+  font-family: "Emoji One";
+  font-style: normal;
+  font-weight: normal;
+  src: url("/fonts/iconfont.eot") format("embedded-opentype"),
+       url("/fonts/iconfont.ttf") format("truetype"),
+       url("/fonts/iconfont.woff") format("woff"),
+       url("/fonts/iconfont.woff2") format("woff2"),
+       url("/fonts/iconfont.svg") format("svg");
+}
 
 * {
   box-sizing: border-box;
@@ -9,7 +21,6 @@
 }
 
 :root {
-  // Colors
   --dynamic-gray-50: #{color.$gray-50};
   --dynamic-gray-100: #{color.$gray-100};
   --dynamic-gray-150: #{color.$gray-150};
@@ -23,7 +34,6 @@
   --dynamic-gray-850: #{color.$gray-850};
   --dynamic-gray-900: #{color.$gray-900};
   --dynamic-gray-950: #{color.$gray-950};
-
   --dynamic-red-50: #{color.$red-50};
   --dynamic-red-100: #{color.$red-100};
   --dynamic-red-200: #{color.$red-200};
@@ -35,7 +45,6 @@
   --dynamic-red-800: #{color.$red-800};
   --dynamic-red-900: #{color.$red-900};
   --dynamic-red-950: #{color.$red-950};
-
   --dynamic-blue-50: #{color.$blue-50};
   --dynamic-blue-100: #{color.$blue-100};
   --dynamic-blue-200: #{color.$blue-200};
@@ -47,27 +56,28 @@
   --dynamic-blue-800: #{color.$blue-800};
   --dynamic-blue-900: #{color.$blue-900};
   --dynamic-blue-950: #{color.$blue-950};
-
   --dynamic-yellow-500: #{color.$yellow-500};
   --dynamic-yellow-600: #{color.$yellow-600};
-  // Theme
+
   --theme-background: var(--dynamic-gray-50);
   --theme-outline: var(--dynamic-gray-300);
-  --theme-text-heading: var(--dynamic-gray-900);
+  --theme-text-title: var(--dynamic-gray-900);
   --theme-text-body: var(--dynamic-gray-700);
   --theme-text-link: var(--dynamic-gray-800);
-  --theme-text-subtext: var(--dynamic-gray-500);
+  --theme-text-subtext: var(--dynamic-gray-600);
   --theme-text-button: #fff;
-  //
+
   --font-size-base: 14px;
   --font-size-h1: 1.75rem;
   --font-size-h2: 1.5rem;
   --font-size-h3: 1.25rem;
+  --font-size-paragraph: 1.125rem;
+
   --content-spacing: 24px;
   --content-max-width: 1280px;
   --content-nav-height: 64px;
   --section-spacing: 48px;
-  --hover-scale: 1.025;
+
   background-color: var(--theme-background);
   color: var(--theme-text-body);
 
@@ -77,7 +87,6 @@
   scrollbar-gutter: stable;
 
   @media (prefers-color-scheme: dark) {
-    // Colors
     --dynamic-gray-50: #{color.$gray-950};
     --dynamic-gray-100: #{color.$gray-900};
     --dynamic-gray-150: #{color.$gray-850};
@@ -91,7 +100,6 @@
     --dynamic-gray-900: #{color.$gray-100};
     --dynamic-gray-850: #{color.$gray-150};
     --dynamic-gray-950: #{color.$gray-50};
-
     --dynamic-red-50: #{color.$red-950};
     --dynamic-red-100: #{color.$red-900};
     --dynamic-red-200: #{color.$red-800};
@@ -103,7 +111,6 @@
     --dynamic-red-800: #{color.$red-200};
     --dynamic-red-900: #{color.$red-100};
     --dynamic-red-950: #{color.$red-50};
-
     --dynamic-blue-50: #{color.$blue-950};
     --dynamic-blue-100: #{color.$blue-900};
     --dynamic-blue-200: #{color.$blue-800};
@@ -115,7 +122,6 @@
     --dynamic-blue-800: #{color.$blue-200};
     --dynamic-blue-900: #{color.$blue-100};
     --dynamic-blue-950: #{color.$blue-50};
-
     --dynamic-yellow-500: #{color.$yellow-600};
     --dynamic-yellow-600: #{color.$yellow-500};
   }
@@ -143,7 +149,12 @@ body {
 }
 
 html:has(dialog[open]) { overflow: hidden !important; }
-p { line-height: 1.5; }
+
+p {
+  color: var(--theme-text-title);
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
 
 a {
   color: var(--dynamic-text-link);
@@ -161,10 +172,10 @@ button {
 h1,
 h2,
 h3 {
-  color: var(--theme-text-heading);
+  color: var(--theme-text-title);
   font-weight: 500;
 }
 
 h1 { font-size: clamp(1.25rem, 2.5vw, var(--font-size-h1)); }
-h2 { font-size: clamp(1rem, 2vw, var(--font-size-h2)); }
-h3 { font-size: var(--font-size-h3); }
+h2 { font-size: clamp(1.125rem, 2.25vw, var(--font-size-h2)); }
+h3 { font-size: clamp(1rem, 2vw, var(--font-size-h3)); }

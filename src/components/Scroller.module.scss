@@ -28,15 +28,10 @@
     display: flex;
     overflow: hidden;
     max-width: var(--content-max-width);
-    margin-block: calc(var(--content-spacing) * -1);
+    padding: var(--content-spacing);
+    margin: calc(var(--content-spacing) * -1);
     overflow-x: auto;
-    padding-block: var(--content-spacing);
     scroll-behavior: smooth;
-
-    @include media("<md") {
-      margin-inline: calc(var(--content-spacing) * -1);
-      padding-inline: var(--content-spacing);
-    }
 
     &::-webkit-scrollbar { display: none; }
   }

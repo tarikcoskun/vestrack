@@ -1,85 +1,127 @@
+@use "sass:color" as sass-color;
 @use "@/styles/util";
+@use "@/styles/color";
 @import "@/styles/media";
 
 .overview {
   display: flex;
-  gap: 2.5rem;
-  padding-block: 4rem;
-  // @include util.full-width-background(var(--dynamic-gray-100));
-  @include media("<desktop") { padding-block: var(--content-spacing); }
+  padding-bottom: var(--section-spacing);
+  gap: 2rem;
   @include media("<md") { flex-direction: column; }
 
-  .moviePoster {
-    width: clamp(150px, 50%, 300px);
+  .columnLeft {
+    position: relative;
+    display: flex;
+    width: var(--poster-width);
     height: 100%;
     flex-shrink: 0;
-    border: 1px solid var(--theme-outline);
+    margin-top: calc(var(--poster-width) * -2/3);
     aspect-ratio: 2/3;
-    background-color: var(--dynamic-gray-150);
+    @include media("<md") { display: none; }
+
+    &:hover .movieTrailer { opacity: 1; }
+
+    .moviePoster {
+      width: 100%;
+      border-radius: 6px;
+      background-color: var(--dynamic-gray-150);
+    }
+
+    .movieTrailer {
+      position: absolute;
+      display: grid;
+      overflow: hidden;
+      border-radius: 6px;
+      inset: 0;
+      opacity: 0;
+      place-content: center;
+      transform-origin: center;
+      transition: opacity 150ms, transform 150ms;
+
+      &::after {
+        position: absolute;
+        background-color: rgb(0 0 0 / 0.25);
+        content: "";
+        inset: 0;
+      }
+
+      .playTrailer {
+        z-index: 10;
+        transition: scale 150ms;
+
+        &:hover {
+          background-color: white;
+          scale: 1.15;
+        }
+      }
+    }
   }
+
+  .columnRight {
+    .overviewInfo {
+      display: flex;
+      flex-direction: column;
+      padding-top: 2rem;
+      gap: 2rem;
+
+      .metadataList {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        @include media("<phone") { gap: 1.5rem }
+
+        .metadataItem {
+          display: flex;
+          gap: 0.5rem 1rem;
+          @include media(">phone") { align-items: center; }
+          @include media("<phone") { flex-direction: column; }
+
+          .title {
+            width: 60px;
+            flex-shrink: 0;
+          }
+
+          .personGroup {
+            list-style: none;
+
+            .person {
+              display: inline;
+              color: var(--theme-text-title);
+              line-height: 1.5;
+              word-break: break-word;
+
+              &:not(:first-child)::before {
+                color: var(--theme-text-body);
+                @include util.circular-divider();
+              }
+            }
+          }
+
+          .dataGroup {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.375rem;
+            list-style: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+.overviewSkeleton {
+  composes: overview;
 
   .overviewInfo {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 
-    .movieTitle {
-      color: var(--theme-text-heading);
-      font-size: clamp(1.5rem, 2.5vw, 2rem);
-    }
-
-    .movieDetails :not(:first-child)::before { @include util.circular-divider; }
-    .movieRating {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-
-      .ratingIcon { color: var(--dynamic-yellow-600); }
-      .voteAverage { color: var(--theme-text-heading); }
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 1rem;
-      margin-block: 1rem;
-    }
-
     .crewOverview {
       display: flex;
       flex-direction: column;
-      margin-top: 0.5rem;
-      gap: 1rem;
-
-      .crewGroup {
-        display: flex;
-        gap: 1rem;
-        @include media("<phone") { flex-direction: column; }
-
-        .title { width: 60px; }
-        .personGroup {
-          list-style: none;
-
-          .person {
-            display: inline;
-            color: var(--dynamic-blue-600);
-            line-height: 1.5;
-            word-break: break-word;
-
-            &:not(:first-child)::before {
-              color: var(--theme-text-body);
-              @include util.circular-divider();
-            }
-          }
-        }
-      }
-    }
-
-    .movieOverview {
-      max-width: 60ch;
-      color: var(--theme-text-heading);
-      font-size: 1.125rem;
-      @include util.line-clamp(5);
+      margin-top: 1rem;
+      gap: 1.25rem;
     }
   }
 }

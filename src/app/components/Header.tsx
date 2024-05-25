@@ -10,7 +10,7 @@ import { navbarLinks } from "@/data/layout";
 import Link from "next/link";
 import { Icon } from "@/components/Icon";
 import { Button } from "@/components/Button";
-import { Input } from "@/components/Form/Input";
+import { Input } from "@/components/forms/Input";
 
 // Styles
 import style from "./Header.module.scss";
@@ -41,7 +41,8 @@ export function Header() {
                   className={cx("link")}
                   data-state={pathname === link.href ? "active" : "inactive"}
                 >
-                  {link.label}
+                  <Icon icon={link.icon} variant={pathname === link.href ? "fill" : "regular"} size={24} className={cx("linkIcon")} />
+                  <span>{link.label}</span>
                 </Link>
               </li>
             ))}
@@ -69,10 +70,9 @@ export function Header() {
             color="gray"
             variant="ghost"
             className={cx("userMenu")}
-            leading={<Icon icon="user" size={20} />}
             style={{ color: "var(--theme-text-button)" }}
           >
-            User
+            Login
           </Button>
 
           <Button

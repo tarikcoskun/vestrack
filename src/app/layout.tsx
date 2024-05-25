@@ -46,6 +46,7 @@ export default function RootLayout(props: BaseLayoutProps) {
         >
           <Toaster position="bottom-right" richColors />
           <div
+            style={{ minHeight: "inherit" }}
             className={classNames("inlineCenter", {
               contentWidth: maxWidth,
             })}

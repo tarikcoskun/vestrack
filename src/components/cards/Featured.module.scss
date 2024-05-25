@@ -34,7 +34,9 @@
         object-fit: cover;
         object-position: center;
         outline: 1px solid var(--theme-outline);
-        transition: 150ms scale;
+        transition: scale 150ms;
+
+        &:hover { scale: 1.05; }
       }
     }
 
@@ -48,19 +50,18 @@
       .movieRating {
         display: flex;
         align-items: center;
-        color: var(--theme-text-heading);
+        color: var(--theme-text-title);
         gap: 0.5rem;
 
         .ratingIcon { color: var(--dynamic-yellow-600); }
       }
 
       .movieTitle {
-        color: var(--theme-text-heading);
+        color: var(--theme-text-title);
         font-size: 1.375rem;
       }
 
       .movieOverview {
-        font-size: 1.125rem;
         @include util.line-clamp(3);
       }
 
