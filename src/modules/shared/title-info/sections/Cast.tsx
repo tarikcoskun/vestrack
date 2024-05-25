@@ -3,20 +3,20 @@
 import { useEffect, useRef, useState } from "react";
 
 // Components
+import Link from "next/link";
 import { Icon } from "@/components/Icon";
 import { Button } from "@/components/Button";
 import { Scroller } from "@/components/Scroller";
-import { MovieInfoModal } from "../components/Modal";
+import { TitleInfoModal } from "../components/Modal";
 import { Skeleton } from "@/components/Skeleton";
 
 // Styles
 import style from "./Cast.module.scss";
 import classNames from "classnames/bind";
-import Link from "next/link";
 
 const cx = classNames.bind(style);
 
-function MovieInfoCastRoot({ movie }: { movie: MovieInfo }) {
+export function TitleInfoCast({ data }: { data: MovieInfo & ShowInfo }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -49,7 +49,7 @@ function MovieInfoCastRoot({ movie }: { movie: MovieInfo }) {
       </header>
 
       <Scroller className={cx("castList")} ref={scrollRef}>
-        {movie.credits.cast
+        {data.credits.cast
           .sort((a, b) => a.order! - b.order!)
           .slice(0, 14)
           .map((person) => (
@@ -87,7 +87,7 @@ function MovieInfoCastRoot({ movie }: { movie: MovieInfo }) {
     const modalScrollRef = useRef<HTMLDivElement>(null);
     const [activeId, setActiveId] = useState("Cast");
 
-    const fullCastCrew = [...movie.credits.cast, ...movie.credits.crew];
+    const fullCastCrew = [...data.credits.cast, ...data.credits.crew];
     const groupedList = fullCastCrew.reduce(
       (obj: { [key: string]: (Cast & { titles: string[] })[] }, curr) => {
         const title = curr.job ? curr.known_for_department : "Cast";
@@ -146,8 +146,8 @@ function MovieInfoCastRoot({ movie }: { movie: MovieInfo }) {
     }, [groupedList]);
 
     return (
-      <MovieInfoModal
-        movie={movie}
+      <TitleInfoModal
+        movie={data}
         open={modalOpen}
         onOpenChange={setModalOpen}
         scrollRef={modalScrollRef}
@@ -216,12 +216,12 @@ function MovieInfoCastRoot({ movie }: { movie: MovieInfo }) {
             ))}
           </div>
         </div>
-      </MovieInfoModal>
+      </TitleInfoModal>
     );
   }
 }
 
-function MovieInfoCastSkeleton() {
+export function TitleInfoCastSkeleton() {
   return (
     <section id="cast" className={cx("castSkeleton")}>
       <header style={{ height: "36px" }}>
@@ -245,7 +245,3 @@ function MovieInfoCastSkeleton() {
     </section>
   );
 }
-
-export const MovieInfoCast = Object.assign(MovieInfoCastRoot, {
-  Skeleton: MovieInfoCastSkeleton
-});

@@ -1,3 +1,5 @@
+import { slugify } from "@/util/slugify";
+
 // Components
 import Link from "next/link";
 
@@ -15,7 +17,7 @@ const cx = classNames.bind(style);
 export function MovieCard(props: MovieCardProps) {
   const { movie, type, className, ...cardProps } = props;
 
-  const infoPageUrl = `/${type === "movie" ? "movies" : "shows"}/${movie.id}`;
+  const infoPageUrl = `/${type}/${slugify(movie.title! || movie.name!) + "-" + movie.id}`;
   const posterUrl = `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`;
 
   return (
@@ -34,12 +36,12 @@ export function MovieCard(props: MovieCardProps) {
       </Link>
       <div className={cx("movieInfo")}>
         <Link href={infoPageUrl}>
-          <span className={cx("movieTitle")} title={movie.title}>
-            {movie.title}
+          <span className={cx("movieTitle")} title={movie.title || movie.name}>
+            {movie.title || movie.name}
           </span>
         </Link>
         <div className={cx("releaseYear")}>
-          {new Date(movie.release_date).getFullYear()}
+          {new Date(movie.release_date! || movie.first_air_date!).getFullYear()}
         </div>
       </div>
     </article>

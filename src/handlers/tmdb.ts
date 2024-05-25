@@ -40,7 +40,7 @@ class TmdbHandler {
     return results;
   }
 
-  async getMovieInfo(movieId: string, type: "movie" | "tv" = "movie") {
+  async getTitleInfo(movieId: string, type: "movie" | "tv" = "movie") {
     const data = await this.fetch<ExtendedMovieInfo>(
       `/${type}/${movieId}?append_to_response=credits,reviews,videos,recommendations`
     );
@@ -69,9 +69,7 @@ class TmdbHandler {
   }
 
   async query(query: string) {
-    const data = await this.fetch<{ results: Result[] }>(
-      `/search/multi?query=${query}`
-    ).then((res) => res.results);
+    const data = await this.fetch<{ results: Result[] }>(`/search/multi?query=${query}`).then((res) => res.results);
 
     const sortFunc = (a: Result, b: Result) => b.popularity - a.popularity;
     const filterFunc = (item: Result) => item.poster_path;
@@ -81,7 +79,7 @@ class TmdbHandler {
       ?.sort(sortFunc)
       ?.filter(filterFunc);
 
-    const series = data
+    const shows = data
       ?.filter((item) => item.media_type === "tv")
       ?.sort(sortFunc)
       ?.filter(filterFunc);
@@ -92,7 +90,7 @@ class TmdbHandler {
 
     return {
       movies,
-      series,
+      shows,
       people,
     };
   }

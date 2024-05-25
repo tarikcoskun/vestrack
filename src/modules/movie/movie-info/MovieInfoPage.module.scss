@@ -1,0 +1,41 @@
+@import "@/styles/media";
+
+.movieInfoPage {
+  --poster-width: clamp(120px, 50%, 300px);
+  --sidebar-width: 190px;
+  --gap: 4rem;
+
+  .layout {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--gap);
+
+    .content {
+      width: 100%;
+      @include media(">desktop") {
+        width: calc(100% - var(--sidebar-width) - var(--gap));
+      }
+
+      > section {
+        > header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          h1 {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+          }
+
+          :global(.scrollerControls) {
+            display: flex;
+            gap: 0.5rem;
+
+            @include media("<md") { display: none; }
+          }
+        }
+      }
+    }
+  }
+}

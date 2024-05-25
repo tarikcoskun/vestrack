@@ -1,16 +1,16 @@
 import { Modal, type ModalProps } from "@/components/Modal";
 import { forwardRef } from "react";
 
-interface MovieInfoModalProps extends Omit<ModalProps, "header"> {
+interface TitleInfoModalProps extends Omit<ModalProps, "header"> {
   movie: MovieInfo;
   description: string;
   children?: React.ReactNode;
 }
 
-export const MovieInfoModal = forwardRef<
+export const TitleInfoModal = forwardRef<
   HTMLDialogElement,
-  MovieInfoModalProps
->((props: MovieInfoModalProps, forwardedRef) => {
+  TitleInfoModalProps
+>((props: TitleInfoModalProps, forwardedRef) => {
   const { open, onOpenChange, scrollRef, movie, description, children } = props;
 
   return (
@@ -35,4 +35,3 @@ export const MovieInfoModal = forwardRef<
     </Modal>
   );
 });
-

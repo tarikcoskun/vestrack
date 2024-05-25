@@ -8,12 +8,12 @@ export interface GenericLink {
 export const navbarLinks: (GenericLink & { icon: IconList; })[] = [
   {
     label: "Movies",
-    href: "/movies",
+    href: "/movie",
     icon: "film"
   },
   {
     label: "TV Shows",
-    href: "/shows",
+    href: "/tv",
     icon: "tv"
   },
 ];
@@ -34,15 +34,15 @@ export const footerLinks: Record<string, (GenericLink & { external?: boolean })[
   Links: [
     {
       label: "Movies",
-      href: "/movies",
+      href: "/movie",
     },
     {
       label: "TV Shows",
-      href: "/shows",
+      href: "/tv",
     },
     {
       label: "People",
-      href: "/people",
+      href: "/person",
     },
   ],
 };

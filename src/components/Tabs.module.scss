@@ -8,7 +8,7 @@
     top: 0;
     display: flex;
     flex-shrink: 0;
-    gap: var(--size-8);
+    gap: 2rem;
 
     &.sticked { z-index: 10; }
 
@@ -18,9 +18,7 @@
       cursor: pointer;
       font-size: var(--scale-0);
       font-weight: 500;
-      letter-spacing: 1px;
       padding-block: var(--size-4);
-      text-transform: uppercase;
       user-select: none;
 
       &[data-state="active"] {
@@ -40,6 +38,5 @@
 
   .tabsContent {
     flex-grow: 1;
-    padding: var(--size-8);
   }
 }

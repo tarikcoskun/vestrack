@@ -19,15 +19,15 @@ const emojiFont = Noto_Color_Emoji({
 
 const cx = classNames.bind(style);
 
-function MovieInfoOverviewRoot({ movie }: { movie: MovieInfo }) {
-  const posterUrl = `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`;
-  const posterBlurUrl = `https://image.tmdb.org/t/p/w300_and_h450_multi_faces_filter%28blur%29/${movie.poster_path}`;
-  const trailerUrl = `https://youtu.be/${movie.videos.results.find((video) => video.type === "Trailer")?.key}`;
+export function TitleInfoOverview({ data }: { data: MovieInfo & ShowInfo }) {
+  const posterUrl = `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${data.poster_path}`;
+  const posterBlurUrl = `https://image.tmdb.org/t/p/w300_and_h450_multi_faces_filter%28blur%29/${data.poster_path}`;
+  const trailerUrl = `https://youtu.be/${data.videos.results.find((video) => video.type === "Trailer")?.key}`;
 
   return (
     <section id="overview" className={cx("overview")}>
       <div className={cx("columnLeft")}>
-        <img src={posterUrl} alt={movie.title} className={cx("moviePoster")} />
+        <img src={posterUrl} alt={data.title} className={cx("moviePoster")} />
         <div className={cx("movieTrailer")} style={{ backgroundImage: `url(${posterBlurUrl})` }}>
           <Button
             as="a"
@@ -50,22 +50,22 @@ function MovieInfoOverviewRoot({ movie }: { movie: MovieInfo }) {
           <div className={cx("metadataList")}>
             <CrewGroup
               title="Director"
-              people={movie.credits.crew.filter(
+              people={data.credits.crew.filter(
                 (person) => person.job === "Director"
               )}
             />
             <CrewGroup
               title="Writer"
-              people={movie.credits.crew.filter(
+              people={data.credits.crew.filter(
                 (person) => person.department === "Writing"
               )}
             />
             <div className={cx("metadataItem")}>
               <span className={cx("title")}>
-                {"Genre" + (movie.genres.length > 1 ? "s" : "")}
+                {"Genre" + (data.genres.length > 1 ? "s" : "")}
               </span>
               <ul className={cx("dataGroup")}>
-                {movie.genres
+                {data.genres
                   .sort((a, b) => (a.name > b.name ? 1 : -1)).map((genre) => (
                     <li key={genre.id} className={cx("person")}>
                       <Button key={genre.name} as={Link} href={`/genre/${slugify(genre.name)}`} color="gray" variant="soft" size="sm" rounded="full" className={cx("movieGenre")}>
@@ -76,7 +76,7 @@ function MovieInfoOverviewRoot({ movie }: { movie: MovieInfo }) {
               </ul>
             </div>
           </div>
-          <p className={cx("movieOverview")}>{movie.overview}</p>
+          <p className={cx("movieOverview")}>{data.overview}</p>
         </section>
       </div>
     </section>
@@ -112,7 +112,7 @@ function CrewGroup(props: CrewGroupProps) {
   );
 }
 
-function MovieInfoOverviewSkeleton() {
+export function TitleInfoOverviewSkeleton() {
   return (
     <section
       id="overview"
@@ -149,7 +149,3 @@ function MovieInfoOverviewSkeleton() {
     </section>
   );
 }
-
-export const MovieInfoOverview = Object.assign(MovieInfoOverviewRoot, {
-  Skeleton: MovieInfoOverviewSkeleton
-});

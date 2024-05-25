@@ -14,7 +14,7 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(style);
 
-function MovieInfoRecommendationsRoot({ movie }: { movie: MovieInfo }) {
+export function TitleInfoRecommendations({ data }: { data: MovieInfo }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -32,7 +32,7 @@ function MovieInfoRecommendationsRoot({ movie }: { movie: MovieInfo }) {
       </header>
 
       <Scroller className={cx("recommendationList")} ref={scrollerRef}>
-        {movie.recommendations.results.map((recommendedMovie) => (
+        {data.recommendations.results.map((recommendedMovie) => (
           <MovieCard
             key={recommendedMovie.id}
             movie={recommendedMovie}
@@ -45,7 +45,7 @@ function MovieInfoRecommendationsRoot({ movie }: { movie: MovieInfo }) {
   );
 }
 
-function MovieInfoRecommendationsSkeleton() {
+export function TitleInfoRecommendationsSkeleton() {
   return (
     <section
       id="recommendations"
@@ -72,7 +72,3 @@ function MovieInfoRecommendationsSkeleton() {
     </section>
   );
 }
-
-export const MovieInfoRecommendations = Object.assign(MovieInfoRecommendationsRoot, {
-  Skeleton: MovieInfoRecommendationsSkeleton
-});

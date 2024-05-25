@@ -5,12 +5,12 @@ import { MovieCard } from "@/components/cards/Movie";
 import { FeaturedCard } from "@/components/cards/Featured";
 
 // Styles
-import style from "./page.module.scss";
+import style from "./MoviesPage.module.scss";
 import classNames from "classnames/bind";
 
 const cx = classNames.bind(style);
 
-export default function Page() {
+export function MoviesPage() {
   const data = getHomeData();
 
   return (
@@ -19,7 +19,7 @@ export default function Page() {
         <h1>Watch Next</h1>
         <div className={cx("discoveryList")}>
           {data.discovery.slice(0, 2).map((movie) => (
-            <FeaturedCard key={movie.id} movie={movie} />
+            <FeaturedCard key={movie.id} movie={movie} type="movie" />
           ))}
         </div>
       </section>

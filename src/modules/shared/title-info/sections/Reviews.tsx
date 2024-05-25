@@ -5,7 +5,7 @@ import { useState } from "react";
 // Components
 import { Icon } from "@/components/Icon";
 import { Button } from "@/components/Button";
-import { MovieInfoModal } from "../components/Modal";
+import { TitleInfoModal } from "../components/Modal";
 import { Skeleton } from "@/components/Skeleton";
 
 // Styles
@@ -15,7 +15,7 @@ import { ReviewCard } from "@/components/cards/Review";
 
 const cx = classNames.bind(style);
 
-function MovieInfoReviewsRoot({ movie }: { movie: MovieInfo }) {
+export function TitleInfoReviews({ data }: { data: MovieInfo }) {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
@@ -39,7 +39,7 @@ function MovieInfoReviewsRoot({ movie }: { movie: MovieInfo }) {
       </header>
 
       <div className={cx("reviewList")}>
-        {movie.reviews.results.slice(0, 1).map((review) => (
+        {data.reviews.results.slice(0, 1).map((review) => (
           <ReviewCard key={review.id} review={review} lineClamp />
         ))}
       </div>
@@ -50,14 +50,14 @@ function MovieInfoReviewsRoot({ movie }: { movie: MovieInfo }) {
 
   function FullReviewsModal() {
     return (
-      <MovieInfoModal
-        movie={movie}
+      <TitleInfoModal
+        movie={data}
         open={modalOpen}
         onOpenChange={setModalOpen}
         description="User Reviews"
       >
         <div className={cx("fullReviewList")}>
-          {movie.reviews.results.map((review) => (
+          {data.reviews.results.map((review) => (
             <ReviewCard
               key={review.id}
               review={review}
@@ -65,12 +65,12 @@ function MovieInfoReviewsRoot({ movie }: { movie: MovieInfo }) {
             />
           ))}
         </div>
-      </MovieInfoModal>
+      </TitleInfoModal>
     );
   }
 }
 
-function MovieInfoReviewsSkeleton() {
+export function TitleInfoReviewsSkeleton() {
   return (
     <section
       id="reviews"
@@ -87,7 +87,3 @@ function MovieInfoReviewsSkeleton() {
     </section>
   );
 }
-
-export const MovieInfoReviews = Object.assign(MovieInfoReviewsRoot, {
-  Skeleton: MovieInfoReviewsSkeleton
-});

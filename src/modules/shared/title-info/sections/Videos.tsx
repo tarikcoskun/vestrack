@@ -7,7 +7,7 @@ import { Icon } from "@/components/Icon";
 import { Button } from "@/components/Button";
 import { VideoCard } from "@/components/cards/Video";
 import { Scroller } from "@/components/Scroller";
-import { MovieInfoModal } from "../components/Modal";
+import { TitleInfoModal } from "../components/Modal";
 import { Skeleton } from "@/components/Skeleton";
 
 // Styles
@@ -16,7 +16,7 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(style);
 
-export function MovieInfoVideosRoot({ movie }: { movie: MovieInfo }) {
+export function TitleInfoVideos({ data }: { data: MovieInfo }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -49,7 +49,7 @@ export function MovieInfoVideosRoot({ movie }: { movie: MovieInfo }) {
       </header>
 
       <Scroller className={cx("videoList")} ref={scrollerRef}>
-        {movie.videos.results
+        {data.videos.results
           .sort(
             (a, b) =>
               new Date(b.published_at).getTime() -
@@ -67,14 +67,14 @@ export function MovieInfoVideosRoot({ movie }: { movie: MovieInfo }) {
 
   function FullVideosModal() {
     return (
-      <MovieInfoModal
-        movie={movie}
+      <TitleInfoModal
+        movie={data}
         open={modalOpen}
         onOpenChange={setModalOpen}
         description="Videos"
       >
         <div className={cx("fullVideoList")}>
-          {movie.videos.results
+          {data.videos.results
             .sort(
               (a, b) =>
                 new Date(b.published_at).getTime() -
@@ -84,12 +84,12 @@ export function MovieInfoVideosRoot({ movie }: { movie: MovieInfo }) {
               <VideoCard key={video.id} video={video} className={cx("video")} />
             ))}
         </div>
-      </MovieInfoModal>
+      </TitleInfoModal>
     );
   }
 }
 
-function MovieInfoVideosSkeleton() {
+export function TitleInfoVideosSkeleton() {
   return (
     <section id="videos" className={cx("videosSkeleton")}>
       <header style={{ height: "36px" }}>
@@ -113,7 +113,3 @@ function MovieInfoVideosSkeleton() {
     </section>
   );
 }
-
-export const MovieInfoVideos = Object.assign(MovieInfoVideosRoot, {
-  Skeleton: MovieInfoVideosSkeleton
-});
