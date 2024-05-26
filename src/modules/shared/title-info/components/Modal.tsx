@@ -2,7 +2,7 @@ import { Modal, type ModalProps } from "@/components/Modal";
 import { forwardRef } from "react";
 
 interface TitleInfoModalProps extends Omit<ModalProps, "header"> {
-  movie: MovieInfo;
+  movie: MovieInfo & SeriesInfo;
   description: string;
   children?: React.ReactNode;
 }
@@ -22,9 +22,9 @@ export const TitleInfoModal = forwardRef<
       header={
         <>
           <h3>
-            {movie.title}{" "}
+            {movie.title || movie.name}{" "}
             <span style={{ color: "var(--theme-text-body)", fontSize: "1rem" }}>
-              ({new Date(movie.release_date).getFullYear()})
+              ({new Date(movie.release_date! || movie.first_air_date!).getFullYear()})
             </span>
           </h3>
           <p>{description}</p>
