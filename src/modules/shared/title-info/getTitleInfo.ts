@@ -8,6 +8,6 @@ export function getTitleInfo(id: string, type: "movie" | "tv") {
   */
 
   return axios
-    .get<MovieInfo & ShowInfo>("/getTitleInfo", { params: { type, id: id.split("-").pop() } })
+    .get<MovieInfo & SeriesInfo>("/getTitleInfo", { params: { type, id: id.split("-").pop() } })
     .then((res) => res.data);
 }

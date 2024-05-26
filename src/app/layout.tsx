@@ -23,7 +23,7 @@ interface BaseLayoutProps {
 
 export const metadata: Metadata = {
   title: "Vestrack",
-  description: "Vestrack is a movie & tv show tracker",
+  description: "Vestrack is a movie & tv series tracker",
 };
 
 export default function RootLayout(props: BaseLayoutProps) {

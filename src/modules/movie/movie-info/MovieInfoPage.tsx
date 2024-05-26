@@ -21,7 +21,7 @@ const cx = classNames.bind(style);
 
 export function MovieInfoPage({ params: { id } }: { params: { id: string } }) {
   const contentRef = useRef<HTMLDivElement>(null);
-  const [data, setData] = useState<MovieInfo & ShowInfo | null>(null);
+  const [data, setData] = useState<MovieInfo & SeriesInfo | null>(null);
 
   useEffect(() => {
     fetchData()
@@ -48,7 +48,7 @@ export function MovieInfoPage({ params: { id } }: { params: { id: string } }) {
                 <TitleInfoOverview data={data} />
                 <TitleInfoCast data={data} />
                 <TitleInfoVideos data={data} />
-                <TitleInfoReviews data={data} />
+                {data.reviews.total_results > 0 && <TitleInfoReviews data={data} />}
                 <TitleInfoRecommendations data={data} />
               </div>
               <TitleInfoSidebar />

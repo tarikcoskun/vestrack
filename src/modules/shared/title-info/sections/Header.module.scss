@@ -26,7 +26,7 @@
 
     &::after {
       position: absolute;
-      background-image: linear-gradient(to bottom, transparent, rgb(0 0 0 / 0.875));
+      background-image: linear-gradient(to bottom, transparent, rgb(0 0 0 / 0.75));
       content: "";
       inset: 0;
     }
@@ -48,7 +48,6 @@
     justify-content: flex-end;
 
     .movieTitle {
-
       @include media(">md") {
         color: color.$gray-100;
         text-shadow: 0 0 8px rgb(0 0 0 / 0.75);

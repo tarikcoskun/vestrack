@@ -19,7 +19,7 @@ const emojiFont = Noto_Color_Emoji({
 
 const cx = classNames.bind(style);
 
-export function TitleInfoOverview({ data }: { data: MovieInfo & ShowInfo }) {
+export function TitleInfoOverview({ data }: { data: MovieInfo & SeriesInfo }) {
   const posterUrl = `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${data.poster_path}`;
   const posterBlurUrl = `https://image.tmdb.org/t/p/w300_and_h450_multi_faces_filter%28blur%29/${data.poster_path}`;
   const trailerUrl = `https://youtu.be/${data.videos.results.find((video) => video.type === "Trailer")?.key}`;
@@ -48,12 +48,19 @@ export function TitleInfoOverview({ data }: { data: MovieInfo & ShowInfo }) {
       <div className={cx("columnRight")}>
         <section className={cx("overviewInfo")}>
           <div className={cx("metadataList")}>
-            <CrewGroup
-              title="Director"
-              people={data.credits.crew.filter(
-                (person) => person.job === "Director"
-              )}
-            />
+            {data.type === "movie" ? (
+              <CrewGroup
+                title="Director"
+                people={data.credits.crew.filter(
+                  (person) => person.job === "Director"
+                )}
+              />
+            ) : (
+              <CrewGroup
+                title="Creator"
+                people={data.created_by}
+              />
+            )}
             <CrewGroup
               title="Writer"
               people={data.credits.crew.filter(
@@ -95,6 +102,8 @@ function CrewGroup(props: CrewGroupProps) {
     if (!arr.map((person) => person.name).includes(curr.name)) arr.push(curr);
     return arr;
   }, []);
+
+  if (!filteredPeople.length) return null;
 
   return (
     <div className={cx("metadataItem")}>

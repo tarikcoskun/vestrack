@@ -36,7 +36,7 @@ export function TitleInfoRecommendations({ data }: { data: MovieInfo }) {
           <MovieCard
             key={recommendedMovie.id}
             movie={recommendedMovie}
-            type="movie"
+            type={recommendedMovie.media_type}
             className={cx("recommendationCard")}
           />
         ))}

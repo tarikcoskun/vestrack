@@ -12,7 +12,7 @@ export const navbarLinks: (GenericLink & { icon: IconList; })[] = [
     icon: "film"
   },
   {
-    label: "TV Shows",
+    label: "TV Series",
     href: "/tv",
     icon: "tv"
   },
@@ -37,7 +37,7 @@ export const footerLinks: Record<string, (GenericLink & { external?: boolean })[
       href: "/movie",
     },
     {
-      label: "TV Shows",
+      label: "TV Series",
       href: "/tv",
     },
     {

@@ -16,7 +16,7 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(style);
 
-export function TitleInfoCast({ data }: { data: MovieInfo & ShowInfo }) {
+export function TitleInfoCast({ data }: { data: MovieInfo & SeriesInfo }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [modalOpen, setModalOpen] = useState(false);
 

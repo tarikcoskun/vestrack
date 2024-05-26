@@ -71,26 +71,39 @@ class TmdbHandler {
   async query(query: string) {
     const data = await this.fetch<{ results: Result[] }>(`/search/multi?query=${query}`).then((res) => res.results);
 
-    const sortFunc = (a: Result, b: Result) => b.popularity - a.popularity;
+    const getRelevancyScore = (title: string) => {
+      const lowTitle = title.toLowerCase();
+      const lowQuery = query.toLowerCase();
+      if (lowTitle === lowQuery) {
+        return 3;
+      } else if (lowTitle.startsWith(lowQuery)) {
+        return 2;
+      } else if (lowTitle.includes(lowQuery)) {
+        return 1;
+      } else {
+        return 0;
+      }
+    };
+
+    const sortFunc = (a: Result, b: Result) => (getRelevancyScore(b.title || b.name!) * 100 + b.popularity) - (getRelevancyScore(a.title || a.name!) * 100 + a.popularity);
     const filterFunc = (item: Result) => item.poster_path;
 
     const movies = data
       ?.filter((item) => item.media_type === "movie")
-      ?.sort(sortFunc)
       ?.filter(filterFunc);
 
-    const shows = data
+    const series = data
       ?.filter((item) => item.media_type === "tv")
-      ?.sort(sortFunc)
       ?.filter(filterFunc);
+
+    const titles = [...movies, ...series].sort(sortFunc);
 
     const people = data
       ?.filter((item) => item.media_type === "person")
       ?.sort(sortFunc);
 
     return {
-      movies,
-      shows,
+      titles,
       people,
     };
   }

@@ -1,4 +1,4 @@
-interface ShowInfo {
+interface SeriesInfo {
   adult: boolean;
   backdrop_path: string;
   created_by: any[];

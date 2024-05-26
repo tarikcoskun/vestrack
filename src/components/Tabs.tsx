@@ -114,6 +114,7 @@ const TabsList = forwardRef<HTMLDivElement, TabsListProps>(
       <div
         {...listProps}
         role="tablist"
+        data-sticky={sticky}
         data-sticked={isSticked}
         className={cx("tabsList", className)}
         ref={composeRefs(forwardedRef, tableHeadRef)}

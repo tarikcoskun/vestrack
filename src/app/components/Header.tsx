@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 // Data
 import { navbarLinks } from "@/data/layout";
@@ -19,8 +19,15 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(style);
 
 export function Header() {
+  const router = useRouter();
   const pathname = usePathname();
+  const [query, setQuery] = useState("");
   const [mobileMenu, setMobileMenu] = useState(false);
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    router.push(`/search?q=${query}`);
+  };
 
   return (
     <header role="banner" className={cx("navbar") + " contentPadding"}>
@@ -49,21 +56,26 @@ export function Header() {
           </ul>
         </nav>
 
-        <Input
-          type="search"
-          placeholder="Search for movies, tv shows, people..."
-          containerClassName={cx("searchBar")}
-          trailing={
-            <Button
-              padding={false}
-              aria-label="Search"
-              className={cx("searchButton")}
-              style={{ color: "var(--theme-text-body)" }}
-            >
-              <Icon icon="search" size={20} />
-            </Button>
-          }
-        />
+        <form onSubmit={handleSubmit} className={cx("searchBar")}>
+          <Input
+            type="search"
+            placeholder="Search for movies, tv series, people..."
+            containerClassName={cx("searchBar")}
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            trailing={
+              <Button
+                type="submit"
+                padding={false}
+                aria-label="Search"
+                className={cx("searchButton")}
+                style={{ color: "var(--theme-text-body)" }}
+              >
+                <Icon icon="search" size={20} />
+              </Button>
+            }
+          />
+        </form>
 
         <div className={cx("menus")}>
           <Button

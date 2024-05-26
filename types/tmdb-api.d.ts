@@ -18,7 +18,7 @@ interface Result {
   id: number;
   original_language: string;
   original_title?: string;
-  poster_path: string;
+  poster_path?: string;
   popularity: number;
   media_type: string;
   name?: string;

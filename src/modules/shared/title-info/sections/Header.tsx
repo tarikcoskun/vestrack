@@ -10,7 +10,7 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(style);
 
-export function TitleInfoHeader({ data }: { data: MovieInfo & ShowInfo }) {
+export function TitleInfoHeader({ data }: { data: MovieInfo & SeriesInfo }) {
   const backdropUrl = `https://image.tmdb.org/t/p/original${data.backdrop_path}`;
   const posterUrl = `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${data.poster_path}`;
 
@@ -43,12 +43,12 @@ export function TitleInfoHeader({ data }: { data: MovieInfo & ShowInfo }) {
               <div className={cx("subtext")}>{data.release_date ? "released" : "premiered"}</div>
             </span>
           </span>
-          {data.runtime && (
+          {data.runtime || data.episode_run_time.length && (
             <span className={cx("movieDetailItem")}>
               <span>
                 <header className={cx("title")}>
                   <h3>
-                    {getRuntime(data.runtime)}
+                    {getRuntime(data.runtime || data.episode_run_time[0])}
                   </h3>
                 </header>
                 <div className={cx("subtext")}>runtime</div>

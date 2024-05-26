@@ -1,3 +1,3 @@
-import { ShowInfoPage } from "@/modules/tv/tv-info/ShowInfoPage";
+import { SeriesInfoPage } from "@/modules/tv/tv-info/SeriesInfoPage";
 
-export default ShowInfoPage;
+export default SeriesInfoPage;

@@ -1,42 +1,32 @@
 .tabsRoot {
   display: flex;
+  gap: 1rem;
 
   &[data-orientation="horizontal"] { flex-direction: column; }
 
   .tabsList {
-    position: sticky;
-    top: 0;
+    z-index: 10;
     display: flex;
     flex-shrink: 0;
     gap: 2rem;
 
-    &.sticked { z-index: 10; }
+    &[data-sticky="true"] {
+      position: sticky;
+      top: 0;
+    }
 
     .tabsTrigger {
-      position: relative;
-      background-color: transparent;
+      color: var(--theme-text-body);
       cursor: pointer;
       font-size: var(--scale-0);
       font-weight: 500;
       padding-block: var(--size-4);
+      text-align: left;
       user-select: none;
 
-      &[data-state="active"] {
-        &::after {
-          position: absolute;
-          top: 100%;
-          left: 50%;
-          width: 6px;
-          height: 6px;
-          border-radius: var(--radius-full);
-          content: "";
-          transform: translate(-50%, -50%);
-        }
-      }
+      &[data-state="active"] { color: var(--theme-text-title) }
     }
   }
 
-  .tabsContent {
-    flex-grow: 1;
-  }
+  .tabsContent { flex-grow: 1; }
 }
