@@ -48,17 +48,17 @@ export function TitleInfoOverview({ data }: { data: MovieInfo & SeriesInfo }) {
       <div className={cx("columnRight")}>
         <section className={cx("overviewInfo")}>
           <div className={cx("metadataList")}>
-            {data.type === "movie" ? (
+            {data.created_by?.length ? (
+              <CrewGroup
+                title="Creator"
+                people={data.created_by}
+              />
+            ) : (
               <CrewGroup
                 title="Director"
                 people={data.credits.crew.filter(
                   (person) => person.job === "Director"
                 )}
-              />
-            ) : (
-              <CrewGroup
-                title="Creator"
-                people={data.created_by}
               />
             )}
             <CrewGroup
