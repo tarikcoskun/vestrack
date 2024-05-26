@@ -29,7 +29,8 @@ export function SearchPage() {
       })
       .catch((err) => {
         notifyError(err);
-      }).finally(() => {
+      })
+      .finally(() => {
         setLoading(false);
       });
 
