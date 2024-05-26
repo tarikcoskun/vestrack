@@ -43,7 +43,7 @@ export function TitleInfoHeader({ data }: { data: MovieInfo & SeriesInfo }) {
               <div className={cx("subtext")}>{data.release_date ? "released" : "premiered"}</div>
             </span>
           </span>
-          {data.runtime || data.episode_run_time.length ? (
+          {(data.runtime || data.episode_run_time.length) ? (
             <span className={cx("movieDetailItem")}>
               <span>
                 <header className={cx("title")}>
