@@ -15,7 +15,7 @@ import { ReviewCard } from "@/components/cards/Review";
 
 const cx = classNames.bind(style);
 
-export function TitleInfoReviews({ data }: { data: MovieInfo }) {
+export function TitleInfoReviews({ data }: { data: MovieInfo & SeriesInfo }) {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (

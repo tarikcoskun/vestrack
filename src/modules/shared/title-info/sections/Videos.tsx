@@ -16,7 +16,7 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(style);
 
-export function TitleInfoVideos({ data }: { data: MovieInfo }) {
+export function TitleInfoVideos({ data }: { data: MovieInfo & SeriesInfo }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [modalOpen, setModalOpen] = useState(false);
 

@@ -14,7 +14,7 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(style);
 
-export function TitleInfoRecommendations({ data }: { data: MovieInfo }) {
+export function TitleInfoRecommendations({ data }: { data: MovieInfo & SeriesInfo }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
 
   return (
