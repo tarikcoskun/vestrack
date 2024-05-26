@@ -50,7 +50,7 @@
     .movieTitle {
       @include media(">md") {
         color: color.$gray-100;
-        text-shadow: 0 0 8px rgb(0 0 0 / 0.75);
+        text-shadow: 0 0 8px rgb(0 0 0 / 0.5);
       }
     }
 
