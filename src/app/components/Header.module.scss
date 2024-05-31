@@ -28,9 +28,10 @@
         position: absolute;
         z-index: 10;
         top: var(--content-nav-height);
+        right: calc(var(--content-spacing) * -1);
+        left: calc(var(--content-spacing) * -1);
         height: 100vh;
-        background: var(--theme-background);
-        inset: calc(var(--content-spacing) * -1);
+        background-color: color.$gray-950;
         opacity: 0;
         pointer-events: none;
 
@@ -43,14 +44,14 @@
       .links {
         display: flex;
         list-style: none;
-        @include media("<phone") { flex-direction: column; }
+        @include media("<md") { flex-direction: column; }
 
         .link {
           display: flex;
           align-items: center;
           gap: 0.5rem;
           padding-inline: 1rem;
-          @include media("<phone") {
+          @include media("<md") {
             padding-block: 1.5rem;
             padding-inline: var(--content-spacing);
           }

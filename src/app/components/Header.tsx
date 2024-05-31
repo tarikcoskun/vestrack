@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 // Data
@@ -29,8 +29,17 @@ export function Header() {
     router.push(`/search?q=${query}`);
   };
 
+  useEffect(() => {
+    if (mobileMenu) {
+      document.body.style.overflow = "hidden";
+    }
+    else {
+      document.body.removeAttribute("style");
+    }
+  }, [mobileMenu]);
+
   return (
-    <header role="banner" className={cx("navbar") + " contentPadding"}>
+    <header role="banner" className={`${cx("navbar")} contentPadding`}>
       <div className={cx("navbarContent")}>
         <Link href="/">
           <span className={cx("brandLogo")}>Vestrack</span>
@@ -63,7 +72,7 @@ export function Header() {
             containerClassName={cx("searchBar")}
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            trailing={
+            trailing={(
               <Button
                 type="submit"
                 padding={false}
@@ -73,7 +82,7 @@ export function Header() {
               >
                 <Icon icon="search" size={20} />
               </Button>
-            }
+            )}
           />
         </form>
 
