@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { notifyError } from "@/util/notifyError";
-import { getSearchData, type SearchResponse } from "./getSearchData";
+import { type SearchResponse, getSearchData } from "./getSearchData";
 
 // Components
-import { SearchTitleCard } from "./components/Card/Title";
+import { SearchMediaCard } from "./components/Card/Title";
 
 // Styles
 import style from "./SearchPage.module.scss";
@@ -46,11 +46,13 @@ export function SearchPage() {
         <div className={cx("resultList")}>
           {isLoading
             ? Array(6).fill(0).map((_, idx) => <SearchCardSkeleton key={idx} />)
-            : data?.titles.length ? data?.titles.map((title) => (
-              <SearchTitleCard key={title.id} movie={title} type={title.media_type as "movie" | "tv"} />
-            )) : (
-              <h3>No results</h3>
-            )}
+            : data?.titles.length
+              ? data?.titles.map((title) => (
+                <SearchMediaCard key={title.id} media={title} type={title.media_type as "movie" | "tv"} />
+              ))
+              : (
+                <h3>No results</h3>
+                )}
         </div>
       </section>
       <section className={cx("resultContainer")}>
@@ -58,11 +60,13 @@ export function SearchPage() {
         <div className={cx("resultList")}>
           {isLoading
             ? Array(6).fill(0).map((_, idx) => <SearchCardSkeleton key={idx} />)
-            : data?.people.length ? data?.people.map((person) => (
-              <SearchPersonCard key={person.id} person={person} />
-            )) : (
-              <h3>No results</h3>
-            )}
+            : data?.people.length
+              ? data?.people.map((person) => (
+                <SearchPersonCard key={person.id} person={person} />
+              ))
+              : (
+                <h3>No results</h3>
+                )}
         </div>
       </section>
     </main>

@@ -1,13 +1,13 @@
 @use "@/styles/util";
 @import "@/styles/media";
 
-.movieCard {
+.mediaCard {
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 
-  .moviePoster {
+  .mediaPoster {
     width: 100%;
     height: 100%;
     border: 1px solid var(--theme-outline);
@@ -20,13 +20,13 @@
     &:hover { scale: 1.05; }
   }
 
-  .movieInfo {
+  .mediaInfo {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     gap: 0.5rem;
 
-    .movieTitle {
+    .mediaTitle {
       color: var(--theme-text-title);
       font-size: 1.125rem;
       font-weight: 500;

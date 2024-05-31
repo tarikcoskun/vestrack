@@ -1,17 +1,14 @@
 import { Modal, type ModalProps } from "@/components/Modal";
 import { forwardRef } from "react";
 
-interface TitleInfoModalProps extends Omit<ModalProps, "header"> {
-  movie: MovieInfo & SeriesInfo;
+interface MediaInfoModalProps extends Omit<ModalProps, "header"> {
+  media: MovieInfo & SeriesInfo;
   description: string;
   children?: React.ReactNode;
 }
 
-export const TitleInfoModal = forwardRef<
-  HTMLDialogElement,
-  TitleInfoModalProps
->((props: TitleInfoModalProps, forwardedRef) => {
-  const { open, onOpenChange, scrollRef, movie, description, children } = props;
+export const MediaInfoModal = forwardRef<HTMLDialogElement, MediaInfoModalProps>((props, forwardedRef) => {
+  const { open, onOpenChange, scrollRef, media, description, children } = props;
 
   return (
     <Modal
@@ -19,17 +16,17 @@ export const TitleInfoModal = forwardRef<
       onOpenChange={onOpenChange}
       ref={forwardedRef}
       scrollRef={scrollRef}
-      header={
+      header={(
         <>
           <h3>
-            {movie.title || movie.name}{" "}
+            {media.title || media.name}{" "}
             <span style={{ color: "var(--theme-text-body)", fontSize: "1rem" }}>
-              ({new Date(movie.release_date! || movie.first_air_date!).getFullYear()})
+              ({new Date(media.release_date! || media.first_air_date!).getFullYear()})
             </span>
           </h3>
           <p>{description}</p>
         </>
-      }
+      )}
     >
       {children}
     </Modal>

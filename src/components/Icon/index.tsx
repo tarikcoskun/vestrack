@@ -5,12 +5,12 @@ import { iconsShared } from "./shared";
 const icons = {
   fill: {
     ...iconsShared,
-    ...iconsFill
+    ...iconsFill,
   },
   regular: {
     ...iconsShared,
-    ...iconsRegular
-  }
+    ...iconsRegular,
+  },
 };
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {

@@ -36,10 +36,7 @@ export function ReviewCard(props: ReviewCardProps) {
         <div className={cx("reviewDetails")}>
           <span className={cx("reviewAuthor")}>{review.author}</span>
           <span className={cx("reviewDate")}>
-            {new Date(review.created_at).toLocaleDateString(
-              "en-US",
-              DATE_FORMAT
-            )}
+            {new Date(review.created_at).toLocaleDateString("en-US", DATE_FORMAT)}
           </span>
         </div>
       </header>

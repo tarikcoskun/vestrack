@@ -7,7 +7,7 @@ import { Icon } from "@/components/Icon";
 import { Button } from "@/components/Button";
 import { VideoCard } from "@/components/cards/Video";
 import { Scroller } from "@/components/Scroller";
-import { TitleInfoModal } from "../components/Modal";
+import { MediaInfoModal } from "../components/Modal";
 import { Skeleton } from "@/components/Skeleton";
 
 // Styles
@@ -16,7 +16,7 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(style);
 
-export function TitleInfoVideos({ data }: { data: MovieInfo & SeriesInfo }) {
+export function MediaInfoVideos({ data }: { data: MovieInfo & SeriesInfo }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -52,8 +52,8 @@ export function TitleInfoVideos({ data }: { data: MovieInfo & SeriesInfo }) {
         {data.videos.results
           .sort(
             (a, b) =>
-              new Date(b.published_at).getTime() -
-              new Date(a.published_at).getTime()
+              new Date(b.published_at).getTime()
+                - new Date(a.published_at).getTime(),
           )
           .slice(0, 8)
           .map((video) => (
@@ -67,8 +67,8 @@ export function TitleInfoVideos({ data }: { data: MovieInfo & SeriesInfo }) {
 
   function FullVideosModal() {
     return (
-      <TitleInfoModal
-        movie={data}
+      <MediaInfoModal
+        media={data}
         open={modalOpen}
         onOpenChange={setModalOpen}
         description="Videos"
@@ -77,19 +77,19 @@ export function TitleInfoVideos({ data }: { data: MovieInfo & SeriesInfo }) {
           {data.videos.results
             .sort(
               (a, b) =>
-                new Date(b.published_at).getTime() -
-                new Date(a.published_at).getTime()
+                new Date(b.published_at).getTime()
+                  - new Date(a.published_at).getTime(),
             )
             .map((video) => (
               <VideoCard key={video.id} video={video} className={cx("video")} />
             ))}
         </div>
-      </TitleInfoModal>
+      </MediaInfoModal>
     );
   }
 }
 
-export function TitleInfoVideosSkeleton() {
+export function MediaInfoVideosSkeleton() {
   return (
     <section id="videos" className={cx("videosSkeleton")}>
       <header style={{ height: "36px" }}>

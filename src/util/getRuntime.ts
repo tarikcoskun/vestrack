@@ -1,15 +1,15 @@
-export const getRuntime = (time: number) => {
+export function getRuntime(time: number) {
   const hours = Math.floor(time / 60);
-  const remainingMinutes = time % 60;
+  const minutes = time % 60;
   let formattedTime = "";
 
   if (hours > 0) {
-    formattedTime += hours + "h ";
+    formattedTime += `${hours}h `;
   }
 
-  if (remainingMinutes > 0 || formattedTime === "") {
-    formattedTime += remainingMinutes + "m";
+  if (minutes > 0 || formattedTime === "") {
+    formattedTime += `${minutes}m`;
   }
 
   return formattedTime;
-};
+}

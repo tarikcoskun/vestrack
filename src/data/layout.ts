@@ -5,16 +5,16 @@ export interface GenericLink {
   href: string;
 }
 
-export const navbarLinks: (GenericLink & { icon: IconList; })[] = [
+export const navbarLinks: (GenericLink & { icon: IconList })[] = [
   {
     label: "Movies",
     href: "/movie",
-    icon: "film"
+    icon: "film",
   },
   {
     label: "TV Series",
     href: "/tv",
-    icon: "tv"
+    icon: "tv",
   },
 ];
 

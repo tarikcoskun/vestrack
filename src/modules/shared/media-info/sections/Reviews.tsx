@@ -5,7 +5,7 @@ import { useState } from "react";
 // Components
 import { Icon } from "@/components/Icon";
 import { Button } from "@/components/Button";
-import { TitleInfoModal } from "../components/Modal";
+import { MediaInfoModal } from "../components/Modal";
 import { Skeleton } from "@/components/Skeleton";
 
 // Styles
@@ -15,7 +15,7 @@ import { ReviewCard } from "@/components/cards/Review";
 
 const cx = classNames.bind(style);
 
-export function TitleInfoReviews({ data }: { data: MovieInfo & SeriesInfo }) {
+export function MediaInfoReviews({ data }: { data: MovieInfo & SeriesInfo }) {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
@@ -50,8 +50,8 @@ export function TitleInfoReviews({ data }: { data: MovieInfo & SeriesInfo }) {
 
   function FullReviewsModal() {
     return (
-      <TitleInfoModal
-        movie={data}
+      <MediaInfoModal
+        media={data}
         open={modalOpen}
         onOpenChange={setModalOpen}
         description="User Reviews"
@@ -65,12 +65,12 @@ export function TitleInfoReviews({ data }: { data: MovieInfo & SeriesInfo }) {
             />
           ))}
         </div>
-      </TitleInfoModal>
+      </MediaInfoModal>
     );
   }
 }
 
-export function TitleInfoReviewsSkeleton() {
+export function MediaInfoReviewsSkeleton() {
   return (
     <section
       id="reviews"

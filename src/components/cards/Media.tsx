@@ -4,17 +4,17 @@ import { slugify } from "@/util/slugify";
 import Link from "next/link";
 
 // Styles
-import style from "./Title.module.scss";
+import style from "./Media.module.scss";
 import classNames from "classnames/bind";
 
-interface SearchTitleCardProps extends React.HTMLAttributes<HTMLElement> {
+interface MediaCardProps extends React.HTMLAttributes<HTMLElement> {
   type: "movie" | "tv";
   media: Result;
 }
 
 const cx = classNames.bind(style);
 
-export function SearchMediaCard(props: SearchTitleCardProps) {
+export function MediaCard(props: MediaCardProps) {
   const { media, type, className, ...cardProps } = props;
 
   const infoPageUrl = `/${type}/${`${slugify(media.title! || media.name!)}-${media.id}`}`;
@@ -23,7 +23,7 @@ export function SearchMediaCard(props: SearchTitleCardProps) {
   return (
     <article
       {...cardProps}
-      className={cx("searchTitleCard", className)}
+      className={cx("mediaCard", className)}
       typeof="Movie"
     >
       <Link href={infoPageUrl} className={cx("posterLink")}>
@@ -40,9 +40,8 @@ export function SearchMediaCard(props: SearchTitleCardProps) {
             {media.title || media.name}
           </span>
         </Link>
-        <div className={cx("mediaDetails")}>
-          <span>{new Date(media.release_date! || media.first_air_date!).getFullYear()}</span>
-          <span>{media.media_type === "media" ? "Movie" : "TV Series"}</span>
+        <div className={cx("releaseYear")}>
+          {new Date(media.release_date! || media.first_air_date!).getFullYear()}
         </div>
       </div>
     </article>

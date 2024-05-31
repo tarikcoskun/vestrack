@@ -9,18 +9,18 @@ import { Button } from "@/components/Button";
 import style from "./Featured.module.scss";
 import classNames from "classnames/bind";
 
-interface MovieCardProps {
+interface FeaturedCardProps {
   type: "movie" | "tv";
-  movie: DiscoveryResult;
+  media: DiscoveryResult;
 }
 
 const cx = classNames.bind(style);
 
-export function FeaturedCard(props: MovieCardProps) {
-  const { movie, type } = props;
+export function FeaturedCard(props: FeaturedCardProps) {
+  const { media, type } = props;
 
-  const posterUrl = `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`;
-  const backdropUrl = `https://image.tmdb.org/t/p/original${movie.backdrop_path}`;
+  const posterUrl = `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${media.poster_path}`;
+  const backdropUrl = `https://image.tmdb.org/t/p/original${media.backdrop_path}`;
 
   return (
     <article className={cx("featuredCard")} typeof="Movie">
@@ -31,23 +31,23 @@ export function FeaturedCard(props: MovieCardProps) {
         }}
       />
       <div className={cx("infoContainer")}>
-        <Link href={`/${type}/${slugify(movie.title) + "-" + movie.id}`} className={cx("posterLink")}>
+        <Link href={`/${type}/${`${slugify(media.title)}-${media.id}`}`} className={cx("posterLink")}>
           <img
             src={posterUrl}
-            alt={movie.title}
+            alt={media.title}
             draggable="false"
-            className={cx("moviePoster")}
+            className={cx("mediaPoster")}
           />
         </Link>
-        <div className={cx("movieInfo")}>
-          <div className={cx("movieRating")}>
+        <div className={cx("mediaInfo")}>
+          <div className={cx("mediaRating")}>
             <Icon icon="star" variant="fill" className={cx("ratingIcon")} />
-            <span>{movie.vote_average.toFixed(1).replace(".0", "")}</span>
+            <span>{media.vote_average.toFixed(1).replace(".0", "")}</span>
           </div>
-          <Link href={`/movie/${movie.id}`}>
-            <span className={cx("movieTitle")}>{movie.title}</span>
+          <Link href={`/movie/${media.id}`}>
+            <span className={cx("mediaTitle")}>{media.title}</span>
           </Link>
-          <p className={cx("movieOverview")}>{movie.overview}</p>
+          <p className={cx("mediaOverview")}>{media.overview}</p>
           <div className={cx("actions")}>
             <Button color="gray" variant="ghost" leading={<Icon icon="play" variant="fill" />}>
               Play Trailer

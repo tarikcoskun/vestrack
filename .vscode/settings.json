@@ -1,3 +1,4 @@
 {
-  "cssvar.files": ["./src/styles/default.scss"]
+  "cssvar.files": ["./src/styles/default.scss"],
+  "eslint.experimental.useFlatConfig": true
 }

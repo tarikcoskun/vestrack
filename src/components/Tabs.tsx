@@ -22,18 +22,18 @@ const cx = classNames.bind(style);
 
 const TabsContext = createContext({} as TabsValue);
 
-const TabsProvider = ({
+function TabsProvider({
   value,
   setValue,
   onValueChange,
   children,
-}: React.PropsWithChildren<TabsValue>) => {
+}: React.PropsWithChildren<TabsValue>) {
   const initialState = { value, setValue, onValueChange };
 
   return (
     <TabsContext.Provider value={initialState}>{children}</TabsContext.Provider>
   );
-};
+}
 
 /* -----------
  * TabsRoot
@@ -72,7 +72,7 @@ const TabsRoot = forwardRef<HTMLDivElement, TabsProps>(
         </div>
       </TabsProvider>
     );
-  }
+  },
 );
 
 /* -----------
@@ -96,7 +96,8 @@ const TabsList = forwardRef<HTMLDivElement, TabsListProps>(
 
         if (parentRect.height - rect.top <= 0) {
           setSticked(true);
-        } else {
+        }
+        else {
           setSticked(false);
         }
       };
@@ -122,7 +123,7 @@ const TabsList = forwardRef<HTMLDivElement, TabsListProps>(
         {children}
       </div>
     );
-  }
+  },
 );
 
 /* -----------
@@ -156,13 +157,14 @@ const TabsTrigger = forwardRef<HTMLButtonElement, TabsTriggerProps>(
           context.onValueChange(value);
         }}
         onKeyDown={(event) => {
-          if ([" ", "Enter"].includes(event.key)) context.onValueChange(value);
+          if ([" ", "Enter"].includes(event.key))
+            context.onValueChange(value);
         }}
       >
         {children}
       </button>
     );
-  }
+  },
 );
 
 /* -----------
@@ -182,7 +184,7 @@ const TabsContent = forwardRef<HTMLDivElement, TabsContentProps>(
 
     return (
       <div
-        {...props}
+        {...contentProps}
         role="tabpanel"
         id={value}
         data-state={isSelected ? "active" : "inactive"}
@@ -192,7 +194,7 @@ const TabsContent = forwardRef<HTMLDivElement, TabsContentProps>(
         {isSelected && children}
       </div>
     );
-  }
+  },
 );
 
 export const Tabs = Object.assign(TabsRoot, {

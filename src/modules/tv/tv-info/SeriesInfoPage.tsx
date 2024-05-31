@@ -2,16 +2,16 @@
 
 import { notifyError } from "@/util/notifyError";
 import { useEffect, useRef, useState } from "react";
-import { getTitleInfo } from "@/modules/shared/title-info/getTitleInfo";
+import { getMediaInfo } from "@/modules/shared/media-info/getMediaInfo";
 
 // Components
-import { TitleInfoHeader, TitleInfoHeaderSkeleton } from "@/modules/shared/title-info/sections/Header";
-import { TitleInfoOverview, TitleInfoOverviewSkeleton } from "@/modules/shared/title-info/sections/Overview";
-import { TitleInfoCast, TitleInfoCastSkeleton } from "@/modules/shared/title-info/sections/Cast";
-import { TitleInfoVideos, TitleInfoVideosSkeleton } from "@/modules/shared/title-info/sections/Videos";
-import { TitleInfoReviews, TitleInfoReviewsSkeleton } from "@/modules/shared/title-info/sections/Reviews";
-import { TitleInfoRecommendations, TitleInfoRecommendationsSkeleton } from "@/modules/shared/title-info/sections/Recommendations";
-import { TitleInfoSidebar } from "@/modules/shared/title-info/components/Sidebar";
+import { MediaInfoHeader, MediaInfoHeaderSkeleton } from "@/modules/shared/media-info/sections/Header";
+import { MediaInfoOverview, MediaInfoOverviewSkeleton } from "@/modules/shared/media-info/sections/Overview";
+import { MediaInfoCast, MediaInfoCastSkeleton } from "@/modules/shared/media-info/sections/Cast";
+import { MediaInfoVideos, MediaInfoVideosSkeleton } from "@/modules/shared/media-info/sections/Videos";
+import { MediaInfoReviews, MediaInfoReviewsSkeleton } from "@/modules/shared/media-info/sections/Reviews";
+import { MediaInfoRecommendations, MediaInfoRecommendationsSkeleton } from "@/modules/shared/media-info/sections/Recommendations";
+import { MediaInfoSidebar } from "@/modules/shared/media-info/components/Sidebar";
 
 // Styles
 import style from "./SeriesInfoPage.module.scss";
@@ -33,40 +33,40 @@ export function SeriesInfoPage({ params: { id } }: { params: { id: string } }) {
       });
 
     async function fetchData() {
-      return await getTitleInfo(id, "tv");
+      return await getMediaInfo(id, "tv");
     }
   }, [id]);
 
   return (
     <main className={cx("seriesInfoPage")}>
       <div className={cx("pageContent")} ref={contentRef}>
-        {data ? (
-          <>
-            <TitleInfoHeader data={data} />
-            <div className={cx("layout")}>
-              <div className={cx("content")}>
-                <TitleInfoOverview data={data} />
-                <TitleInfoCast data={data} />
-                <TitleInfoVideos data={data} />
-                {data.reviews.total_results > 0 && <TitleInfoReviews data={data} />}
-                <TitleInfoRecommendations data={data} />
+        {data
+          ? (
+            <>
+              <MediaInfoHeader data={data} />
+              <div className={cx("layout")}>
+                <div className={cx("content")}>
+                  <MediaInfoOverview data={data} />
+                  <MediaInfoCast data={data} />
+                  <MediaInfoVideos data={data} />
+                  {data.reviews.total_results > 0 && <MediaInfoReviews data={data} />}
+                  <MediaInfoRecommendations data={data} />
+                </div>
+                <MediaInfoSidebar />
               </div>
-              <TitleInfoSidebar />
-            </div>
-          </>
-        ) : (
-          <>
-            <TitleInfoHeaderSkeleton />
-            <TitleInfoOverviewSkeleton />
-            <TitleInfoCastSkeleton />
-            <TitleInfoVideosSkeleton />
-            <TitleInfoReviewsSkeleton />
-            <TitleInfoRecommendationsSkeleton />
-          </>
-        )}
+            </>
+            )
+          : (
+            <>
+              <MediaInfoHeaderSkeleton />
+              <MediaInfoOverviewSkeleton />
+              <MediaInfoCastSkeleton />
+              <MediaInfoVideosSkeleton />
+              <MediaInfoReviewsSkeleton />
+              <MediaInfoRecommendationsSkeleton />
+            </>
+            )}
       </div>
     </main>
   );
 }
-
-

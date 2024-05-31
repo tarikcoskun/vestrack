@@ -1,7 +1,7 @@
 import homedata from "@/data/placeholder-homedata.json";
 
 // Components
-import { MovieCard } from "@/components/cards/Movie";
+import { MediaCard } from "@/components/cards/Media";
 import { FeaturedCard } from "@/components/cards/Featured";
 
 // Styles
@@ -18,8 +18,8 @@ export function SeriesPage() {
       <section className={cx("discoveryContainer")}>
         <h1>Watch Next</h1>
         <div className={cx("discoveryList")}>
-          {data.discovery.slice(0, 2).map((movie) => (
-            <FeaturedCard key={movie.id} movie={movie} type="tv" />
+          {data.discovery.slice(0, 2).map((media) => (
+            <FeaturedCard key={media.id} media={media} type="tv" />
           ))}
         </div>
       </section>
@@ -27,8 +27,8 @@ export function SeriesPage() {
       <section className={cx("trendingContainer")}>
         <h1>Trending Series</h1>
         <div className={cx("trendingList")}>
-          {data.trending.movie.slice(0, 6).map((movie) => (
-            <MovieCard key={movie.id} movie={movie as Result} type="tv" />
+          {data.trending.movie.slice(0, 6).map((media) => (
+            <MediaCard key={media.id} media={media as Result} type="tv" />
           ))}
         </div>
       </section>

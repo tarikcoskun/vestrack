@@ -26,7 +26,7 @@
       width: 25%;
       flex-shrink: 0;
 
-      .moviePoster {
+      .mediaPoster {
         width: 100%;
         height: 100%;
         aspect-ratio: 2/3;
@@ -40,14 +40,14 @@
       }
     }
 
-    .movieInfo {
+    .mediaInfo {
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       padding: 1.5rem;
       gap: 1rem;
 
-      .movieRating {
+      .mediaRating {
         display: flex;
         align-items: center;
         color: var(--theme-text-title);
@@ -56,13 +56,13 @@
         .ratingIcon { color: var(--dynamic-yellow-600); }
       }
 
-      .movieTitle {
+      .mediaTitle {
         color: var(--theme-text-title);
         font-size: 1.375rem;
         font-weight: 500;
       }
 
-      .movieOverview {
+      .mediaOverview {
         @include util.line-clamp(3);
       }
 

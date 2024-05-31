@@ -10,18 +10,18 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(style);
 
-export function TitleInfoHeader({ data }: { data: MovieInfo & SeriesInfo }) {
+export function MediaInfoHeader({ data }: { data: MovieInfo & SeriesInfo }) {
   const backdropUrl = `https://image.tmdb.org/t/p/original${data.backdrop_path}`;
   const posterUrl = `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${data.poster_path}`;
 
   return (
     <header id="header" className={cx("header")}>
-      <div className={cx("movieBackdrop")} style={{ backgroundImage: `url(${backdropUrl})` }} />
-      <img src={posterUrl} alt={data.title} className={cx("moviePoster")} />
-      <section className={cx("movieHeader")}>
-        <h1 className={cx("movieTitle")}>{data.title || data.name}</h1>
-        <div className={cx("movieDetailList")}>
-          <span className={cx("movieDetailItem")}>
+      <div className={cx("mediaBackdrop")} style={{ backgroundImage: `url(${backdropUrl})` }} />
+      <img src={posterUrl} alt={data.title} className={cx("mediaPoster")} />
+      <section className={cx("mediaHeader")}>
+        <h1 className={cx("mediaTitle")}>{data.title || data.name}</h1>
+        <div className={cx("mediaDetailList")}>
+          <span className={cx("mediaDetailItem")}>
             <Icon icon="star" variant="fill" size={32} className={cx("ratingStar")} style={{ color: "var(--dynamic-yellow-600)" }} />
             <span>
               <header className={cx("title")}>
@@ -33,7 +33,7 @@ export function TitleInfoHeader({ data }: { data: MovieInfo & SeriesInfo }) {
               <div className={cx("subtext")}>{new Intl.NumberFormat("en-US", { notation: "compact" }).format(data.vote_count)} votes</div>
             </span>
           </span>
-          <span className={cx("movieDetailItem")}>
+          <span className={cx("mediaDetailItem")}>
             <span>
               <header className={cx("title")}>
                 <h3>
@@ -43,40 +43,42 @@ export function TitleInfoHeader({ data }: { data: MovieInfo & SeriesInfo }) {
               <div className={cx("subtext")}>{data.release_date ? "released" : "premiered"}</div>
             </span>
           </span>
-          {(data.runtime || data.episode_run_time.length) ? (
-            <span className={cx("movieDetailItem")}>
-              <span>
-                <header className={cx("title")}>
-                  <h3>
-                    {getRuntime(data.runtime || data.episode_run_time[0])}
-                  </h3>
-                </header>
-                <div className={cx("subtext")}>runtime</div>
+          {(data.runtime || data.episode_run_time.length)
+            ? (
+              <span className={cx("mediaDetailItem")}>
+                <span>
+                  <header className={cx("title")}>
+                    <h3>
+                      {getRuntime(data.runtime || data.episode_run_time[0])}
+                    </h3>
+                  </header>
+                  <div className={cx("subtext")}>runtime</div>
+                </span>
               </span>
-            </span>
-          ) : null}
+              )
+            : null}
         </div>
       </section>
     </header>
   );
 }
 
-export function TitleInfoHeaderSkeleton() {
+export function MediaInfoHeaderSkeleton() {
   return (
     <header
       id="header"
       className={cx("headerSkeleton")}
     >
-      <Skeleton id="movieBackdrop" style={{ position: "absolute", zIndex: "-1", top: "var(--content-nav-height)", right: "0", left: "0", height: "inherit" }} />
-      <Skeleton id="moviePoster" className={cx("moviePoster", "posterSkeleton")} />
-      <section className={cx("movieHeader")}>
+      <Skeleton id="mediaBackdrop" style={{ position: "absolute", zIndex: "-1", top: "var(--content-nav-height)", right: "0", left: "0", height: "inherit" }} />
+      <Skeleton id="mediaPoster" className={cx("mediaPoster", "posterSkeleton")} />
+      <section className={cx("mediaHeader")}>
         <Skeleton
-          id="movieTitle"
+          id="mediaTitle"
           width={180}
           height={20}
           type="text"
         />
-        <div className={cx("movieDetailList")}>
+        <div className={cx("mediaDetailList")}>
           <Skeleton
             id="metadataItem"
             width={140}

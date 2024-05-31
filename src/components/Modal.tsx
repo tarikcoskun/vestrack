@@ -21,13 +21,13 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDialogElement> {
 
 const ModalRoot = forwardRef<HTMLDialogElement, ModalProps>(
   (props, forwardedRef) => {
-    const { open, header, scrollRef, onOpenChange, children, ...dialogProps } =
-      props;
+    const { open, header, scrollRef, onOpenChange, children, ...dialogProps } = props;
 
     const localRef = useRef<HTMLDialogElement>(null);
 
     useEffect(() => {
-      if (open) localRef.current?.showModal();
+      if (open)
+        localRef.current?.showModal();
       else localRef.current?.close();
     }, [open]);
 
@@ -63,18 +63,18 @@ const ModalRoot = forwardRef<HTMLDialogElement, ModalProps>(
         </main>
       </dialog>
     );
-  }
+  },
 );
 
 interface ModalHeaderProps {
   children?: React.ReactNode;
 }
 
-const ModalHeader = (props: ModalHeaderProps) => {
+function ModalHeader(props: ModalHeaderProps) {
   const { children } = props;
 
   return <header className={cx("modalHeader")}>{children}</header>;
-};
+}
 
 export const Modal = Object.assign(ModalRoot, {
   Header: ModalHeader,

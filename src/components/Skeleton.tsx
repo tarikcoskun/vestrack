@@ -27,11 +27,11 @@ function SkeletonRoot(props: SkeletonProps) {
     <div
       {...skeletonProps}
       style={{
-        width: width + "px",
-        height: type === "text" ? Number(height) * lineHeight : height + "px",
+        width: `${width}px`,
+        height: type === "text" ? Number(height) * lineHeight : `${height}px`,
         marginBlock:
           type === "text"
-            ? Number(height) - Number(height) * lineHeight + 1 + "px"
+            ? `${Number(height) - Number(height) * lineHeight + 1}px`
             : "",
         ...elementStyle,
       }}
@@ -54,7 +54,7 @@ function SkeletonParagraph(props: SkeletonParagraphProps) {
   return (
     <div
       className={cx("skeletonParagraphContainer")}
-      style={{ height: height + "px" }}
+      style={{ height: `${height}px` }}
     >
       {arr.map((_, idx) => (
         <SkeletonRoot

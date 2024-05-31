@@ -9,9 +9,7 @@ export async function GET(req: NextRequest) {
   if (!type) {
     Response.json(
       { error: "No :type provided" },
-      {
-        status: 400,
-      }
+      { status: 400 },
     );
   }
 

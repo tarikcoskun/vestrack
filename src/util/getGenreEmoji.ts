@@ -1,4 +1,4 @@
-export const getGenreEmoji = (genre: string): string => {
+export function getGenreEmoji(genre: string): string {
   switch (genre) {
     case "action":
     case "action-adventure":
@@ -48,6 +48,6 @@ export const getGenreEmoji = (genre: string): string => {
     default:
       return "";
   }
-};
+}
 
 export default getGenreEmoji;

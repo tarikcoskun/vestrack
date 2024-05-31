@@ -27,12 +27,15 @@ const ScrollerRoot = forwardRef<HTMLDivElement, ScrollerProps>(
 
     useEffect(() => {
       const scroller = scrollerRef.current;
-      if (!scroller) return;
+      if (!scroller)
+        return;
 
       const listener = () => {
         let position = "middle";
-        if (scroller.scrollLeft === 0) position = "start";
-        else if (scroller.scrollLeft + scroller.clientWidth === scroller.scrollWidth) position = "end";
+        if (scroller.scrollLeft === 0)
+          position = "start";
+        else if (scroller.scrollLeft + scroller.clientWidth === scroller.scrollWidth)
+          position = "end";
         else position = "middle";
 
         setScrollerPosition(position);
@@ -59,7 +62,7 @@ const ScrollerRoot = forwardRef<HTMLDivElement, ScrollerProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 
 /* ---------------
@@ -86,20 +89,18 @@ const ScrollerTrigger = forwardRef<HTMLButtonElement, ScrollerTriggerProps>(
 
     const scroll = () => {
       if (trackRef.current) {
-        const scrollAmount =
-          (trackRef.current.children[0].clientWidth +
-            parseInt(getComputedStyle(trackRef.current).gap)) *
-          3;
+        const scrollAmount = (trackRef.current.children[0].clientWidth + Number.parseInt(getComputedStyle(trackRef.current).gap)) * 3;
 
         if (direction === "left") {
           trackRef.current.scrollBy({
             left: -scrollAmount,
-            behavior: "smooth"
+            behavior: "smooth",
           });
-        } else {
+        }
+        else {
           trackRef.current.scrollBy({
             left: scrollAmount,
-            behavior: "smooth"
+            behavior: "smooth",
           });
         }
       }
@@ -112,7 +113,7 @@ const ScrollerTrigger = forwardRef<HTMLButtonElement, ScrollerTriggerProps>(
         variant="soft"
         padding="square"
         rounded="full"
-        aria-label={"Scroll " + direction}
+        aria-label={`Scroll ${direction}`}
         className={cx("scrollerTrigger", className)}
         ref={forwardedRef}
         onClick={scroll}
@@ -120,7 +121,7 @@ const ScrollerTrigger = forwardRef<HTMLButtonElement, ScrollerTriggerProps>(
         {children}
       </Button>
     );
-  }
+  },
 );
 
 export const Scroller = Object.assign(ScrollerRoot, {

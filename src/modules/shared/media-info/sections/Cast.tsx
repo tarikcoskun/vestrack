@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Icon } from "@/components/Icon";
 import { Button } from "@/components/Button";
 import { Scroller } from "@/components/Scroller";
-import { TitleInfoModal } from "../components/Modal";
+import { MediaInfoModal } from "../components/Modal";
 import { Skeleton } from "@/components/Skeleton";
 
 // Styles
@@ -16,7 +16,7 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(style);
 
-export function TitleInfoCast({ data }: { data: MovieInfo & SeriesInfo }) {
+export function MediaInfoCast({ data }: { data: MovieInfo & SeriesInfo }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -55,20 +55,22 @@ export function TitleInfoCast({ data }: { data: MovieInfo & SeriesInfo }) {
           .map((person) => (
             <article key={person.id} className={cx("person")}>
               <Link href={`/person/${person.id}`} className={cx("photoLink")}>
-                {person.profile_path ? (
-                  <img
-                    src={`https://image.tmdb.org/t/p/w342${person.profile_path}`}
-                    alt={person.name}
-                    className={cx("personPhoto")}
-                  />
-                ) : (
-                  <div className={cx("personInitials")}>
-                    {person.name
-                      ?.split(/\s/)
-                      .slice(0, 2)
-                      .map((word) => word.slice(0, 1))}
-                  </div>
-                )}
+                {person.profile_path
+                  ? (
+                    <img
+                      src={`https://image.tmdb.org/t/p/w342${person.profile_path}`}
+                      alt={person.name}
+                      className={cx("personPhoto")}
+                    />
+                    )
+                  : (
+                    <div className={cx("personInitials")}>
+                      {person.name
+                        ?.split(/\s/)
+                        .slice(0, 2)
+                        .map((word) => word.slice(0, 1))}
+                    </div>
+                    )}
               </Link>
               <Link href={`/person/${person.id}`} className={cx("personName")}>
                 <span title={person.name}>{person.name}</span>
@@ -93,19 +95,23 @@ export function TitleInfoCast({ data }: { data: MovieInfo & SeriesInfo }) {
         const title = curr.job ? curr.known_for_department : "Cast";
         const personTitle = (curr.job ? curr.job : curr.character)!;
         if (
-          Object.keys(obj).length &&
-          obj[title] &&
-          obj[title].find((person) => person.name === curr.name)
-        ) obj[title]
-          .find((person) => person.name === curr.name)
-          ?.titles.push(personTitle);
-        else (obj[title] = obj[title] || []).push({
-          ...curr,
-          titles: [personTitle],
-        });
+          Object.keys(obj).length
+          && obj[title]
+          && obj[title].find((person) => person.name === curr.name)
+        ) {
+          obj[title]
+            .find((person) => person.name === curr.name)
+            ?.titles.push(personTitle);
+        }
+        else {
+          (obj[title] = obj[title] || []).push({
+            ...curr,
+            titles: [personTitle],
+          });
+        }
         return obj;
       },
-      {}
+      {},
     );
 
     useEffect(() => {
@@ -123,7 +129,8 @@ export function TitleInfoCast({ data }: { data: MovieInfo & SeriesInfo }) {
           .map((id) => {
             const element = document.getElementById(id);
 
-            if (!element) return { id, top: -1, bottom: -1 };
+            if (!element)
+              return { id, top: -1, bottom: -1 };
 
             const rect = element.getBoundingClientRect();
             const top = clamp(rect.top + scroll - offset);
@@ -146,8 +153,8 @@ export function TitleInfoCast({ data }: { data: MovieInfo & SeriesInfo }) {
     }, [groupedList]);
 
     return (
-      <TitleInfoModal
-        movie={data}
+      <MediaInfoModal
+        media={data}
         open={modalOpen}
         onOpenChange={setModalOpen}
         scrollRef={modalScrollRef}
@@ -188,22 +195,24 @@ export function TitleInfoCast({ data }: { data: MovieInfo & SeriesInfo }) {
                 </thead>
                 <tbody>
                   {group.map((person) => (
-                    <tr key={"modal" + person.id} className={cx("person")}>
+                    <tr key={`modal${person.id}`} className={cx("person")}>
                       <td aria-label="Photo">
-                        {person.profile_path ? (
-                          <img
-                            src={`https://image.tmdb.org/t/p/w342${person.profile_path}`}
-                            alt={person.name}
-                            className={cx("personPhoto")}
-                          />
-                        ) : (
-                          <div className={cx("personInitials")}>
-                            {person.name
-                              ?.split(/\s/)
-                              .slice(0, 2)
-                              .map((word) => word.slice(0, 1))}
-                          </div>
-                        )}
+                        {person.profile_path
+                          ? (
+                            <img
+                              src={`https://image.tmdb.org/t/p/w342${person.profile_path}`}
+                              alt={person.name}
+                              className={cx("personPhoto")}
+                            />
+                            )
+                          : (
+                            <div className={cx("personInitials")}>
+                              {person.name
+                                ?.split(/\s/)
+                                .slice(0, 2)
+                                .map((word) => word.slice(0, 1))}
+                            </div>
+                            )}
                       </td>
                       <td aria-label="Name">{person.name}</td>
                       <td aria-label="Character/job">
@@ -216,12 +225,12 @@ export function TitleInfoCast({ data }: { data: MovieInfo & SeriesInfo }) {
             ))}
           </div>
         </div>
-      </TitleInfoModal>
+      </MediaInfoModal>
     );
   }
 }
 
-export function TitleInfoCastSkeleton() {
+export function MediaInfoCastSkeleton() {
   return (
     <section id="cast" className={cx("castSkeleton")}>
       <header style={{ height: "36px" }}>

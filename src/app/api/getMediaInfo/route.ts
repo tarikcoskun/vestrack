@@ -12,10 +12,10 @@ export async function GET(req: NextRequest) {
       { error: "No :id or :type provided" },
       {
         status: 400,
-      }
+      },
     );
   }
 
-  const data = await TmdbApi.getTitleInfo(id, type);
+  const data = await TmdbApi.getMediaInfo(id, type);
   return Response.json(data);
 }

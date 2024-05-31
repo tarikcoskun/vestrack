@@ -9,7 +9,7 @@
   .posterLink {
     display: flex;
 
-    .moviePoster {
+    .mediaPoster {
       width: 100%;
       height: 120px;
       border: 1px solid var(--theme-outline);
@@ -23,19 +23,19 @@
     }
   }
 
-  .movieInfo {
+  .mediaInfo {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 
-    .movieTitle {
+    .mediaTitle {
       color: var(--theme-text-title);
       font-size: 1.125rem;
       font-weight: 500;
       @include util.line-clamp(1);
     }
 
-    .movieDetails {
+    .mediaDetails {
       :not(:first-child)::before {
         color: var(--theme-text-body);
         @include util.circular-divider();

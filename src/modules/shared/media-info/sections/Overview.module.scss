@@ -19,15 +19,15 @@
     aspect-ratio: 2/3;
     @include media("<md") { display: none; }
 
-    &:hover .movieTrailer { opacity: 1; }
+    &:hover .mediaTrailer { opacity: 1; }
 
-    .moviePoster {
+    .mediaPoster {
       width: 100%;
       border-radius: 6px;
       background-color: var(--dynamic-gray-150);
     }
 
-    .movieTrailer {
+    .mediaTrailer {
       position: absolute;
       display: grid;
       overflow: hidden;

@@ -3,7 +3,7 @@
 import { useRef } from "react";
 
 // Components
-import { MovieCard } from "@/components/cards/Movie";
+import { MediaCard } from "@/components/cards/Media";
 import { Scroller } from "@/components/Scroller";
 import { Icon } from "@/components/Icon";
 import { Skeleton } from "@/components/Skeleton";
@@ -14,7 +14,7 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(style);
 
-export function TitleInfoRecommendations({ data }: { data: MovieInfo & SeriesInfo }) {
+export function MediaInfoRecommendations({ data }: { data: MovieInfo & SeriesInfo }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -32,11 +32,11 @@ export function TitleInfoRecommendations({ data }: { data: MovieInfo & SeriesInf
       </header>
 
       <Scroller className={cx("recommendationList")} ref={scrollerRef}>
-        {data.recommendations.results.map((recommendedMovie) => (
-          <MovieCard
-            key={recommendedMovie.id}
-            movie={recommendedMovie}
-            type={recommendedMovie.media_type}
+        {data.recommendations.results.map((recommended) => (
+          <MediaCard
+            key={recommended.id}
+            media={recommended}
+            type={recommended.media_type}
             className={cx("recommendationCard")}
           />
         ))}
@@ -45,7 +45,7 @@ export function TitleInfoRecommendations({ data }: { data: MovieInfo & SeriesInf
   );
 }
 
-export function TitleInfoRecommendationsSkeleton() {
+export function MediaInfoRecommendationsSkeleton() {
   return (
     <section
       id="recommendations"
@@ -58,7 +58,7 @@ export function TitleInfoRecommendationsSkeleton() {
         {Array(5)
           .fill(0)
           .map((_, idx) => (
-            <div key={idx} className={cx("movieCard")}>
+            <div key={idx} className={cx("mediaCard")}>
               <Skeleton
                 width={200}
                 height={303.09}

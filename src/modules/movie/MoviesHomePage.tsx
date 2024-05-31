@@ -1,7 +1,7 @@
 import homedata from "@/data/placeholder-homedata.json";
 
 // Components
-import { MovieCard } from "@/components/cards/Movie";
+import { MediaCard } from "@/components/cards/Media";
 import { FeaturedCard } from "@/components/cards/Featured";
 
 // Styles
@@ -11,7 +11,8 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(style);
 
 export function MoviesPage() {
-  const data = getHomeData();
+  // const data = getHomeData();
+  const data = homedata;
 
   return (
     <main className={cx("moviesPage")}>
@@ -19,7 +20,7 @@ export function MoviesPage() {
         <h1>Watch Next</h1>
         <div className={cx("discoveryList")}>
           {data.discovery.slice(0, 2).map((movie) => (
-            <FeaturedCard key={movie.id} movie={movie} type="movie" />
+            <FeaturedCard key={movie.id} media={movie} type="movie" />
           ))}
         </div>
       </section>
@@ -28,14 +29,10 @@ export function MoviesPage() {
         <h1>Trending Movies</h1>
         <div className={cx("trendingList")}>
           {data.trending.movie.slice(0, 6).map((movie) => (
-            <MovieCard key={movie.id} movie={movie as Result} type="movie" />
+            <MediaCard key={movie.id} media={movie as Result} type="movie" />
           ))}
         </div>
       </section>
     </main>
   );
-}
-
-function getHomeData() {
-  return homedata;
 }

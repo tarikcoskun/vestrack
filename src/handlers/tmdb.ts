@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export interface ExtendedMovieInfo extends Result {
+export interface ExtendedMediaInfo extends Result {
   credits: {
     cast: Cast[];
     crew: Cast[];
@@ -16,8 +16,8 @@ export interface ExtendedMovieInfo extends Result {
 
 interface ExtendedPersonInfo extends PersonInfo {
   combined_credits: {
-    cast: ExtendedMovieInfo[];
-    crew: ExtendedMovieInfo[];
+    cast: ExtendedMediaInfo[];
+    crew: ExtendedMediaInfo[];
   };
 }
 
@@ -25,7 +25,7 @@ class TmdbHandler {
   apiKey = process.env.TMDB_API_KEY;
 
   async fetch<T>(url: string) {
-    const urlConstruct = new URL("http://api.themoviedb.org/3" + url);
+    const urlConstruct = new URL(`http://api.themoviedb.org/3${url}`);
     urlConstruct.searchParams.append("api_key", this.apiKey);
 
     const res = await axios.get<T>(urlConstruct.toString());
@@ -34,15 +34,15 @@ class TmdbHandler {
 
   async getTrending(type: "movie" | "tv" | "people") {
     const { results } = await this.fetch<TmdbApiResponse>(
-      `/trending/${type}/week`
+      `/trending/${type}/week`,
     );
 
     return results;
   }
 
-  async getTitleInfo(movieId: string, type: "movie" | "tv" = "movie") {
-    const data = await this.fetch<ExtendedMovieInfo>(
-      `/${type}/${movieId}?append_to_response=credits,reviews,videos,recommendations`
+  async getMediaInfo(mediaId: string, type: "movie" | "tv" = "movie") {
+    const data = await this.fetch<ExtendedMediaInfo>(
+      `/${type}/${mediaId}?append_to_response=credits,reviews,videos,recommendations`,
     );
 
     return data;
@@ -50,7 +50,7 @@ class TmdbHandler {
 
   async getActor(actorId: string) {
     const { combined_credits, ...data } = await this.fetch<ExtendedPersonInfo>(
-      `/person/${actorId}?append_to_response=combined_credits`
+      `/person/${actorId}?append_to_response=combined_credits`,
     );
 
     const sortedCast = [...(combined_credits?.cast || [])]
@@ -64,7 +64,7 @@ class TmdbHandler {
   }
 
   async getDiscovery() {
-    const res = await this.fetch<{ results: DiscoveryResult[]; }>("/discover/movie");
+    const res = await this.fetch<{ results: DiscoveryResult[] }>("/discover/movie");
     return res.results;
   }
 
@@ -76,11 +76,14 @@ class TmdbHandler {
       const lowQuery = query.toLowerCase();
       if (lowTitle === lowQuery) {
         return 3;
-      } else if (lowTitle.startsWith(lowQuery)) {
+      }
+      else if (lowTitle.startsWith(lowQuery)) {
         return 2;
-      } else if (lowTitle.includes(lowQuery)) {
+      }
+      else if (lowTitle.includes(lowQuery)) {
         return 1;
-      } else {
+      }
+      else {
         return 0;
       }
     };

@@ -20,20 +20,14 @@ interface Props {
   children?: React.ReactNode;
 }
 
-type ButtonProps<C extends React.ElementType> =
-  PolymorphicComponentPropsWithRef<C, Props>;
+type ButtonProps<C extends React.ElementType> = PolymorphicComponentPropsWithRef<C, Props>;
 
-type ButtonComponent = <
-  C extends React.ElementType = "button",
->({ }: ButtonProps<C>) => React.ReactNode;
+type ButtonComponent = <C extends React.ElementType = "button">(props: ButtonProps<C>) => React.ReactNode;
 
 const cx = classNames.bind(style);
 
 const ButtonRoot: ButtonComponent = forwardRef(
-  <C extends React.ElementType = "button">(
-    props: ButtonProps<C>,
-    ref: PolymorphicRef<C>
-  ) => {
+  <C extends React.ElementType = "button">(props: ButtonProps<C>, ref: PolymorphicRef<C>) => {
     const {
       as,
       color,
@@ -68,7 +62,7 @@ const ButtonRoot: ButtonComponent = forwardRef(
         {!!trailing && trailing}
       </Component>
     );
-  }
+  },
 );
 
 type ButtonGroupProps = React.HTMLAttributes<HTMLElement>;
@@ -84,5 +78,5 @@ function ButtonGroup(props: ButtonGroupProps) {
 }
 
 export const Button = Object.assign(ButtonRoot, {
-  Group: ButtonGroup
+  Group: ButtonGroup,
 });

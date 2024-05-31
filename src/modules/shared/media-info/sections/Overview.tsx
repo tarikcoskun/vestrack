@@ -14,12 +14,12 @@ import { Noto_Color_Emoji } from "next/font/google";
 
 const emojiFont = Noto_Color_Emoji({
   weight: "400",
-  subsets: ["emoji"]
+  subsets: ["emoji"],
 });
 
 const cx = classNames.bind(style);
 
-export function TitleInfoOverview({ data }: { data: MovieInfo & SeriesInfo }) {
+export function MediaInfoOverview({ data }: { data: MovieInfo & SeriesInfo }) {
   const posterUrl = `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${data.poster_path}`;
   const posterBlurUrl = `https://image.tmdb.org/t/p/w300_and_h450_multi_faces_filter%28blur%29/${data.poster_path}`;
   const trailerUrl = `https://youtu.be/${data.videos.results.find((video) => video.type === "Trailer")?.key}`;
@@ -27,8 +27,8 @@ export function TitleInfoOverview({ data }: { data: MovieInfo & SeriesInfo }) {
   return (
     <section id="overview" className={cx("overview")}>
       <div className={cx("columnLeft")}>
-        <img src={posterUrl} alt={data.title} className={cx("moviePoster")} />
-        <div className={cx("movieTrailer")} style={{ backgroundImage: `url(${posterBlurUrl})` }}>
+        <img src={posterUrl} alt={data.title} className={cx("mediaPoster")} />
+        <div className={cx("mediaTrailer")} style={{ backgroundImage: `url(${posterBlurUrl})` }}>
           <Button
             as="a"
             href={trailerUrl}
@@ -48,34 +48,36 @@ export function TitleInfoOverview({ data }: { data: MovieInfo & SeriesInfo }) {
       <div className={cx("columnRight")}>
         <section className={cx("overviewInfo")}>
           <div className={cx("metadataList")}>
-            {data.created_by?.length ? (
-              <CrewGroup
-                title="Creator"
-                people={data.created_by}
-              />
-            ) : (
-              <CrewGroup
-                title="Director"
-                people={data.credits.crew.filter(
-                  (person) => person.job === "Director"
+            {data.created_by?.length
+              ? (
+                <CrewGroup
+                  title="Creator"
+                  people={data.created_by}
+                />
+                )
+              : (
+                <CrewGroup
+                  title="Director"
+                  people={data.credits.crew.filter(
+                    (person) => person.job === "Director",
+                  )}
+                />
                 )}
-              />
-            )}
             <CrewGroup
               title="Writer"
               people={data.credits.crew.filter(
-                (person) => person.department === "Writing"
+                (person) => person.department === "Writing",
               )}
             />
             <div className={cx("metadataItem")}>
               <span className={cx("title")}>
-                {"Genre" + (data.genres.length > 1 ? "s" : "")}
+                {`Genre${data.genres.length > 1 ? "s" : ""}`}
               </span>
               <ul className={cx("dataGroup")}>
                 {data.genres
                   .sort((a, b) => (a.name > b.name ? 1 : -1)).map((genre) => (
                     <li key={genre.id} className={cx("person")}>
-                      <Button key={genre.name} as={Link} href={`/genre/${slugify(genre.name)}`} color="gray" variant="soft" size="sm" rounded="full" className={cx("movieGenre")}>
+                      <Button key={genre.name} as={Link} href={`/genre/${slugify(genre.name)}`} color="gray" variant="soft" size="sm" rounded="full" className={cx("mediaGenre")}>
                         <span style={{ fontFamily: emojiFont.style.fontFamily }}>{getGenreEmoji(slugify(genre.name))}</span> {genre.name}
                       </Button>
                     </li>
@@ -83,7 +85,7 @@ export function TitleInfoOverview({ data }: { data: MovieInfo & SeriesInfo }) {
               </ul>
             </div>
           </div>
-          <p className={cx("movieOverview")}>{data.overview}</p>
+          <p className={cx("mediaOverview")}>{data.overview}</p>
         </section>
       </div>
     </section>
@@ -99,11 +101,13 @@ function CrewGroup(props: CrewGroupProps) {
   const { title, people } = props;
 
   const filteredPeople = people.reduce((arr: Cast[], curr) => {
-    if (!arr.map((person) => person.name).includes(curr.name)) arr.push(curr);
+    if (!arr.map((person) => person.name).includes(curr.name))
+      arr.push(curr);
     return arr;
   }, []);
 
-  if (!filteredPeople.length) return null;
+  if (!filteredPeople.length)
+    return null;
 
   return (
     <div className={cx("metadataItem")}>
@@ -121,13 +125,13 @@ function CrewGroup(props: CrewGroupProps) {
   );
 }
 
-export function TitleInfoOverviewSkeleton() {
+export function MediaInfoOverviewSkeleton() {
   return (
     <section
       id="overview"
       className={cx("overviewSkeleton")}
     >
-      <Skeleton id="moviePoster" className={cx("columnLeft", "posterSkeleton")} />
+      <Skeleton id="mediaPoster" className={cx("columnLeft", "posterSkeleton")} />
       <div className={cx("columnRight")}>
         <div className={cx("overviewInfo")}>
           <div className={cx("metadataList")}>
@@ -149,7 +153,7 @@ export function TitleInfoOverviewSkeleton() {
           </div>
 
           <Skeleton.Paragraph
-            id="movieOverview"
+            id="mediaOverview"
             height={94.5}
             lines={4}
           />

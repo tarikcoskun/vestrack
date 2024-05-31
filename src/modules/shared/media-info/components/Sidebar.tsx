@@ -31,7 +31,7 @@ const sections = [
   },
 ];
 
-export function TitleInfoSidebar() {
+export function MediaInfoSidebar() {
   const { copyToClipboard, isCopied } = useClipboard();
 
   const activeId = useScrollSpy(sections.map((i) => i.id), 48);

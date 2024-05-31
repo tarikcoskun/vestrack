@@ -16,7 +16,7 @@ const cx = classNames.bind(style);
 export function SearchPersonCard(props: SearchPersonCardProps) {
   const { person, className, ...cardProps } = props;
 
-  const infoPageUrl = `/person/${slugify(person.name!) + "-" + person.id}`;
+  const infoPageUrl = `/person/${`${slugify(person.name!)}-${person.id}`}`;
   const photoUrl = `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${person.profile_path}`;
 
   return (
@@ -26,20 +26,22 @@ export function SearchPersonCard(props: SearchPersonCardProps) {
       typeof="Movie"
     >
       <Link href={`/person/${person.id}`} className={cx("photoLink")}>
-        {person.profile_path ? (
-          <img
-            src={photoUrl}
-            alt={person.name}
-            className={cx("personPhoto")}
-          />
-        ) : (
-          <div className={cx("personInitials")}>
-            {person.name
-              ?.split(/\s/)
-              .slice(0, 2)
-              .map((word) => word.slice(0, 1))}
-          </div>
-        )}
+        {person.profile_path
+          ? (
+            <img
+              src={photoUrl}
+              alt={person.name}
+              className={cx("personPhoto")}
+            />
+            )
+          : (
+            <div className={cx("personInitials")}>
+              {person.name
+                ?.split(/\s/)
+                .slice(0, 2)
+                .map((word) => word.slice(0, 1))}
+            </div>
+            )}
       </Link>
       <div className={cx("personInfo")}>
         <Link href={infoPageUrl}>
