@@ -10,13 +10,13 @@
 
     .videoThumbnail {
       width: 100%;
+      height: 100%;
       border: 1px solid var(--theme-outline);
       border-radius: var(--rounded-base);
       aspect-ratio: 16/9;
       background-color: var(--dynamic-gray-150);
       object-fit: cover;
       transition: scale 150ms;
-      @include media("<lg") { width: 250px; }
 
       &:hover { scale: 1.05; }
     }

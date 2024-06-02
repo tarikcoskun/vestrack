@@ -74,7 +74,7 @@
     .overviewInfo {
       display: flex;
       flex-direction: column;
-      padding-top: 2rem;
+      padding-top: var(--content-spacing);
       gap: 2rem;
 
       .metadataList {

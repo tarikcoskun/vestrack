@@ -25,19 +25,23 @@
   &[data-scroll-position="end"]::after { opacity: 0; }
 
   .scrollerTrack {
+    --item-count: var(--scroller-items-per-scroll);
     --scroller-gap: var(--content-spacing);
     --scroller-max-width: calc(var(--content-width) - var(--sidebar-width) - var(--layout-gap) + (var(--content-spacing) * 2));
-    --scroller-item-width: calc((var(--scroller-max-width) - (var(--scroller-items-per-scroll) + 1) * var(--scroller-gap)) / var(--scroller-items-per-scroll));
+    --scroller-item-width: calc((var(--scroller-max-width) - (var(--scroller-items-per-scroll) + 1) * var(--scroller-gap)) / var(--item-count));
     display: grid;
     overflow: hidden;
     max-width: var(--scroller-max-width);
     padding: var(--content-spacing);
     margin: calc(var(--content-spacing) * -1);
-    gap: var(--content-spacing);
+    gap: var(--scroller-gap);
     grid-auto-flow: column;
     grid-template-columns: repeat(var(--scroller-items-per-scroll), 1fr);
     overflow-x: auto;
     scroll-behavior: smooth;
+    @include media("<md") {
+      --item-count: calc(var(--scroller-items-per-scroll) + 2);
+    }
 
     &::-webkit-scrollbar { display: none; }
 

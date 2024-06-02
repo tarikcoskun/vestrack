@@ -1,5 +1,6 @@
 @use "color";
 @use "sass:color" as sass-color;
+@import "media";
 
 @font-face {
   font-family: "Emoji One";
@@ -131,6 +132,10 @@
     --dynamic-yellow-600: #{color.$yellow-500};
 
     --theme-outline: rgb(255 255 255 / 0.15);
+  }
+
+  @include media("<md") {
+    --section-spacing: 24px;
   }
 
   &::-webkit-scrollbar {
