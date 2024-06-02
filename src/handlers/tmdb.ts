@@ -32,19 +32,18 @@ class TmdbHandler {
     return res.data;
   }
 
-  async getTrending(type: "movie" | "tv" | "people") {
-    const { results } = await this.fetch<TmdbApiResponse>(
-      `/trending/${type}/week`,
-    );
+  async getDiscovery(type: "movie" | "tv") {
+    const { results } = await this.fetch<TmdbApiResponse>(`/discover/${type}`);
+    return results;
+  }
 
+  async getTrending(type: "movie" | "tv" | "people") {
+    const { results } = await this.fetch<TmdbApiResponse>(`/trending/${type}/week`);
     return results;
   }
 
   async getMediaInfo(mediaId: string, type: "movie" | "tv" = "movie") {
-    const data = await this.fetch<ExtendedMediaInfo>(
-      `/${type}/${mediaId}?append_to_response=credits,reviews,videos,recommendations`,
-    );
-
+    const data = await this.fetch<ExtendedMediaInfo>(`/${type}/${mediaId}?append_to_response=credits,reviews,videos,recommendations`);
     return data;
   }
 
@@ -63,17 +62,13 @@ class TmdbHandler {
     };
   }
 
-  async getDiscovery() {
-    const res = await this.fetch<{ results: DiscoveryResult[] }>("/discover/movie");
-    return res.results;
-  }
-
   async query(query: string) {
     const data = await this.fetch<{ results: Result[] }>(`/search/multi?query=${query}`).then((res) => res.results);
 
     const getRelevancyScore = (title: string) => {
       const lowTitle = title.toLowerCase();
       const lowQuery = query.toLowerCase();
+
       if (lowTitle === lowQuery) {
         return 3;
       }

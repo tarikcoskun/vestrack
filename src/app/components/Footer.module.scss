@@ -11,7 +11,7 @@
     --grid-cols: 2;
     display: grid;
     width: 100%;
-    max-width: var(--content-max-width);
+    max-width: var(--content-width);
     padding-top: var(--section-spacing);
     gap: var(--section-spacing);
     grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));

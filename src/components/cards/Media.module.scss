@@ -8,13 +8,24 @@
   gap: 1rem;
 
   .mediaPoster {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .mediaPosterFallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dynamic-gray-400);
+  }
+
+  .mediaPoster,
+  .mediaPosterFallback {
     width: 100%;
     height: 100%;
     border: 1px solid var(--theme-outline);
     aspect-ratio: 2/3;
     background-color: var(--dynamic-gray-150);
-    object-fit: cover;
-    object-position: center;
     transition: scale 150ms;
 
     &:hover { scale: 1.05; }

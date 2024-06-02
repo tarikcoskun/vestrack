@@ -10,9 +10,7 @@ export async function GET(req: NextRequest) {
   if (!id || !type) {
     Response.json(
       { error: "No :id or :type provided" },
-      {
-        status: 400,
-      },
+      { status: 400 },
     );
   }
 

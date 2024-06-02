@@ -3,17 +3,17 @@
 .seriesInfoPage {
   --poster-width: clamp(120px, 50%, 300px);
   --sidebar-width: 190px;
-  --gap: 4rem;
+  --layout-gap: 4rem;
 
   .layout {
     display: flex;
     align-items: flex-start;
-    gap: var(--gap);
+    gap: var(--layout-gap);
 
     .content {
       width: 100%;
       @include media(">desktop") {
-        width: calc(100% - var(--sidebar-width) - var(--gap));
+        width: calc(100% - var(--sidebar-width) - var(--layout-gap));
       }
 
       > section {

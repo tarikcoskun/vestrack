@@ -8,6 +8,7 @@ export function getGenreEmoji(genre: string): string {
     case "animation":
       return "👾";
     case "comedy":
+    case "soap":
       return "😆";
     case "crime":
       return "🔪";
@@ -49,5 +50,3 @@ export function getGenreEmoji(genre: string): string {
       return "";
   }
 }
-
-export default getGenreEmoji;

@@ -15,9 +15,9 @@
     "downlevelIteration": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "skipLibCheck": true,
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
     "plugins": [
       {
         "name": "next"

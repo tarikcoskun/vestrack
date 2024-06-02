@@ -1,10 +1,11 @@
 import { slugify } from "@/util/slugify";
+import { TMDB_IMAGE_BASE_POSTER } from "@/constants/image";
 
 // Components
 import Link from "next/link";
 
 // Styles
-import style from "./Title.module.scss";
+import style from "./Media.module.scss";
 import classNames from "classnames/bind";
 
 interface SearchTitleCardProps extends React.HTMLAttributes<HTMLElement> {
@@ -18,7 +19,7 @@ export function SearchMediaCard(props: SearchTitleCardProps) {
   const { media, type, className, ...cardProps } = props;
 
   const infoPageUrl = `/${type}/${`${slugify(media.title! || media.name!)}-${media.id}`}`;
-  const posterUrl = `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${media.poster_path}`;
+  const posterUrl = TMDB_IMAGE_BASE_POSTER + media.poster_path;
 
   return (
     <article
@@ -42,7 +43,7 @@ export function SearchMediaCard(props: SearchTitleCardProps) {
         </Link>
         <div className={cx("mediaDetails")}>
           <span>{new Date(media.release_date! || media.first_air_date!).getFullYear()}</span>
-          <span>{media.media_type === "media" ? "Movie" : "TV Series"}</span>
+          <span>{media.media_type === "movie" ? "Movie" : "TV Series"}</span>
         </div>
       </div>
     </article>

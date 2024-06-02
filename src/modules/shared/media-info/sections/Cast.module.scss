@@ -8,55 +8,50 @@
   padding-block: var(--section-spacing);
 }
 
-  .castList {
-    gap: 2rem;
-    @include media("<md") { gap: 1rem; }
+.castList {
+  .person {
+    display: flex;
+    flex-direction: column;
 
-    .person {
+    .photoLink {
       display: flex;
-      width: 12rem;
-      flex-direction: column;
-      @include media("<md") { width: 8rem; }
+      transition: scale 150ms;
 
-      .photoLink {
-        display: flex;
-        width: inherit;
-
-        .personPhoto {
-          object-fit: cover;
-          object-position: center;
-        }
-
-        .personInitials {
-          display: grid;
-          font-size: 3rem;
-          place-content: center;
-        }
-
-        .personPhoto,
-        .personInitials {
-          width: inherit;
-          border: 1px solid var(--theme-outline);
-          aspect-ratio: 4/5;
-          background-color: var(--dynamic-gray-150);
-          transition: scale 150ms;
-
-          &:hover { scale: 1.05; }
-        }
+      .personPhoto {
+        object-fit: cover;
+        object-position: center;
       }
 
-      .personName {
-        margin-top: 1rem;
-        color: var(--theme-text-title);
-        font-size: 1.125rem;
-        @include util.truncate();
+      .personInitials {
+        display: grid;
+        font-size: 3rem;
+        place-content: center;
       }
 
-      .personCharacter {
-        margin-top: 0.5rem;
+      .personPhoto,
+      .personInitials {
+        width: 100%;
+        border: 1px solid var(--theme-outline);
+        aspect-ratio: 4/5;
+        background-color: var(--dynamic-gray-150);
+      }
+
+      &:hover {
+        scale: 1.05;
+        text-decoration: none;
       }
     }
+
+    .personName {
+      margin-top: 1rem;
+      color: var(--theme-text-title);
+      font-size: 1.125rem;
+      @include util.truncate();
+    }
+
+    .personCharacter { margin-top: 0.5rem; }
   }
+}
 
 .castModalLayout {
   display: flex;
@@ -162,10 +157,9 @@
 
   .castList {
     display: flex;
-    gap: 2rem;
+    gap: var(--content-spacing);
 
     .person {
-      width: 168px;
       height: 265.2px;
       flex-direction: column;
       flex-shrink: 0;

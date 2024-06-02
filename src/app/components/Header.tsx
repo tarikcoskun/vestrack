@@ -57,7 +57,7 @@ export function Header() {
                   className={cx("link")}
                   data-state={pathname === link.href ? "active" : "inactive"}
                 >
-                  <Icon icon={link.icon} variant={pathname === link.href ? "fill" : "regular"} size={24} className={cx("linkIcon")} />
+                  <Icon icon={link.icon} variant={pathname === link.href ? "fill" : "line"} size={24} className={cx("linkIcon")} />
                   <span>{link.label}</span>
                 </Link>
               </li>

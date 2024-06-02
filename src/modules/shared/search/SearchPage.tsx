@@ -6,7 +6,7 @@ import { notifyError } from "@/util/notifyError";
 import { type SearchResponse, getSearchData } from "./getSearchData";
 
 // Components
-import { SearchMediaCard } from "./components/Card/Title";
+import { SearchMediaCard } from "./components/Card/Media";
 
 // Styles
 import style from "./SearchPage.module.scss";

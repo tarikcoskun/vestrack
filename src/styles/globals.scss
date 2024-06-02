@@ -3,7 +3,7 @@
 
 .inlineCenter { margin-inline: auto; }
 .pagePadding { padding-block: var(--content-spacing); }
-.contentWidth { max-width: var(--content-max-width); }
+.contentWidth { max-width: var(--content-width); }
 .contentPadding {
   @include media("<desktop") { padding-inline: var(--content-spacing); }
 }

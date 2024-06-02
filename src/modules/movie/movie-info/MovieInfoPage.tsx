@@ -48,8 +48,8 @@ export function MovieInfoPage({ params: { id } }: { params: { id: string } }) {
                 <div className={cx("content")}>
                   <MediaInfoOverview data={data} />
                   <MediaInfoCast data={data} />
-                  <MediaInfoVideos data={data} />
-                  {data.reviews.total_results > 0 && <MediaInfoReviews data={data} />}
+                  {data.videos.results.length > 0 ? <MediaInfoVideos data={data} /> : null}
+                  {data.reviews.total_results > 0 ? <MediaInfoReviews data={data} /> : null}
                   <MediaInfoRecommendations data={data} />
                 </div>
                 <MediaInfoSidebar />

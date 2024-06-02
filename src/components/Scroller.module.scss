@@ -25,14 +25,22 @@
   &[data-scroll-position="end"]::after { opacity: 0; }
 
   .scrollerTrack {
-    display: flex;
+    --scroller-gap: var(--content-spacing);
+    --scroller-max-width: calc(var(--content-width) - var(--sidebar-width) - var(--layout-gap) + (var(--content-spacing) * 2));
+    --scroller-item-width: calc((var(--scroller-max-width) - (var(--scroller-items-per-scroll) + 1) * var(--scroller-gap)) / var(--scroller-items-per-scroll));
+    display: grid;
     overflow: hidden;
-    max-width: var(--content-max-width);
+    max-width: var(--scroller-max-width);
     padding: var(--content-spacing);
     margin: calc(var(--content-spacing) * -1);
+    gap: var(--content-spacing);
+    grid-auto-flow: column;
+    grid-template-columns: repeat(12, 1fr);
     overflow-x: auto;
     scroll-behavior: smooth;
 
     &::-webkit-scrollbar { display: none; }
+
+    > * { width: var(--scroller-item-width); }
   }
 }

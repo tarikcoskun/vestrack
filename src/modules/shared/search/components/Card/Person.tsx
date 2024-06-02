@@ -1,4 +1,5 @@
 import { slugify } from "@/util/slugify";
+import { TMDB_IMAGE_BASE_POSTER } from "@/constants/image";
 
 // Components
 import Link from "next/link";
@@ -17,7 +18,7 @@ export function SearchPersonCard(props: SearchPersonCardProps) {
   const { person, className, ...cardProps } = props;
 
   const infoPageUrl = `/person/${`${slugify(person.name!)}-${person.id}`}`;
-  const photoUrl = `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${person.profile_path}`;
+  const photoUrl = TMDB_IMAGE_BASE_POSTER + person.profile_path;
 
   return (
     <article

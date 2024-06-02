@@ -17,67 +17,68 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(style);
 
 export function MediaInfoCast({ data }: { data: MovieInfo & SeriesInfo }) {
-  const scrollRef = useRef<HTMLDivElement>(null);
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <section id="cast" className={cx("cast")}>
-      <header>
-        <h1>
-          Cast & Crew
-          <Button
-            color="gray"
-            variant="ghost"
-            padding="square"
-            rounded="full"
-            aria-label="See all"
-            onClick={() => {
-              setModalOpen(true);
-            }}
-          >
-            <Icon icon="arrow-right" size={20} />
-          </Button>
-        </h1>
-        <div className="scrollerControls">
-          <Scroller.Trigger trackRef={scrollRef} direction="left">
-            <Icon icon="caret-left" />
-          </Scroller.Trigger>
-          <Scroller.Trigger trackRef={scrollRef} direction="right">
-            <Icon icon="caret-right" />
-          </Scroller.Trigger>
-        </div>
-      </header>
+      <Scroller itemsPerScroll={6}>
+        <header>
+          <h1>
+            Cast & Crew
+            <Button
+              color="gray"
+              variant="ghost"
+              padding="square"
+              rounded="full"
+              aria-label="See all"
+              onClick={() => {
+                setModalOpen(true);
+              }}
+            >
+              <Icon icon="arrow-right" size={20} />
+            </Button>
+          </h1>
+          <div className="scrollerControls">
+            <Scroller.Trigger direction="left">
+              <Icon icon="caret-left" />
+            </Scroller.Trigger>
+            <Scroller.Trigger direction="right">
+              <Icon icon="caret-right" />
+            </Scroller.Trigger>
+          </div>
+        </header>
 
-      <Scroller className={cx("castList")} ref={scrollRef}>
-        {data.credits.cast
-          .sort((a, b) => a.order! - b.order!)
-          .slice(0, 14)
-          .map((person) => (
-            <article key={person.id} className={cx("person")}>
-              <Link href={`/person/${person.id}`} className={cx("photoLink")}>
-                {person.profile_path
-                  ? (
-                    <img
-                      src={`https://image.tmdb.org/t/p/w342${person.profile_path}`}
-                      alt={person.name}
-                      className={cx("personPhoto")}
-                    />
-                    )
-                  : (
-                    <div className={cx("personInitials")}>
-                      {person.name
-                        ?.split(/\s/)
-                        .slice(0, 2)
-                        .map((word) => word.slice(0, 1))}
-                    </div>
-                    )}
-              </Link>
-              <Link href={`/person/${person.id}`} className={cx("personName")}>
-                <span title={person.name}>{person.name}</span>
-              </Link>
-              <div className={cx("personCharacter")}>{person.character}</div>
-            </article>
-          ))}
+        <Scroller.Track className={cx("castList")}>
+          {data.credits.cast
+            .sort((a, b) => a.order! - b.order!)
+            .slice(0, 14)
+            .map((person) => (
+              <article key={person.id} className={cx("person")}>
+                <Link href={`/person/${person.id}`} className={cx("photoLink")}>
+                  {person.profile_path
+                    ? (
+                      <img
+                        src={`https://image.tmdb.org/t/p/w342${person.profile_path}`}
+                        alt={person.name}
+                        className={cx("personPhoto")}
+                      />
+                      )
+                    : (
+                      <div className={cx("personInitials")}>
+                        {person.name
+                          ?.split(/\s/)
+                          .slice(0, 2)
+                          .map((word) => word.slice(0, 1))}
+                      </div>
+                      )}
+                </Link>
+                <Link href={`/person/${person.id}`} className={cx("personName")}>
+                  <span title={person.name}>{person.name}</span>
+                </Link>
+                <div className={cx("personCharacter")}>{person.character}</div>
+              </article>
+            ))}
+        </Scroller.Track>
       </Scroller>
 
       <FullCastModal />
@@ -242,8 +243,8 @@ export function MediaInfoCastSkeleton() {
           .map((_, idx) => (
             <div key={idx} className={cx("person")}>
               <Skeleton
-                width={168}
-                height={210}
+                width={152.33}
+                height={190.41}
                 style={{ marginBottom: "0.5rem" }}
               />
               <Skeleton width={140} height={18.11} type="text" />

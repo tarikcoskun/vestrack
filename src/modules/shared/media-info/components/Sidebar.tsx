@@ -55,7 +55,7 @@ export function MediaInfoSidebar() {
         ))}
       </ol>
       <div className={cx("actions")}>
-        <Button.Group>
+        {/* <Button.Group>
           <Button
             color="blue"
             leading={<Icon icon="bookmark" variant="fill" size={18} />}
@@ -65,7 +65,7 @@ export function MediaInfoSidebar() {
           <Button color="blue" padding="square">
             <Icon icon="caret-down" size={18} />
           </Button>
-        </Button.Group>
+        </Button.Group> */}
 
         <Button
           color="gray"

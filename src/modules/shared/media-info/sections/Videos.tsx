@@ -17,48 +17,49 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(style);
 
 export function MediaInfoVideos({ data }: { data: MovieInfo & SeriesInfo }) {
-  const scrollerRef = useRef<HTMLDivElement>(null);
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <section id="videos" className={cx("videos")}>
-      <header>
-        <h1>
-          Videos
-          <Button
-            color="gray"
-            variant="ghost"
-            padding="square"
-            rounded="full"
-            aria-label="See all"
-            onClick={() => {
-              setModalOpen(true);
-            }}
-          >
-            <Icon icon="arrow-right" size={20} />
-          </Button>
-        </h1>
-        <div className="scrollerControls">
-          <Scroller.Trigger trackRef={scrollerRef} direction="left">
-            <Icon icon="caret-left" />
-          </Scroller.Trigger>
-          <Scroller.Trigger trackRef={scrollerRef} direction="right">
-            <Icon icon="caret-right" />
-          </Scroller.Trigger>
-        </div>
-      </header>
+      <Scroller itemsPerScroll={3}>
+        <header>
+          <h1>
+            Videos
+            <Button
+              color="gray"
+              variant="ghost"
+              padding="square"
+              rounded="full"
+              aria-label="See all"
+              onClick={() => {
+                setModalOpen(true);
+              }}
+            >
+              <Icon icon="arrow-right" size={20} />
+            </Button>
+          </h1>
+          <div className="scrollerControls">
+            <Scroller.Trigger direction="left">
+              <Icon icon="caret-left" />
+            </Scroller.Trigger>
+            <Scroller.Trigger direction="right">
+              <Icon icon="caret-right" />
+            </Scroller.Trigger>
+          </div>
+        </header>
 
-      <Scroller className={cx("videoList")} ref={scrollerRef}>
-        {data.videos.results
-          .sort(
-            (a, b) =>
-              new Date(b.published_at).getTime()
-                - new Date(a.published_at).getTime(),
-          )
-          .slice(0, 8)
-          .map((video) => (
-            <VideoCard key={video.id} video={video} />
-          ))}
+        <Scroller.Track className={cx("videoList")}>
+          {data.videos.results
+            .sort(
+              (a, b) =>
+                new Date(b.published_at).getTime()
+                  - new Date(a.published_at).getTime(),
+            )
+            .slice(0, 8)
+            .map((video) => (
+              <VideoCard key={video.id} video={video} />
+            ))}
+        </Scroller.Track>
       </Scroller>
 
       <FullVideosModal />

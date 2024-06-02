@@ -1,4 +1,5 @@
 import { getRuntime } from "@/util/getRuntime";
+import { TMDB_IMAGE_BASE_BACKDROP, TMDB_IMAGE_BASE_POSTER } from "@/constants/image";
 
 // Components
 import { Icon } from "@/components/Icon";
@@ -11,11 +12,11 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(style);
 
 export function MediaInfoHeader({ data }: { data: MovieInfo & SeriesInfo }) {
-  const backdropUrl = `https://image.tmdb.org/t/p/original${data.backdrop_path}`;
-  const posterUrl = `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${data.poster_path}`;
+  const backdropUrl = TMDB_IMAGE_BASE_BACKDROP + data.backdrop_path;
+  const posterUrl = TMDB_IMAGE_BASE_POSTER + data.poster_path;
 
   return (
-    <header id="header" className={cx("header")}>
+    <header id="header" className={cx("header")} data-backdrop={Boolean(data.backdrop_path)}>
       <div className={cx("mediaBackdrop")} style={{ backgroundImage: `url(${backdropUrl})` }} />
       <img src={posterUrl} alt={data.title} className={cx("mediaPoster")} />
       <section className={cx("mediaHeader")}>

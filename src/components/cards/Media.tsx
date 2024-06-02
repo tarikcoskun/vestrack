@@ -1,7 +1,9 @@
 import { slugify } from "@/util/slugify";
+import { TMDB_IMAGE_BASE_POSTER } from "@/constants/image";
 
 // Components
 import Link from "next/link";
+import { Icon } from "../Icon";
 
 // Styles
 import style from "./Media.module.scss";
@@ -18,7 +20,7 @@ export function MediaCard(props: MediaCardProps) {
   const { media, type, className, ...cardProps } = props;
 
   const infoPageUrl = `/${type}/${`${slugify(media.title! || media.name!)}-${media.id}`}`;
-  const posterUrl = `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${media.poster_path}`;
+  const posterUrl = TMDB_IMAGE_BASE_POSTER + media.poster_path;
 
   return (
     <article
@@ -27,12 +29,20 @@ export function MediaCard(props: MediaCardProps) {
       typeof="Movie"
     >
       <Link href={infoPageUrl} className={cx("posterLink")}>
-        <img
-          src={posterUrl}
-          alt={media.title}
-          draggable="false"
-          className={cx("mediaPoster")}
-        />
+        {media.poster_path
+          ? (
+            <img
+              src={posterUrl}
+              alt={media.title}
+              draggable="false"
+              className={cx("mediaPoster")}
+            />
+            )
+          : (
+            <div className={cx("mediaPosterFallback")}>
+              <Icon icon="image" size={64} />
+            </div>
+            )}
       </Link>
       <div className={cx("mediaInfo")}>
         <Link href={infoPageUrl}>

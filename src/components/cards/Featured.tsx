@@ -1,4 +1,5 @@
 import { slugify } from "@/util/slugify";
+import { TMDB_IMAGE_BASE_BACKDROP, TMDB_IMAGE_BASE_POSTER } from "@/constants/image";
 
 // Components
 import Link from "next/link";
@@ -11,7 +12,7 @@ import classNames from "classnames/bind";
 
 interface FeaturedCardProps {
   type: "movie" | "tv";
-  media: DiscoveryResult;
+  media: Result;
 }
 
 const cx = classNames.bind(style);
@@ -19,8 +20,8 @@ const cx = classNames.bind(style);
 export function FeaturedCard(props: FeaturedCardProps) {
   const { media, type } = props;
 
-  const posterUrl = `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${media.poster_path}`;
-  const backdropUrl = `https://image.tmdb.org/t/p/original${media.backdrop_path}`;
+  const posterUrl = TMDB_IMAGE_BASE_POSTER + media.poster_path;
+  const backdropUrl = TMDB_IMAGE_BASE_BACKDROP + media.backdrop_path;
 
   return (
     <article className={cx("featuredCard")} typeof="Movie">
@@ -31,13 +32,21 @@ export function FeaturedCard(props: FeaturedCardProps) {
         }}
       />
       <div className={cx("infoContainer")}>
-        <Link href={`/${type}/${`${slugify(media.title)}-${media.id}`}`} className={cx("posterLink")}>
-          <img
-            src={posterUrl}
-            alt={media.title}
-            draggable="false"
-            className={cx("mediaPoster")}
-          />
+        <Link href={`/${type}/${`${slugify(media.title! || media.name!)}-${media.id}`}`} className={cx("posterLink")}>
+          {media.poster_path
+            ? (
+              <img
+                src={posterUrl}
+                alt={media.title}
+                draggable="false"
+                className={cx("mediaPoster")}
+              />
+              )
+            : (
+              <div className={cx("mediaPosterFallback")}>
+                <Icon icon="image" size={64} />
+              </div>
+              )}
         </Link>
         <div className={cx("mediaInfo")}>
           <div className={cx("mediaRating")}>
@@ -45,10 +54,10 @@ export function FeaturedCard(props: FeaturedCardProps) {
             <span>{media.vote_average.toFixed(1).replace(".0", "")}</span>
           </div>
           <Link href={`/movie/${media.id}`}>
-            <span className={cx("mediaTitle")}>{media.title}</span>
+            <span className={cx("mediaTitle")}>{media.title || media.name}</span>
           </Link>
           <p className={cx("mediaOverview")}>{media.overview}</p>
-          <div className={cx("actions")}>
+          {/* <div className={cx("actions")}>
             <Button color="gray" variant="ghost" leading={<Icon icon="play" variant="fill" />}>
               Play Trailer
             </Button>
@@ -59,7 +68,7 @@ export function FeaturedCard(props: FeaturedCardProps) {
             >
               Add to Watchlist
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
     </article>

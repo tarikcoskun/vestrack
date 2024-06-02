@@ -130,8 +130,7 @@ const TabsList = forwardRef<HTMLDivElement, TabsListProps>(
  * TabsTrigger
  * ----------- */
 
-interface TabsTriggerProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface TabsTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   value: string;
 }
 

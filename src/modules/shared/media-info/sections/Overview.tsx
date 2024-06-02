@@ -1,5 +1,6 @@
 import { slugify } from "@/util/slugify";
-import getGenreEmoji from "@/util/getGenreEmoji";
+import { getGenreEmoji } from "@/util/getGenreEmoji";
+import { TMDB_IMAGE_BASE_POSTER, TMDB_IMAGE_BASE_POSTER_BLUR } from "@/constants/image";
 
 // Components
 import Link from "next/link";
@@ -20,30 +21,45 @@ const emojiFont = Noto_Color_Emoji({
 const cx = classNames.bind(style);
 
 export function MediaInfoOverview({ data }: { data: MovieInfo & SeriesInfo }) {
-  const posterUrl = `https://image.tmdb.org/t/p/w300_and_h450_bestv2/${data.poster_path}`;
-  const posterBlurUrl = `https://image.tmdb.org/t/p/w300_and_h450_multi_faces_filter%28blur%29/${data.poster_path}`;
+  const posterUrl = TMDB_IMAGE_BASE_POSTER + data.poster_path;
+  const posterBlurUrl = TMDB_IMAGE_BASE_POSTER_BLUR + data.poster_path;
   const trailerUrl = `https://youtu.be/${data.videos.results.find((video) => video.type === "Trailer")?.key}`;
 
   return (
     <section id="overview" className={cx("overview")}>
       <div className={cx("columnLeft")}>
-        <img src={posterUrl} alt={data.title} className={cx("mediaPoster")} />
-        <div className={cx("mediaTrailer")} style={{ backgroundImage: `url(${posterBlurUrl})` }}>
-          <Button
-            as="a"
-            href={trailerUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            color="white"
-            size="lg"
-            padding="square"
-            rounded="full"
-            title="Play trailer"
-            className={cx("playTrailer")}
-          >
-            <Icon icon="play" variant="fill" size={24} />
-          </Button>
-        </div>
+        {data.poster_path
+          ? (
+            <img
+              src={posterUrl}
+              alt={data.title}
+              draggable="false"
+              className={cx("mediaPoster")}
+            />
+            )
+          : (
+            <div className={cx("mediaPosterFallback")}>
+              <Icon icon="image" size={96} />
+            </div>
+            )}
+        {!trailerUrl.includes("undefined") && (
+          <div className={cx("mediaTrailer")} style={{ backgroundImage: `url(${posterBlurUrl})` }}>
+            <Button
+              as="a"
+              href={trailerUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              color="white"
+              size="lg"
+              padding="square"
+              rounded="full"
+              title="Play trailer"
+              className={cx("playTrailer")}
+            >
+              <Icon icon="play" variant="fill" size={24} />
+            </Button>
+          </div>
+        )}
       </div>
       <div className={cx("columnRight")}>
         <section className={cx("overviewInfo")}>
@@ -154,6 +170,7 @@ export function MediaInfoOverviewSkeleton() {
 
           <Skeleton.Paragraph
             id="mediaOverview"
+            style={{ maxWidth: "706px", width: "100%" }}
             height={94.5}
             lines={4}
           />

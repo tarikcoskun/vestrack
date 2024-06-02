@@ -74,7 +74,7 @@
   --font-size-paragraph: 1.125rem;
 
   --content-spacing: 24px;
-  --content-max-width: 1280px;
+  --content-width: 1280px;
   --content-nav-height: 64px;
   --section-spacing: 48px;
 
@@ -157,7 +157,7 @@ p {
 }
 
 a {
-  color: var(--dynamic-text-link);
+  color: inherit;
   text-decoration: none;
 
   &:hover { text-decoration: underline; }

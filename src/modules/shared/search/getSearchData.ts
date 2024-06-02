@@ -5,8 +5,7 @@ export interface SearchResponse {
   people: Person[];
 }
 
-export function getSearchData(query: string) {
-  return axios
-    .get<SearchResponse>("/search", { params: { query } })
-    .then((res) => res.data);
+export async function getSearchData(query: string) {
+  const res = await axios.get<SearchResponse>("/search", { params: { query } });
+  return res.data;
 }

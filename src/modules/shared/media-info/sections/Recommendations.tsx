@@ -15,31 +15,31 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(style);
 
 export function MediaInfoRecommendations({ data }: { data: MovieInfo & SeriesInfo }) {
-  const scrollerRef = useRef<HTMLDivElement>(null);
-
   return (
     <section id="recommendations" className={cx("recommendations")}>
-      <header>
-        <h1>Recommendations</h1>
-        <div className="scrollerControls">
-          <Scroller.Trigger trackRef={scrollerRef} direction="left">
-            <Icon icon="caret-left" />
-          </Scroller.Trigger>
-          <Scroller.Trigger trackRef={scrollerRef} direction="right">
-            <Icon icon="caret-right" />
-          </Scroller.Trigger>
-        </div>
-      </header>
+      <Scroller itemsPerScroll={5}>
+        <header>
+          <h1>Recommendations</h1>
+          <div className="scrollerControls">
+            <Scroller.Trigger direction="left">
+              <Icon icon="caret-left" />
+            </Scroller.Trigger>
+            <Scroller.Trigger direction="right">
+              <Icon icon="caret-right" />
+            </Scroller.Trigger>
+          </div>
+        </header>
 
-      <Scroller className={cx("recommendationList")} ref={scrollerRef}>
-        {data.recommendations.results.map((recommended) => (
-          <MediaCard
-            key={recommended.id}
-            media={recommended}
-            type={recommended.media_type}
-            className={cx("recommendationCard")}
-          />
-        ))}
+        <Scroller.Track className={cx("recommendationList")}>
+          {data.recommendations.results.map((recommended) => (
+            <MediaCard
+              key={recommended.id}
+              media={recommended}
+              type={recommended.media_type}
+              className={cx("recommendationCard")}
+            />
+          ))}
+        </Scroller.Track>
       </Scroller>
     </section>
   );

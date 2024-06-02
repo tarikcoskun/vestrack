@@ -1,27 +1,27 @@
+import { iconsLine } from "./line";
 import { iconsFill } from "./fill";
-import { iconsRegular } from "./regular";
-import { iconsShared } from "./shared";
+import { iconsCommon } from "./common";
 
 const icons = {
-  fill: {
-    ...iconsShared,
-    ...iconsFill,
+  line: {
+    ...iconsCommon,
+    ...iconsLine,
   },
-  regular: {
-    ...iconsShared,
-    ...iconsRegular,
+  fill: {
+    ...iconsCommon,
+    ...iconsFill,
   },
 };
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
-  variant?: "regular" | "fill";
-  icon: keyof typeof icons.fill;
+  variant?: "line" | "fill";
+  icon: IconList;
   size?: number | string;
 }
 
-export type IconList = keyof typeof icons.fill;
+export type IconList = keyof typeof icons.line;
 
-export function Icon({ icon, size = 16, variant = "regular", ...props }: IconProps) {
+export function Icon({ icon, size = 16, variant = "line", ...props }: IconProps) {
   const body = icons[variant][icon];
 
   return (
@@ -32,9 +32,8 @@ export function Icon({ icon, size = 16, variant = "regular", ...props }: IconPro
       viewBox="0 0 256 256"
       width={size.toString()}
       height={size.toString()}
-      fill="currentColor"
     >
-      <g>{body}</g>
+      <g fill="currentColor">{body}</g>
     </svg>
   );
 }
