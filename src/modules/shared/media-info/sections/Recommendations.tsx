@@ -1,12 +1,9 @@
 "use client";
 
-import { useRef } from "react";
-
 // Components
 import { MediaCard, MediaCardSkeleton } from "@/components/cards/Media";
 import { Scroller } from "@/components/Scroller";
 import { Icon } from "@/components/Icon";
-import { Skeleton } from "@/components/Skeleton";
 
 // Styles
 import style from "./Recommendations.module.scss";

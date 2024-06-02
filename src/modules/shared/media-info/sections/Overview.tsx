@@ -125,12 +125,7 @@ export function MediaInfoOverview({ data }: { data: MovieInfo & SeriesInfo | nul
             : (
               <div className={cx("overviewText")}>
                 <Skeleton width={200} height={16.09} type="text" />
-                <Skeleton.Paragraph
-                  id="mediaOverview"
-                  style={{ maxWidth: "706px", width: "100%" }}
-                  height={68.25}
-                  lines={3}
-                />
+                <Skeleton.Paragraph height={68.25} lines={3} style={{ maxWidth: "706px", width: "100%" }} />
               </div>
               )}
         </section>
