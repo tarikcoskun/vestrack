@@ -20,61 +20,47 @@ export function MediaInfoHeader({ data }: { data: MovieInfo & SeriesInfo | null 
       <div className={cx("mediaBackdrop")} style={{ backgroundImage: `url(${backdropUrl})` }} />
       <img src={posterUrl} alt={data?.title} className={cx("mediaPoster")} />
       <section className={cx("mediaHeader")}>
-        {data
-          ? (
-            <h1 className={cx("mediaTitle")}>{data.title || data.name}</h1>
-            )
-          : (
-            <Skeleton width={180} height={28.17} type="text" />
-            )}
-        {data
-          ? (
-            <div className={cx("mediaDetailList")}>
-              <span className={cx("mediaDetailItem")}>
-                <Icon icon="star" variant="fill" size={32} className={cx("ratingStar")} style={{ color: "var(--dynamic-yellow-600)" }} />
-                <span>
-                  <header className={cx("title")}>
-                    <h3>
-                      {data.vote_average.toFixed(1).replace(".0", "")}
-                    </h3>/10
-                    <Icon icon="star" variant="fill" size={12} className={cx("ratingStarMb")} style={{ color: "var(--dynamic-yellow-600)" }} />
-                  </header>
-                  <div className={cx("subtext")}>{new Intl.NumberFormat("en-US", { notation: "compact" }).format(data.vote_count)} votes</div>
-                </span>
+        {data && <h1 className={cx("mediaTitle")}>{data.title || data.name}</h1>}
+        {data && (
+          <div className={cx("mediaDetailList")}>
+            <span className={cx("mediaDetailItem")}>
+              <Icon icon="star" variant="fill" size={32} className={cx("ratingStar")} style={{ color: "var(--color-yellow)" }} />
+              <span>
+                <header className={cx("title")}>
+                  <h3>
+                    {data.vote_average.toFixed(1).replace(".0", "")}
+                  </h3>/10
+                  <Icon icon="star" variant="fill" size={12} className={cx("ratingStarMb")} style={{ color: "var(--color-yellow)" }} />
+                </header>
+                <div className={cx("subtext")}>{new Intl.NumberFormat("en-US", { notation: "compact" }).format(data.vote_count)} votes</div>
               </span>
-              <span className={cx("mediaDetailItem")}>
-                <span>
-                  <header className={cx("title")}>
-                    <h3>
-                      {new Date(data.release_date || data.first_air_date).toLocaleDateString("en-US", { month: "short", year: "numeric" })}
-                    </h3>
-                  </header>
-                  <div className={cx("subtext")}>{data.release_date ? "released" : "premiered"}</div>
-                </span>
+            </span>
+            <span className={cx("mediaDetailItem")}>
+              <span>
+                <header className={cx("title")}>
+                  <h3>
+                    {new Date(data.release_date || data.first_air_date).toLocaleDateString("en-US", { month: "short", year: "numeric" })}
+                  </h3>
+                </header>
+                <div className={cx("subtext")}>{data.release_date ? "released" : "premiered"}</div>
               </span>
-              {(data.runtime || data.episode_run_time.length)
-                ? (
-                  <span className={cx("mediaDetailItem")}>
-                    <span>
-                      <header className={cx("title")}>
-                        <h3>
-                          {getRuntime(data.runtime || data.episode_run_time[0])}
-                        </h3>
-                      </header>
-                      <div className={cx("subtext")}>runtime</div>
-                    </span>
+            </span>
+            {(data.runtime || data.episode_run_time.length)
+              ? (
+                <span className={cx("mediaDetailItem")}>
+                  <span>
+                    <header className={cx("title")}>
+                      <h3>
+                        {getRuntime(data.runtime || data.episode_run_time[0])}
+                      </h3>
+                    </header>
+                    <div className={cx("subtext")}>runtime</div>
                   </span>
-                  )
-                : null}
-            </div>
-            )
-          : (
-            <div className={cx("mediaDetailList")}>
-              <Skeleton width={140} height={36.22} />
-              <Skeleton width={120} height={36.22} />
-              <Skeleton width={100} height={36.22} />
-            </div>
-            )}
+                </span>
+                )
+              : null}
+          </div>
+        )}
       </section>
     </header>
   );

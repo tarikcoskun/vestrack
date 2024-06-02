@@ -1,8 +1,8 @@
-@use "sass:color" as sass-color;
-@use "@/styles/color";
+@use "sass:color";
+@use "@/styles/colors";
 
 .skeleton {
-  background-color: sass-color.scale(color.$gray-500, $alpha: -85%);
+  background-color: var(--theme-skeleton);
 
   &.roundedBase { border-radius: var(--rounded-base); }
   &.roundedFull { border-radius: var(--rounded-full); }

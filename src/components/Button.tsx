@@ -10,7 +10,7 @@ import style from "./Button.module.scss";
 import classNames from "classnames/bind";
 
 interface Props {
-  color?: "white" | "gray" | "red" | "blue";
+  color?: "white" | "gray" | "blue";
   variant?: "solid" | "soft" | "ghost";
   size?: "sm" | "lg";
   padding?: boolean | "square";

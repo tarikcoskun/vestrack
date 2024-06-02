@@ -1,23 +1,19 @@
 @use "sass:color" as sass-color;
-@use "@/styles/color";
+@use "@/styles/colors";
 
 $variants: "solid", "soft", "ghost";
 $colors: (
   "white": (
-    text: color.$gray-900,
+    text: colors.$gray-900,
     base: white
   ),
   "gray": (
-    text: var(--dynamic-gray-900),
-    base: color.$gray-500,
-  ),
-  "red": (
-    text: var(--dynamic-red-700),
-    base: color.$red-600,
+    text: var(--color-gray-900),
+    base: colors.$gray-500,
   ),
   "blue": (
-    text: var(--dynamic-blue-700),
-    base: color.$blue-600,
+    text: var(--color-blue-700),
+    base: colors.$blue-600,
   ),
 );
 
@@ -87,7 +83,7 @@ $colors: (
 
   > :first-child {
     flex-grow: 1;
-    border-right: 1px solid sass-color.scale(color.$gray-100, $alpha: -85%);
+    border-right: 1px solid sass-color.scale(colors.$gray-100, $alpha: -85%);
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
   }

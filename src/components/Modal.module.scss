@@ -14,7 +14,7 @@
   max-width: var(--content-width);
   border-radius: var(--rounded-lg);
   margin: auto;
-  background-color: var(--dynamic-gray-150);
+  background-color: var(--color-gray-150);
   color: var(--theme-text-body);
 
   &[open] { animation: dialogOpen 150ms; }
@@ -48,11 +48,11 @@
       background-color: transparent;
 
       &-thumb {
-        border: 0.25rem solid var(--dynamic-gray-150);
+        border: 0.25rem solid var(--color-gray-150);
         border-radius: var(--rounded-full);
-        background-color: var(--dynamic-gray-500);
+        background-color: var(--color-gray-500);
 
-        &:hover { background-color: var(--dynamic-gray-600); }
+        &:hover { background-color: var(--color-gray-600); }
       }
     }
   }

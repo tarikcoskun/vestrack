@@ -1,11 +1,11 @@
-@use "@/styles/color";
+@use "@/styles/colors";
 @import "@/styles/media";
 
 .footer {
   width: 100%;
   margin-top: auto;
-  background-color: color.$gray-900;
-  color: color.$gray-300;
+  background-color: colors.$gray-900;
+  color: colors.$gray-300;
 
   .footerContent {
     --grid-cols: 2;
@@ -27,13 +27,13 @@
         grid-column: span 2 / span 2;
 
         .brandLogo {
-          color: color.$gray-100;
+          color: colors.$gray-100;
           font-size: 1.25rem;
           font-weight: 500;
         }
       }
 
-      .categoryTitle { color: color.$gray-100; }
+      .categoryTitle { color: colors.$gray-100; }
       .categoryLinks {
         display: flex;
         flex-direction: column;
@@ -49,7 +49,7 @@
     }
 
     .footerCopyright {
-      border-top: 1px solid color.$gray-800;
+      border-top: 1px solid colors.$gray-800;
       grid-column: 1 / -1;
       padding-block: 1.5rem;
     }

@@ -50,7 +50,7 @@ export function FeaturedCard(props: FeaturedCardProps) {
           }}
         />
         <div className={cx("mediaRating")}>
-          <Icon icon="star" variant="fill" className={cx("ratingIcon")} />
+          <Icon icon="star" variant="fill" style={{ color: "var(--color-yellow)" }} />
           <span>{media.vote_average.toFixed(1).replace(".0", "")}</span>
         </div>
         <Link href={`/movie/${media.id}`}>
@@ -77,9 +77,8 @@ export function FeaturedCard(props: FeaturedCardProps) {
 export function FeaturedCardSkeleton() {
   return (
     <div style={{ display: "flex", alignItems: "center" }}>
-      <Skeleton style={{ width: "25%", aspectRatio: "2/3", backgroundColor: "var(--dynamic-gray-200)", flexShrink: "0" }} />
+      <Skeleton style={{ width: "25%", aspectRatio: "2/3", flexShrink: "0" }} />
       <div style={{
-        backgroundColor: "var(--dynamic-gray-150)",
         width: "100%",
         height: "calc(100% - 1rem)",
         padding: "1.5rem",

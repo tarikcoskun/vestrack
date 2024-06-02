@@ -1,6 +1,6 @@
 @use "sass:color" as sass-color;
 @use "@/styles/util";
-@use "@/styles/color";
+@use "@/styles/colors";
 @import "@/styles/media";
 
 .header {
@@ -24,16 +24,16 @@
     .mediaHeader {
       .mediaTitle {
         @include media(">md") {
-          color: color.$gray-100;
+          color: colors.$gray-100;
           text-shadow: 0 0 8px rgb(0 0 0 / 0.5);
         }
       }
 
       .mediaDetailList {
-        @include media(">md") { color: sass-color.scale(color.$gray-100, $alpha: -25%); }
+        @include media(">md") { color: sass-color.scale(colors.$gray-100, $alpha: -25%); }
 
         .mediaDetailItem header h3 {
-          @include media(">md") { color: color.$gray-100; }
+          @include media(">md") { color: colors.$gray-100; }
         }
       }
     }
@@ -46,7 +46,7 @@
     right: 0;
     left: 0;
     height: inherit;
-    background-color: var(--dynamic-gray-150);
+    background-color: var(--color-gray-150);
     background-position: left 10%;
     background-size: cover;
     @include media("<md") { display: none; }
@@ -58,7 +58,7 @@
     flex-shrink: 0;
     border-radius: var(--rounded-base);
     aspect-ratio: 2/3;
-    background-color: var(--dynamic-gray-150);
+    background-color: var(--color-gray-150);
     @include media(">md") { display: none; }
   }
 

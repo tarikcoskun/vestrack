@@ -1,11 +1,11 @@
-@use "@/styles/color";
+@use "@/styles/colors";
 @import "@/styles/media";
 
 .navbar {
   width: 100%;
   height: var(--content-nav-height);
-  background-color: color.$gray-900;
-  color: color.$gray-300;
+  background-color: colors.$gray-900;
+  color: colors.$gray-300;
 
   .navbarContent {
     position: relative;
@@ -18,7 +18,7 @@
     margin-inline: auto;
 
     .brandLogo {
-      color: color.$gray-100;
+      color: colors.$gray-100;
       font-size: 1.25rem;
       font-weight: 500;
     }
@@ -31,7 +31,7 @@
         right: calc(var(--content-spacing) * -1);
         left: calc(var(--content-spacing) * -1);
         height: 100vh;
-        background-color: color.$gray-950;
+        background-color: colors.$gray-950;
         opacity: 0;
         pointer-events: none;
 

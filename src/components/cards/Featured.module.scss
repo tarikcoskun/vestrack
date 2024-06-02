@@ -20,7 +20,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: var(--dynamic-gray-400);
+        color: var(--color-gray-400);
       }
 
       .mediaPoster,
@@ -29,7 +29,7 @@
         height: 100%;
         border-radius: var(--rounded-base);
         aspect-ratio: 2/3;
-        background-color: var(--dynamic-gray-150);
+        background-color: var(--color-gray-150);
         outline: 1px solid var(--theme-outline);
         transition: scale 150ms;
 
@@ -48,9 +48,9 @@
       border: 1px solid var(--theme-outline);
       border-radius: 0 var(--rounded-base) var(--rounded-base) 0;
       border-left: 0;
-      background-image: linear-gradient(rgb(255 255 255 / 0.5), var(--dynamic-gray-100));
+      background-image: linear-gradient(rgb(255 255 255 / 0.5), var(--color-gray-100));
       gap: 1rem;
-      @media (prefers-color-scheme: dark) { background-image: linear-gradient(rgb(0 0 0 / 0.5), var(--dynamic-gray-100)); }
+      @media (prefers-color-scheme: dark) { background-image: linear-gradient(rgb(0 0 0 / 0.5), var(--color-gray-100)); }
 
       .backdrop {
         position: absolute;
@@ -66,8 +66,6 @@
         align-items: center;
         color: var(--theme-text-title);
         gap: 0.5rem;
-
-        .ratingIcon { color: var(--dynamic-yellow-600); }
       }
 
       .mediaTitle {

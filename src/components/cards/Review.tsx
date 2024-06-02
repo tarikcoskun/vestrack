@@ -26,7 +26,7 @@ export function ReviewCard(props: ReviewCardProps) {
     >
       <header className={cx("reviewHeader")}>
         <div className={cx("reviewRating")}>
-          <Icon icon="star" variant="fill" className={cx("ratingIcon")} />
+          <Icon icon="star" variant="fill" style={{ color: "var(--color-yellow)" }} />
           <span>
             <span className={cx("ratingAmount")}>
               {review.author_details.rating?.toFixed(1).replace(".0", "")}

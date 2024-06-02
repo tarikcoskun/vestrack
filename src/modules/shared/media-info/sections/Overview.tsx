@@ -44,7 +44,7 @@ export function MediaInfoOverview({ data }: { data: MovieInfo & SeriesInfo | nul
               </div>
               )
           : (
-            <Skeleton style={{ width: "100%", height: "100%", backgroundColor: "var(--dynamic-gray-300)" }} />
+            <Skeleton style={{ width: "100%", height: "100%", backgroundColor: "var(--color-gray-200)" }} />
             )}
         {!trailerUrl.includes("undefined") && (
           <div className={cx("mediaTrailer")} style={{ backgroundImage: `url(${posterBlurUrl})` }}>

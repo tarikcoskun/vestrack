@@ -48,7 +48,7 @@ interface SkeletonParagraphProps extends SkeletonProps {
 }
 
 function SkeletonParagraph(props: SkeletonParagraphProps) {
-  const { lines, width, height } = props;
+  const { lines, width, height, style } = props;
   const arr = Array(Number(lines)).fill("");
 
   return (
@@ -60,7 +60,7 @@ function SkeletonParagraph(props: SkeletonParagraphProps) {
         <SkeletonRoot
           key={idx}
           width={idx === Number(lines) - 1 ? (Number(width) * 2) / 3 : width}
-          style={{ width: idx === Number(lines) - 1 ? "70%" : "" }}
+          style={{ width: idx === Number(lines) - 1 ? "70%" : "", ...style }}
         />
       ))}
     </div>
