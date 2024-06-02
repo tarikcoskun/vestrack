@@ -60,6 +60,7 @@ function SkeletonParagraph(props: SkeletonParagraphProps) {
         <SkeletonRoot
           key={idx}
           width={idx === Number(lines) - 1 ? (Number(width) * 2) / 3 : width}
+          style={{ width: idx === Number(lines) - 1 ? "70%" : "" }}
         />
       ))}
     </div>

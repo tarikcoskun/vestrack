@@ -5,8 +5,8 @@ import { notifyError } from "@/util/notifyError";
 import { getHomeData } from "../shared/home/getHomeData";
 
 // Components
-import { MediaCard } from "@/components/cards/Media";
-import { FeaturedCard } from "@/components/cards/Featured";
+import { MediaCard, MediaCardSkeleton } from "@/components/cards/Media";
+import { FeaturedCard, FeaturedCardSkeleton } from "@/components/cards/Featured";
 
 // Styles
 import style from "./MoviesHomePage.module.scss";
@@ -33,31 +33,30 @@ export function MoviesPage() {
 
   return (
     <main className={cx("moviesPage")}>
-      {data
-        ? (
-          <>
-            <section className={cx("discoveryContainer")}>
-              <h1>Watch Next</h1>
-              <div className={cx("discoveryList")}>
-                {data.discovery.slice(0, 2).map((movie) => (
-                  <FeaturedCard key={movie.id} media={movie} type="movie" />
-                ))}
-              </div>
-            </section>
-
-            <section className={cx("trendingContainer")}>
-              <h1>Trending Movies</h1>
-              <div className={cx("trendingList")}>
-                {data.trending.map((movie) => (
-                  <MediaCard key={movie.id} media={movie as Result} type="movie" />
-                ))}
-              </div>
-            </section>
-          </>
-          )
-        : (
-          <div>Loading...</div>
-          )}
+      <section className={cx("discoveryContainer")}>
+        <h1>Watch Next</h1>
+        <div className={cx("discoveryList")}>
+          {data
+            ? data.discovery.slice(0, 2).map((movie) => (
+              <FeaturedCard key={movie.id} media={movie} type="movie" />
+            ))
+            : Array(2).fill(0).map((_, idx) => (
+              <FeaturedCardSkeleton key={idx} />
+            ))}
+        </div>
+      </section>
+      <section className={cx("trendingContainer")}>
+        <h1>Trending Movies</h1>
+        <div className={cx("trendingList")}>
+          {data
+            ? data.trending.map((movie) => (
+              <MediaCard key={movie.id} media={movie as Result} type="movie" />
+            ))
+            : Array(12).fill(0).map((_, idx) => (
+              <MediaCardSkeleton key={idx} />
+            ))}
+        </div>
+      </section>
     </main>
   );
 }

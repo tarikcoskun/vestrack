@@ -23,7 +23,7 @@ const ScrollerContext = createContext({} as ScrollerValue);
 
 function ScrollerProvider({ itemsPerScroll, children }: React.PropsWithChildren<{ itemsPerScroll: number }>) {
   const trackRef = useRef<HTMLUListElement>(null);
-  const [scrollPosition, setScrollPosition] = useState<ScrollPosition>("start");
+  const [scrollPosition, setScrollPosition] = useState<ScrollPosition>("no-scroll");
   const initialState = { trackRef, itemsPerScroll, scrollPosition, setScrollPosition };
 
   return (
@@ -79,12 +79,14 @@ const ScrollerTrack = forwardRef<HTMLUListElement, ScrollerTrackProps>((props, f
     };
 
     listener();
-    scroller.addEventListener("scroll", listener);
     window.addEventListener("resize", listener);
+    scroller.addEventListener("DOMNodeInserted", listener);
+    scroller.addEventListener("scroll", listener);
 
     return () => {
-      scroller.removeEventListener("scroll", listener);
       window.removeEventListener("resize", listener);
+      scroller.removeEventListener("DOMNodeInserted", listener);
+      scroller.removeEventListener("scroll", listener);
     };
   }, []);
 

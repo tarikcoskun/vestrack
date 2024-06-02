@@ -16,7 +16,7 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(style);
 
-export function MediaInfoCast({ data }: { data: MovieInfo & SeriesInfo }) {
+export function MediaInfoCast({ data }: { data: MovieInfo & SeriesInfo | null }) {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
@@ -49,35 +49,45 @@ export function MediaInfoCast({ data }: { data: MovieInfo & SeriesInfo }) {
         </header>
 
         <Scroller.Track className={cx("castList")}>
-          {data.credits.cast
-            .sort((a, b) => a.order! - b.order!)
-            .slice(0, 14)
-            .map((person) => (
-              <article key={person.id} className={cx("person")}>
-                <Link href={`/person/${person.id}`} className={cx("photoLink")}>
-                  {person.profile_path
-                    ? (
-                      <img
-                        src={`https://image.tmdb.org/t/p/w342${person.profile_path}`}
-                        alt={person.name}
-                        className={cx("personPhoto")}
-                      />
-                      )
-                    : (
-                      <div className={cx("personInitials")}>
-                        {person.name
-                          ?.split(/\s/)
-                          .slice(0, 2)
-                          .map((word) => word.slice(0, 1))}
-                      </div>
-                      )}
-                </Link>
-                <Link href={`/person/${person.id}`} className={cx("personName")}>
-                  <span title={person.name}>{person.name}</span>
-                </Link>
-                <div className={cx("personCharacter")}>{person.character}</div>
-              </article>
-            ))}
+          {data
+            ? data.credits.cast
+              .sort((a, b) => a.order! - b.order!)
+              .slice(0, 14)
+              .map((person) => (
+                <article key={person.id} className={cx("person")}>
+                  <Link href={`/person/${person.id}`} className={cx("photoLink")}>
+                    {person.profile_path
+                      ? (
+                        <img
+                          src={`https://image.tmdb.org/t/p/w342${person.profile_path}`}
+                          alt={person.name}
+                          className={cx("personPhoto")}
+                        />
+                        )
+                      : (
+                        <div className={cx("personInitials")}>
+                          {person.name
+                            ?.split(/\s/)
+                            .slice(0, 2)
+                            .map((word) => word.slice(0, 1))}
+                        </div>
+                        )}
+                  </Link>
+                  <Link href={`/person/${person.id}`} className={cx("personName")}>
+                    <span title={person.name}>{person.name}</span>
+                  </Link>
+                  <div className={cx("personCharacter")}>{person.character}</div>
+                </article>
+              ))
+            : Array(6)
+              .fill(0)
+              .map((_, idx) => (
+                <div key={idx} style={{ height: "261.7px" }}>
+                  <Skeleton style={{ width: "100%", aspectRatio: "4/5" }} />
+                  <Skeleton width={140} height={18.11} type="text" style={{ marginTop: "1rem" }} />
+                  <Skeleton width={100} height={16.09} type="text" style={{ marginTop: "0.5rem" }} />
+                </div>
+              ))}
         </Scroller.Track>
       </Scroller>
 
@@ -90,7 +100,7 @@ export function MediaInfoCast({ data }: { data: MovieInfo & SeriesInfo }) {
     const modalScrollRef = useRef<HTMLDivElement>(null);
     const [activeId, setActiveId] = useState("Cast");
 
-    const fullCastCrew = [...data.credits.cast, ...data.credits.crew];
+    const fullCastCrew = [...(data?.credits.cast || []), ...(data?.credits.crew || [])];
     const groupedList = fullCastCrew.reduce(
       (obj: { [key: string]: (Cast & { titles: string[] })[] }, curr) => {
         const title = curr.job ? curr.known_for_department : "Cast";
@@ -121,7 +131,9 @@ export function MediaInfoCast({ data }: { data: MovieInfo & SeriesInfo }) {
       const isBetween = (value: number, floor: number, ceil: number) =>
         value >= floor && value <= ceil;
 
-      const el = modalScrollRef.current!;
+      const el = modalScrollRef.current;
+      if (!el)
+        return;
 
       const listener = () => {
         const scroll = el.scrollTop;
@@ -229,29 +241,4 @@ export function MediaInfoCast({ data }: { data: MovieInfo & SeriesInfo }) {
       </MediaInfoModal>
     );
   }
-}
-
-export function MediaInfoCastSkeleton() {
-  return (
-    <section id="cast" className={cx("castSkeleton")}>
-      <header style={{ height: "36px" }}>
-        <Skeleton width={120} height={28.17} />
-      </header>
-      <div className={cx("castList")}>
-        {Array(6)
-          .fill(0)
-          .map((_, idx) => (
-            <div key={idx} className={cx("person")}>
-              <Skeleton
-                width={152.33}
-                height={190.41}
-                style={{ marginBottom: "0.5rem" }}
-              />
-              <Skeleton width={140} height={18.11} type="text" />
-              <Skeleton width={100} height={16.09} type="text" />
-            </div>
-          ))}
-      </div>
-    </section>
-  );
 }

@@ -20,27 +20,31 @@ const emojiFont = Noto_Color_Emoji({
 
 const cx = classNames.bind(style);
 
-export function MediaInfoOverview({ data }: { data: MovieInfo & SeriesInfo }) {
-  const posterUrl = TMDB_IMAGE_BASE_POSTER + data.poster_path;
-  const posterBlurUrl = TMDB_IMAGE_BASE_POSTER_BLUR + data.poster_path;
-  const trailerUrl = `https://youtu.be/${data.videos.results.find((video) => video.type === "Trailer")?.key}`;
+export function MediaInfoOverview({ data }: { data: MovieInfo & SeriesInfo | null }) {
+  const posterUrl = TMDB_IMAGE_BASE_POSTER + data?.poster_path;
+  const posterBlurUrl = TMDB_IMAGE_BASE_POSTER_BLUR + data?.poster_path;
+  const trailerUrl = `https://youtu.be/${data?.videos.results.find((video) => video.type === "Trailer")?.key}`;
 
   return (
     <section id="overview" className={cx("overview")}>
       <div className={cx("columnLeft")}>
-        {data.poster_path
-          ? (
-            <img
-              src={posterUrl}
-              alt={data.title}
-              draggable="false"
-              className={cx("mediaPoster")}
-            />
-            )
+        {data
+          ? data.poster_path
+            ? (
+              <img
+                src={posterUrl}
+                alt={data.title}
+                draggable="false"
+                className={cx("mediaPoster")}
+              />
+              )
+            : (
+              <div className={cx("mediaPosterFallback")}>
+                <Icon icon="image" size={96} />
+              </div>
+              )
           : (
-            <div className={cx("mediaPosterFallback")}>
-              <Icon icon="image" size={96} />
-            </div>
+            <Skeleton style={{ width: "100%", height: "100%", backgroundColor: "var(--dynamic-gray-300)" }} />
             )}
         {!trailerUrl.includes("undefined") && (
           <div className={cx("mediaTrailer")} style={{ backgroundImage: `url(${posterBlurUrl})` }}>
@@ -63,48 +67,72 @@ export function MediaInfoOverview({ data }: { data: MovieInfo & SeriesInfo }) {
       </div>
       <div className={cx("columnRight")}>
         <section className={cx("overviewInfo")}>
-          <div className={cx("metadataList")}>
-            {data.created_by?.length
-              ? (
+          {data
+            ? (
+              <div className={cx("metadataList")}>
+                {data.created_by?.length
+                  ? (
+                    <CrewGroup
+                      title="Creator"
+                      people={data?.created_by}
+                    />
+                    )
+                  : (
+                    <CrewGroup
+                      title="Director"
+                      people={data?.credits.crew.filter(
+                        (person) => person.job === "Director",
+                      )}
+                    />
+                    )}
                 <CrewGroup
-                  title="Creator"
-                  people={data.created_by}
-                />
-                )
-              : (
-                <CrewGroup
-                  title="Director"
+                  title="Writer"
                   people={data.credits.crew.filter(
-                    (person) => person.job === "Director",
+                    (person) => person.department === "Writing",
                   )}
                 />
-                )}
-            <CrewGroup
-              title="Writer"
-              people={data.credits.crew.filter(
-                (person) => person.department === "Writing",
+                <div className={cx("metadataItem", "genres")}>
+                  <span className={cx("title")}>
+                    {`Genre${data.genres.length > 1 ? "s" : ""}`}
+                  </span>
+                  <ul className={cx("dataGroup")}>
+                    {data.genres
+                      .sort((a, b) => (a.name > b.name ? 1 : -1)).map((genre) => (
+                        <li key={genre.id} className={cx("person")}>
+                          <Button key={genre.name} as={Link} href={`/genre/${slugify(genre.name)}`} color="gray" variant="soft" size="sm" rounded="full" className={cx("mediaGenre")}>
+                            <span style={{ fontFamily: emojiFont.style.fontFamily }}>{getGenreEmoji(slugify(genre.name))}</span> {genre.name}
+                          </Button>
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+              </div>
+              )
+            : (
+              <div className={cx("metadataList")}>
+                <Skeleton width={180} height={21} />
+                <Skeleton width={320} height={21} />
+                <Skeleton width={280} height={30.08} />
+              </div>
               )}
-            />
-            <div className={cx("metadataItem", "genres")}>
-              <span className={cx("title")}>
-                {`Genre${data.genres.length > 1 ? "s" : ""}`}
-              </span>
-              <ul className={cx("dataGroup")}>
-                {data.genres
-                  .sort((a, b) => (a.name > b.name ? 1 : -1)).map((genre) => (
-                    <li key={genre.id} className={cx("person")}>
-                      <Button key={genre.name} as={Link} href={`/genre/${slugify(genre.name)}`} color="gray" variant="soft" size="sm" rounded="full" className={cx("mediaGenre")}>
-                        <span style={{ fontFamily: emojiFont.style.fontFamily }}>{getGenreEmoji(slugify(genre.name))}</span> {genre.name}
-                      </Button>
-                    </li>
-                  ))}
-              </ul>
-            </div>
-          </div>
-          <div className={cx("overviewText")}>
-            {data.tagline && <div className={cx("tagline")}>{data.tagline}</div>}
-            <p>{data.overview}</p>
-          </div>
+          {data
+            ? (
+              <div className={cx("overviewText")}>
+                {data?.tagline && <div className={cx("tagline")}>{data?.tagline}</div>}
+                <p>{data?.overview}</p>
+              </div>
+              )
+            : (
+              <div className={cx("overviewText")}>
+                <Skeleton width={200} height={16.09} type="text" />
+                <Skeleton.Paragraph
+                  id="mediaOverview"
+                  style={{ maxWidth: "706px", width: "100%" }}
+                  height={68.25}
+                  lines={3}
+                />
+              </div>
+              )}
         </section>
       </div>
     </section>
@@ -119,7 +147,7 @@ interface CrewGroupProps {
 function CrewGroup(props: CrewGroupProps) {
   const { title, people } = props;
 
-  const filteredPeople = people.reduce((arr: Cast[], curr) => {
+  const filteredPeople = (people || []).reduce((arr: Cast[], curr) => {
     if (!arr.map((person) => person.name).includes(curr.name))
       arr.push(curr);
     return arr;
@@ -141,44 +169,5 @@ function CrewGroup(props: CrewGroupProps) {
         ))}
       </ul>
     </div>
-  );
-}
-
-export function MediaInfoOverviewSkeleton() {
-  return (
-    <section
-      id="overview"
-      className={cx("overviewSkeleton")}
-    >
-      <Skeleton id="mediaPoster" className={cx("columnLeft", "posterSkeleton")} />
-      <div className={cx("columnRight")}>
-        <div className={cx("overviewInfo")}>
-          <div className={cx("metadataList")}>
-            <Skeleton
-              id="metadataItem"
-              width={180}
-              height={21}
-            />
-            <Skeleton
-              id="metadataItem"
-              width={320}
-              height={21}
-            />
-            <Skeleton
-              id="metadataItem"
-              width={280}
-              height={30.08}
-            />
-          </div>
-
-          <Skeleton.Paragraph
-            id="mediaOverview"
-            style={{ maxWidth: "706px", width: "100%" }}
-            height={94.5}
-            lines={4}
-          />
-        </div>
-      </div>
-    </section>
   );
 }

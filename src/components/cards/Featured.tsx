@@ -5,6 +5,7 @@ import { TMDB_IMAGE_BASE_BACKDROP, TMDB_IMAGE_BASE_POSTER } from "@/constants/im
 import Link from "next/link";
 import { Icon } from "@/components/Icon";
 import { Button } from "@/components/Button";
+import { Skeleton } from "../Skeleton";
 
 // Styles
 import style from "./Featured.module.scss";
@@ -70,5 +71,27 @@ export function FeaturedCard(props: FeaturedCardProps) {
           </div> */}
       </div>
     </article>
+  );
+}
+
+export function FeaturedCardSkeleton() {
+  return (
+    <div style={{ display: "flex", alignItems: "center" }}>
+      <Skeleton style={{ width: "25%", aspectRatio: "2/3", backgroundColor: "var(--dynamic-gray-200)", flexShrink: "0" }} />
+      <div style={{
+        backgroundColor: "var(--dynamic-gray-150)",
+        width: "100%",
+        height: "calc(100% - 1rem)",
+        padding: "1.5rem",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-end",
+        borderRadius: "0 var(--rounded-lg) var(--rounded-lg) 0",
+      }}
+      >
+        <Skeleton height={25} width={250} type="text" style={{ marginBottom: "1rem" }} />
+        <Skeleton.Paragraph height={70.88} lines={3} type="text" />
+      </div>
+    </div>
   );
 }

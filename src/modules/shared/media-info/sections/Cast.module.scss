@@ -150,21 +150,3 @@
     }
   }
 }
-
-.castSkeleton {
-  composes: cast;
-  overflow: hidden;
-  max-width: 1048px;
-
-  .castList {
-    display: flex;
-    gap: var(--content-spacing);
-
-    .person {
-      height: 265.2px;
-      flex-direction: column;
-      flex-shrink: 0;
-      gap: 0.5rem;
-    }
-  }
-}

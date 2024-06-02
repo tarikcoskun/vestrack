@@ -21,20 +21,3 @@
     }
   }
 }
-
-.videosSkeleton {
-  composes: videos;
-  overflow: hidden;
-  max-width: 1048px;
-
-  .videoList {
-    display: flex;
-
-    .video {
-      display: flex;
-      height: 235.2px;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-  }
-}

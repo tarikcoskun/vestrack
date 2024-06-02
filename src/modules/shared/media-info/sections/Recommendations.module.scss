@@ -5,22 +5,4 @@
   flex-direction: column;
   gap: 1.5rem;
   padding-block: var(--section-spacing);
-
-}
-
-.recommendationsSkeleton {
-  composes: recommendations;
-  overflow: hidden;
-  max-width: 1048px;
-
-  .recommendationList {
-    display: flex;
-
-    .mediaCard {
-      display: flex;
-      height: 358.3px;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-  }
 }

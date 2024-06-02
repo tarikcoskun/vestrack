@@ -4,6 +4,7 @@ import { TMDB_IMAGE_BASE_POSTER } from "@/constants/image";
 // Components
 import Link from "next/link";
 import { Icon } from "../Icon";
+import { Skeleton } from "../Skeleton";
 
 // Styles
 import style from "./Media.module.scss";
@@ -55,5 +56,15 @@ export function MediaCard(props: MediaCardProps) {
         </div>
       </div>
     </article>
+  );
+}
+
+export function MediaCardSkeleton() {
+  return (
+    <div>
+      <Skeleton style={{ width: "100%", aspectRatio: "2/3" }} />
+      <Skeleton width={140} height={18.11} type="text" style={{ marginTop: "1rem" }} />
+      <Skeleton width={100} height={16.09} type="text" style={{ marginTop: "0.5rem" }} />
+    </div>
   );
 }

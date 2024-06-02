@@ -15,7 +15,7 @@ import { ReviewCard } from "@/components/cards/Review";
 
 const cx = classNames.bind(style);
 
-export function MediaInfoReviews({ data }: { data: MovieInfo & SeriesInfo }) {
+export function MediaInfoReviews({ data }: { data: MovieInfo & SeriesInfo | null }) {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
@@ -39,9 +39,15 @@ export function MediaInfoReviews({ data }: { data: MovieInfo & SeriesInfo }) {
       </header>
 
       <div className={cx("reviewList")}>
-        {data.reviews.results.slice(0, 1).map((review) => (
-          <ReviewCard key={review.id} review={review} lineClamp />
-        ))}
+        {data
+          ? data?.reviews.results.slice(0, 1).map((review) => (
+            <ReviewCard key={review.id} review={review} lineClamp />
+          ))
+          : (
+            <div className={cx("review")}>
+              <Skeleton height={196.69} />
+            </div>
+            )}
       </div>
 
       <FullReviewsModal />
@@ -57,7 +63,7 @@ export function MediaInfoReviews({ data }: { data: MovieInfo & SeriesInfo }) {
         description="User Reviews"
       >
         <div className={cx("fullReviewList")}>
-          {data.reviews.results.map((review) => (
+          {data?.reviews.results.map((review) => (
             <ReviewCard
               key={review.id}
               review={review}
@@ -68,22 +74,4 @@ export function MediaInfoReviews({ data }: { data: MovieInfo & SeriesInfo }) {
       </MediaInfoModal>
     );
   }
-}
-
-export function MediaInfoReviewsSkeleton() {
-  return (
-    <section
-      id="reviews"
-      className={cx("reviewsSkeleton")}
-    >
-      <header style={{ height: "36px" }}>
-        <Skeleton width={160} height={28.17} />
-      </header>
-      <div className={cx("reviewList")}>
-        <div className={cx("review")}>
-          <Skeleton height={196.69} />
-        </div>
-      </div>
-    </section>
-  );
 }

@@ -4,7 +4,7 @@
 .skeleton {
   background-color: sass-color.scale(color.$gray-500, $alpha: -85%);
 
-  &.roundedBase { border-radius: var(--rounded-sm); }
+  &.roundedBase { border-radius: var(--rounded-base); }
   &.roundedFull { border-radius: var(--rounded-full); }
 }
 

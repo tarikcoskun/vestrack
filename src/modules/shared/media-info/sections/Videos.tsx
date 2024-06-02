@@ -16,7 +16,7 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(style);
 
-export function MediaInfoVideos({ data }: { data: MovieInfo & SeriesInfo }) {
+export function MediaInfoVideos({ data }: { data: MovieInfo & SeriesInfo | null }) {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
@@ -49,16 +49,22 @@ export function MediaInfoVideos({ data }: { data: MovieInfo & SeriesInfo }) {
         </header>
 
         <Scroller.Track className={cx("videoList")}>
-          {data.videos.results
-            .sort(
-              (a, b) =>
-                new Date(b.published_at).getTime()
-                  - new Date(a.published_at).getTime(),
-            )
-            .slice(0, 8)
-            .map((video) => (
-              <VideoCard key={video.id} video={video} />
-            ))}
+          {data
+            ? data.videos.results
+              .sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime())
+              .slice(0, 8)
+              .map((video) => (
+                <VideoCard key={video.id} video={video} />
+              ))
+            : Array(3)
+              .fill(0)
+              .map((_, idx) => (
+                <div key={idx} style={{ height: "240.06px" }}>
+                  <Skeleton style={{ width: "100%", aspectRatio: "16/9" }} />
+                  <Skeleton width={220} height={18.11} type="text" style={{ marginTop: "1rem" }} />
+                  <Skeleton width={100} height={16.09} type="text" style={{ marginTop: "0.5rem" }} />
+                </div>
+              ))}
         </Scroller.Track>
       </Scroller>
 
@@ -75,12 +81,8 @@ export function MediaInfoVideos({ data }: { data: MovieInfo & SeriesInfo }) {
         description="Videos"
       >
         <div className={cx("fullVideoList")}>
-          {data.videos.results
-            .sort(
-              (a, b) =>
-                new Date(b.published_at).getTime()
-                  - new Date(a.published_at).getTime(),
-            )
+          {data?.videos.results
+            .sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime())
             .map((video) => (
               <VideoCard key={video.id} video={video} className={cx("video")} />
             ))}
@@ -88,29 +90,4 @@ export function MediaInfoVideos({ data }: { data: MovieInfo & SeriesInfo }) {
       </MediaInfoModal>
     );
   }
-}
-
-export function MediaInfoVideosSkeleton() {
-  return (
-    <section id="videos" className={cx("videosSkeleton")}>
-      <header style={{ height: "36px" }}>
-        <Skeleton width={100} height={28.17} />
-      </header>
-      <div className={cx("videoList")}>
-        {Array(6)
-          .fill(0)
-          .map((_, idx) => (
-            <div key={idx} className={cx("video")}>
-              <Skeleton
-                width={320}
-                height={180}
-                style={{ marginBottom: "0.5rem" }}
-              />
-              <Skeleton width={200} height={18.11} type="text" />
-              <Skeleton width={80} height={16.09} type="text" />
-            </div>
-          ))}
-      </div>
-    </section>
-  );
 }
