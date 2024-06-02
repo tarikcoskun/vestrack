@@ -128,10 +128,9 @@ export function MediaInfoCast({ data }: { data: MovieInfo & SeriesInfo | null })
     useEffect(() => {
       const offset = 248;
       const clamp = (value: number) => Math.max(0, value);
-      const isBetween = (value: number, floor: number, ceil: number) =>
-        value >= floor && value <= ceil;
-
+      const isBetween = (value: number, floor: number, ceil: number) => value >= floor && value <= ceil;
       const el = modalScrollRef.current;
+
       if (!el)
         return;
 
