@@ -18,41 +18,43 @@ const cx = classNames.bind(style);
 export function MediaInfoReviews({ data }: { data: MovieInfo & SeriesInfo | null }) {
   const [modalOpen, setModalOpen] = useState(false);
 
-  return (
-    <section id="reviews" className={cx("reviews")}>
-      <header>
-        <h1>
-          User Reviews
-          <Button
-            color="gray"
-            variant="ghost"
-            padding="square"
-            rounded="full"
-            aria-label="See all"
-            onClick={() => {
-              setModalOpen(true);
-            }}
-          >
-            <Icon icon="arrow-right" size={20} />
-          </Button>
-        </h1>
-      </header>
+  return data === null || data.reviews.total_results > 0
+    ? (
+      <section id="reviews" className={cx("reviews")}>
+        <header>
+          <h1>
+            User Reviews
+            <Button
+              color="gray"
+              variant="ghost"
+              padding="square"
+              rounded="full"
+              aria-label="See all"
+              onClick={() => {
+                setModalOpen(true);
+              }}
+            >
+              <Icon icon="arrow-right" size={20} />
+            </Button>
+          </h1>
+        </header>
 
-      <div className={cx("reviewList")}>
-        {data
-          ? data?.reviews.results.slice(0, 1).map((review) => (
-            <ReviewCard key={review.id} review={review} lineClamp />
-          ))
-          : (
-            <div className={cx("review")}>
-              <Skeleton height={196.69} />
-            </div>
-            )}
-      </div>
+        <div className={cx("reviewList")}>
+          {data
+            ? data?.reviews.results.slice(0, 1).map((review) => (
+              <ReviewCard key={review.id} review={review} lineClamp />
+            ))
+            : (
+              <div className={cx("review")}>
+                <Skeleton height={196.69} />
+              </div>
+              )}
+        </div>
 
-      <FullReviewsModal />
-    </section>
-  );
+        <FullReviewsModal />
+      </section>
+      )
+    : null;
 
   function FullReviewsModal() {
     return (

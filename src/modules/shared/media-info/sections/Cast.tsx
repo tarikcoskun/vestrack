@@ -82,7 +82,7 @@ export function MediaInfoCast({ data }: { data: MovieInfo & SeriesInfo | null })
             : Array(6)
               .fill(0)
               .map((_, idx) => (
-                <div key={idx} style={{ height: "261.7px" }}>
+                <div key={idx}>
                   <Skeleton style={{ width: "100%", aspectRatio: "4/5" }} />
                   <Skeleton width={140} height={18.11} type="text" style={{ marginTop: "1rem" }} />
                   <Skeleton width={100} height={16.09} type="text" style={{ marginTop: "0.5rem" }} />
