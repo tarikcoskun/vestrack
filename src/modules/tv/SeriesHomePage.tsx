@@ -37,8 +37,8 @@ export function SeriesPage() {
         <h1>Watch Next</h1>
         <div className={cx("discoveryList")}>
           {data
-            ? data.discovery.slice(0, 2).map((movie) => (
-              <FeaturedCard key={movie.id} media={movie} type="movie" />
+            ? data.discovery.slice(0, 2).map((media) => (
+              <FeaturedCard key={media.id} media={media} type="tv" />
             ))
             : Array(2).fill(0).map((_, idx) => (
               <FeaturedCardSkeleton key={idx} />
@@ -49,8 +49,8 @@ export function SeriesPage() {
         <h1>Trending Series</h1>
         <div className={cx("trendingList")}>
           {data
-            ? data.trending.map((movie) => (
-              <MediaCard key={movie.id} media={movie as Result} type="movie" />
+            ? data.trending.map((media) => (
+              <MediaCard key={media.id} media={media as Result} type="tv" />
             ))
             : Array(12).fill(0).map((_, idx) => (
               <MediaCardSkeleton key={idx} />
