@@ -12,10 +12,10 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(style);
 
 export function MediaInfoRecommendations({ data }: { data: MovieInfo & SeriesInfo | null }) {
-  return data === null || data.recommendations.total_results > 0
+  return data === null || data?.recommendations.total_results > 0
     ? (
       <section id="recommendations" className={cx("recommendations")}>
-        <Scroller itemsPerScroll={5}>
+        <Scroller columns={5}>
           <header>
             <h1>Recommendations</h1>
             <div className="scrollerControls">

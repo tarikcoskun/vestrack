@@ -52,7 +52,16 @@
     @include media("<md") { display: none; }
   }
 
-  .mediaPoster {
+  .mediaPosterFallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-gray-400);
+  }
+
+  .mediaPoster,
+  .mediaPosterFallback,
+  .mediaPosterSkeleton {
     width: clamp(120px, 50%, 200px);
     height: 100%;
     flex-shrink: 0;

@@ -21,7 +21,7 @@ export function MediaInfoCast({ data }: { data: MovieInfo & SeriesInfo | null })
 
   return (
     <section id="cast" className={cx("cast")}>
-      <Scroller itemsPerScroll={6}>
+      <Scroller columns={6}>
         <header>
           <h1>
             Cast & Crew

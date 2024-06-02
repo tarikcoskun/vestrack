@@ -18,7 +18,24 @@ export function MediaInfoHeader({ data }: { data: MovieInfo & SeriesInfo | null 
   return (
     <header id="header" className={cx("header")} data-backdrop={Boolean(data?.backdrop_path)}>
       <div className={cx("mediaBackdrop")} style={{ backgroundImage: `url(${backdropUrl})` }} />
-      <img src={posterUrl} alt={data?.title} className={cx("mediaPoster")} />
+      {data
+        ? data.poster_path
+          ? (
+            <img
+              src={posterUrl}
+              alt={data.title}
+              draggable="false"
+              className={cx("mediaPoster")}
+            />
+            )
+          : (
+            <div className={cx("mediaPosterFallback")}>
+              <Icon icon="image" size={64} />
+            </div>
+            )
+        : (
+          <Skeleton className={cx("mediaPosterSkeleton")} />
+          )}
       <section className={cx("mediaHeader")}>
         {data && <h1 className={cx("mediaTitle")}>{data.title || data.name}</h1>}
         {data && (

@@ -80,32 +80,32 @@ export function MediaInfoOverview({ data }: { data: MovieInfo & SeriesInfo | nul
                   : (
                     <CrewGroup
                       title="Director"
-                      people={data?.credits.crew.filter(
-                        (person) => person.job === "Director",
-                      )}
+                      people={data?.credits.crew.filter((person) => person.job === "Director")}
                     />
                     )}
                 <CrewGroup
                   title="Writer"
-                  people={data.credits.crew.filter(
-                    (person) => person.department === "Writing",
-                  )}
+                  people={data.credits.crew.filter((person) => person.department === "Writing")}
                 />
-                <div className={cx("metadataItem", "genres")}>
-                  <span className={cx("title")}>
-                    {`Genre${data.genres.length > 1 ? "s" : ""}`}
-                  </span>
-                  <ul className={cx("dataGroup")}>
-                    {data.genres
-                      .sort((a, b) => (a.name > b.name ? 1 : -1)).map((genre) => (
-                        <li key={genre.id} className={cx("person")}>
-                          <Button key={genre.name} as={Link} href={`/genre/${slugify(genre.name)}`} color="gray" variant="soft" size="sm" rounded="full" className={cx("mediaGenre")}>
-                            <span style={{ fontFamily: emojiFont.style.fontFamily }}>{getGenreEmoji(slugify(genre.name))}</span> {genre.name}
-                          </Button>
-                        </li>
-                      ))}
-                  </ul>
-                </div>
+                {data.genres.length > 0
+                  ? (
+                    <div className={cx("metadataItem", "genres")}>
+                      <span className={cx("title")}>
+                        {`Genre${data.genres.length > 1 ? "s" : ""}`}
+                      </span>
+                      <ul className={cx("dataGroup")}>
+                        {data.genres
+                          .sort((a, b) => (a.name > b.name ? 1 : -1)).map((genre) => (
+                            <li key={genre.id} className={cx("person")}>
+                              <Button key={genre.name} as={Link} href={`/genre/${slugify(genre.name)}`} color="gray" variant="soft" size="sm" rounded="full" className={cx("mediaGenre")}>
+                                <span style={{ fontFamily: emojiFont.style.fontFamily }}>{getGenreEmoji(slugify(genre.name))}</span> {genre.name}
+                              </Button>
+                            </li>
+                          ))}
+                      </ul>
+                    </div>
+                    )
+                  : null}
               </div>
               )
             : (

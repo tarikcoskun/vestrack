@@ -18,7 +18,7 @@ const cx = classNames.bind(style);
 export function MediaInfoReviews({ data }: { data: MovieInfo & SeriesInfo | null }) {
   const [modalOpen, setModalOpen] = useState(false);
 
-  return data === null || data.reviews.total_results > 0
+  return data === null || data?.reviews.total_results > 0
     ? (
       <section id="reviews" className={cx("reviews")}>
         <header>

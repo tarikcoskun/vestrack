@@ -2,6 +2,8 @@
 @import "@/styles/media";
 
 .navbar {
+  position: relative;
+  z-index: 50;
   width: 100%;
   height: var(--content-nav-height);
   background-color: colors.$gray-900;

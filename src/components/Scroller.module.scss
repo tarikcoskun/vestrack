@@ -25,10 +25,10 @@
   &[data-scroll-position="end"]::after { opacity: 0; }
 
   .scrollerTrack {
-    --item-count: var(--scroller-items-per-scroll);
+    --item-count: var(--scroller-columns);
     --scroller-gap: var(--content-spacing);
     --scroller-max-width: calc(var(--content-width) - var(--sidebar-width) - var(--layout-gap) + (var(--content-spacing) * 2));
-    --scroller-item-width: calc((var(--scroller-max-width) - (var(--scroller-items-per-scroll) + 1) * var(--scroller-gap)) / var(--item-count));
+    --scroller-item-width: calc((var(--scroller-max-width) - (var(--scroller-columns) + 1) * var(--scroller-gap)) / var(--item-count));
     display: grid;
     overflow: hidden;
     max-width: var(--scroller-max-width);
@@ -36,11 +36,12 @@
     margin: calc(var(--content-spacing) * -1);
     gap: var(--scroller-gap);
     grid-auto-flow: column;
-    grid-template-columns: repeat(var(--scroller-items-per-scroll), 1fr);
+    grid-template-columns: repeat(var(--scroller-columns), 1fr);
     overflow-x: auto;
     scroll-behavior: smooth;
     @include media("<md") {
-      --item-count: calc(var(--scroller-items-per-scroll) + 2);
+      --scroller-gap: 1rem;
+      --item-count: calc(var(--scroller-columns) + 2);
     }
 
     &::-webkit-scrollbar { display: none; }

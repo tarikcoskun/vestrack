@@ -19,10 +19,10 @@ const cx = classNames.bind(style);
 export function MediaInfoVideos({ data }: { data: MovieInfo & SeriesInfo | null }) {
   const [modalOpen, setModalOpen] = useState(false);
 
-  return data === null || data.videos.results.length > 0
+  return data === null || data?.videos.results.length > 0
     ? (
       <section id="videos" className={cx("videos")}>
-        <Scroller itemsPerScroll={3}>
+        <Scroller columns={3}>
           <header>
             <h1>
               Videos

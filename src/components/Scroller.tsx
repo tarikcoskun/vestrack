@@ -14,17 +14,17 @@ type ScrollPosition = "start" | "middle" | "end" | "no-scroll";
 
 interface ScrollerValue {
   trackRef: React.RefObject<HTMLUListElement>;
-  itemsPerScroll: number;
+  columns: number;
   scrollPosition: ScrollPosition;
   setScrollPosition: React.Dispatch<React.SetStateAction<ScrollPosition>>;
 }
 
 const ScrollerContext = createContext({} as ScrollerValue);
 
-function ScrollerProvider({ itemsPerScroll, children }: React.PropsWithChildren<{ itemsPerScroll: number }>) {
+function ScrollerProvider({ columns, children }: React.PropsWithChildren<{ columns: number }>) {
   const trackRef = useRef<HTMLUListElement>(null);
   const [scrollPosition, setScrollPosition] = useState<ScrollPosition>("no-scroll");
-  const initialState = { trackRef, itemsPerScroll, scrollPosition, setScrollPosition };
+  const initialState = { trackRef, columns, scrollPosition, setScrollPosition };
 
   return (
     <ScrollerContext.Provider value={initialState}>{children}</ScrollerContext.Provider>
@@ -36,14 +36,14 @@ function ScrollerProvider({ itemsPerScroll, children }: React.PropsWithChildren<
  * --------------- */
 
 interface ScrollerProps extends React.PropsWithChildren {
-  itemsPerScroll?: number;
+  columns?: number;
 }
 
 function ScrollerRoot(props: ScrollerProps) {
-  const { itemsPerScroll = 6, children } = props;
+  const { columns = 6, children } = props;
 
   return (
-    <ScrollerProvider itemsPerScroll={itemsPerScroll}>{children}</ScrollerProvider>
+    <ScrollerProvider columns={columns}>{children}</ScrollerProvider>
   );
 }
 
@@ -58,7 +58,7 @@ interface ScrollerTrackProps extends React.HTMLAttributes<HTMLElement> {
 const ScrollerTrack = forwardRef<HTMLUListElement, ScrollerTrackProps>((props, forwardedRef) => {
   const { className, containerClassName, children, ...rest } = props;
 
-  const { trackRef, itemsPerScroll, scrollPosition, setScrollPosition } = useContext(ScrollerContext);
+  const { trackRef, columns, scrollPosition, setScrollPosition } = useContext(ScrollerContext);
 
   useEffect(() => {
     const scroller = trackRef.current;
@@ -94,7 +94,7 @@ const ScrollerTrack = forwardRef<HTMLUListElement, ScrollerTrackProps>((props, f
     <div
       {...rest}
       className={cx("scrollerContainer", containerClassName)}
-      style={{ ["--scroller-items-per-scroll" as string]: itemsPerScroll }}
+      style={{ ["--scroller-columns" as string]: columns }}
       data-scroll-position={scrollPosition}
     >
       <ul
@@ -119,11 +119,11 @@ const ScrollerTrigger = forwardRef<HTMLButtonElement, ScrollerTriggerProps>(
   (props, forwardedRef) => {
     const { className, direction, children, ...triggerProps } = props;
 
-    const { trackRef, itemsPerScroll, scrollPosition } = useContext(ScrollerContext);
+    const { trackRef, columns, scrollPosition } = useContext(ScrollerContext);
 
     const scroll = () => {
       if (trackRef.current) {
-        const scrollAmount = (Number.parseFloat(getComputedStyle(trackRef.current.children[0]).width) + Number.parseFloat(getComputedStyle(trackRef.current).gap)) * itemsPerScroll;
+        const scrollAmount = (Number.parseFloat(getComputedStyle(trackRef.current.children[0]).width) + Number.parseFloat(getComputedStyle(trackRef.current).gap)) * columns;
 
         if (direction === "left") {
           trackRef.current.scrollBy({
