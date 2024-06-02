@@ -10,8 +10,8 @@
 
     .videoThumbnail {
       width: 100%;
-      min-width: 320px;
       border: 1px solid var(--theme-outline);
+      border-radius: var(--rounded-base);
       aspect-ratio: 16/9;
       background-color: var(--dynamic-gray-150);
       object-fit: cover;

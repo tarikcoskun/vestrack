@@ -85,7 +85,7 @@ export function MediaInfoOverview({ data }: { data: MovieInfo & SeriesInfo }) {
                 (person) => person.department === "Writing",
               )}
             />
-            <div className={cx("metadataItem")}>
+            <div className={cx("metadataItem", "genres")}>
               <span className={cx("title")}>
                 {`Genre${data.genres.length > 1 ? "s" : ""}`}
               </span>
@@ -101,7 +101,10 @@ export function MediaInfoOverview({ data }: { data: MovieInfo & SeriesInfo }) {
               </ul>
             </div>
           </div>
-          <p className={cx("mediaOverview")}>{data.overview}</p>
+          <div className={cx("overviewText")}>
+            {data.tagline && <div className={cx("tagline")}>{data.tagline}</div>}
+            <p>{data.overview}</p>
+          </div>
         </section>
       </div>
     </section>

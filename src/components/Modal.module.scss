@@ -12,7 +12,7 @@
 .dialog:modal {
   width: 100%;
   max-width: var(--content-width);
-  border-radius: 8px;
+  border-radius: var(--rounded-lg);
   margin: auto;
   background-color: var(--dynamic-gray-150);
   color: var(--theme-text-body);
@@ -49,7 +49,7 @@
 
       &-thumb {
         border: 0.25rem solid var(--dynamic-gray-150);
-        border-radius: 100rem;
+        border-radius: var(--rounded-full);
         background-color: var(--dynamic-gray-500);
 
         &:hover { background-color: var(--dynamic-gray-600); }

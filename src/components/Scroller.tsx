@@ -6,21 +6,25 @@ import { Button } from "./Button";
 
 // Styles
 import style from "./Scroller.module.scss";
-import variables from "@/styles/global-variables.module.scss";
 import classNames from "classnames/bind";
 
 const cx = classNames.bind(style);
 
+type ScrollPosition = "start" | "middle" | "end" | "no-scroll";
+
 interface ScrollerValue {
   trackRef: React.RefObject<HTMLUListElement>;
   itemsPerScroll: number;
+  scrollPosition: ScrollPosition;
+  setScrollPosition: React.Dispatch<React.SetStateAction<ScrollPosition>>;
 }
 
 const ScrollerContext = createContext({} as ScrollerValue);
 
 function ScrollerProvider({ itemsPerScroll, children }: React.PropsWithChildren<{ itemsPerScroll: number }>) {
   const trackRef = useRef<HTMLUListElement>(null);
-  const initialState = { trackRef, itemsPerScroll };
+  const [scrollPosition, setScrollPosition] = useState<ScrollPosition>("start");
+  const initialState = { trackRef, itemsPerScroll, scrollPosition, setScrollPosition };
 
   return (
     <ScrollerContext.Provider value={initialState}>{children}</ScrollerContext.Provider>
@@ -54,8 +58,7 @@ interface ScrollerTrackProps extends React.HTMLAttributes<HTMLElement> {
 const ScrollerTrack = forwardRef<HTMLUListElement, ScrollerTrackProps>((props, forwardedRef) => {
   const { className, containerClassName, children, ...rest } = props;
 
-  const { trackRef, itemsPerScroll } = useContext(ScrollerContext);
-  const [scrollerPosition, setScrollerPosition] = useState("start");
+  const { trackRef, itemsPerScroll, scrollPosition, setScrollPosition } = useContext(ScrollerContext);
 
   useEffect(() => {
     const scroller = trackRef.current;
@@ -64,19 +67,24 @@ const ScrollerTrack = forwardRef<HTMLUListElement, ScrollerTrackProps>((props, f
 
     const listener = () => {
       let position = "middle";
-      if (scroller.scrollLeft === 0)
+      if (scroller.scrollLeft === 0 && scroller.clientWidth === scroller.scrollWidth)
+        position = "no-scroll";
+      else if (scroller.scrollLeft === 0)
         position = "start";
       else if (scroller.scrollLeft + scroller.clientWidth === scroller.scrollWidth)
         position = "end";
       else position = "middle";
 
-      setScrollerPosition(position);
+      setScrollPosition(position as ScrollPosition);
     };
 
+    listener();
     scroller.addEventListener("scroll", listener);
+    window.addEventListener("resize", listener);
 
     return () => {
       scroller.removeEventListener("scroll", listener);
+      window.removeEventListener("resize", listener);
     };
   }, []);
 
@@ -85,7 +93,7 @@ const ScrollerTrack = forwardRef<HTMLUListElement, ScrollerTrackProps>((props, f
       {...rest}
       className={cx("scrollerContainer", containerClassName)}
       style={{ ["--scroller-items-per-scroll" as string]: itemsPerScroll }}
-      data-scroll-position={scrollerPosition}
+      data-scroll-position={scrollPosition}
     >
       <ul
         className={cx("scrollerTrack", className)}
@@ -107,9 +115,9 @@ interface ScrollerTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElem
 
 const ScrollerTrigger = forwardRef<HTMLButtonElement, ScrollerTriggerProps>(
   (props, forwardedRef) => {
-    const { className, direction, disabled, children, ...triggerProps } = props;
+    const { className, direction, children, ...triggerProps } = props;
 
-    const { trackRef, itemsPerScroll } = useContext(ScrollerContext);
+    const { trackRef, itemsPerScroll, scrollPosition } = useContext(ScrollerContext);
 
     const scroll = () => {
       if (trackRef.current) {
@@ -130,21 +138,27 @@ const ScrollerTrigger = forwardRef<HTMLButtonElement, ScrollerTriggerProps>(
       }
     };
 
-    return (
-      <Button
-        {...triggerProps}
-        color="gray"
-        variant="soft"
-        padding="square"
-        rounded="full"
-        aria-label={`Scroll ${direction}`}
-        className={cx("scrollerTrigger", className)}
-        ref={forwardedRef}
-        onClick={scroll}
-      >
-        {children}
-      </Button>
-    );
+    const isDisabled = (scrollPosition === "start" && direction === "left") || (scrollPosition === "end" && direction === "right");
+
+    return scrollPosition === "no-scroll"
+      ? null
+      : (
+        <Button
+          {...triggerProps}
+          color="gray"
+          variant="soft"
+          padding="square"
+          rounded="full"
+          aria-label={`Scroll ${direction}`}
+          disabled={isDisabled}
+          className={cx("scrollerTrigger", className)}
+          ref={forwardedRef}
+          onClick={scroll}
+        >
+          {children}
+        </Button>
+        )
+    ;
   },
 );
 

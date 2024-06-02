@@ -6,9 +6,6 @@
   gap: 1.5rem;
   padding-block: var(--section-spacing);
 
-  .recommendationList {
-    @include media("<md") { gap: 1rem; }
-  }
 }
 
 .recommendationsSkeleton {
@@ -18,7 +15,6 @@
 
   .recommendationList {
     display: flex;
-    gap: 2rem;
 
     .mediaCard {
       display: flex;

@@ -60,7 +60,7 @@
   --dynamic-yellow-600: #{color.$yellow-600};
 
   --theme-background: var(--dynamic-gray-50);
-  --theme-outline: var(--dynamic-gray-300);
+  --theme-outline: rgb(0 0 0 / 0.15);
   --theme-text-title: var(--dynamic-gray-900);
   --theme-text-body: var(--dynamic-gray-700);
   --theme-text-link: var(--dynamic-gray-800);
@@ -77,6 +77,11 @@
   --content-width: 1280px;
   --content-nav-height: 64px;
   --section-spacing: 48px;
+
+  --rounded-sm: 4px;
+  --rounded-base: 6px;
+  --rounded-lg: 10px;
+  --rounded-full: 100rem;
 
   background-color: var(--theme-background);
   color: var(--theme-text-body);
@@ -124,6 +129,8 @@
     --dynamic-blue-950: #{color.$blue-50};
     --dynamic-yellow-500: #{color.$yellow-600};
     --dynamic-yellow-600: #{color.$yellow-500};
+
+    --theme-outline: rgb(255 255 255 / 0.15);
   }
 
   &::-webkit-scrollbar {
@@ -134,7 +141,7 @@
 
     &-thumb {
       border: 0.25rem solid var(--theme-background);
-      border-radius: 100rem;
+      border-radius: var(--rounded-full);
       background-color: var(--dynamic-gray-500);
 
       &:hover { background-color: var(--dynamic-gray-600); }

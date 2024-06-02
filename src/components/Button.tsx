@@ -36,6 +36,7 @@ const ButtonRoot: ButtonComponent = forwardRef(
       size = "regular",
       padding = true,
       rounded = true,
+      disabled,
       className,
       leading,
       trailing,
@@ -48,6 +49,7 @@ const ButtonRoot: ButtonComponent = forwardRef(
       <Component
         {...buttonProps}
         type={type}
+        disabled={disabled}
         className={cx("button", `${variant}-${color}`, className, {
           [`size-${size}`]: size !== "regular",
           paddingBase: padding === true,

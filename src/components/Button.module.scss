@@ -43,10 +43,14 @@ $colors: (
       padding: 10px;
     }
   }
-  &.roundedBase { border-radius: 6px; }
-  &.roundedFull { border-radius: 100rem; }
+  &.roundedBase { border-radius: var(--rounded-base); }
+  &.roundedFull { border-radius: var(--rounded-full); }
   &.size-lg { font-size: 1.125rem; }
   &.size-sm { font-size: 0.875rem; }
+  &[disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 
   @mixin generate-color-variant($colors, $variant, $color) {
     @if $variant == "solid" {

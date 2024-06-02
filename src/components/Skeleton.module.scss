@@ -4,8 +4,8 @@
 .skeleton {
   background-color: sass-color.scale(color.$gray-500, $alpha: -85%);
 
-  &.roundedBase { border-radius: 4px; }
-  &.roundedFull { border-radius: 100rem; }
+  &.roundedBase { border-radius: var(--rounded-sm); }
+  &.roundedFull { border-radius: var(--rounded-full); }
 }
 
 .skeletonParagraphContainer {

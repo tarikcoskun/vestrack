@@ -21,7 +21,7 @@ interface SeriesInfo {
   original_name: string;
   overview: string;
   popularity: number;
-  poster_path: string;
+  poster_path?: string;
   production_companies: Productioncompany[];
   production_countries: Productioncountry[];
   seasons: Season[];

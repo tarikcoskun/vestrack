@@ -24,6 +24,7 @@
     width: 100%;
     height: 100%;
     border: 1px solid var(--theme-outline);
+    border-radius: var(--rounded-base);
     aspect-ratio: 2/3;
     background-color: var(--dynamic-gray-150);
     transition: scale 150ms;

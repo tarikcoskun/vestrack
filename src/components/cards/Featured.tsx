@@ -25,39 +25,38 @@ export function FeaturedCard(props: FeaturedCardProps) {
 
   return (
     <article className={cx("featuredCard")} typeof="Movie">
-      <div
-        className={cx("backdrop")}
-        style={{
-          backgroundImage: `url(${backdropUrl})`,
-        }}
-      />
-      <div className={cx("infoContainer")}>
-        <Link href={`/${type}/${`${slugify(media.title! || media.name!)}-${media.id}`}`} className={cx("posterLink")}>
-          {media.poster_path
-            ? (
-              <img
-                src={posterUrl}
-                alt={media.title}
-                draggable="false"
-                className={cx("mediaPoster")}
-              />
-              )
-            : (
-              <div className={cx("mediaPosterFallback")}>
-                <Icon icon="image" size={64} />
-              </div>
-              )}
+      <Link href={`/${type}/${`${slugify(media.title! || media.name!)}-${media.id}`}`} className={cx("posterLink")}>
+        {media.poster_path
+          ? (
+            <img
+              src={posterUrl}
+              alt={media.title}
+              draggable="false"
+              className={cx("mediaPoster")}
+            />
+            )
+          : (
+            <div className={cx("mediaPosterFallback")}>
+              <Icon icon="image" size={64} />
+            </div>
+            )}
+      </Link>
+      <div className={cx("mediaInfo")}>
+        <div
+          className={cx("backdrop")}
+          style={{
+            backgroundImage: `url(${backdropUrl})`,
+          }}
+        />
+        <div className={cx("mediaRating")}>
+          <Icon icon="star" variant="fill" className={cx("ratingIcon")} />
+          <span>{media.vote_average.toFixed(1).replace(".0", "")}</span>
+        </div>
+        <Link href={`/movie/${media.id}`}>
+          <span className={cx("mediaTitle")}>{media.title || media.name}</span>
         </Link>
-        <div className={cx("mediaInfo")}>
-          <div className={cx("mediaRating")}>
-            <Icon icon="star" variant="fill" className={cx("ratingIcon")} />
-            <span>{media.vote_average.toFixed(1).replace(".0", "")}</span>
-          </div>
-          <Link href={`/movie/${media.id}`}>
-            <span className={cx("mediaTitle")}>{media.title || media.name}</span>
-          </Link>
-          <p className={cx("mediaOverview")}>{media.overview}</p>
-          {/* <div className={cx("actions")}>
+        <p className={cx("mediaOverview")}>{media.overview}</p>
+        {/* <div className={cx("actions")}>
             <Button color="gray" variant="ghost" leading={<Icon icon="play" variant="fill" />}>
               Play Trailer
             </Button>
@@ -69,7 +68,6 @@ export function FeaturedCard(props: FeaturedCardProps) {
               Add to Watchlist
             </Button>
           </div> */}
-        </div>
       </div>
     </article>
   );

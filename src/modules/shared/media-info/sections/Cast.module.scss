@@ -32,6 +32,7 @@
       .personInitials {
         width: 100%;
         border: 1px solid var(--theme-outline);
+        border-radius: var(--rounded-base);
         aspect-ratio: 4/5;
         background-color: var(--dynamic-gray-150);
       }

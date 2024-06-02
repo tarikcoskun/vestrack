@@ -6,11 +6,6 @@
   flex-direction: column;
   gap: 1.5rem;
   padding-block: var(--section-spacing);
-
-  .videoList {
-    gap: 2rem;
-    @include media("<md") { gap: 1rem; }
-  }
 }
 
 .fullVideoList {

@@ -35,7 +35,7 @@
     margin: calc(var(--content-spacing) * -1);
     gap: var(--content-spacing);
     grid-auto-flow: column;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(var(--scroller-items-per-scroll), 1fr);
     overflow-x: auto;
     scroll-behavior: smooth;
 
