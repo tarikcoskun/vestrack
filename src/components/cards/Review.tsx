@@ -2,6 +2,7 @@ import { DATE_FORMAT } from "@/lib/constants";
 
 // Components
 import { Icon } from "../Icon";
+import snarkdown from "snarkdown";
 
 // Styles
 import style from "./Review.module.scss";
@@ -43,7 +44,7 @@ export function ReviewCard(props: ReviewCardProps) {
       <p
         className={cx("reviewContent")}
         data-line-clamp={lineClamp}
-        dangerouslySetInnerHTML={{ __html: review.content }}
+        dangerouslySetInnerHTML={{ __html: snarkdown(review.content.replace(/\r?\n|\r/g, "<br>")) }}
       />
     </div>
   );

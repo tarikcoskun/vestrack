@@ -26,6 +26,6 @@
   }
 
   &[data-line-clamp] .reviewContent {
-    @include util.line-clamp(4);
+    @include util.line-clamp(5);
   }
 }
