@@ -46,15 +46,13 @@ export function MediaHorizontalCard(props: MediaHorizontalCardProps) {
             </div>
             )}
         <div className={cx("mediaInfo")}>
-          <div className={cx("mediaTitle")} title={media.title || media.name}>
-            {media.title || media.name}
-          </div>
+          <div className={cx("mediaTitle")} title={media.title || media.name}>{media.title || media.name}</div>
           <div className={cx("mediaDetails")}>
             <span className={cx("rating")}>
               <Icon icon="star" variant="fill" style={{ color: "var(--color-yellow)" }} />
               <span>{media.vote_average.toFixed(1).replace(".0", "")}</span>
             </span>
-            <span>{new Date(media.release_date! || media.first_air_date!).getFullYear()}</span>
+            {(media.release_date || media.first_air_date) ? (<span>{new Date(media.release_date! || media.first_air_date!).getFullYear()}</span>) : null}
           </div>
         </div>
       </article>

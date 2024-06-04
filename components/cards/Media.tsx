@@ -47,9 +47,7 @@ export function MediaCard(props: MediaCardProps) {
       </Link>
       <div className={cx("mediaInfo")}>
         <Link href={infoPageUrl}>
-          <span className={cx("mediaTitle")} title={media.title || media.name}>
-            {media.title || media.name}
-          </span>
+          <span className={cx("mediaTitle")} title={media.title || media.name}>{media.title || media.name}</span>
         </Link>
         <div className={cx("mediaDetails")}>
           <span className={cx("rating")}>

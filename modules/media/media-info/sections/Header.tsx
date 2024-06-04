@@ -53,7 +53,7 @@ export function MediaInfoHeader({ data }: { data: MovieInfo & SeriesInfo | null 
           ? (
             <div className={cx("mediaDetails")}>
               <div className={cx("detailList")}>
-                <span>{data.release_date ? new Date(data.release_date).getFullYear() : `${new Date(data.first_air_date).getFullYear()}–${!data.in_production ? new Date(data.last_air_date).getFullYear() : ""}`}</span>
+                {(data.release_date || data.first_air_date) ? (<span>{data.release_date ? new Date(data.release_date).getFullYear() : `${new Date(data.first_air_date).getFullYear()}–${!data.in_production ? new Date(data.last_air_date).getFullYear() : ""}`}</span>) : null}
                 {(data.runtime || data.episode_run_time.length) ? (<span>{getRuntime(data.runtime || data.episode_run_time[0])}</span>) : null}
               </div>
               <span className={cx("rating")}>
