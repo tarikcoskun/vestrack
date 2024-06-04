@@ -1,25 +1,25 @@
 "use client";
 
-import { notifyError } from "@/util/notifyError";
 import { useEffect, useRef, useState } from "react";
-import { getMediaInfo } from "@/modules/shared/media-info/getMediaInfo";
+import { getMediaInfo } from "./getMediaInfo";
+import { notifyError } from "@/util/notifyError";
 
 // Components
-import { MediaInfoHeader } from "@/modules/shared/media-info/sections/Header";
-import { MediaInfoOverview } from "@/modules/shared/media-info/sections/Overview";
-import { MediaInfoCast } from "@/modules/shared/media-info/sections/Cast";
-import { MediaInfoVideos } from "@/modules/shared/media-info/sections/Videos";
-import { MediaInfoReviews } from "@/modules/shared/media-info/sections/Reviews";
-import { MediaInfoRecommendations } from "@/modules/shared/media-info/sections/Recommendations";
-import { MediaInfoSidebar } from "@/modules/shared/media-info/components/Sidebar";
+import { MediaInfoHeader } from "./sections/Header";
+import { MediaInfoOverview } from "./sections/Overview";
+import { MediaInfoCast } from "./sections/Cast";
+import { MediaInfoVideos } from "./sections/Videos";
+import { MediaInfoReviews } from "./sections/Reviews";
+import { MediaInfoRecommendations } from "./sections/Recommendations";
+import { MediaInfoSidebar } from "./components/Sidebar";
 
 // Styles
-import style from "./MovieInfoPage.module.scss";
+import style from "./MediaInfoPage.module.scss";
 import classNames from "classnames/bind";
 
 const cx = classNames.bind(style);
 
-export function MovieInfoPage({ params: { id } }: { params: { id: string } }) {
+export function MediaInfoPage({ mediaId, type }: { mediaId: string; type: "movie" | "tv" }) {
   const contentRef = useRef<HTMLDivElement>(null);
   const [data, setData] = useState<MovieInfo & SeriesInfo | null>(null);
 
@@ -33,12 +33,12 @@ export function MovieInfoPage({ params: { id } }: { params: { id: string } }) {
       });
 
     async function fetchData() {
-      return await getMediaInfo(id, "movie");
+      return await getMediaInfo(mediaId, type);
     }
-  }, [id]);
+  }, [mediaId]);
 
   return (
-    <main className={cx("movieInfoPage")}>
+    <main className={cx("mediaInfoPage")}>
       <div className={cx("pageContent")} ref={contentRef}>
         <MediaInfoHeader data={data} />
         <div className={cx("layout")}>

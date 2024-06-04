@@ -1,3 +1,5 @@
-import { MoviesPage } from "@/modules/movie/MoviesHomePage";
+import { MediaHomePage } from "@/modules/media/MediaHomePage";
 
-export default MoviesPage;
+export default function MovieHomePage() {
+  return <MediaHomePage type="movie" />;
+};

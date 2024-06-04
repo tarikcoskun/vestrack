@@ -106,11 +106,6 @@
               color: var(--theme-text-title);
               line-height: 1.5;
               word-break: break-word;
-
-              &:not(:first-child)::before {
-                color: var(--theme-text-body);
-                @include util.circular-divider();
-              }
             }
           }
 
@@ -120,16 +115,6 @@
             gap: 0.375rem;
             list-style: none;
           }
-        }
-      }
-
-      .overviewText {
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-
-        .tagline {
-          font-style: italic;
         }
       }
     }

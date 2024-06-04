@@ -2,17 +2,6 @@
 @use "colors";
 @import "media";
 
-@font-face {
-  font-family: "Emoji One";
-  font-style: normal;
-  font-weight: normal;
-  src: url("/fonts/iconfont.eot") format("embedded-opentype"),
-       url("/fonts/iconfont.ttf") format("truetype"),
-       url("/fonts/iconfont.woff") format("woff"),
-       url("/fonts/iconfont.woff2") format("woff2"),
-       url("/fonts/iconfont.svg") format("svg");
-}
-
 * {
   box-sizing: border-box;
   padding: 0;

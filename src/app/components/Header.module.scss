@@ -27,7 +27,7 @@
 
     .navigation {
       @include media("<md") {
-        position: absolute;
+        position: fixed;
         z-index: 10;
         top: var(--content-nav-height);
         right: calc(var(--content-spacing) * -1);

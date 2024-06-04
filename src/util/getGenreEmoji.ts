@@ -1,4 +1,4 @@
-export function getGenreEmoji(genre: string): string {
+export function getGenreEmoji(genre: string) {
   switch (genre) {
     case "action":
     case "action-adventure":
@@ -20,7 +20,7 @@ export function getGenreEmoji(genre: string): string {
       return "👪";
     case "fantasy":
     case "sci-fi-fantasy":
-      return "🔮";
+      return "🐉";
     case "history":
       return "🏛️";
     case "horror":
@@ -33,6 +33,8 @@ export function getGenreEmoji(genre: string): string {
       return "🔍";
     case "news":
       return "📰";
+    case "reality":
+      return "🌍";
     case "romance":
       return "💘";
     case "science-fiction":

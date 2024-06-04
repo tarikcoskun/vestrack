@@ -1,3 +1,5 @@
-import { SeriesPage } from "@/modules/tv/SeriesHomePage";
+import { MediaHomePage } from "@/modules/media/MediaHomePage";
 
-export default SeriesPage;
+export default function SeriesHomePage() {
+  return <MediaHomePage type="tv" />;
+};

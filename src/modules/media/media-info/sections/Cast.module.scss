@@ -35,6 +35,10 @@
         border-radius: var(--rounded-base);
         aspect-ratio: 4/5;
         background-color: var(--color-gray-150);
+        @include media("<md") {
+          border-radius: var(--rounded-full);
+          aspect-ratio: 1/1;
+        }
       }
 
       &:hover {

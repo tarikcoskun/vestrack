@@ -1,4 +1,4 @@
-import { DATE_FORMAT } from "@/lib/constants";
+import { DATE_FORMAT } from "@/constants/misc";
 
 // Components
 import { Icon } from "../Icon";

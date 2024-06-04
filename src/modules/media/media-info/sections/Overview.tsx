@@ -116,18 +116,8 @@ export function MediaInfoOverview({ data }: { data: MovieInfo & SeriesInfo | nul
               </div>
               )}
           {data
-            ? (
-              <div className={cx("overviewText")}>
-                {data?.tagline && <div className={cx("tagline")}>{data?.tagline}</div>}
-                <p>{data?.overview}</p>
-              </div>
-              )
-            : (
-              <div className={cx("overviewText")}>
-                <Skeleton width={200} height={16.09} type="text" />
-                <Skeleton.Paragraph height={68.25} lines={3} style={{ maxWidth: "706px", width: "100%" }} />
-              </div>
-              )}
+            ? <p>{data?.overview}</p>
+            : <Skeleton.Paragraph height={94.5} lines={4} />}
         </section>
       </div>
     </section>
@@ -157,9 +147,10 @@ function CrewGroup(props: CrewGroupProps) {
         {title + (people.length > 1 ? "s" : "")}
       </span>
       <ul className={cx("personGroup")}>
-        {filteredPeople.map((person) => (
+        {filteredPeople.map((person, idx) => (
           <li key={person.name} className={cx("person")}>
             <Link href={`/person/${person.id}`}>{person.name}</Link>
+            {idx !== filteredPeople.length - 1 && ", "}
           </li>
         ))}
       </ul>

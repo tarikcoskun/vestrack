@@ -1,4 +1,4 @@
-import { DATE_FORMAT } from "@/lib/constants";
+import { DATE_FORMAT } from "@/constants/misc";
 
 // Styles
 import style from "./Video.module.scss";
