@@ -25,7 +25,7 @@ export const MediaInfoModal = forwardRef<HTMLDialogElement, MediaInfoModalProps>
                 ({new Date(media?.release_date || media?.first_air_date).getFullYear()})
               </span>
             </h3>
-            <p>{description}</p>
+            <div>{description}</div>
           </>
         )}
       >

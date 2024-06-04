@@ -1,3 +1,5 @@
+@import "@/styles/media";
+
 @keyframes dialogOpen {
   from {
     opacity: 0;
@@ -31,6 +33,9 @@
     flex-direction: column;
     padding: 2rem 2.5rem;
     gap: 0.5rem;
+    @include media("<md") {
+      padding: var(--content-spacing);
+    }
   }
 
   .modalContent {
@@ -40,6 +45,10 @@
     padding: 2.5rem;
     padding-top: 0;
     overflow-y: auto;
+    @include media("<md") {
+      padding: var(--content-spacing);
+      padding-top: 0;
+    }
 
     &::-webkit-scrollbar {
       width: 0.75rem;

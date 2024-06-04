@@ -9,9 +9,12 @@
 }
 
 .fullVideoList {
+  --grid-cols: 1;
   display: grid;
   gap: 4rem 2rem;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+  @include media(">phone") { --grid-cols: 2; }
+  @include media(">md") { --grid-cols: 3; }
 
   .video {
     .thumbnailLink {
