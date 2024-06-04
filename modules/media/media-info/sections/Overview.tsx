@@ -11,12 +11,7 @@ import { Skeleton } from "@/components/Skeleton";
 // Styles
 import style from "./Overview.module.scss";
 import classNames from "classnames/bind";
-import { Noto_Color_Emoji } from "next/font/google";
-
-const emojiFont = Noto_Color_Emoji({
-  weight: "400",
-  subsets: ["emoji"],
-});
+import { getGenreEmojiName } from "@/util/getGenreEmojiName";
 
 const cx = classNames.bind(style);
 
@@ -98,7 +93,7 @@ export function MediaInfoOverview({ data }: { data: MovieInfo & SeriesInfo | nul
                           .sort((a, b) => (a.name > b.name ? 1 : -1)).map((genre) => (
                             <li key={genre.id} className={cx("person")}>
                               <Button key={genre.name} as={Link} href={`/genre/${slugify(genre.name)}`} color="gray" variant="soft" size="sm" rounded="full" className={cx("mediaGenre")}>
-                                <span style={{ fontFamily: emojiFont.style.fontFamily }}>{getGenreEmoji(slugify(genre.name))}</span> {genre.name}
+                                <img src={`/emojis/${getGenreEmojiName(slugify(genre.name))}.svg`} width={16} height={16} /> {genre.name}
                               </Button>
                             </li>
                           ))}
