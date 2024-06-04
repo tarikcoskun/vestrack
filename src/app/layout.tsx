@@ -4,7 +4,7 @@ import classNames from "classnames";
 import { Toaster } from "sonner";
 
 // Components
-import { Header } from "./components/Header";
+import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 
 // Styles
@@ -37,7 +37,7 @@ export default function RootLayout(props: BaseLayoutProps) {
       }}
     >
       <body>
-        <Header />
+        <Navbar />
         <div
           className="contentPadding"
           style={{

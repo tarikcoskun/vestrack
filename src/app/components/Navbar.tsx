@@ -13,12 +13,12 @@ import { Button } from "@/components/Button";
 import { Input } from "@/components/forms/Input";
 
 // Styles
-import style from "./Header.module.scss";
+import style from "./Navbar.module.scss";
 import classNames from "classnames/bind";
 
 const cx = classNames.bind(style);
 
-export function Header() {
+export function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
   const [query, setQuery] = useState("");
