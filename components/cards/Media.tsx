@@ -34,7 +34,7 @@ export function MediaCard(props: MediaCardProps) {
           ? (
             <img
               src={posterUrl}
-              alt={media.title}
+              alt={media.title || media.name}
               draggable="false"
               className={cx("mediaPoster")}
             />
@@ -51,8 +51,12 @@ export function MediaCard(props: MediaCardProps) {
             {media.title || media.name}
           </span>
         </Link>
-        <div className={cx("releaseYear")}>
-          {new Date(media.release_date! || media.first_air_date!).getFullYear()}
+        <div className={cx("mediaDetails")}>
+          <span className={cx("rating")}>
+            <Icon icon="star" variant="fill" style={{ color: "var(--color-yellow)" }} />
+            <span>{media.vote_average.toFixed(1).replace(".0", "")}</span>
+          </span>
+          <span>{new Date(media.release_date! || media.first_air_date!).getFullYear()}</span>
         </div>
       </div>
     </article>

@@ -2,40 +2,25 @@
 
 // Components
 import { MediaCard, MediaCardSkeleton } from "@/components/cards/Media";
+import { Section } from "@/components/Section";
 import { Scroller } from "@/components/Scroller";
-import { Icon } from "@/components/Icon";
-
-// Styles
-import style from "./Recommendations.module.scss";
-import classNames from "classnames/bind";
-
-const cx = classNames.bind(style);
 
 export function MediaInfoRecommendations({ data }: { data: MovieInfo & SeriesInfo | null }) {
   return data === null || data?.recommendations.total_results > 0
     ? (
-      <section id="recommendations" className={cx("recommendations")}>
+      <Section id="recommendations">
         <Scroller columns={5}>
-          <header>
+          <Section.Header scrollerControls>
             <h1>Recommendations</h1>
-            <div className="scrollerControls">
-              <Scroller.Trigger direction="left">
-                <Icon icon="caret-left" />
-              </Scroller.Trigger>
-              <Scroller.Trigger direction="right">
-                <Icon icon="caret-right" />
-              </Scroller.Trigger>
-            </div>
-          </header>
+          </Section.Header>
 
-          <Scroller.Track className={cx("recommendationList")}>
+          <Scroller.Track maxWidth="withSidebar">
             {data
               ? data.recommendations.results.map((recommended) => (
                 <MediaCard
                   key={recommended.id}
                   media={recommended}
                   type={recommended.media_type}
-                  className={cx("recommendationCard")}
                 />
               ))
               : Array(5)
@@ -45,7 +30,7 @@ export function MediaInfoRecommendations({ data }: { data: MovieInfo & SeriesInf
                 ))}
           </Scroller.Track>
         </Scroller>
-      </section>
+      </Section>
       )
     : null;
 }

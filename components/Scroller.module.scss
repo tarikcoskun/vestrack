@@ -27,7 +27,7 @@
   .scrollerTrack {
     --item-count: var(--scroller-columns);
     --scroller-gap: var(--content-spacing);
-    --scroller-max-width: calc(var(--content-width) - var(--sidebar-width) - var(--layout-gap) + (var(--content-spacing) * 2));
+    --scroller-max-width: calc(var(--content-width) + var(--content-spacing) * 2);
     --scroller-item-width: calc((var(--scroller-max-width) - (var(--scroller-columns) + 1) * var(--scroller-gap)) / var(--item-count));
     display: grid;
     overflow: hidden;
@@ -42,6 +42,10 @@
     @include media("<md") {
       --scroller-gap: 1rem;
       --item-count: calc(var(--scroller-columns) + 2);
+    }
+
+    &[data-max-width="withSidebar"] {
+      --scroller-max-width: calc(var(--content-width) - var(--sidebar-width) - var(--layout-gap) + (var(--content-spacing) * 2)) !important;
     }
 
     &::-webkit-scrollbar { display: none; }

@@ -1,13 +1,6 @@
 @use "@/styles/util";
 @import "@/styles/media";
 
-.videos {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding-block: var(--section-spacing);
-}
-
 .fullVideoList {
   --grid-cols: 1;
   display: grid;

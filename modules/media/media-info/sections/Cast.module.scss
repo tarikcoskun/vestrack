@@ -1,13 +1,6 @@
 @use "@/styles/util";
 @import "@/styles/media";
 
-.cast {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding-block: var(--section-spacing);
-}
-
 .castList {
   .person {
     display: flex;
@@ -15,7 +8,9 @@
 
     .photoLink {
       display: flex;
-      transition: scale 150ms;
+      overflow: hidden;
+      border: 1px solid var(--theme-outline);
+      border-radius: var(--rounded-base);
 
       .personPhoto {
         object-fit: cover;
@@ -31,18 +26,18 @@
       .personPhoto,
       .personInitials {
         width: 100%;
-        border: 1px solid var(--theme-outline);
-        border-radius: var(--rounded-base);
         aspect-ratio: 4/5;
         background-color: var(--color-gray-150);
+        transition: scale 150ms;
         @include media("<md") {
           border-radius: var(--rounded-full);
           aspect-ratio: 1/1;
         }
+
+        &:hover { scale: 1.05; }
       }
 
       &:hover {
-        scale: 1.05;
         text-decoration: none;
       }
     }

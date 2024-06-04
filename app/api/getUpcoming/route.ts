@@ -5,15 +5,14 @@ import TmdbApi from "@/handlers/tmdb";
 export async function GET(req: NextRequest) {
   const params = req.nextUrl.searchParams;
   const type = params.get("type") as "movie" | "tv";
-  const id = params.get("id") as string;
 
-  if (!id || !type) {
+  if (!type) {
     Response.json(
-      { error: "No :type or :id provided" },
+      { error: "No :type provided" },
       { status: 400 },
     );
   }
 
-  const data = await TmdbApi.getMediaInfo(type, id);
+  const data = await TmdbApi.getUpcoming(type);
   return Response.json(data);
 }

@@ -45,7 +45,7 @@ export function Navbar() {
   return (
     <header role="banner" className={`${cx("navbar")} contentPadding`}>
       <div className={cx("navbarContent")}>
-        <Link href="/movie">
+        <Link href="/">
           <span className={cx("brandLogo")}>Vestrack</span>
         </Link>
 

@@ -33,7 +33,7 @@ export function MediaInfoPage({ mediaId, type }: { mediaId: string; type: "movie
       });
 
     async function fetchData() {
-      return await getMediaInfo(mediaId, type);
+      return await getMediaInfo(type, mediaId);
     }
   }, [mediaId]);
 

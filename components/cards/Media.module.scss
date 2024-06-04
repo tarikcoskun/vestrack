@@ -2,33 +2,37 @@
 @import "@/styles/media";
 
 .mediaCard {
-  position: relative;
   display: flex;
   flex-direction: column;
 
-  .mediaPoster {
-    object-fit: cover;
-    object-position: center;
-  }
-
-  .mediaPosterFallback {
+  .posterLink {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-gray-400);
-  }
-
-  .mediaPoster,
-  .mediaPosterFallback {
-    width: 100%;
-    height: 100%;
+    overflow: hidden;
     border: 1px solid var(--theme-outline);
     border-radius: var(--rounded-base);
-    aspect-ratio: 2/3;
-    background-color: var(--color-gray-150);
-    transition: scale 150ms;
 
-    &:hover { scale: 1.05; }
+    .mediaPoster {
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .mediaPosterFallback {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-gray-400);
+    }
+
+    .mediaPoster,
+    .mediaPosterFallback {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 2/3;
+      background-color: var(--color-gray-150);
+      transition: scale 150ms;
+
+      &:hover { scale: 1.05; }
+    }
   }
 
   .mediaInfo {
@@ -43,6 +47,21 @@
       font-size: 1.125rem;
       font-weight: 500;
       @include util.line-clamp(1);
+    }
+
+    .mediaDetails {
+      display: flex;
+
+      > :not(:first-child)::before {
+        @include util.circular-divider();
+      }
+
+      .rating {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.25rem;
+      }
     }
   }
 }

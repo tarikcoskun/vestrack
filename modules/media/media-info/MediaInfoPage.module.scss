@@ -27,13 +27,6 @@
             align-items: center;
             gap: 1rem;
           }
-
-          :global(.scrollerControls) {
-            display: flex;
-            gap: 0.5rem;
-
-            @include media("<md") { display: none; }
-          }
         }
       }
     }

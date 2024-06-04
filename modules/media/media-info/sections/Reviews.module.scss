@@ -1,16 +1,9 @@
 @use "@/styles/util";
 
-.reviews {
+.reviewList {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  padding-block: var(--section-spacing);
-
-  .reviewList {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
+  gap: 1rem;
 }
 
 .fullReviewList {

@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Icon } from "@/components/Icon";
 import { Button } from "@/components/Button";
+import { Section } from "@/components/Section";
 import { Scroller } from "@/components/Scroller";
 import { MediaInfoModal } from "../components/Modal";
 import { Skeleton } from "@/components/Skeleton";
@@ -20,9 +21,9 @@ export function MediaInfoCast({ data }: { data: MovieInfo & SeriesInfo | null })
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
-    <section id="cast" className={cx("cast")}>
+    <Section id="cast">
       <Scroller columns={6}>
-        <header>
+        <Section.Header scrollerControls>
           <h1>
             Cast & Crew
             <Button
@@ -38,17 +39,9 @@ export function MediaInfoCast({ data }: { data: MovieInfo & SeriesInfo | null })
               <Icon icon="arrow-right" size={20} />
             </Button>
           </h1>
-          <div className="scrollerControls">
-            <Scroller.Trigger direction="left">
-              <Icon icon="caret-left" />
-            </Scroller.Trigger>
-            <Scroller.Trigger direction="right">
-              <Icon icon="caret-right" />
-            </Scroller.Trigger>
-          </div>
-        </header>
+        </Section.Header>
 
-        <Scroller.Track className={cx("castList")}>
+        <Scroller.Track maxWidth="withSidebar" className={cx("castList")}>
           {data
             ? data.credits.cast
               .sort((a, b) => a.order! - b.order!)
@@ -92,7 +85,7 @@ export function MediaInfoCast({ data }: { data: MovieInfo & SeriesInfo | null })
       </Scroller>
 
       <FullCastModal />
-    </section>
+    </Section>
   );
 
   function FullCastModal() {

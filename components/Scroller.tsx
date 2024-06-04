@@ -15,16 +15,17 @@ type ScrollPosition = "start" | "middle" | "end" | "no-scroll";
 interface ScrollerValue {
   trackRef: React.RefObject<HTMLUListElement>;
   columns: number;
+  autoscroll: boolean;
   scrollPosition: ScrollPosition;
   setScrollPosition: React.Dispatch<React.SetStateAction<ScrollPosition>>;
 }
 
 const ScrollerContext = createContext({} as ScrollerValue);
 
-function ScrollerProvider({ columns, children }: React.PropsWithChildren<{ columns: number }>) {
+function ScrollerProvider({ columns, autoscroll, children }: React.PropsWithChildren<{ columns: number; autoscroll: boolean }>) {
   const trackRef = useRef<HTMLUListElement>(null);
   const [scrollPosition, setScrollPosition] = useState<ScrollPosition>("no-scroll");
-  const initialState = { trackRef, columns, scrollPosition, setScrollPosition };
+  const initialState = { trackRef, columns, autoscroll, scrollPosition, setScrollPosition };
 
   return (
     <ScrollerContext.Provider value={initialState}>{children}</ScrollerContext.Provider>
@@ -37,13 +38,14 @@ function ScrollerProvider({ columns, children }: React.PropsWithChildren<{ colum
 
 interface ScrollerProps extends React.PropsWithChildren {
   columns?: number;
+  autoscroll?: boolean;
 }
 
 function ScrollerRoot(props: ScrollerProps) {
-  const { columns = 6, children } = props;
+  const { columns = 6, autoscroll = false, children } = props;
 
   return (
-    <ScrollerProvider columns={columns}>{children}</ScrollerProvider>
+    <ScrollerProvider columns={columns} autoscroll={autoscroll}>{children}</ScrollerProvider>
   );
 }
 
@@ -53,25 +55,26 @@ function ScrollerRoot(props: ScrollerProps) {
 
 interface ScrollerTrackProps extends React.HTMLAttributes<HTMLElement> {
   containerClassName?: string;
+  maxWidth?: "default" | "withSidebar";
 }
 
 const ScrollerTrack = forwardRef<HTMLUListElement, ScrollerTrackProps>((props, forwardedRef) => {
-  const { className, containerClassName, children, ...rest } = props;
+  const { className, containerClassName, maxWidth, children, ...trackProps } = props;
 
   const { trackRef, columns, scrollPosition, setScrollPosition } = useContext(ScrollerContext);
 
   useEffect(() => {
-    const scroller = trackRef.current;
-    if (!scroller)
+    const track = trackRef.current;
+    if (!track)
       return;
 
     const listener = () => {
       let position = "middle";
-      if (scroller.scrollLeft === 0 && scroller.clientWidth === scroller.scrollWidth)
+      if (track.scrollLeft === 0 && track.clientWidth === track.scrollWidth)
         position = "no-scroll";
-      else if (scroller.scrollLeft === 0)
+      else if (track.scrollLeft === 0)
         position = "start";
-      else if (scroller.scrollLeft + scroller.clientWidth === scroller.scrollWidth)
+      else if (track.scrollLeft + track.clientWidth === track.scrollWidth)
         position = "end";
       else position = "middle";
 
@@ -80,19 +83,19 @@ const ScrollerTrack = forwardRef<HTMLUListElement, ScrollerTrackProps>((props, f
 
     listener();
     window.addEventListener("resize", listener);
-    scroller.addEventListener("DOMNodeInserted", listener);
-    scroller.addEventListener("scroll", listener);
+    track.addEventListener("DOMNodeInserted", listener);
+    track.addEventListener("scroll", listener);
 
     return () => {
       window.removeEventListener("resize", listener);
-      scroller.removeEventListener("DOMNodeInserted", listener);
-      scroller.removeEventListener("scroll", listener);
+      track.removeEventListener("DOMNodeInserted", listener);
+      track.removeEventListener("scroll", listener);
     };
   }, []);
 
   return (
     <div
-      {...rest}
+      {...trackProps}
       className={cx("scrollerContainer", containerClassName)}
       style={{ ["--scroller-columns" as string]: columns }}
       data-scroll-position={scrollPosition}
@@ -100,6 +103,7 @@ const ScrollerTrack = forwardRef<HTMLUListElement, ScrollerTrackProps>((props, f
       <ul
         className={cx("scrollerTrack", className)}
         ref={composeRefs(forwardedRef, trackRef)}
+        data-max-width={maxWidth}
       >
         {children}
       </ul>

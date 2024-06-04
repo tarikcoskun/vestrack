@@ -32,25 +32,38 @@ class TmdbHandler {
     return res.data;
   }
 
+  async getPopular(type: "movie" | "tv") {
+    const { results } = await this.fetch<TmdbApiResponse>(`/${type}/popular`);
+    return results;
+  }
+
+  async getTopRated(type: "movie" | "tv") {
+    const { results } = await this.fetch<TmdbApiResponse>(`/${type}/top_rated`);
+    return results;
+  }
+
+  async getUpcoming(type: "movie" | "tv") {
+    const { results } = await this.fetch<TmdbApiResponse>(`/${type}/upcoming`);
+    return results;
+  }
+
   async getDiscovery(type: "movie" | "tv") {
     const { results } = await this.fetch<TmdbApiResponse>(`/discover/${type}`);
     return results;
   }
 
-  async getTrending(type: "movie" | "tv" | "people") {
-    const { results } = await this.fetch<TmdbApiResponse>(`/trending/${type}/week`);
+  async getTrending(type: "all" | "movie" | "tv" | "person", timeWindow: "day" | "week") {
+    const { results } = await this.fetch<TmdbApiResponse>(`/trending/${type}/${timeWindow}`);
     return results;
   }
 
-  async getMediaInfo(mediaId: string, type: "movie" | "tv" = "movie") {
+  async getMediaInfo(type: "movie" | "tv", mediaId: string) {
     const data = await this.fetch<ExtendedMediaInfo>(`/${type}/${mediaId}?append_to_response=credits,reviews,videos,recommendations`);
     return data;
   }
 
-  async getActor(actorId: string) {
-    const { combined_credits, ...data } = await this.fetch<ExtendedPersonInfo>(
-      `/person/${actorId}?append_to_response=combined_credits`,
-    );
+  async getPerson(personId: string) {
+    const { combined_credits, ...data } = await this.fetch<ExtendedPersonInfo>(`/person/${personId}?append_to_response=combined_credits`);
 
     const sortedCast = [...(combined_credits?.cast || [])]
       .filter((item) => item.media_type === "movie")
@@ -58,7 +71,7 @@ class TmdbHandler {
 
     return {
       ...data,
-      cast: sortedCast?.slice(0, 6) || [],
+      cast: sortedCast || [],
     };
   }
 

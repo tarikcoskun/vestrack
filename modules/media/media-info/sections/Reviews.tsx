@@ -5,13 +5,14 @@ import { useState } from "react";
 // Components
 import { Icon } from "@/components/Icon";
 import { Button } from "@/components/Button";
+import { Section } from "@/components/Section";
+import { ReviewCard } from "@/components/cards/Review";
 import { MediaInfoModal } from "../components/Modal";
 import { Skeleton } from "@/components/Skeleton";
 
 // Styles
 import style from "./Reviews.module.scss";
 import classNames from "classnames/bind";
-import { ReviewCard } from "@/components/cards/Review";
 
 const cx = classNames.bind(style);
 
@@ -20,8 +21,8 @@ export function MediaInfoReviews({ data }: { data: MovieInfo & SeriesInfo | null
 
   return data === null || data?.reviews.total_results > 0
     ? (
-      <section id="reviews" className={cx("reviews")}>
-        <header>
+      <Section id="reviews">
+        <Section.Header>
           <h1>
             User Reviews
             <Button
@@ -37,7 +38,7 @@ export function MediaInfoReviews({ data }: { data: MovieInfo & SeriesInfo | null
               <Icon icon="arrow-right" size={20} />
             </Button>
           </h1>
-        </header>
+        </Section.Header>
 
         <div className={cx("reviewList")}>
           {data
@@ -52,7 +53,7 @@ export function MediaInfoReviews({ data }: { data: MovieInfo & SeriesInfo | null
         </div>
 
         <FullReviewsModal />
-      </section>
+      </Section>
       )
     : null;
 

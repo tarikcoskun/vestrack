@@ -1,34 +1,12 @@
 @import "@/styles/media";
 
 .mediaHomePage {
-  .discoveryContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    padding-block: var(--section-spacing);
-
-    .discoveryList {
-      --grid-cols: 1;
-      display: grid;
-      gap: var(--content-spacing);
-      grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
-      @include media(">lg") { --grid-cols: 2; }
-    }
-  }
-
-  .trendingContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    padding-block: var(--section-spacing);
-
-    .trendingList {
-      --grid-cols: 2;
-      display: grid;
-      gap: 4rem var(--content-spacing);
-      grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
-      @include media(">md") { --grid-cols: 4; }
-      @include media(">lg") { --grid-cols: 6; }
-    }
+  .gridList {
+    --grid-cols: 2;
+    display: grid;
+    gap: 4rem var(--content-spacing);
+    grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+    @include media(">md") { --grid-cols: 4; }
+    @include media(">lg") { --grid-cols: 6; }
   }
 }

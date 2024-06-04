@@ -5,8 +5,9 @@ import { useRef, useState } from "react";
 // Components
 import { Icon } from "@/components/Icon";
 import { Button } from "@/components/Button";
-import { VideoCard } from "@/components/cards/Video";
+import { Section } from "@/components/Section";
 import { Scroller } from "@/components/Scroller";
+import { VideoCard } from "@/components/cards/Video";
 import { MediaInfoModal } from "../components/Modal";
 import { Skeleton } from "@/components/Skeleton";
 
@@ -21,9 +22,9 @@ export function MediaInfoVideos({ data }: { data: MovieInfo & SeriesInfo | null 
 
   return data === null || data?.videos.results.length > 0
     ? (
-      <section id="videos" className={cx("videos")}>
+      <Section id="videos">
         <Scroller columns={3}>
-          <header>
+          <Section.Header scrollerControls>
             <h1>
               Videos
               <Button
@@ -39,17 +40,9 @@ export function MediaInfoVideos({ data }: { data: MovieInfo & SeriesInfo | null 
                 <Icon icon="arrow-right" size={20} />
               </Button>
             </h1>
-            <div className="scrollerControls">
-              <Scroller.Trigger direction="left">
-                <Icon icon="caret-left" />
-              </Scroller.Trigger>
-              <Scroller.Trigger direction="right">
-                <Icon icon="caret-right" />
-              </Scroller.Trigger>
-            </div>
-          </header>
+          </Section.Header>
 
-          <Scroller.Track className={cx("videoList")}>
+          <Scroller.Track maxWidth="withSidebar">
             {data
               ? data.videos.results
                 .sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime())
@@ -70,7 +63,7 @@ export function MediaInfoVideos({ data }: { data: MovieInfo & SeriesInfo | null 
         </Scroller>
 
         <FullVideosModal />
-      </section>
+      </Section>
       )
     : null;
 
