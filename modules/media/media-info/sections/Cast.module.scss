@@ -11,6 +11,7 @@
       overflow: hidden;
       border: 1px solid var(--theme-outline);
       border-radius: var(--rounded-base);
+      @include media("<md") { border-radius: var(--rounded-full); }
 
       .personPhoto {
         object-fit: cover;
@@ -29,10 +30,7 @@
         aspect-ratio: 4/5;
         background-color: var(--color-gray-150);
         transition: scale 150ms;
-        @include media("<md") {
-          border-radius: var(--rounded-full);
-          aspect-ratio: 1/1;
-        }
+        @include media("<md") { aspect-ratio: 1/1; }
 
         &:hover { scale: 1.05; }
       }
