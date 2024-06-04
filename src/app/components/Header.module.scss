@@ -30,8 +30,8 @@
         position: fixed;
         z-index: 10;
         top: var(--content-nav-height);
-        right: calc(var(--content-spacing) * -1);
-        left: calc(var(--content-spacing) * -1);
+        right: 0;
+        left: 0;
         height: 100vh;
         background-color: colors.$gray-950;
         opacity: 0;

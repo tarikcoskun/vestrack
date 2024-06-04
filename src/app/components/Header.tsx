@@ -38,6 +38,10 @@ export function Header() {
     }
   }, [mobileMenu]);
 
+  useEffect(() => {
+    setMobileMenu(false);
+  }, [pathname]);
+
   return (
     <header role="banner" className={`${cx("navbar")} contentPadding`}>
       <div className={cx("navbarContent")}>
