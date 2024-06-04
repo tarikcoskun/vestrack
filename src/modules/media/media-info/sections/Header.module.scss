@@ -48,7 +48,7 @@
     left: 0;
     height: inherit;
     background-color: var(--color-gray-150);
-    background-position: left 10%;
+    background-position: center 40%;
     background-size: cover;
     @include media("<md") { display: none; }
   }
@@ -75,6 +75,7 @@
   .mediaHeader {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     justify-content: flex-end;
 
     .mediaDetails {

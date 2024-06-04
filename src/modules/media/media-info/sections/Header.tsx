@@ -40,23 +40,37 @@ export function MediaInfoHeader({ data }: { data: MovieInfo & SeriesInfo | null 
         {data
           ? <h1 className={cx("mediaTitle")}>{data.title || data.name}</h1>
           : (
-            <Skeleton width={300} height={28.17} type="text" />
+            <Skeleton
+              height={28.17}
+              type="text"
+              style={{
+                maxWidth: "300px",
+                width: "100%",
+              }}
+            />
             )}
-        {data && (
-          <div className={cx("mediaDetails")}>
-            <div className={cx("detailList")}>
-              <span>{new Date(data.release_date).getFullYear()}</span>
-              <span>{getRuntime(data.runtime)}</span>
-            </div>
-            <span className={cx("rating")}>
-              <Icon icon="star" variant="fill" style={{ color: "var(--color-yellow)" }} />
-              <span>
-                <span className={cx("ratingAmount")}>{data.vote_average.toFixed(1).replace(".0", "")}</span>/10
+        {data
+          ? (
+            <div className={cx("mediaDetails")}>
+              <div className={cx("detailList")}>
+                <span>{data.release_date ? new Date(data.release_date).getFullYear() : `${new Date(data.first_air_date).getFullYear()}–${!data.in_production ? new Date(data.last_air_date).getFullYear() : ""}`}</span>
+                {(data.runtime || data.episode_run_time.length) ? (<span>{getRuntime(data.runtime || data.episode_run_time[0])}</span>) : null}
+              </div>
+              <span className={cx("rating")}>
+                <Icon icon="star" variant="fill" style={{ color: "var(--color-yellow)" }} />
+                <span>
+                  <span className={cx("ratingAmount")}>{data.vote_average.toFixed(1).replace(".0", "")}</span>/10
+                </span>
+                <span>({new Intl.NumberFormat("en-US", { notation: "compact" }).format(data.vote_count)} votes)</span>
               </span>
-              <span>({new Intl.NumberFormat("en-US", { notation: "compact" }).format(data.vote_count)} votes)</span>
-            </span>
-          </div>
-        )}
+            </div>
+            )
+          : (
+            <div className={cx("mediaDetails")}>
+              <Skeleton width={100} height={16.09} type="text" />
+              <Skeleton width={150} height={16.09} type="text" />
+            </div>
+            )}
       </section>
     </header>
   );
