@@ -15,14 +15,12 @@
     text-decoration: none;
 
     .mediaBackdrop,
-    .mediaBackdropFallback {
-      scale: 1.05;
-    }
+    .mediaBackdropFallback { scale: 1.05; }
   }
 
   .mediaBackdrop {
-    object-fit: cover;
-    object-position: center;
+    background-position: center;
+    background-size: cover;
   }
 
   .mediaBackdropFallback {

@@ -33,11 +33,9 @@ export function MediaHorizontalCard(props: MediaHorizontalCardProps) {
       >
         {media.backdrop_path
           ? (
-            <img
-              src={backdropUrl}
-              alt={media.title || media.name}
-              draggable="false"
+            <div
               className={cx("mediaBackdrop")}
+              style={{ backgroundImage: `url(${backdropUrl})` }}
             />
             )
           : (
