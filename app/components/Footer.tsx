@@ -13,7 +13,7 @@ const cx = classNames.bind(styles);
 
 export function Footer() {
   return (
-    <footer className={`${cx("footer")} contentPadding`}>
+    <footer className={cx("footer", ["contentPadding"])}>
       <div className={cx("footerContent")}>
         <section className={cx("footerSection", "brand")}>
           <div className={cx("brandLogo")}>Vestrack</div>

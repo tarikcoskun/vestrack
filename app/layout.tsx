@@ -16,19 +16,12 @@ const font = DM_Sans({
   weight: ["400", "500", "600"],
 });
 
-interface BaseLayoutProps {
-  maxWidth?: boolean;
-  children?: React.ReactNode;
-}
-
 export const metadata: Metadata = {
   title: "Vestrack",
   description: "Vestrack is a movie & tv series tracker",
 };
 
-export default function RootLayout(props: BaseLayoutProps) {
-  const { maxWidth = true, children } = props;
-
+export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
     <html
       lang="en"
@@ -44,15 +37,13 @@ export default function RootLayout(props: BaseLayoutProps) {
             minHeight: "calc(100vh - var(--content-nav-height))",
           }}
         >
-          <Toaster position="bottom-right" richColors />
           <div
             style={{ minHeight: "inherit" }}
-            className={classNames("inlineCenter", {
-              contentWidth: maxWidth,
-            })}
+            className={classNames("inlineCenter", ["contentWidth"])}
           >
             {children}
           </div>
+          <Toaster position="bottom-right" richColors />
         </div>
         <Footer />
       </body>

@@ -43,7 +43,7 @@ export function Navbar() {
   }, [pathname]);
 
   return (
-    <header role="banner" className={`${cx("navbar")} contentPadding`}>
+    <header role="banner" className={cx("navbar", ["contentPadding"])}>
       <div className={cx("navbarContent")}>
         <Link href="/">
           <span className={cx("brandLogo")}>Vestrack</span>
