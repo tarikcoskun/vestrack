@@ -42,7 +42,7 @@ export function SearchMediaCard(props: SearchTitleCardProps) {
           </span>
         </Link>
         <div className={cx("mediaDetails")}>
-          <span>{new Date(media.release_date! || media.first_air_date!).getFullYear()}</span>
+          {(media.release_date || media.first_air_date) ? (<span>{new Date(media.release_date! || media.first_air_date!).getFullYear()}</span>) : null}
           <span>{media.media_type === "movie" ? "Movie" : "TV Series"}</span>
         </div>
       </div>
