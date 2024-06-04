@@ -1,0 +1,28 @@
+@mixin line-clamp($lines: 1) {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+}
+
+@mixin truncate() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre;
+}
+
+@mixin circular-divider() {
+  display: inline-block;
+  padding: 1px;
+  border-radius: 50%;
+  margin: 0 0.5rem 0.125rem;
+  background-color: currentColor;
+  content: "";
+  vertical-align: middle;
+}
+
+@mixin full-width-background($color) {
+  background-color: $color;
+  box-shadow: 0 0 0 100vmax $color;
+  clip-path: inset(0 -100vmax);
+}

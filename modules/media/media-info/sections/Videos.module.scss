@@ -1,0 +1,26 @@
+@use "@/styles/util";
+@import "@/styles/media";
+
+.videos {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-block: var(--section-spacing);
+}
+
+.fullVideoList {
+  --grid-cols: 1;
+  display: grid;
+  gap: 4rem 2rem;
+  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+  @include media(">phone") { --grid-cols: 2; }
+  @include media(">md") { --grid-cols: 3; }
+
+  .video {
+    .thumbnailLink {
+      width: auto;
+
+      .videoThumbnail { width: 100%; }
+    }
+  }
+}

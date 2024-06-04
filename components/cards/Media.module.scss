@@ -1,0 +1,48 @@
+@use "@/styles/util";
+@import "@/styles/media";
+
+.mediaCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  .mediaPoster {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .mediaPosterFallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-gray-400);
+  }
+
+  .mediaPoster,
+  .mediaPosterFallback {
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--theme-outline);
+    border-radius: var(--rounded-base);
+    aspect-ratio: 2/3;
+    background-color: var(--color-gray-150);
+    transition: scale 150ms;
+
+    &:hover { scale: 1.05; }
+  }
+
+  .mediaInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-top: 1rem;
+    gap: 0.5rem;
+
+    .mediaTitle {
+      color: var(--theme-text-title);
+      font-size: 1.125rem;
+      font-weight: 500;
+      @include util.line-clamp(1);
+    }
+  }
+}

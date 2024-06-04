@@ -1,0 +1,40 @@
+@import "@/styles/media";
+
+.sidebar {
+  position: sticky;
+  z-index: 10;
+  top: var(--content-spacing);
+  width: var(--sidebar-width);
+  margin-top: var(--content-spacing);
+  @include media("<desktop") { display: none; }
+
+  .sidebarLinks {
+    list-style: none;
+
+    .sidebarLink {
+      padding-left: 1rem;
+      border-left: 2px solid var(--color-gray-300);
+      color: var(--theme-text-body);
+      cursor: pointer;
+      padding-block: 0.5rem;
+
+      &:hover { color: var(--theme-text-title); }
+      &[data-state="active"] {
+        border-color: var(--color-gray-900);
+        color: var(--theme-text-title);
+        font-weight: 500;
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    gap: 0.5rem;
+
+    > * {
+      width: 100%;
+    }
+  }
+}

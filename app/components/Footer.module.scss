@@ -1,0 +1,57 @@
+@use "@/styles/colors";
+@import "@/styles/media";
+
+.footer {
+  width: 100%;
+  margin-top: auto;
+  background-color: colors.$gray-900;
+  color: colors.$gray-300;
+
+  .footerContent {
+    --grid-cols: 2;
+    display: grid;
+    width: 100%;
+    max-width: var(--content-width);
+    padding-top: var(--section-spacing);
+    gap: var(--section-spacing);
+    grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+    margin-inline: auto;
+    @include media(">md") { --grid-cols: 4; }
+
+    .footerSection {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+
+      &.brand {
+        grid-column: span 2 / span 2;
+
+        .brandLogo {
+          color: colors.$gray-100;
+          font-size: 1.25rem;
+          font-weight: 500;
+        }
+      }
+
+      .categoryTitle { color: colors.$gray-100; }
+      .categoryLinks {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        list-style: none;
+
+        .link {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+      }
+    }
+
+    .footerCopyright {
+      border-top: 1px solid colors.$gray-800;
+      grid-column: 1 / -1;
+      padding-block: 1.5rem;
+    }
+  }
+}

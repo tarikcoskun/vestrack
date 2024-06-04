@@ -1,0 +1,103 @@
+@use "sass:color" as sass-color;
+@use "@/styles/util";
+@use "@/styles/colors";
+@import "@/styles/media";
+
+.header {
+  display: flex;
+  gap: 1.5rem;
+  @include media("<md") { padding-top: 1.5rem; }
+  @include media(">md") {
+    height: 30vh;
+    padding-bottom: 1.5rem;
+    margin-left: calc(var(--poster-width) + 2rem);
+  }
+
+  &[data-backdrop="true"] {
+    .mediaBackdrop::after {
+      position: absolute;
+      background-image: linear-gradient(to bottom, transparent, rgb(0 0 0 / 0.75));
+      content: "";
+      inset: 0;
+    }
+
+    .mediaHeader {
+      .mediaTitle {
+        @include media(">md") {
+          color: colors.$gray-100;
+          text-shadow: 0 0 8px rgb(0 0 0 / 0.5);
+        }
+      }
+
+      .mediaDetails {
+        @include media(">md") { color: sass-color.scale(colors.$gray-100, $alpha: -15%); }
+
+        .ratingAmount {
+          color: var(--theme-text-title);
+          @include media(">md") { color: colors.$gray-100; }
+        }
+      }
+    }
+  }
+
+  .mediaBackdrop {
+    position: absolute;
+    z-index: -1;
+    top: var(--content-nav-height);
+    right: 0;
+    left: 0;
+    height: inherit;
+    background-color: var(--color-gray-150);
+    background-position: center 40%;
+    background-size: cover;
+    @include media("<md") { display: none; }
+  }
+
+  .mediaPosterFallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-gray-400);
+  }
+
+  .mediaPoster,
+  .mediaPosterFallback,
+  .mediaPosterSkeleton {
+    width: clamp(120px, 40%, 180px);
+    height: 100%;
+    flex-shrink: 0;
+    border-radius: var(--rounded-base);
+    aspect-ratio: 2/3;
+    background-color: var(--color-gray-150);
+    @include media(">md") { display: none; }
+  }
+
+  .mediaHeader {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: flex-end;
+
+    .mediaDetails {
+      display: flex;
+      flex-direction: column;
+      margin-top: 0.75rem;
+      gap: 0.5rem;
+
+      .detailList :not(:first-child)::before {
+        @include util.circular-divider();
+      }
+
+      .rating {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.25rem;
+      }
+    }
+  }
+}
+
+.headerSkeleton {
+  composes: header;
+}

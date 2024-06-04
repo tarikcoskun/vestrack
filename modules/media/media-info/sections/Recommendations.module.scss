@@ -1,0 +1,8 @@
+@import "@/styles/media";
+
+.recommendations {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-block: var(--section-spacing);
+}

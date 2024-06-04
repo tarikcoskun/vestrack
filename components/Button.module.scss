@@ -1,0 +1,95 @@
+@use "sass:color" as sass-color;
+@use "@/styles/colors";
+
+$variants: "solid", "soft", "ghost";
+$colors: (
+  "white": (
+    text: colors.$gray-900,
+    base: white
+  ),
+  "gray": (
+    text: var(--color-gray-900),
+    base: colors.$gray-500,
+  ),
+  "blue": (
+    text: var(--color-blue-700),
+    base: colors.$blue-600,
+  ),
+);
+
+.button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 0.5rem;
+  transition: background-color 100ms;
+
+  &:hover { text-decoration: none; }
+  &.paddingBase {
+    padding: 8px 12px;
+
+    &.size-lg {
+      padding: 10px 14px;
+    }
+  }
+  &.paddingSquare {
+    padding: 8px;
+
+    &.size-lg {
+      padding: 10px;
+    }
+  }
+  &.roundedBase { border-radius: var(--rounded-base); }
+  &.roundedFull { border-radius: var(--rounded-full); }
+  &.size-lg { font-size: 1.125rem; }
+  &.size-sm { font-size: 0.875rem; }
+  &[disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  @mixin generate-color-variant($colors, $variant, $color) {
+    @if $variant == "solid" {
+      background-color: map-get($colors, $color, "base");
+
+      &:hover { background-color: sass-color.scale(map-get($colors, $color, "base"), $lightness: -15%); }
+    } @else if $variant == "soft" {
+      backdrop-filter: blur(1rem);
+      background-color: sass-color.scale(map-get($colors, $color, "base"), $alpha: -85%);
+      color: map-get($colors, $color, "text");
+
+      &:hover { background-color: sass-color.scale(map-get($colors, $color, "base"), $alpha: -75%); }
+    } @else if $variant == "ghost" {
+      background-color: transparent;
+      color: map-get($colors, $color, "text");
+
+      &:hover {background-color: sass-color.scale(map-get($colors, $color, "base"), $alpha: -85%); }
+    } @else {
+      @error "Unsupported variant: #{$variant}";
+    }
+  }
+
+  @each $variant in $variants {
+    @each $color in map-keys($colors) {
+      &.#{$variant}-#{$color} {
+        @include generate-color-variant($colors, $variant, $color);
+      }
+    }
+  }
+}
+
+.buttonGroup {
+  display: flex;
+
+  > :first-child {
+    flex-grow: 1;
+    border-right: 1px solid sass-color.scale(colors.$gray-100, $alpha: -85%);
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  >:last-child {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+  }
+}
