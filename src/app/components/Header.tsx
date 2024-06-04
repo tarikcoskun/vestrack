@@ -45,7 +45,9 @@ export function Header() {
   return (
     <header role="banner" className={`${cx("navbar")} contentPadding`}>
       <div className={cx("navbarContent")}>
-        <div className={cx("brandLogo")}>Vestrack</div>
+        <Link href="/movie">
+          <span className={cx("brandLogo")}>Vestrack</span>
+        </Link>
 
         <nav
           className={cx("navigation")}
