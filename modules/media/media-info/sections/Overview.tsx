@@ -93,7 +93,7 @@ export function MediaInfoOverview({ data }: { data: MovieInfo & SeriesInfo | nul
                           .sort((a, b) => (a.name > b.name ? 1 : -1)).map((genre) => (
                             <li key={genre.id} className={cx("person")}>
                               <Button key={genre.name} as={Link} href={`/genre/${slugify(genre.name)}`} color="gray" variant="soft" size="sm" rounded="full" className={cx("mediaGenre")}>
-                                <img src={`/emojis/${getGenreEmojiName(slugify(genre.name))}.svg`} width={16} height={16} /> {genre.name}
+                                <img src={`/emojis/${getGenreEmojiName(slugify(genre.name))}.svg`} width={16} height={16} draggable="false" /> {genre.name}
                               </Button>
                             </li>
                           ))}
