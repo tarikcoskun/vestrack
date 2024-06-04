@@ -88,7 +88,7 @@ export function FeaturedCardSkeleton() {
         borderRadius: "0 var(--rounded-lg) var(--rounded-lg) 0",
       }}
       >
-        <Skeleton height={25} width={250} type="text" style={{ marginBottom: "1rem" }} />
+        <Skeleton height={25} type="text" style={{ maxWidth: "250px", width: "100%", marginBottom: "1rem" }} />
         <Skeleton.Paragraph height={70.88} lines={3} type="text" />
       </div>
     </div>
