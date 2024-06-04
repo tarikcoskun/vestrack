@@ -25,15 +25,17 @@ export function ReviewCard(props: ReviewCardProps) {
       data-line-clamp={lineClamp}
     >
       <header className={cx("reviewHeader")}>
-        <div className={cx("reviewRating")}>
-          <Icon icon="star" variant="fill" style={{ color: "var(--color-yellow)" }} />
-          <span>
-            <span className={cx("ratingAmount")}>
-              {review.author_details.rating?.toFixed(1).replace(".0", "")}
+        {review.author_details.rating && (
+          <div className={cx("reviewRating")}>
+            <Icon icon="star" variant="fill" style={{ color: "var(--color-yellow)" }} />
+            <span>
+              <span className={cx("ratingAmount")}>
+                {review.author_details.rating.toFixed(1).replace(".0", "")}
+              </span>
+              /10
             </span>
-            /10
-          </span>
-        </div>
+          </div>
+        )}
         <div className={cx("reviewDetails")}>
           <span className={cx("reviewAuthor")}>{review.author}</span>
           <span className={cx("reviewDate")}>
