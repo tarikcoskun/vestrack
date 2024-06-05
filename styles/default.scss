@@ -50,7 +50,8 @@
   --font-size-h1: 1.75rem;
   --font-size-h2: 1.5rem;
   --font-size-h3: 1.25rem;
-  --font-size-paragraph: 1.125rem;
+  --font-size-lg: 1.125rem;
+  --font-size-paragraph: var(--font-size-lg);
 
   --content-spacing: 24px;
   --content-width: 1280px;

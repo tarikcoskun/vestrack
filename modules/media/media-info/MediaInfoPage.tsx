@@ -24,6 +24,8 @@ export function MediaInfoPage({ mediaId, type }: { mediaId: string; type: "movie
   const [data, setData] = useState<MovieInfo & SeriesInfo | null>(null);
 
   useEffect(() => {
+    const fetchData = async () => await getMediaInfo(type, mediaId);
+
     fetchData()
       .then((res) => {
         setData(res);
@@ -31,26 +33,20 @@ export function MediaInfoPage({ mediaId, type }: { mediaId: string; type: "movie
       .catch((err) => {
         notifyError(err);
       });
-
-    async function fetchData() {
-      return await getMediaInfo(type, mediaId);
-    }
   }, [mediaId]);
 
   return (
-    <main className={cx("mediaInfoPage")}>
-      <div className={cx("pageContent")} ref={contentRef}>
-        <MediaInfoHeader data={data} />
-        <div className={cx("layout")}>
-          <div className={cx("content")}>
-            <MediaInfoOverview data={data} />
-            <MediaInfoCast data={data} />
-            <MediaInfoVideos data={data} />
-            <MediaInfoReviews data={data} />
-            <MediaInfoRecommendations data={data} />
-          </div>
-          <MediaInfoSidebar />
+    <main className={cx("mediaInfoPage")} ref={contentRef}>
+      <MediaInfoHeader data={data} />
+      <div className={cx("layout")}>
+        <div className={cx("content")}>
+          <MediaInfoOverview data={data} />
+          <MediaInfoCast data={data} />
+          <MediaInfoVideos data={data} />
+          <MediaInfoReviews data={data} />
+          <MediaInfoRecommendations data={data} />
         </div>
+        <MediaInfoSidebar />
       </div>
     </main>
   );

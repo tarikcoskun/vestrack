@@ -23,6 +23,8 @@ export function SearchPage() {
   const [data, setData] = useState<SearchResponse | null>(null);
 
   useEffect(() => {
+    const fetchData = async () => await getSearchData(query);
+
     fetchData()
       .then((res) => {
         setData(res);
@@ -33,10 +35,6 @@ export function SearchPage() {
       .finally(() => {
         setLoading(false);
       });
-
-    async function fetchData() {
-      return await getSearchData(query);
-    }
   }, [query]);
 
   return (

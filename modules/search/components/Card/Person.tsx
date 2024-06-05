@@ -26,7 +26,7 @@ export function SearchPersonCard(props: SearchPersonCardProps) {
       className={cx("searchPersonCard", className)}
       typeof="Movie"
     >
-      <Link href={`/person/${person.id}`} className={cx("photoLink")}>
+      <Link href={infoPageUrl} className={cx("photoLink")}>
         {person.profile_path
           ? (
             <img

@@ -1,0 +1,17 @@
+@import "@/styles/media";
+
+.personInfoPage {
+  --sidebar-width: 300px;
+  --layout-gap: 2rem;
+  --poster-width: clamp(120px, 50%, 300px);
+
+  .layout {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--layout-gap);
+    padding-block: var(--section-spacing);
+    @include media("<lg") {
+      flex-direction: column;
+    }
+  }
+}

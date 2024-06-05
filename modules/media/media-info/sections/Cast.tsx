@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { slugify } from "@/util/slugify";
 
 // Components
 import Link from "next/link";
@@ -48,7 +49,7 @@ export function MediaInfoCast({ data }: { data: MovieInfo & SeriesInfo | null })
               .slice(0, 14)
               .map((person) => (
                 <article key={person.id} className={cx("person")}>
-                  <Link href={`/person/${person.id}`} className={cx("photoLink")}>
+                  <Link href={`/person/${slugify(person.name)}-${person.id}`} className={cx("photoLink")}>
                     {person.profile_path
                       ? (
                         <img

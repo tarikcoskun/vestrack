@@ -16,8 +16,8 @@ export interface ExtendedMediaInfo extends Result {
 
 interface ExtendedPersonInfo extends PersonInfo {
   combined_credits: {
-    cast: ExtendedMediaInfo[];
-    crew: ExtendedMediaInfo[];
+    cast: Cast[];
+    crew: Crew[];
   };
 }
 
@@ -62,16 +62,18 @@ class TmdbHandler {
     return data;
   }
 
-  async getPerson(personId: string) {
+  async getPersonInfo(personId: string) {
     const { combined_credits, ...data } = await this.fetch<ExtendedPersonInfo>(`/person/${personId}?append_to_response=combined_credits`);
 
     const sortedCast = [...(combined_credits?.cast || [])]
-      .filter((item) => item.media_type === "movie")
       .sort((a, b) => b.popularity - a.popularity);
 
     return {
       ...data,
-      cast: sortedCast || [],
+      combined_credits: {
+        cast: sortedCast,
+        crew: combined_credits.crew,
+      },
     };
   }
 

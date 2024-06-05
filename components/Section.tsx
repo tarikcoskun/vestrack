@@ -6,15 +6,23 @@ import { Scroller } from "./Scroller";
 import style from "./Section.module.scss";
 import classNames from "classnames/bind";
 
-type SectionProps = React.HTMLAttributes<HTMLElement>;
+interface SectionProps extends React.HTMLAttributes<HTMLElement> {
+  padding?: boolean | "content";
+};
 
 const cx = classNames.bind(style);
 
 function SectionRoot(props: SectionProps) {
-  const { className, children, ...sectionProps } = props;
+  const { className, padding = true, children, ...sectionProps } = props;
 
   return (
-    <section {...sectionProps} className={cx("section", className)}>
+    <section
+      {...sectionProps}
+      className={cx("section", className, {
+        paddingBase: padding === true,
+        paddingContent: padding === "content",
+      })}
+    >
       {children}
     </section>
   );

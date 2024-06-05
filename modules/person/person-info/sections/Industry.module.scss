@@ -1,0 +1,11 @@
+@import "@/styles/media";
+
+.columnRight {
+  width: 100%;
+
+  .personName {
+    @include media("<md") {
+      display: none;
+    }
+  }
+}
