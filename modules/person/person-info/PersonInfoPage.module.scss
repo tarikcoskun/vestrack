@@ -3,7 +3,7 @@
 .personInfoPage {
   --sidebar-width: 300px;
   --layout-gap: 2rem;
-  --poster-width: clamp(120px, 50%, 300px);
+  --poster-width: clamp(120px, 40%, 180px);
 
   .layout {
     display: flex;
