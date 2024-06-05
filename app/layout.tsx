@@ -19,6 +19,7 @@ const font = DM_Sans({
 export const metadata: Metadata = {
   title: "Vestrack",
   description: "Vestrack is a movie & tv series tracker",
+  themeColor: "#171717",
 };
 
 export default function RootLayout({ children }: React.PropsWithChildren) {
