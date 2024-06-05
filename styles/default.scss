@@ -101,7 +101,9 @@
   }
 
   @include media("<md") {
+    --content-spacing: 18px;
     --section-spacing: 24px;
+    --content-nav-height: 56px;
   }
 
   &::-webkit-scrollbar {

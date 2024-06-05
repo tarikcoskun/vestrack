@@ -64,22 +64,23 @@
     .searchBar {
       flex-grow: 1;
       @include media("<phone") { display: none; }
-
-      .searchButton { color: var(--theme-text-body); }
     }
 
     .menus {
       display: flex;
       margin-left: auto;
-      gap: 0.5rem;
+      gap: 1rem;
+      @include media(">md") { display: none; }
+    }
+  }
 
-      .userMenu {
-        @include media("<md") { display: none; }
-      }
+  .mobileSearchOverlay {
+    position: absolute;
+    inset: 0;
 
-      .mobileMenu {
-        @include media(">md") { display: none; }
-      }
+    .searchBar {
+      height: var(--content-nav-height);
+      border-radius: 0;
     }
   }
 }

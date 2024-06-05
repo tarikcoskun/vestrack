@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 // Data
@@ -23,6 +23,8 @@ export function Navbar() {
   const pathname = usePathname();
   const [query, setQuery] = useState("");
   const [mobileMenu, setMobileMenu] = useState(false);
+  const [mobileSearch, setMobileSearch] = useState(false);
+  const mobileSearchRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -81,7 +83,6 @@ export function Navbar() {
                 type="submit"
                 padding={false}
                 aria-label="Search"
-                className={cx("searchButton")}
                 style={{ color: "var(--theme-text-body)" }}
               >
                 <Icon icon="search" size={20} />
@@ -94,10 +95,16 @@ export function Navbar() {
           <Button
             color="gray"
             variant="ghost"
-            className={cx("userMenu")}
+            padding={false}
+            aria-label="Search"
+            className={cx("mobileSearch")}
+            onClick={() => {
+              setMobileSearch(true);
+              setTimeout(() => mobileSearchRef.current?.focus());
+            }}
             style={{ color: "var(--theme-text-button)" }}
           >
-            Login
+            <Icon icon="search" size={22} />
           </Button>
 
           <Button
@@ -107,11 +114,39 @@ export function Navbar() {
             aria-label="Mobile menu"
             className={cx("mobileMenu")}
             onClick={() => setMobileMenu((val) => !val)}
-            leading={<Icon icon={mobileMenu ? "x" : "menu"} size={24} />}
             style={{ color: "var(--theme-text-button)" }}
-          />
+          >
+            <Icon icon={mobileMenu ? "x" : "menu"} size={24} />
+          </Button>
         </div>
       </div>
+
+      {mobileSearch && (
+        <div className={cx("mobileSearchOverlay")}>
+          <form onSubmit={handleSubmit} className={cx("searchBar")}>
+            <Input
+              type="search"
+              placeholder="Search for movies, tv series, people..."
+              containerClassName={cx("searchBar")}
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              className={cx("searchInput")}
+              ref={mobileSearchRef}
+              trailing={(
+                <Button
+                  type="button"
+                  padding={false}
+                  aria-label="Close search"
+                  onClick={() => setMobileSearch(false)}
+                  style={{ color: "var(--theme-text-body)" }}
+                >
+                  <Icon icon="x" size={20} />
+                </Button>
+              )}
+            />
+          </form>
+        </div>
+      )}
     </header>
   );
 }
