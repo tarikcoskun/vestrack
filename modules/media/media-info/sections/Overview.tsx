@@ -138,7 +138,7 @@ function MetadataItem(props: MetadataItemProps) {
   return (
     <div className={cx("metadataItem")}>
       <span className={cx("title")}>
-        {title + (people.length > 1 ? "s" : "")}
+        {title + (filteredPeople.length > 1 ? "s" : "")}
       </span>
       <ul className={cx("personGroup")}>
         {filteredPeople.map((person, idx) => (
