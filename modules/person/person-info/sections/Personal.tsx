@@ -34,7 +34,7 @@ export function PersonInfoPersonal({ data }: { data: PersonInfo | null }) {
             </div>
             )
         : (
-          <Skeleton style={{ width: "var(--poster-width)", height: "100%", aspectRatio: "2/3", backgroundColor: "var(--color-gray-200)" }} />
+          <Skeleton style={{ width: "100%", height: "100%", aspectRatio: "2/3", backgroundColor: "var(--color-gray-200)" }} />
           )}
 
       {data && (
