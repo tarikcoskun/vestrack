@@ -30,7 +30,7 @@
       }
 
       .mediaDetails {
-        @include media(">md") { color: sass-color.scale(colors.$gray-100, $alpha: -15%); }
+        @include media(">md") { color: var(--theme-text-subtext); }
 
         .ratingAmount {
           color: var(--theme-text-title);

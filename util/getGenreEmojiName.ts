@@ -36,7 +36,7 @@ export function getGenreEmojiName(genre: string) {
     case "reality":
       return "globe";
     case "romance":
-      return "heart-with-arrow";
+      return "revolving-hearts";
     case "science-fiction":
       return "rocket";
     case "talk":

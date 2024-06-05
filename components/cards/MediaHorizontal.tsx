@@ -51,6 +51,7 @@ export function MediaHorizontalCard(props: MediaHorizontalCardProps) {
               <span>{media.vote_average.toFixed(1).replace(".0", "")}</span>
             </span>
             {(media.release_date || media.first_air_date) ? (<span>{new Date(media.release_date! || media.first_air_date!).getFullYear()}</span>) : null}
+            {media.media_type === "tv" && (<span>TV Series</span>)}
           </div>
         </div>
       </article>
