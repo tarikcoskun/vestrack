@@ -19,7 +19,7 @@
       color: var(--theme-text-title);
 
       &:focus { outline: none; }
-      &::placeholder { color: var(--theme-text-subtext); }
+      &::placeholder { color: var(--color-gray-600); }
     }
 
     .leading {

@@ -61,6 +61,7 @@
 
     .mediaDetails {
       display: flex;
+      color: var(--theme-text-subtext);
 
       > :not(:first-child)::before {
         @include util.circular-divider();
