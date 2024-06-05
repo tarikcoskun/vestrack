@@ -63,7 +63,7 @@
   .mediaPoster,
   .mediaPosterFallback,
   .mediaPosterSkeleton {
-    width: clamp(120px, 40%, 180px);
+    width: var(--poster-width);
     height: 100%;
     flex-shrink: 0;
     border-radius: var(--rounded-base);

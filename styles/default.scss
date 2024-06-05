@@ -57,6 +57,7 @@
   --content-width: 1280px;
   --content-nav-height: 64px;
   --section-spacing: 48px;
+  --poster-width: clamp(120px, 50%, 300px);
 
   --rounded-sm: 4px;
   --rounded-base: 6px;
@@ -105,6 +106,7 @@
     --content-spacing: 18px;
     --section-spacing: 24px;
     --content-nav-height: 56px;
+    --poster-width: clamp(120px, 40%, 180px);
   }
 
   &::-webkit-scrollbar {
