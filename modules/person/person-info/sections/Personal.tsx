@@ -54,7 +54,6 @@ export function PersonInfoPersonal({ data }: { data: PersonInfo | null }) {
               )}
 
           <FactItem title="Known For" content={data.known_for_department} />
-          <FactItem title="Known Credits" content={data.combined_credits.cast.length} />
           <FactItem
             title="Birth"
             content={(
