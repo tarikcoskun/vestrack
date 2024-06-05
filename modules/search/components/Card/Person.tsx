@@ -52,7 +52,7 @@ export function SearchPersonCard(props: SearchPersonCardProps) {
         </Link>
         <div className={cx("personDetails")}>
           <span>{person.known_for_department}</span>
-          <span>{person.known_for[0].title || person.known_for[0].name} ({new Date(person.known_for[0].release_date! || person.known_for[0].first_air_date!).getFullYear()})</span>
+          {person.known_for.length ? (<span>{person.known_for[0].title || person.known_for[0].name} ({new Date(person.known_for[0].release_date! || person.known_for[0].first_air_date!).getFullYear()})</span>) : null}
         </div>
       </div>
     </article>
