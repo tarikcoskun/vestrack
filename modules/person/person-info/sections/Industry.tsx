@@ -42,29 +42,33 @@ export function PersonInfoIndustry({ data }: { data: PersonInfo | null }) {
             )}
       </Section>
 
-      <Section padding="content">
-        <Scroller columns={6}>
-          <Section.Header scrollerControls>
-            <h2>Known For</h2>
-          </Section.Header>
+      {data?.combined_credits.cast.length
+        ? (
+          <Section padding="content">
+            <Scroller columns={6}>
+              <Section.Header scrollerControls>
+                <h2>Known For</h2>
+              </Section.Header>
 
-          <Scroller.Track maxWidth="withSidebar">
-            {data
-              ? data.combined_credits.cast.sort((a, b) => b.popularity - a.popularity).map((media) => (
-                <MediaCard
-                  key={media.id}
-                  media={media as Result}
-                  type={media.media_type}
-                />
-              ))
-              : Array(5)
-                .fill(0)
-                .map((_, idx) => (
-                  <MediaCardSkeleton key={idx} />
-                ))}
-          </Scroller.Track>
-        </Scroller>
-      </Section>
+              <Scroller.Track maxWidth="withSidebar">
+                {data
+                  ? data.combined_credits.cast.sort((a, b) => b.popularity - a.popularity).map((media) => (
+                    <MediaCard
+                      key={media.id}
+                      media={media as Result}
+                      type={media.media_type}
+                    />
+                  ))
+                  : Array(5)
+                    .fill(0)
+                    .map((_, idx) => (
+                      <MediaCardSkeleton key={idx} />
+                    ))}
+              </Scroller.Track>
+            </Scroller>
+          </Section>
+          )
+        : null}
     </div>
   );
 }

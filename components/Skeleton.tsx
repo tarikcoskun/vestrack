@@ -45,16 +45,17 @@ function SkeletonRoot(props: SkeletonProps) {
 
 interface SkeletonParagraphProps extends SkeletonProps {
   lines: number;
+  containerStyle?: React.CSSProperties;
 }
 
 function SkeletonParagraph(props: SkeletonParagraphProps) {
-  const { lines, width, height, style } = props;
+  const { lines, width, height, style, containerStyle } = props;
   const arr = Array(Number(lines)).fill("");
 
   return (
     <div
       className={cx("skeletonParagraphContainer")}
-      style={{ height: `${height}px` }}
+      style={{ height: `${height}px`, ...containerStyle }}
     >
       {arr.map((_, idx) => (
         <SkeletonRoot

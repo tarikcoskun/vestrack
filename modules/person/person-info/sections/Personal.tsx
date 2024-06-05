@@ -34,56 +34,43 @@ export function PersonInfoPersonal({ data }: { data: PersonInfo | null }) {
             </div>
             )
         : (
-          <Skeleton style={{ width: "100%", height: "100%", aspectRatio: "2/3", backgroundColor: "var(--color-gray-200)" }} />
+          <Skeleton className={cx("personPhotoSkeleton")} />
           )}
 
-      {data && (
-        <div className={cx("facts")}>
-          {data
-            ? <h1 className={cx("personName")}>{data.name}</h1>
-            : (
-              <Skeleton
-                height={28.17}
-                type="text"
-                className={cx("personName")}
-                style={{
-                  maxWidth: "300px",
-                  width: "100%",
-                }}
-              />
-              )}
+      <div className={cx("facts")}>
+        {data
+          ? <h1 className={cx("personName")}>{data.name}</h1>
+          : (
+            <Skeleton
+              height={28.17}
+              type="text"
+              className={cx("personName")}
+              style={{
+                maxWidth: "300px",
+                width: "100%",
+              }}
+            />
+            )}
 
-          <FactItem title="Known For" content={data.known_for_department} />
-          <FactItem
-            title="Birth"
-            content={(
+        <div className={cx("factGroup")}>
+          <div className="title">Known For</div>
+          {data ? data.known_for_department : <Skeleton width={100} height={16.09} type="text" />}
+        </div>
+        <div className={cx("factGroup")}>
+          <div className="title">Birth</div>
+          {data
+            ? (
               <>
                 {new Date(data?.birthday).toLocaleDateString("en-US", DATE_FORMAT)}
                 <br />{calculateAge(new Date(data?.birthday))} years old
                 <br />{data.place_of_birth}
               </>
-            )}
-          />
+              )
+            : (
+              <Skeleton.Paragraph height={48.28} lines={3} containerStyle={{ width: "100px", gap: "3px" }} />
+              )}
         </div>
-      )}
-    </div>
-  );
-}
-
-interface FactItemProps {
-  title: string;
-  content?: React.ReactNode;
-}
-
-function FactItem(props: FactItemProps) {
-  const { title, content } = props;
-
-  return (
-    <div className={cx("factGroup")}>
-      <div className={cx("title")}>
-        {title}
       </div>
-      {content}
     </div>
   );
 }
