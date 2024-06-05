@@ -123,7 +123,13 @@ export function Navbar() {
 
       {mobileSearch && (
         <div className={cx("mobileSearchOverlay")}>
-          <form onSubmit={handleSubmit} className={cx("searchBar")}>
+          <form
+            onSubmit={(event) => {
+              handleSubmit(event);
+              setMobileSearch(false);
+            }}
+            className={cx("searchBar")}
+          >
             <Input
               type="search"
               placeholder="Search for movies, tv series, people..."
