@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 
 import classNames from "classnames";
 import { Toaster } from "sonner";
@@ -19,6 +19,10 @@ const font = DM_Sans({
 export const metadata: Metadata = {
   title: "Vestrack",
   description: "Vestrack is a movie & tv series tracker",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
   themeColor: "#171717",
 };
 
