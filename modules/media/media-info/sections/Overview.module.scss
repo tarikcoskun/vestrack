@@ -88,6 +88,10 @@
           gap: 0.5rem 1rem;
           @include media("<phone") { flex-direction: column; }
 
+          &.skeleton {
+            @include media(">phone") { align-items: center; }
+          }
+
           &.genres .title {
             margin-top: 7px;
           }
