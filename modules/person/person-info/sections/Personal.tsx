@@ -60,7 +60,10 @@ export function PersonInfoPersonal({ data }: { data: PersonInfo | null }) {
           {data
             ? (
               <>
-                {new Date(data?.birthday).toLocaleDateString("en-US", DATE_FORMAT)}
+                {new Date(data?.birthday).toLocaleDateString("en-US", {
+                  ...DATE_FORMAT,
+                  month: "long",
+                })}
                 <br />{calculateAge(new Date(data?.birthday))} years old
                 <br />{data.place_of_birth}
               </>
