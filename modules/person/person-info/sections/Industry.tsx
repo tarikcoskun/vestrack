@@ -47,7 +47,7 @@ export function PersonInfoIndustry({ data }: { data: PersonInfo | null }) {
       {data?.combined_credits.cast.length
         ? (
           <Section padding="content">
-            <Scroller columns={6}>
+            <Scroller columns={5}>
               <Section.Header scrollerControls>
                 <h2>Known For</h2>
               </Section.Header>
