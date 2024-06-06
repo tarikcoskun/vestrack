@@ -15,7 +15,7 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(style);
 
 export function MediaHomePage({ type }: { type: "movie" | "tv" }) {
-  const [data, setData] = useState<{ trending: Result[]; topRated: Result[] } | null>(null);
+  const [data, setData] = useState<{ trending: Result[]; popular: Result[] } | null>(null);
 
   useEffect(() => {
     const fetchData = async () => await getMediaHomeData(type);

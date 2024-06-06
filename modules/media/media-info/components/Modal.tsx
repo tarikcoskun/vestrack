@@ -2,7 +2,7 @@ import { Modal, type ModalProps } from "@/components/Modal";
 import { forwardRef } from "react";
 
 interface MediaInfoModalProps extends Omit<ModalProps, "header"> {
-  media: MovieInfo & SeriesInfo | null;
+  media: MediaInfo & SeriesInfo | null;
   description: string;
   children?: React.ReactNode;
 }

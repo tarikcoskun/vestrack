@@ -1,4 +1,4 @@
-interface MovieInfo {
+interface MediaInfo {
   adult: boolean;
   backdrop_path: string;
   belongs_to_collection: BelongsToCollection;

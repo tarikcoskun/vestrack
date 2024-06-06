@@ -21,7 +21,7 @@ const cx = classNames.bind(style);
 
 export function MediaInfoPage({ mediaId, type }: { mediaId: string; type: "movie" | "tv" }) {
   const contentRef = useRef<HTMLDivElement>(null);
-  const [data, setData] = useState<MovieInfo & SeriesInfo | null>(null);
+  const [data, setData] = useState<MediaInfo & SeriesInfo | null>(null);
 
   useEffect(() => {
     const fetchData = async () => await getMediaInfo(type, mediaId);

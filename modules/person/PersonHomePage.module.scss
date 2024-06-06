@@ -1,0 +1,12 @@
+@import "@/styles/media";
+
+.personHomePage {
+  .gridList {
+    --grid-cols: 2;
+    display: grid;
+    gap: 4rem var(--content-spacing);
+    grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+    @include media(">md") { --grid-cols: 4; }
+    @include media(">lg") { --grid-cols: 6; }
+  }
+}

@@ -1,4 +1,3 @@
-import { getGender } from "@/util/getGender";
 import { calculateAge } from "@/util/calculateAge";
 import { DATE_FORMAT } from "@/constants/misc";
 import { TMDB_IMAGE_BASE_POSTER } from "@/constants/image";
@@ -53,11 +52,11 @@ export function PersonInfoPersonal({ data }: { data: PersonInfo | null }) {
             )}
 
         <div className={cx("factGroup")}>
-          <div className="title">Known For</div>
+          <div className={cx("title")}>Known For</div>
           {data ? data.known_for_department : <Skeleton width={100} height={16.09} type="text" />}
         </div>
         <div className={cx("factGroup")}>
-          <div className="title">Birth</div>
+          <div className={cx("title")}>Birth</div>
           {data
             ? (
               <>

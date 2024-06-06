@@ -11,7 +11,7 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(style);
 
-export function MediaInfoHeader({ data }: { data: MovieInfo & SeriesInfo | null }) {
+export function MediaInfoHeader({ data }: { data: MediaInfo & SeriesInfo | null }) {
   const backdropUrl = TMDB_IMAGE_BASE_BACKDROP + data?.backdrop_path;
   const posterUrl = TMDB_IMAGE_BASE_POSTER + data?.poster_path;
 

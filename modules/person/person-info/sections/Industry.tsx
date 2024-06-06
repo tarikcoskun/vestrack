@@ -28,19 +28,21 @@ export function PersonInfoIndustry({ data }: { data: PersonInfo | null }) {
             }}
           />
           )}
-      <Section padding="content">
-        <Section.Header>
-          <h2>Biography</h2>
-        </Section.Header>
+      {(data === null || data.biography) && (
+        <Section padding="content">
+          <Section.Header>
+            <h2>Biography</h2>
+          </Section.Header>
 
-        {data
-          ? (
-            <p dangerouslySetInnerHTML={{ __html: snarkdown(data?.biography.replace(/\r?\n|\r/g, "<br>")) }} />
-            )
-          : (
-            <Skeleton.Paragraph height={162.75} lines={7} />
-            )}
-      </Section>
+          {data
+            ? (
+              <p dangerouslySetInnerHTML={{ __html: snarkdown(data?.biography.replace(/\r?\n|\r/g, "<br>")) }} />
+              )
+            : (
+              <Skeleton.Paragraph height={162.75} lines={7} />
+              )}
+        </Section>
+      )}
 
       {data?.combined_credits.cast.length
         ? (
@@ -52,11 +54,12 @@ export function PersonInfoIndustry({ data }: { data: PersonInfo | null }) {
 
               <Scroller.Track maxWidth="withSidebar">
                 {data
-                  ? data.combined_credits.cast.sort((a, b) => b.popularity - a.popularity).map((media) => (
+                  ? data.combined_credits.cast.map((media) => (
                     <MediaCard
                       key={media.id}
                       media={media as Result}
                       type={media.media_type}
+                      withRating={false}
                     />
                   ))
                   : Array(5)

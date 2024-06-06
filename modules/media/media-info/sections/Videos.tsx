@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 // Components
 import { Icon } from "@/components/Icon";
@@ -17,7 +17,7 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(style);
 
-export function MediaInfoVideos({ data }: { data: MovieInfo & SeriesInfo | null }) {
+export function MediaInfoVideos({ data }: { data: MediaInfo & SeriesInfo | null }) {
   const [modalOpen, setModalOpen] = useState(false);
 
   return data === null || data?.videos.results.length > 0

@@ -5,7 +5,7 @@ import { MediaCard, MediaCardSkeleton } from "@/components/cards/Media";
 import { Section } from "@/components/Section";
 import { Scroller } from "@/components/Scroller";
 
-export function MediaInfoRecommendations({ data }: { data: MovieInfo & SeriesInfo | null }) {
+export function MediaInfoRecommendations({ data }: { data: MediaInfo & SeriesInfo | null }) {
   return data === null || data?.recommendations.total_results > 0
     ? (
       <Section id="recommendations">

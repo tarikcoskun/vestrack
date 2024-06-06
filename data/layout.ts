@@ -16,6 +16,11 @@ export const navbarLinks: (GenericLink & { icon: IconList })[] = [
     href: "/tv",
     icon: "tv",
   },
+  {
+    label: "People",
+    href: "/person",
+    icon: "people",
+  },
 ];
 
 export const footerLinks: Record<string, (GenericLink & { external?: boolean })[]> = {

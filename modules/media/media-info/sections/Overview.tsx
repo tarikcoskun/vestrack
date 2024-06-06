@@ -14,7 +14,7 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(style);
 
-export function MediaInfoOverview({ data }: { data: MovieInfo & SeriesInfo | null }) {
+export function MediaInfoOverview({ data }: { data: MediaInfo & SeriesInfo | null }) {
   const posterUrl = TMDB_IMAGE_BASE_POSTER + data?.poster_path;
   const posterBlurUrl = TMDB_IMAGE_BASE_POSTER_BLUR + data?.poster_path;
   const trailerUrl = `https://youtu.be/${data?.videos.results.find((video) => video.type === "Trailer")?.key}`;
@@ -127,7 +127,7 @@ function MetadataItem(props: MetadataItemProps) {
   const { title, people } = props;
 
   const filteredPeople = (people || []).reduce((arr: Cast[], curr) => {
-    if (!arr.map((person) => person.name).includes(curr.name))
+    if (!arr.map((item) => item.name).includes(curr.name))
       arr.push(curr);
     return arr;
   }, []);

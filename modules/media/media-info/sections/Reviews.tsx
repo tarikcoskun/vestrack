@@ -16,7 +16,7 @@ import classNames from "classnames/bind";
 
 const cx = classNames.bind(style);
 
-export function MediaInfoReviews({ data }: { data: MovieInfo & SeriesInfo | null }) {
+export function MediaInfoReviews({ data }: { data: MediaInfo & SeriesInfo | null }) {
   const [modalOpen, setModalOpen] = useState(false);
 
   return data === null || data?.reviews.total_results > 0

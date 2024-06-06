@@ -2,8 +2,8 @@ import axios from "axios";
 
 export interface ExtendedMediaInfo extends Result {
   credits: {
-    cast: Cast[];
-    crew: Cast[];
+    cast: PersonCast[];
+    crew: PersonCast[];
   };
   reviews: {
     results: Review[];
@@ -16,8 +16,8 @@ export interface ExtendedMediaInfo extends Result {
 
 interface ExtendedPersonInfo extends PersonInfo {
   combined_credits: {
-    cast: Cast[];
-    crew: Crew[];
+    cast: PersonCast[];
+    crew: PersonCrew[];
   };
 }
 
@@ -65,8 +65,13 @@ class TmdbHandler {
   async getPersonInfo(personId: string) {
     const { combined_credits, ...data } = await this.fetch<ExtendedPersonInfo>(`/person/${personId}?append_to_response=combined_credits`);
 
-    const sortedCast = [...(combined_credits?.cast || [])]
-      .sort((a, b) => b.popularity - a.popularity);
+    const filteredCast = (combined_credits.cast || []).reduce((arr: PersonCast[], curr) => {
+      if (!arr.map((item) => item.name).includes(curr.name))
+        arr.push(curr);
+      return arr;
+    }, []);
+
+    const sortedCast = filteredCast.sort((a, b) => b.popularity - a.popularity);
 
     return {
       ...data,

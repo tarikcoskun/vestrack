@@ -13,12 +13,13 @@ import classNames from "classnames/bind";
 interface MediaCardProps extends React.HTMLAttributes<HTMLElement> {
   type: "movie" | "tv";
   media: Result;
+  withRating?: boolean;
 }
 
 const cx = classNames.bind(style);
 
 export function MediaCard(props: MediaCardProps) {
-  const { media, type, className, ...cardProps } = props;
+  const { media, type, withRating = true, className, ...cardProps } = props;
 
   const infoPageUrl = `/${type}/${`${slugify(media.title! || media.name!)}-${media.id}`}`;
   const posterUrl = TMDB_IMAGE_BASE_POSTER + media.poster_path;
@@ -50,10 +51,12 @@ export function MediaCard(props: MediaCardProps) {
           <span className={cx("mediaTitle")} title={media.title || media.name}>{media.title || media.name}</span>
         </Link>
         <div className={cx("mediaDetails")}>
-          <span className={cx("rating")}>
-            <Icon icon="star" variant="fill" style={{ color: "var(--color-yellow)" }} />
-            <span>{media.vote_average.toFixed(1).replace(".0", "")}</span>
-          </span>
+          {withRating && (
+            <span className={cx("rating")}>
+              <Icon icon="star" variant="fill" style={{ color: "var(--color-yellow)" }} />
+              <span>{media.vote_average.toFixed(1).replace(".0", "")}</span>
+            </span>
+          )}
           <span>{new Date(media.release_date! || media.first_air_date!).getFullYear()}</span>
         </div>
       </div>

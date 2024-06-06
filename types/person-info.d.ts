@@ -17,11 +17,11 @@ interface PersonInfo {
 }
 
 interface CombinedCredits {
-  cast: Cast[];
-  crew: Crew[];
+  cast: PersonCast[];
+  crew: PersonCrew[];
 }
 
-interface Cast {
+interface PersonCast {
   adult: boolean;
   backdrop_path: null | string;
   genre_ids: number[];
@@ -47,7 +47,7 @@ interface Cast {
   episode_count?: number;
 }
 
-interface Crew {
+interface PersonCrew {
   adult: boolean;
   backdrop_path: null | string;
   genre_ids: number[];

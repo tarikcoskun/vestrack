@@ -1,0 +1,65 @@
+@use "@/styles/util";
+@import "@/styles/media";
+
+.personCard {
+  display: flex;
+  flex-direction: column;
+
+  .photoLink {
+    display: flex;
+    overflow: hidden;
+    border: 1px solid var(--theme-outline);
+    border-radius: var(--rounded-base);
+    @include media("<md") { border-radius: var(--rounded-full); }
+
+    .personPhoto {
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .personInitials {
+      display: grid;
+      font-size: 3rem;
+      place-content: center;
+    }
+
+    .personPhoto,
+    .personInitials {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 4/5;
+      background-color: var(--color-gray-150);
+      transition: scale 150ms;
+      @include media("<md") { aspect-ratio: 1/1; }
+
+      &:hover { scale: 1.05; }
+    }
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .personInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-top: 1rem;
+    gap: 0.5rem;
+
+    .personName {
+      color: var(--theme-text-title);
+      font-size: 1.125rem;
+      font-weight: 500;
+      @include util.line-clamp(1);
+    }
+
+    .personDetails {
+      display: flex;
+
+      > :not(:first-child)::before {
+        @include util.circular-divider();
+      }
+    }
+  }
+}

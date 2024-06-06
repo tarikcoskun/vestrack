@@ -34,10 +34,10 @@ interface Person {
   id: number;
   known_for: Knownfor[];
   known_for_department: string;
-  profile_path?: string;
+  profile_path: string | null;
   popularity: number;
-  media_type: string;
-  character: string;
+  media_type?: string;
+  character?: string;
 }
 
 interface Knownfor {

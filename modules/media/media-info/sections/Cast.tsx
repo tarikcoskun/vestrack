@@ -1,10 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { slugify } from "@/util/slugify";
 
 // Components
-import Link from "next/link";
 import { Icon } from "@/components/Icon";
 import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
@@ -15,10 +13,11 @@ import { Skeleton } from "@/components/Skeleton";
 // Styles
 import style from "./Cast.module.scss";
 import classNames from "classnames/bind";
+import { PersonCard } from "@/components/cards/Person";
 
 const cx = classNames.bind(style);
 
-export function MediaInfoCast({ data }: { data: MovieInfo & SeriesInfo | null }) {
+export function MediaInfoCast({ data }: { data: MediaInfo & SeriesInfo | null }) {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
@@ -48,30 +47,10 @@ export function MediaInfoCast({ data }: { data: MovieInfo & SeriesInfo | null })
               .sort((a, b) => a.order! - b.order!)
               .slice(0, 14)
               .map((person) => (
-                <article key={person.id} className={cx("person")}>
-                  <Link href={`/person/${slugify(person.name)}-${person.id}`} className={cx("photoLink")}>
-                    {person.profile_path
-                      ? (
-                        <img
-                          src={`https://image.tmdb.org/t/p/w342${person.profile_path}`}
-                          alt={person.name}
-                          className={cx("personPhoto")}
-                        />
-                        )
-                      : (
-                        <div className={cx("personInitials")}>
-                          {person.name
-                            ?.split(/\s/)
-                            .slice(0, 2)
-                            .map((word) => word.slice(0, 1))}
-                        </div>
-                        )}
-                  </Link>
-                  <Link href={`/person/${person.id}`} className={cx("personName")}>
-                    <span title={person.name}>{person.name}</span>
-                  </Link>
-                  <div className={cx("personCharacter")}>{person.character}</div>
-                </article>
+                <PersonCard
+                  person={person}
+                  details={person.character}
+                />
               ))
             : Array(6)
               .fill(0)
