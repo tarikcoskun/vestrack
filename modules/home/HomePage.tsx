@@ -104,7 +104,7 @@ export function HomePage() {
               Popular Series
               <Button
                 as={Link}
-                href="/movie"
+                href="/tv"
                 color="gray"
                 variant="ghost"
                 padding="square"
