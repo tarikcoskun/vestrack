@@ -106,11 +106,11 @@ export function MediaInfoOverview({ data }: { data: MediaInfo & SeriesInfo | nul
               <div className={cx("metadataList")}>
                 <div className={cx("metadataItem", "skeleton")}>
                   <Skeleton width={60} height={18} className={cx("title")} />
-                  <Skeleton height={18} type="text" style={{ maxWidth: "180px", width: "100%" }} />
+                  <Skeleton height={18} style={{ maxWidth: "180px", width: "100%" }} />
                 </div>
                 <div className={cx("metadataItem", "skeleton")}>
                   <Skeleton width={60} height={18} className={cx("title")} />
-                  <Skeleton height={21} type="text" style={{ maxWidth: "300px", width: "100%" }} />
+                  <Skeleton height={21} style={{ maxWidth: "300px", width: "100%" }} />
                 </div>
                 <div className={cx("metadataItem", "skeleton")}>
                   <Skeleton width={60} height={18} className={cx("title")} />
