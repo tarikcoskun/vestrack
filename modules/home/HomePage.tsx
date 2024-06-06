@@ -5,6 +5,7 @@ import { notifyError } from "@/util/notifyError";
 import { getHomeData } from "./getHomeData";
 
 // Components
+import Link from "next/link";
 import { Icon } from "@/components/Icon";
 import { Section } from "@/components/Section";
 import { Scroller } from "@/components/Scroller";
@@ -14,6 +15,7 @@ import { MediaCard, MediaCardSkeleton } from "@/components/cards/Media";
 import style from "./HomePage.module.scss";
 import classNames from "classnames/bind";
 import { MediaCardHorizontalSkeleton, MediaHorizontalCard } from "@/components/cards/MediaHorizontal";
+import { Button } from "@/components/Button";
 
 const cx = classNames.bind(style);
 
@@ -60,7 +62,21 @@ export function HomePage() {
       <Section id="popular-movies">
         <Scroller columns={6}>
           <Section.Header scrollerControls>
-            <h1><Icon icon="film" variant="fill" size={28} style={{ color: "var(--color-gray-600)" }} /> Popular Movies</h1>
+            <h1>
+              <Icon icon="film" variant="fill" size={28} style={{ color: "var(--color-gray-600)" }} />
+              Popular Movies
+              <Button
+                as={Link}
+                href="/movie"
+                color="gray"
+                variant="ghost"
+                padding="square"
+                rounded="full"
+                aria-label="See all"
+              >
+                <Icon icon="arrow-right" size={20} />
+              </Button>
+            </h1>
           </Section.Header>
 
           <Scroller.Track>
@@ -83,7 +99,21 @@ export function HomePage() {
       <Section id="popular-series">
         <Scroller columns={6}>
           <Section.Header scrollerControls>
-            <h1><Icon icon="tv" variant="fill" size={28} style={{ color: "var(--color-gray-600)" }} /> Popular Series</h1>
+            <h1>
+              <Icon icon="film" variant="fill" size={28} style={{ color: "var(--color-gray-600)" }} />
+              Popular Series
+              <Button
+                as={Link}
+                href="/movie"
+                color="gray"
+                variant="ghost"
+                padding="square"
+                rounded="full"
+                aria-label="See all"
+              >
+                <Icon icon="arrow-right" size={20} />
+              </Button>
+            </h1>
           </Section.Header>
 
           <Scroller.Track>
