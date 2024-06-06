@@ -27,7 +27,8 @@
     margin-top: 1rem;
     color: var(--theme-text-title);
     font-size: 1.125rem;
-    @include util.line-clamp(1);
+    font-weight: 500;
+    @include util.truncate();
   }
 
   .publishedAt { margin-top: 0.5rem; }

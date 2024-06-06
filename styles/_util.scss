@@ -8,7 +8,7 @@
 @mixin truncate() {
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: pre;
+  white-space: nowrap;
 }
 
 @mixin circular-divider() {

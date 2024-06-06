@@ -32,8 +32,9 @@ export function VideoCard(props: VideoCardProps) {
         target="_blank"
         rel="noopener noreferrer"
         className={cx("videoName")}
+        title={video.name}
       >
-        {video.name}
+        <span>{video.name}</span>
       </a>
       <div className={cx("publishedAt")}>
         {new Date(video.published_at).toLocaleDateString("en-US", DATE_FORMAT)}

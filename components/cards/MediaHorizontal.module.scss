@@ -53,10 +53,11 @@
     gap: 0.5rem;
 
     .mediaTitle {
+      display: block;
       color: colors.$gray-100;
       font-size: 1.125rem;
       font-weight: 500;
-      @include util.line-clamp(1);
+      @include util.truncate();
     }
 
     .mediaDetails {
