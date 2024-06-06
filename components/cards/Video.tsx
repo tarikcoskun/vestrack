@@ -3,6 +3,7 @@ import { DATE_FORMAT } from "@/constants/misc";
 // Styles
 import style from "./Video.module.scss";
 import classNames from "classnames/bind";
+import { Skeleton } from "../Skeleton";
 
 interface VideoCardProps extends React.HTMLAttributes<HTMLElement> {
   video: Video;
@@ -39,6 +40,16 @@ export function VideoCard(props: VideoCardProps) {
       <div className={cx("publishedAt")}>
         {new Date(video.published_at).toLocaleDateString("en-US", DATE_FORMAT)}
       </div>
+    </div>
+  );
+}
+
+export function VideoCardSkeleton() {
+  return (
+    <div>
+      <Skeleton style={{ width: "100%", aspectRatio: "16/8.9" }} />
+      <Skeleton width={220} height={18.11} type="text" style={{ marginTop: "1rem" }} />
+      <Skeleton width={100} height={16.09} type="text" style={{ marginTop: "0.5rem" }} />
     </div>
   );
 }

@@ -7,9 +7,8 @@ import { Icon } from "@/components/Icon";
 import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
 import { Scroller } from "@/components/Scroller";
-import { VideoCard } from "@/components/cards/Video";
+import { VideoCard, VideoCardSkeleton } from "@/components/cards/Video";
 import { MediaInfoModal } from "../components/Modal";
-import { Skeleton } from "@/components/Skeleton";
 
 // Styles
 import style from "./Videos.module.scss";
@@ -53,11 +52,7 @@ export function MediaInfoVideos({ data }: { data: MediaInfo & SeriesInfo | null 
               : Array(3)
                 .fill(0)
                 .map((_, idx) => (
-                  <div key={idx}>
-                    <Skeleton style={{ width: "100%", aspectRatio: "16/9" }} />
-                    <Skeleton width={220} height={18.11} type="text" style={{ marginTop: "1rem" }} />
-                    <Skeleton width={100} height={16.09} type="text" style={{ marginTop: "0.5rem" }} />
-                  </div>
+                  <VideoCardSkeleton key={idx} />
                 ))}
           </Scroller.Track>
         </Scroller>
