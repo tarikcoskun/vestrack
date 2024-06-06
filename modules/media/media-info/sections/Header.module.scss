@@ -6,7 +6,10 @@
 .header {
   display: flex;
   gap: 1.5rem;
-  @include media("<md") { padding-top: 1.5rem; }
+  @include media("<md") {
+    padding-top: 3rem;
+    gap: 1rem;
+  }
   @include media(">md") {
     height: 30vh;
     padding-bottom: 1.5rem;
@@ -14,11 +17,13 @@
   }
 
   &[data-backdrop="true"] {
-    .mediaBackdrop::after {
-      position: absolute;
-      background-image: linear-gradient(to bottom, transparent, rgb(0 0 0 / 0.75));
-      content: "";
-      inset: 0;
+    @include media(">md") {
+      .mediaBackdrop::after {
+        position: absolute;
+        background-image: linear-gradient(to bottom, transparent, rgb(0 0 0 / 0.75));
+        content: "";
+        inset: 0;
+      }
     }
 
     .mediaHeader {
@@ -50,7 +55,11 @@
     background-color: var(--color-gray-150);
     background-position: center 40%;
     background-size: cover;
-    @include media("<md") { display: none; }
+    @include media("<md") {
+      height: 152px;
+      background-position: center top;
+      mask-image: linear-gradient(black, transparent);
+    }
   }
 
   .mediaPosterFallback {

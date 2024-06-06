@@ -3,6 +3,7 @@
 .personInfoPage {
   --sidebar-width: 300px;
   --layout-gap: 2rem;
+  @include media("<md") { --layout-gap: 1.5rem; }
 
   .layout {
     display: flex;
