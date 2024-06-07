@@ -94,7 +94,7 @@ export function MediaInfoOverview({ data }: { data: MediaInfo & SeriesInfo | nul
                         {data.genres
                           .sort((a, b) => (a.name > b.name ? 1 : -1)).map((genre) => (
                             <li key={genre.id} className={cx("person")}>
-                              <Button key={genre.name} as={Link} href={`/genre/${slugify(genre.name)}`} color="gray" variant="soft" size="sm" rounded="full" className={cx("mediaGenre")}>
+                              <Button key={genre.name} color="gray" variant="soft" size="sm" rounded="full" className={cx("mediaGenre")}>
                                 <Image
                                   src={`/emojis/${getGenreEmojiName(slugify(genre.name))}.svg`}
                                   alt=""
