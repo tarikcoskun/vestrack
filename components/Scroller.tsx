@@ -83,13 +83,15 @@ const ScrollerTrack = forwardRef<HTMLElement, ScrollerTrackProps>((props, forwar
 
     listener();
     window.addEventListener("resize", listener);
-    track.addEventListener("DOMNodeInserted", listener);
     track.addEventListener("scroll", listener);
+
+    const observer = new MutationObserver(() => listener());
+    observer.observe(track, { childList: true, subtree: true });
 
     return () => {
       window.removeEventListener("resize", listener);
-      track.removeEventListener("DOMNodeInserted", listener);
       track.removeEventListener("scroll", listener);
+      observer.disconnect();
     };
   }, []);
 
