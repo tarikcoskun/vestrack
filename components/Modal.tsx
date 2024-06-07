@@ -66,13 +66,7 @@ const ModalRoot = forwardRef<HTMLDialogElement, ModalProps>(
   },
 );
 
-interface ModalHeaderProps {
-  children?: React.ReactNode;
-}
-
-function ModalHeader(props: ModalHeaderProps) {
-  const { children } = props;
-
+function ModalHeader({ children }: React.PropsWithChildren) {
   return <header className={cx("modalHeader")}>{children}</header>;
 }
 

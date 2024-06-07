@@ -63,7 +63,7 @@ export function Navbar() {
                   className={cx("link")}
                   data-state={pathname === link.href ? "active" : "inactive"}
                 >
-                  <Icon icon={link.icon} variant={pathname === link.href ? "fill" : "line"} size={24} className={cx("linkIcon")} />
+                  <Icon icon={link.icon} variant={pathname === link.href ? "fill" : "line"} size={24} />
                   <span>{link.label}</span>
                 </Link>
               </li>
