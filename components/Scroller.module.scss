@@ -36,12 +36,14 @@
     margin: calc(var(--content-spacing) * -1);
     gap: var(--scroller-gap);
     grid-auto-flow: column;
-    grid-template-columns: repeat(var(--scroller-columns), 1fr);
+    grid-template-columns: repeat(var(--scroller-columns), var(--scroller-item-width));
     overflow-x: auto;
     scroll-behavior: smooth;
+    scroll-padding-inline: var(--content-spacing);
     @include media("<md") {
       --scroller-gap: 1rem;
       --item-count: calc(var(--scroller-columns) + 2);
+      scroll-snap-type: x mandatory;
     }
 
     &[data-max-width="withSidebar"] {
@@ -50,6 +52,9 @@
 
     &::-webkit-scrollbar { display: none; }
 
-    > * { width: var(--scroller-item-width); }
+    > * {
+      width: var(--scroller-item-width);
+      scroll-snap-align: start;
+    }
   }
 }
