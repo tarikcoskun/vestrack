@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 // Components
+import Image from "next/image";
 import { Icon } from "@/components/Icon";
 import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
@@ -14,6 +15,7 @@ import { Skeleton } from "@/components/Skeleton";
 import style from "./Cast.module.scss";
 import classNames from "classnames/bind";
 import { PersonCard } from "@/components/cards/Person";
+import { TMDB_IMAGE_BASE_PERSON_PHOTO } from "@/constants/image";
 
 const cx = classNames.bind(style);
 
@@ -184,9 +186,11 @@ export function MediaInfoCast({ data }: { data: MediaInfo & SeriesInfo | null })
                       <td aria-label="Photo">
                         {person.profile_path
                           ? (
-                            <img
-                              src={`https://image.tmdb.org/t/p/w342${person.profile_path}`}
+                            <Image
+                              src={TMDB_IMAGE_BASE_PERSON_PHOTO + person.profile_path}
                               alt={person.name}
+                              width={56}
+                              height={70}
                               className={cx("personPhoto")}
                             />
                             )

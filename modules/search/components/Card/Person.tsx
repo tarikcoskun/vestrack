@@ -1,8 +1,9 @@
 import { slugify } from "@/util/slugify";
-import { TMDB_IMAGE_BASE_POSTER } from "@/constants/image";
+import { TMDB_IMAGE_BASE_PERSON_PHOTO } from "@/constants/image";
 
 // Components
 import Link from "next/link";
+import Image from "next/image";
 
 // Styles
 import style from "./Person.module.scss";
@@ -18,7 +19,7 @@ export function SearchPersonCard(props: SearchPersonCardProps) {
   const { person, className, ...cardProps } = props;
 
   const infoPageUrl = `/person/${`${slugify(person.name!)}-${person.id}`}`;
-  const photoUrl = TMDB_IMAGE_BASE_POSTER + person.profile_path;
+  const photoUrl = TMDB_IMAGE_BASE_PERSON_PHOTO + person.profile_path;
 
   return (
     <article
@@ -29,9 +30,11 @@ export function SearchPersonCard(props: SearchPersonCardProps) {
       <Link href={infoPageUrl} className={cx("photoLink")}>
         {person.profile_path
           ? (
-            <img
+            <Image
               src={photoUrl}
               alt={person.name}
+              width={80}
+              height={120}
               className={cx("personPhoto")}
             />
             )

@@ -13,7 +13,7 @@ const cx = classNames.bind(style);
 type ScrollPosition = "start" | "middle" | "end" | "no-scroll";
 
 interface ScrollerValue {
-  trackRef: React.RefObject<HTMLUListElement>;
+  trackRef: React.RefObject<HTMLElement>;
   columns: number;
   autoscroll: boolean;
   scrollPosition: ScrollPosition;
@@ -23,7 +23,7 @@ interface ScrollerValue {
 const ScrollerContext = createContext({} as ScrollerValue);
 
 function ScrollerProvider({ columns, autoscroll, children }: React.PropsWithChildren<{ columns: number; autoscroll: boolean }>) {
-  const trackRef = useRef<HTMLUListElement>(null);
+  const trackRef = useRef<HTMLElement>(null);
   const [scrollPosition, setScrollPosition] = useState<ScrollPosition>("no-scroll");
   const initialState = { trackRef, columns, autoscroll, scrollPosition, setScrollPosition };
 
@@ -58,7 +58,7 @@ interface ScrollerTrackProps extends React.HTMLAttributes<HTMLElement> {
   maxWidth?: "default" | "withSidebar";
 }
 
-const ScrollerTrack = forwardRef<HTMLUListElement, ScrollerTrackProps>((props, forwardedRef) => {
+const ScrollerTrack = forwardRef<HTMLElement, ScrollerTrackProps>((props, forwardedRef) => {
   const { className, containerClassName, maxWidth, children, ...trackProps } = props;
 
   const { trackRef, columns, scrollPosition, setScrollPosition } = useContext(ScrollerContext);
@@ -100,13 +100,13 @@ const ScrollerTrack = forwardRef<HTMLUListElement, ScrollerTrackProps>((props, f
       style={{ ["--scroller-columns" as string]: columns }}
       data-scroll-position={scrollPosition}
     >
-      <ul
+      <div
         className={cx("scrollerTrack", className)}
         ref={composeRefs(forwardedRef, trackRef)}
         data-max-width={maxWidth}
       >
         {children}
-      </ul>
+      </div>
     </div>
   );
 });

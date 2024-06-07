@@ -1,9 +1,13 @@
 import { DATE_FORMAT } from "@/constants/misc";
 
+// Components
+import Image from "next/image";
+import { Skeleton } from "../Skeleton";
+
 // Styles
 import style from "./Video.module.scss";
 import classNames from "classnames/bind";
-import { Skeleton } from "../Skeleton";
+import { YOUTUBE_THUMBNAIL_BASE, YOUTUBE_THUMBNAIL_QUALITY } from "@/constants/image";
 
 interface VideoCardProps extends React.HTMLAttributes<HTMLElement> {
   video: Video;
@@ -14,22 +18,26 @@ const cx = classNames.bind(style);
 export function VideoCard(props: VideoCardProps) {
   const { className, video, ...cardProps } = props;
 
+  const videoUrl = `https://youtu.be/${video.key}`;
+
   return (
     <div {...cardProps} className={cx("videoCard", className)}>
       <a
-        href={`https://youtu.be/${video.key}`}
+        href={videoUrl}
         target="_blank"
         rel="noopener noreferrer"
         className={cx("thumbnailLink")}
       >
-        <img
-          src={`https://i.ytimg.com/vi/${video.key}/hqdefault.jpg`}
+        <Image
+          src={YOUTUBE_THUMBNAIL_BASE + video.key + YOUTUBE_THUMBNAIL_QUALITY}
           alt={video.name}
+          width={480}
+          height={360}
           className={cx("videoThumbnail")}
         />
       </a>
       <a
-        href={`https://youtu.be/${video.key}`}
+        href={videoUrl}
         target="_blank"
         rel="noopener noreferrer"
         className={cx("videoName")}

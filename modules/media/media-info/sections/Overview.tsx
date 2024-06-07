@@ -4,6 +4,7 @@ import { TMDB_IMAGE_BASE_POSTER, TMDB_IMAGE_BASE_POSTER_BLUR } from "@/constants
 
 // Components
 import Link from "next/link";
+import Image from "next/image";
 import { Icon } from "@/components/Icon";
 import { Button } from "@/components/Button";
 import { Skeleton } from "@/components/Skeleton";
@@ -25,9 +26,11 @@ export function MediaInfoOverview({ data }: { data: MediaInfo & SeriesInfo | nul
         {data
           ? data.poster_path
             ? (
-              <img
+              <Image
                 src={posterUrl}
                 alt={data.title}
+                width={300}
+                height={450}
                 draggable="false"
                 className={cx("mediaPoster")}
               />
@@ -92,7 +95,14 @@ export function MediaInfoOverview({ data }: { data: MediaInfo & SeriesInfo | nul
                           .sort((a, b) => (a.name > b.name ? 1 : -1)).map((genre) => (
                             <li key={genre.id} className={cx("person")}>
                               <Button key={genre.name} as={Link} href={`/genre/${slugify(genre.name)}`} color="gray" variant="soft" size="sm" rounded="full" className={cx("mediaGenre")}>
-                                <img src={`/emojis/${getGenreEmojiName(slugify(genre.name))}.svg`} width={16} height={16} draggable="false" /> {genre.name}
+                                <Image
+                                  src={`/emojis/${getGenreEmojiName(slugify(genre.name))}.svg`}
+                                  alt={genre.name}
+                                  width={16}
+                                  height={16}
+                                  draggable="false"
+                                />
+                                <span>{genre.name}</span>
                               </Button>
                             </li>
                           ))}

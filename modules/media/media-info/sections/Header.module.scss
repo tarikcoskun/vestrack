@@ -45,7 +45,8 @@
     }
   }
 
-  .mediaBackdrop {
+  .mediaBackdrop,
+  .mediaBackdropFallback {
     position: absolute;
     z-index: -1;
     top: var(--content-nav-height);
@@ -53,11 +54,8 @@
     left: 0;
     height: inherit;
     background-color: var(--color-gray-150);
-    background-position: center 40%;
-    background-size: cover;
     @include media("<md") {
       height: 152px;
-      background-position: center top;
       mask-image: linear-gradient(black, transparent);
     }
   }

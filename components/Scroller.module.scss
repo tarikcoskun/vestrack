@@ -46,11 +46,10 @@
       scroll-snap-type: x mandatory;
     }
 
+    &::-webkit-scrollbar { display: none; }
     &[data-max-width="withSidebar"] {
       --scroller-max-width: calc(var(--content-width) - var(--sidebar-width) - var(--layout-gap) + (var(--content-spacing) * 2)) !important;
     }
-
-    &::-webkit-scrollbar { display: none; }
 
     > * {
       width: var(--scroller-item-width);

@@ -1,7 +1,11 @@
+"use client";
+
+import { useState } from "react";
 import { getRuntime } from "@/util/getRuntime";
 import { TMDB_IMAGE_BASE_BACKDROP, TMDB_IMAGE_BASE_POSTER } from "@/constants/image";
 
 // Components
+import Image from "next/image";
 import { Icon } from "@/components/Icon";
 import { Skeleton } from "@/components/Skeleton";
 
@@ -12,18 +16,38 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(style);
 
 export function MediaInfoHeader({ data }: { data: MediaInfo & SeriesInfo | null }) {
+  const [backdropLoaded, setBackdropLoaded] = useState(false);
+
   const backdropUrl = TMDB_IMAGE_BASE_BACKDROP + data?.backdrop_path;
   const posterUrl = TMDB_IMAGE_BASE_POSTER + data?.poster_path;
 
   return (
-    <header id="header" className={cx("header")} data-backdrop={Boolean(data?.backdrop_path)}>
-      {data && <div className={cx("mediaBackdrop")} style={{ backgroundImage: `url(${backdropUrl})` }} />}
+    <header id="header" className={cx("header")} data-backdrop={Boolean(data?.backdrop_path && backdropLoaded)}>
+      {data?.backdrop_path
+        ? (
+          <div className={cx("mediaBackdrop")}>
+            <Image
+              src={backdropUrl}
+              alt={data.title}
+              fill
+              style={{ objectFit: "cover" }}
+              onLoad={() => {
+                setBackdropLoaded(true);
+              }}
+            />
+          </div>
+          )
+        : (
+          <div className={cx("mediaBackdropFallback")} />
+          )}
       {data
         ? data.poster_path
           ? (
-            <img
+            <Image
               src={posterUrl}
               alt={data.title}
+              width={300}
+              height={450}
               draggable="false"
               className={cx("mediaPoster")}
             />

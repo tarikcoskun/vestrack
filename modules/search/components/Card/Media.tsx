@@ -3,6 +3,8 @@ import { TMDB_IMAGE_BASE_POSTER } from "@/constants/image";
 
 // Components
 import Link from "next/link";
+import Image from "next/image";
+import { Icon } from "@/components/Icon";
 
 // Styles
 import style from "./Media.module.scss";
@@ -24,16 +26,26 @@ export function SearchMediaCard(props: SearchTitleCardProps) {
   return (
     <article
       {...cardProps}
-      className={cx("searchTitleCard", className)}
+      className={cx("searchMediaCard", className)}
       typeof="Movie"
     >
       <Link href={infoPageUrl} className={cx("posterLink")}>
-        <img
-          src={posterUrl}
-          alt={media.title}
-          draggable="false"
-          className={cx("mediaPoster")}
-        />
+        {media.poster_path
+          ? (
+            <Image
+              src={posterUrl}
+              alt={media.title! || media.name!}
+              width={80}
+              height={120}
+              draggable="false"
+              className={cx("mediaPoster")}
+            />
+            )
+          : (
+            <div className={cx("mediaPosterFallback")}>
+              <Icon icon="image" size={32} />
+            </div>
+            )}
       </Link>
       <div className={cx("mediaInfo")}>
         <Link href={infoPageUrl}>

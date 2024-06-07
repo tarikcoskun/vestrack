@@ -3,6 +3,7 @@ import { DATE_FORMAT } from "@/constants/misc";
 import { TMDB_IMAGE_BASE_POSTER } from "@/constants/image";
 
 // Components
+import Image from "next/image";
 import { Icon } from "@/components/Icon";
 import { Skeleton } from "@/components/Skeleton";
 
@@ -20,9 +21,11 @@ export function PersonInfoPersonal({ data }: { data: PersonInfo | null }) {
       {data
         ? data.profile_path
           ? (
-            <img
+            <Image
               src={photoUrl}
               alt={data.name}
+              width={300}
+              height={450}
               draggable="false"
               className={cx("personPhoto")}
             />
