@@ -97,7 +97,7 @@ export function MediaInfoOverview({ data }: { data: MediaInfo & SeriesInfo | nul
                               <Button key={genre.name} as={Link} href={`/genre/${slugify(genre.name)}`} color="gray" variant="soft" size="sm" rounded="full" className={cx("mediaGenre")}>
                                 <Image
                                   src={`/emojis/${getGenreEmojiName(slugify(genre.name))}.svg`}
-                                  alt={genre.name}
+                                  alt=""
                                   width={16}
                                   height={16}
                                   draggable="false"
