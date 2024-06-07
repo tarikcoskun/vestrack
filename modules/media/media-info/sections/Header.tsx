@@ -30,6 +30,7 @@ export function MediaInfoHeader({ data }: { data: MediaInfo & SeriesInfo | null 
               src={backdropUrl}
               alt={data.title}
               fill
+              priority
               style={{ objectFit: "cover" }}
               onLoad={() => {
                 setBackdropLoaded(true);
