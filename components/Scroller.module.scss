@@ -48,7 +48,12 @@
 
     &::-webkit-scrollbar { display: none; }
     &[data-max-width="withSidebar"] {
-      --scroller-max-width: calc(var(--content-width) - var(--sidebar-width) - var(--layout-gap) + (var(--content-spacing) * 2)) !important;
+      @include media(">md") {
+        --scroller-max-width: calc(var(--content-width) - var(--sidebar-width) - var(--layout-gap) + (var(--content-spacing) * 2)) !important;
+      }
+      @include media("<md") {
+        --item-count: calc(var(--scroller-columns) + 3);
+      }
     }
 
     > * {
