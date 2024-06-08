@@ -13,7 +13,7 @@ import { Skeleton } from "@/components/Skeleton";
 // Styles
 import style from "./Cast.module.scss";
 import classNames from "classnames/bind";
-import { PersonCard } from "@/components/cards/Person";
+import { PersonCard, PersonCardSkeleton } from "@/components/cards/Person";
 import { TMDB_IMAGE_BASE_PERSON_PHOTO } from "@/constants/image";
 
 const cx = classNames.bind(style);
@@ -49,6 +49,7 @@ export function MediaInfoCast({ data }: { data: MediaInfo & SeriesInfo | null })
               .slice(0, 14)
               .map((person) => (
                 <PersonCard
+                  key={person.id}
                   person={person}
                   details={person.character}
                 />
@@ -56,11 +57,7 @@ export function MediaInfoCast({ data }: { data: MediaInfo & SeriesInfo | null })
             : Array(6)
               .fill(0)
               .map((_, idx) => (
-                <div key={idx}>
-                  <Skeleton style={{ width: "100%", aspectRatio: "4/5" }} />
-                  <Skeleton width={140} height={18.11} type="text" style={{ marginTop: "1rem" }} />
-                  <Skeleton width={100} height={16.09} type="text" style={{ marginTop: "0.5rem" }} />
-                </div>
+                <PersonCardSkeleton key={idx} />
               ))}
         </Scroller.Track>
       </Scroller>

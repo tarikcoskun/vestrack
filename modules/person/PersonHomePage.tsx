@@ -39,7 +39,7 @@ export function PersonHomePage() {
               <PersonCard key={person.id} person={person as any} />
             ))
             : Array(12).fill(0).map((_, idx) => (
-              <PersonCardSkeleton key={idx} />
+              <PersonCardSkeleton key={idx} details={false} />
             ))}
         </div>
       </Section>

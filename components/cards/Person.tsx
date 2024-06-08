@@ -58,12 +58,12 @@ export function PersonCard(props: PersonCardProps) {
   );
 }
 
-export function PersonCardSkeleton() {
+export function PersonCardSkeleton({ details = true }: { details?: boolean }) {
   return (
     <div>
       <Skeleton style={{ width: "100%", aspectRatio: "4/5" }} />
-      <Skeleton width={140} height={18.11} type="text" style={{ marginTop: "1rem" }} />
-      <Skeleton width={100} height={16.09} type="text" style={{ marginTop: "0.5rem" }} />
+      <Skeleton height={18.11} type="text" style={{ maxWidth: "140px", width: "100%", marginTop: "1rem" }} />
+      {details && (<Skeleton width={100} height={16.09} type="text" style={{ marginTop: "0.5rem" }} />)}
     </div>
   );
 }
