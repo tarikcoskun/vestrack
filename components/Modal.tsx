@@ -19,51 +19,46 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDialogElement> {
   onOpenChange: (value: boolean) => void;
 }
 
-const ModalRoot = forwardRef<HTMLDialogElement, ModalProps>(
-  (props, forwardedRef) => {
-    const { open, header, scrollRef, onOpenChange, children, ...dialogProps } = props;
+const ModalRoot = forwardRef<HTMLDialogElement, ModalProps>((props, forwardedRef) => {
+  const { open, header, scrollRef, onOpenChange, children, ...dialogProps } = props;
+  const localRef = useRef<HTMLDialogElement>(null);
 
-    const localRef = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    if (open) localRef.current?.showModal();
+    else localRef.current?.close();
+  }, [open]);
 
-    useEffect(() => {
-      if (open)
-        localRef.current?.showModal();
-      else localRef.current?.close();
-    }, [open]);
-
-    return (
-      <dialog
-        {...dialogProps}
-        className={cx("dialog")}
-        ref={composeRefs(forwardedRef, localRef)}
-        onClick={(event) => {
-          if (event.target === localRef.current) {
+  return (
+    <dialog
+      {...dialogProps}
+      className={cx("dialog")}
+      ref={composeRefs(forwardedRef, localRef)}
+      onClick={(event) => {
+        if (event.target === localRef.current) onOpenChange(false);
+      }}
+    >
+      <header className={cx("modalHeader")}>
+        {header}
+        <Button
+          color="gray"
+          variant="ghost"
+          padding="square"
+          rounded="full"
+          aria-label="Close modal"
+          className={cx("modalDismiss")}
+          onClick={() => {
             onOpenChange(false);
-          }
-        }}
-      >
-        <header className={cx("modalHeader")}>
-          {header}
-          <Button
-            color="gray"
-            variant="ghost"
-            padding="square"
-            rounded="full"
-            aria-label="Close modal"
-            className={cx("modalDismiss")}
-            onClick={() => {
-              onOpenChange(false);
-            }}
-          >
-            <Icon icon="x" />
-          </Button>
-        </header>
-        <main className={cx("modalContent")} ref={scrollRef}>
-          {children}
-        </main>
-      </dialog>
-    );
-  },
+          }}
+        >
+          <Icon icon="x" />
+        </Button>
+      </header>
+      <main className={cx("modalContent")} ref={scrollRef}>
+        {children}
+      </main>
+    </dialog>
+  );
+},
 );
 
 function ModalHeader({ children }: React.PropsWithChildren) {

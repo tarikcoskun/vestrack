@@ -66,8 +66,7 @@ class TmdbHandler {
     const { combined_credits, ...data } = await this.fetch<ExtendedPersonInfo>(`/person/${personId}?append_to_response=combined_credits`);
 
     const filteredCast = (combined_credits.cast || []).reduce((arr: PersonCast[], curr) => {
-      if (!arr.map((item) => item.name).includes(curr.name))
-        arr.push(curr);
+      if (!arr.map((item) => item.name).includes(curr.name)) arr.push(curr);
       return arr;
     }, []);
 
@@ -89,18 +88,10 @@ class TmdbHandler {
       const lowTitle = title.toLowerCase();
       const lowQuery = query.toLowerCase();
 
-      if (lowTitle === lowQuery) {
-        return 3;
-      }
-      else if (lowTitle.startsWith(lowQuery)) {
-        return 2;
-      }
-      else if (lowTitle.includes(lowQuery)) {
-        return 1;
-      }
-      else {
-        return 0;
-      }
+      if (lowTitle === lowQuery) return 3;
+      else if (lowTitle.startsWith(lowQuery)) return 2;
+      else if (lowTitle.includes(lowQuery)) return 1;
+      else return 0;
     };
 
     const sortFunc = (a: Result, b: Result) => (getRelevancyScore(b.title || b.name!) * 100 + b.popularity) - (getRelevancyScore(a.title || a.name!) * 100 + a.popularity);

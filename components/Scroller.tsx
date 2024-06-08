@@ -60,22 +60,17 @@ interface ScrollerTrackProps extends React.HTMLAttributes<HTMLElement> {
 
 const ScrollerTrack = forwardRef<HTMLElement, ScrollerTrackProps>((props, forwardedRef) => {
   const { className, containerClassName, maxWidth, children, ...trackProps } = props;
-
   const { trackRef, columns, scrollPosition, setScrollPosition } = useContext(ScrollerContext);
 
   useEffect(() => {
     const track = trackRef.current;
-    if (!track)
-      return;
+    if (!track) return;
 
     const listener = () => {
       let position = "middle";
-      if (track.scrollLeft === 0 && track.clientWidth === track.scrollWidth)
-        position = "no-scroll";
-      else if (track.scrollLeft === 0)
-        position = "start";
-      else if (track.scrollLeft + track.clientWidth === track.scrollWidth)
-        position = "end";
+      if (track.scrollLeft === 0 && track.clientWidth === track.scrollWidth) position = "no-scroll";
+      else if (track.scrollLeft === 0) position = "start";
+      else if (track.scrollLeft + track.clientWidth === track.scrollWidth) position = "end";
       else position = "middle";
 
       setScrollPosition(position as ScrollPosition);
@@ -121,53 +116,50 @@ interface ScrollerTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElem
   direction: "left" | "right";
 }
 
-const ScrollerTrigger = forwardRef<HTMLButtonElement, ScrollerTriggerProps>(
-  (props, forwardedRef) => {
-    const { className, direction, children, ...triggerProps } = props;
+const ScrollerTrigger = forwardRef<HTMLButtonElement, ScrollerTriggerProps>((props, forwardedRef) => {
+  const { className, direction, children, ...triggerProps } = props;
+  const { trackRef, columns, scrollPosition } = useContext(ScrollerContext);
 
-    const { trackRef, columns, scrollPosition } = useContext(ScrollerContext);
+  const scroll = () => {
+    const track = trackRef.current;
+    if (!track) return;
 
-    const scroll = () => {
-      if (trackRef.current) {
-        const scrollAmount = (Number.parseFloat(getComputedStyle(trackRef.current.children[0]).width) + Number.parseFloat(getComputedStyle(trackRef.current).gap)) * columns;
+    const scrollAmount = (Number.parseFloat(getComputedStyle(track.children[0]).width) + Number.parseFloat(getComputedStyle(track).gap)) * columns;
 
-        if (direction === "left") {
-          trackRef.current.scrollBy({
-            left: -Math.ceil(scrollAmount),
-            behavior: "smooth",
-          });
-        }
-        else {
-          trackRef.current.scrollBy({
-            left: Math.ceil(scrollAmount),
-            behavior: "smooth",
-          });
-        }
-      }
-    };
+    if (direction === "left") {
+      track.scrollBy({
+        left: -Math.ceil(scrollAmount),
+      });
+    }
+    else {
+      track.scrollBy({
+        left: Math.ceil(scrollAmount),
+      });
+    }
+  };
 
-    const isDisabled = (scrollPosition === "start" && direction === "left") || (scrollPosition === "end" && direction === "right");
+  const isDisabled = (scrollPosition === "start" && direction === "left") || (scrollPosition === "end" && direction === "right");
 
-    return scrollPosition === "no-scroll"
-      ? null
-      : (
-        <Button
-          {...triggerProps}
-          color="gray"
-          variant="soft"
-          padding="square"
-          rounded="full"
-          aria-label={`Scroll ${direction}`}
-          disabled={isDisabled}
-          className={cx("scrollerTrigger", className)}
-          ref={forwardedRef}
-          onClick={scroll}
-        >
-          {children}
-        </Button>
-        )
-    ;
-  },
+  return scrollPosition === "no-scroll"
+    ? null
+    : (
+      <Button
+        {...triggerProps}
+        color="gray"
+        variant="soft"
+        padding="square"
+        rounded="full"
+        aria-label={`Scroll ${direction}`}
+        disabled={isDisabled}
+        className={cx("scrollerTrigger", className)}
+        ref={forwardedRef}
+        onClick={scroll}
+      >
+        {children}
+      </Button>
+      )
+  ;
+},
 );
 
 export const Scroller = Object.assign(ScrollerRoot, {

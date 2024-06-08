@@ -145,8 +145,7 @@ function MetadataItem(props: MetadataItemProps) {
   const { title, people } = props;
 
   const filteredPeople = (people || []).reduce((arr: Cast[], curr) => {
-    if (!arr.map((item) => item.name).includes(curr.name))
-      arr.push(curr);
+    if (!arr.map((item) => item.name).includes(curr.name)) arr.push(curr);
     return arr;
   }, []);
 

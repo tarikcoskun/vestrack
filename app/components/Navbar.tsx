@@ -32,12 +32,8 @@ export function Navbar() {
   };
 
   useEffect(() => {
-    if (mobileMenu) {
-      document.body.style.overflow = "hidden";
-    }
-    else {
-      document.body.removeAttribute("style");
-    }
+    if (mobileMenu) document.body.style.overflow = "hidden";
+    else document.body.removeAttribute("style");
   }, [mobileMenu]);
 
   useEffect(() => {

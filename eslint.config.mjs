@@ -11,5 +11,6 @@ export default config({
     "node/prefer-global/process": "off",
     "style/arrow-parens": ["error", "always"],
     "style/jsx-one-expression-per-line": "off",
+    "antfu/if-newline": "off",
   },
 });

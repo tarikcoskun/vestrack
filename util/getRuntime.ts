@@ -3,13 +3,8 @@ export function getRuntime(time: number) {
   const minutes = time % 60;
   let formattedTime = "";
 
-  if (hours > 0) {
-    formattedTime += `${hours}h `;
-  }
-
-  if (minutes > 0 || formattedTime === "") {
-    formattedTime += `${minutes}m`;
-  }
+  if (hours > 0) formattedTime += `${hours}h `;
+  if (minutes > 0 || formattedTime === "") formattedTime += `${minutes}m`;
 
   return formattedTime;
 }

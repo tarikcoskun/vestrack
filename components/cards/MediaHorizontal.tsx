@@ -1,6 +1,3 @@
-"use client";
-
-import { useState } from "react";
 import { slugify } from "@/util/slugify";
 import { TMDB_IMAGE_BASE_BACKDROP_SM } from "@/constants/image";
 
@@ -23,8 +20,6 @@ const cx = classNames.bind(style);
 export function MediaHorizontalCard(props: MediaHorizontalCardProps) {
   const { media, type, className, ...cardProps } = props;
 
-  const [backdropLoaded, setBackdropLoaded] = useState(false);
-
   const infoPageUrl = `/${type}/${`${slugify(media.title! || media.name!)}-${media.id}`}`;
   const backdropUrl = TMDB_IMAGE_BASE_BACKDROP_SM + media.backdrop_path;
 
@@ -34,7 +29,7 @@ export function MediaHorizontalCard(props: MediaHorizontalCardProps) {
         {...cardProps}
         className={cx("mediaHorizontalCard", className)}
         typeof="Movie"
-        data-backdrop={Boolean(media.backdrop_path && backdropLoaded)}
+        data-backdrop={Boolean(media.backdrop_path)}
       >
         {media.backdrop_path
           ? (
@@ -44,9 +39,6 @@ export function MediaHorizontalCard(props: MediaHorizontalCardProps) {
               <img
                 src={backdropUrl}
                 alt={media.title! || media.name!}
-                onLoad={() => {
-                  setBackdropLoaded(true);
-                }}
               />
             </div>
             )

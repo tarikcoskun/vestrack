@@ -8,7 +8,6 @@ import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
 import { Scroller } from "@/components/Scroller";
 import { MediaInfoModal } from "../components/Modal";
-import { Skeleton } from "@/components/Skeleton";
 
 // Styles
 import style from "./Cast.module.scss";

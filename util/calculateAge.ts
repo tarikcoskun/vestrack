@@ -4,9 +4,7 @@ export function calculateAge(birthDate: Date): number {
   const monthDifference = today.getMonth() - birthDate.getMonth();
   const dayDifference = today.getDate() - birthDate.getDate();
 
-  if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
-    age--;
-  }
+  if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) age--;
 
   return age;
 }
