@@ -62,13 +62,12 @@
     height: 100%;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 1rem;
-    margin-top: 1rem;
+    padding: var(--content-spacing);
     gap: 0.5rem;
 
     .mediaTitle {
       display: block;
-      font-size: 1.125rem;
+      font-size: var(--font-size-h3);
       font-weight: 500;
       @include util.truncate();
     }

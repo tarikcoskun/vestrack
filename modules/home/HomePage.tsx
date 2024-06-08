@@ -37,7 +37,7 @@ export function HomePage() {
   return (
     <main className={cx("homePage")}>
       <Section id="trending">
-        <Scroller columns={4} autoscroll>
+        <Scroller columns={3} autoscroll>
           <Section.Header scrollerControls>
             <h1><Icon icon="fire" variant="fill" size={28} style={{ color: "var(--color-gray-600)" }} /> Trending Today</h1>
           </Section.Header>
