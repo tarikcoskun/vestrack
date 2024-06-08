@@ -1,6 +1,6 @@
 import { slugify } from "@/util/slugify";
 import { getGenreEmojiName } from "@/util/getGenreEmojiName";
-import { TMDB_IMAGE_BASE_POSTER, TMDB_IMAGE_BASE_POSTER_BLUR } from "@/constants/image";
+import { TMDB_IMAGE_BASE_POSTER } from "@/constants/image";
 
 // Components
 import Link from "next/link";
@@ -17,7 +17,6 @@ const cx = classNames.bind(style);
 
 export function MediaInfoOverview({ data }: { data: MediaInfo & SeriesInfo | null }) {
   const posterUrl = TMDB_IMAGE_BASE_POSTER + data?.poster_path;
-  const posterBlurUrl = TMDB_IMAGE_BASE_POSTER_BLUR + data?.poster_path;
   const trailerUrl = `https://youtu.be/${data?.videos.results.find((video) => video.type === "Trailer")?.key}`;
 
   return (
@@ -44,7 +43,7 @@ export function MediaInfoOverview({ data }: { data: MediaInfo & SeriesInfo | nul
             <Skeleton style={{ width: "100%", height: "100%", aspectRatio: "2/3", backgroundColor: "var(--color-gray-200)" }} />
             )}
         {!trailerUrl.includes("undefined") && (
-          <div className={cx("mediaTrailer")} style={{ backgroundImage: `url(${posterBlurUrl})` }}>
+          <div className={cx("mediaTrailer")}>
             <Button
               as="a"
               href={trailerUrl}

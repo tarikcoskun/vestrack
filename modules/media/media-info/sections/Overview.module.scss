@@ -42,6 +42,7 @@
       display: grid;
       overflow: hidden;
       border-radius: var(--rounded-base);
+      backdrop-filter: blur(3rem) contrast(1.5);
       inset: 0;
       opacity: 0;
       place-content: center;
