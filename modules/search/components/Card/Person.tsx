@@ -3,7 +3,6 @@ import { TMDB_IMAGE_BASE_PERSON_PHOTO } from "@/constants/image";
 
 // Components
 import Link from "next/link";
-import Image from "next/image";
 
 // Styles
 import style from "./Person.module.scss";
@@ -30,7 +29,7 @@ export function SearchPersonCard(props: SearchPersonCardProps) {
       <Link href={infoPageUrl} className={cx("photoLink")}>
         {person.profile_path
           ? (
-            <Image
+            <img
               src={photoUrl}
               alt={person.name}
               width={80}

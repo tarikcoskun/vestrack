@@ -26,12 +26,10 @@ export function MediaInfoHeader({ data }: { data: MediaInfo & SeriesInfo | null 
       {data?.backdrop_path
         ? (
           <div className={cx("mediaBackdrop")}>
-            <Image
+            <img
               src={backdropUrl}
               alt={data.title}
-              fill
-              priority
-              style={{ objectFit: "cover" }}
+              fetchPriority="high"
               onLoad={() => {
                 setBackdropLoaded(true);
               }}

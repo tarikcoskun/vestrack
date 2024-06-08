@@ -3,7 +3,6 @@ import { TMDB_IMAGE_BASE_POSTER } from "@/constants/image";
 
 // Components
 import Link from "next/link";
-import Image from "next/image";
 import { Skeleton } from "../Skeleton";
 
 // Styles
@@ -28,7 +27,7 @@ export function PersonCard(props: PersonCardProps) {
       <Link href={infoPageUrl} className={cx("photoLink")}>
         {person.profile_path
           ? (
-            <Image
+            <img
               src={photoUrl}
               alt={person.name}
               width={138}

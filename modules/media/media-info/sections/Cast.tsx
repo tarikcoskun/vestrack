@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 
 // Components
-import Image from "next/image";
 import { Icon } from "@/components/Icon";
 import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
@@ -186,7 +185,7 @@ export function MediaInfoCast({ data }: { data: MediaInfo & SeriesInfo | null })
                       <td aria-label="Photo">
                         {person.profile_path
                           ? (
-                            <Image
+                            <img
                               src={TMDB_IMAGE_BASE_PERSON_PHOTO + person.profile_path}
                               alt={person.name}
                               width={56}

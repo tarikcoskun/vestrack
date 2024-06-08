@@ -3,7 +3,6 @@ import { TMDB_IMAGE_BASE_POSTER } from "@/constants/image";
 
 // Components
 import Link from "next/link";
-import Image from "next/image";
 import { Icon } from "@/components/Icon";
 
 // Styles
@@ -32,7 +31,7 @@ export function SearchMediaCard(props: SearchTitleCardProps) {
       <Link href={infoPageUrl} className={cx("posterLink")}>
         {media.poster_path
           ? (
-            <Image
+            <img
               src={posterUrl}
               alt={media.title! || media.name!}
               width={80}

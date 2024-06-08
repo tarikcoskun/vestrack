@@ -4,7 +4,6 @@ import { useState } from "react";
 import { DATE_FORMAT } from "@/constants/misc";
 
 // Components
-import Image from "next/image";
 import { Skeleton } from "../Skeleton";
 
 // Styles
@@ -20,45 +19,39 @@ const cx = classNames.bind(style);
 
 export function VideoCard(props: VideoCardProps) {
   const { className, video, ...cardProps } = props;
-  const [isHidden, setHidden] = useState(false);
 
   const videoUrl = `https://youtu.be/${video.key}`;
 
-  return !isHidden
-    ? (
-      <div {...cardProps} className={cx("videoCard", className)}>
-        <a
-          href={videoUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={cx("thumbnailLink")}
-        >
-          <Image
-            src={YOUTUBE_THUMBNAIL_BASE + video.key + YOUTUBE_THUMBNAIL_QUALITY}
-            alt={video.name}
-            width={480}
-            height={360}
-            className={cx("videoThumbnail")}
-            onError={() => {
-              setHidden(true);
-            }}
-          />
-        </a>
-        <a
-          href={videoUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={cx("videoName")}
-          title={video.name}
-        >
-          <span>{video.name}</span>
-        </a>
-        <div className={cx("publishedAt")}>
-          {new Date(video.published_at).toLocaleDateString("en-US", DATE_FORMAT)}
-        </div>
+  return (
+    <div {...cardProps} className={cx("videoCard", className)}>
+      <a
+        href={videoUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cx("thumbnailLink")}
+      >
+        <img
+          src={YOUTUBE_THUMBNAIL_BASE + video.key + YOUTUBE_THUMBNAIL_QUALITY}
+          alt={video.name}
+          width={480}
+          height={360}
+          className={cx("videoThumbnail")}
+        />
+      </a>
+      <a
+        href={videoUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cx("videoName")}
+        title={video.name}
+      >
+        <span>{video.name}</span>
+      </a>
+      <div className={cx("publishedAt")}>
+        {new Date(video.published_at).toLocaleDateString("en-US", DATE_FORMAT)}
       </div>
-      )
-    : null;
+    </div>
+  );
 }
 
 export function VideoCardSkeleton() {
