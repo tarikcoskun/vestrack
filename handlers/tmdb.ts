@@ -1,26 +1,5 @@
 import axios from "axios";
 
-export interface ExtendedMediaInfo extends Result {
-  credits: {
-    cast: PersonCast[];
-    crew: PersonCast[];
-  };
-  reviews: {
-    results: Review[];
-  };
-  videos: {
-    results: Video[];
-  };
-  recommendations: Recommendations;
-}
-
-interface ExtendedPersonInfo extends PersonInfo {
-  combined_credits: {
-    cast: PersonCast[];
-    crew: PersonCrew[];
-  };
-}
-
 class TmdbHandler {
   apiKey = process.env.TMDB_API_KEY;
 
@@ -58,12 +37,12 @@ class TmdbHandler {
   }
 
   async getMediaInfo(type: "movie" | "tv", mediaId: string) {
-    const data = await this.fetch<ExtendedMediaInfo>(`/${type}/${mediaId}?append_to_response=credits,reviews,videos,recommendations`);
+    const data = await this.fetch<MediaInfo>(`/${type}/${mediaId}?append_to_response=credits,reviews,videos,recommendations`);
     return data;
   }
 
   async getPersonInfo(personId: string) {
-    const { combined_credits, ...data } = await this.fetch<ExtendedPersonInfo>(`/person/${personId}?append_to_response=combined_credits`);
+    const { combined_credits, ...data } = await this.fetch<PersonInfo>(`/person/${personId}?append_to_response=combined_credits`);
 
     const filteredCast = (combined_credits.cast || []).reduce((arr: PersonCast[], curr) => {
       if (!arr.map((item) => item.name).includes(curr.name)) arr.push(curr);
