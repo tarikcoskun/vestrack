@@ -9,7 +9,7 @@ import { Skeleton } from "../Skeleton";
 // Styles
 import style from "./Video.module.scss";
 import classNames from "classnames/bind";
-import { YOUTUBE_THUMBNAIL_BASE, YOUTUBE_THUMBNAIL_QUALITY } from "@/constants/image";
+import { YOUTUBE_THUMBNAIL_BASE_URL, YOUTUBE_THUMBNAIL_QUALITY } from "@/constants/image";
 
 interface VideoCardProps extends React.HTMLAttributes<HTMLElement> {
   video: Video;
@@ -31,7 +31,7 @@ export function VideoCard(props: VideoCardProps) {
         className={cx("thumbnailLink")}
       >
         <img
-          src={YOUTUBE_THUMBNAIL_BASE + video.key + YOUTUBE_THUMBNAIL_QUALITY}
+          src={YOUTUBE_THUMBNAIL_BASE_URL + video.key + YOUTUBE_THUMBNAIL_QUALITY}
           alt={video.name}
           width={480}
           height={360}

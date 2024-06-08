@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { slugify } from "@/util/slugify";
-import { TMDB_IMAGE_BASE_BACKDROP } from "@/constants/image";
+import { TMDB_IMAGE_BASE_BACKDROP_SM } from "@/constants/image";
 
 // Components
 import Link from "next/link";
@@ -26,7 +26,7 @@ export function MediaHorizontalCard(props: MediaHorizontalCardProps) {
   const [backdropLoaded, setBackdropLoaded] = useState(false);
 
   const infoPageUrl = `/${type}/${`${slugify(media.title! || media.name!)}-${media.id}`}`;
-  const backdropUrl = TMDB_IMAGE_BASE_BACKDROP + media.backdrop_path;
+  const backdropUrl = TMDB_IMAGE_BASE_BACKDROP_SM + media.backdrop_path;
 
   return (
     <Link href={infoPageUrl} style={{ textDecoration: "none" }}>
