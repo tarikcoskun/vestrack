@@ -14,7 +14,7 @@
   aspect-ratio: 16/9;
 
   &[data-backdrop="true"] .mediaInfo {
-    background-image: linear-gradient(to bottom, transparent, rgb(0 0 0 / 0.75));
+    background-image: linear-gradient(to bottom, transparent, rgb(0 0 0 / 0.8));
 
     .mediaTitle {
       color: colors.$gray-100;
@@ -60,6 +60,7 @@
   .mediaInfo {
     z-index: 1;
     display: flex;
+    height: 50%;
     flex-direction: column;
     justify-content: flex-end;
     padding: var(--content-spacing);
@@ -69,7 +70,7 @@
       display: block;
       font-size: var(--font-size-h3);
       font-weight: 500;
-      @include util.truncate();
+      line-height: 1.5;
     }
 
     .mediaDetails {
