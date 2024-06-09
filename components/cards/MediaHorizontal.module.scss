@@ -10,7 +10,7 @@
   flex-direction: column;
   justify-content: flex-end;
   border: 1px solid var(--theme-outline);
-  border-radius: var(--rounded-base);
+  border-radius: var(--rounded-lg);
   aspect-ratio: 16/9;
 
   &[data-backdrop="true"] .mediaInfo {

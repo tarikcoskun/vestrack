@@ -66,7 +66,7 @@ export function MediaHorizontalCard(props: MediaHorizontalCardProps) {
 export function MediaCardHorizontalSkeleton() {
   return (
     <div>
-      <Skeleton style={{ width: "100%", aspectRatio: "16/9" }} />
+      <Skeleton style={{ width: "100%", aspectRatio: "16/9", borderRadius: "var(--rounded-lg)" }} />
     </div>
   );
 }
