@@ -51,7 +51,7 @@ export function HomePage() {
                   type={media.media_type as "movie" | "tv"}
                 />
               ))
-              : Array(6)
+              : Array(3)
                 .fill(0)
                 .map((_, idx) => (
                   <MediaCardHorizontalSkeleton key={idx} />

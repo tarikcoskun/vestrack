@@ -27,7 +27,7 @@ class TmdbHandler {
   }
 
   async getDiscovery(type: "movie" | "tv") {
-    const { results } = await this.fetch<TmdbApiResponse>(`/discover/${type}`);
+    const { results } = await this.fetch<TmdbApiResponse>(`/discover/${type}?sort_by=popularity.desc`);
     return results;
   }
 
