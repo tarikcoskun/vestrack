@@ -1,38 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { notifyError } from "@/util/notifyError";
-import { getHomeData } from "./getHomeData";
+import { useHomeData } from "./useHomeData";
 
 // Components
 import Link from "next/link";
 import { Icon } from "@/components/Icon";
+import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
 import { Scroller } from "@/components/Scroller";
 import { MediaCard, MediaCardSkeleton } from "@/components/cards/Media";
+import { MediaCardHorizontalSkeleton, MediaHorizontalCard } from "@/components/cards/MediaHorizontal";
 
 // Styles
 import style from "./HomePage.module.scss";
 import classNames from "classnames/bind";
-import { MediaCardHorizontalSkeleton, MediaHorizontalCard } from "@/components/cards/MediaHorizontal";
-import { Button } from "@/components/Button";
 
 const cx = classNames.bind(style);
 
 export function HomePage() {
-  const [data, setData] = useState<{ trending: Result[]; popular: Record<"movies" | "series", Result[]> } | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => await getHomeData();
-
-    fetchData()
-      .then((res) => {
-        setData(res);
-      })
-      .catch((err) => {
-        notifyError(err);
-      });
-  }, []);
+  const { trendingData, popularMoviesData, popularSeriesData } = useHomeData();
 
   return (
     <main className={cx("homePage")}>
@@ -43,8 +29,8 @@ export function HomePage() {
           </Section.Header>
 
           <Scroller.Track>
-            {data
-              ? data.trending.map((media) => (
+            {trendingData
+              ? trendingData.map((media) => (
                 <MediaHorizontalCard
                   key={media.id}
                   media={media}
@@ -80,8 +66,8 @@ export function HomePage() {
           </Section.Header>
 
           <Scroller.Track>
-            {data
-              ? data.popular.movies.map((media) => (
+            {popularMoviesData
+              ? popularMoviesData.map((media) => (
                 <MediaCard
                   key={media.id}
                   media={media}
@@ -117,8 +103,8 @@ export function HomePage() {
           </Section.Header>
 
           <Scroller.Track>
-            {data
-              ? data.popular.series.map((media) => (
+            {popularSeriesData
+              ? popularSeriesData.map((media) => (
                 <MediaCard
                   key={media.id}
                   media={media}

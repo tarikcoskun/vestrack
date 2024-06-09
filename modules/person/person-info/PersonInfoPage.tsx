@@ -1,8 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { getPersonInfo } from "./getPersonInfo";
-import { notifyError } from "@/util/notifyError";
+import { usePersonInfoData } from "./usePersonInfoData";
 
 // Components
 import { PersonInfoPersonal } from "./sections/Personal";
@@ -15,19 +13,7 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(style);
 
 export function PersonInfoPage({ params: { id } }: { params: { id: string } }) {
-  const [data, setData] = useState<PersonInfo | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => await getPersonInfo(id);
-
-    fetchData()
-      .then((res) => {
-        setData(res);
-      })
-      .catch((err) => {
-        notifyError(err);
-      });
-  }, [id]);
+  const { data } = usePersonInfoData(id);
 
   return (
     <main className={cx("personInfoPage")}>

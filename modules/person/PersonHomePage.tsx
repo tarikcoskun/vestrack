@@ -1,8 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { notifyError } from "@/util/notifyError";
-import { getPersonHomeData } from "./getPersonHomeData";
+import { usePersonHomeData } from "./usePersonHomeData";
 
 // Components
 import { Section } from "@/components/Section";
@@ -15,19 +13,7 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(style);
 
 export function PersonHomePage() {
-  const [data, setData] = useState<{ popular: Person[] } | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => await getPersonHomeData();
-
-    fetchData()
-      .then((res) => {
-        setData(res);
-      })
-      .catch((err) => {
-        notifyError(err);
-      });
-  }, []);
+  const { data } = usePersonHomeData();
 
   return (
     <main className={cx("personHomePage")}>
@@ -35,7 +21,7 @@ export function PersonHomePage() {
         <h1>Popular People</h1>
         <div className={cx("gridList")}>
           {data
-            ? data.popular.map((person) => (
+            ? data.map((person) => (
               <PersonCard key={person.id} person={person as any} />
             ))
             : Array(12).fill(0).map((_, idx) => (

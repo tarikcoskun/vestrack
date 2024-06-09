@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { getMediaInfo } from "./getMediaInfo";
-import { notifyError } from "@/util/notifyError";
+import { useRef } from "react";
+import { useMediaInfoData } from "./useMediaInfoData";
 
 // Components
 import { MediaInfoHeader } from "./sections/Header";
@@ -20,20 +19,8 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(style);
 
 export function MediaInfoPage({ mediaId, type }: { mediaId: string; type: "movie" | "tv" }) {
+  const { data } = useMediaInfoData(type, mediaId);
   const contentRef = useRef<HTMLDivElement>(null);
-  const [data, setData] = useState<MediaInfo & SeriesInfo | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => await getMediaInfo(type, mediaId);
-
-    fetchData()
-      .then((res) => {
-        setData(res);
-      })
-      .catch((err) => {
-        notifyError(err);
-      });
-  }, [mediaId]);
 
   return (
     <main className={cx("mediaInfoPage")} ref={contentRef}>

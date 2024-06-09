@@ -1,8 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { notifyError } from "@/util/notifyError";
-import { getMediaHomeData } from "./getMediaHomeData";
+import { useMediaHomeData } from "./useMediaHomeData";
 
 // Components
 import { Section } from "@/components/Section";
@@ -18,19 +16,7 @@ import { MediaCardHorizontalSkeleton, MediaHorizontalCard } from "@/components/c
 const cx = classNames.bind(style);
 
 export function MediaHomePage({ type }: { type: "movie" | "tv" }) {
-  const [data, setData] = useState<{ discover: Result[]; trending: Result[] } | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => await getMediaHomeData(type);
-
-    fetchData()
-      .then((res) => {
-        setData(res);
-      })
-      .catch((err) => {
-        notifyError(err);
-      });
-  }, []);
+  const { discoverData, trendingData } = useMediaHomeData(type);
 
   return (
     <main className={cx("mediaHomePage")}>
@@ -41,8 +27,8 @@ export function MediaHomePage({ type }: { type: "movie" | "tv" }) {
           </Section.Header>
 
           <Scroller.Track>
-            {data
-              ? data.discover.map((media) => (
+            {discoverData
+              ? discoverData.map((media) => (
                 <MediaHorizontalCard
                   key={media.id}
                   media={media}
@@ -63,8 +49,8 @@ export function MediaHomePage({ type }: { type: "movie" | "tv" }) {
         </Section.Header>
 
         <div className={cx("gridList")}>
-          {data
-            ? data.trending.map((media) => (
+          {trendingData
+            ? trendingData.map((media) => (
               <MediaCard key={media.id} media={media} type={type} />
             ))
             : Array(12).fill(0).map((_, idx) => (
