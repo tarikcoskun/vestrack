@@ -46,7 +46,7 @@ export function MediaHomePage({ type }: { type: "movie" | "tv" }) {
                 <MediaHorizontalCard
                   key={media.id}
                   media={media}
-                  type={media.media_type as "movie" | "tv"}
+                  type={type}
                 />
               ))
               : Array(3)
