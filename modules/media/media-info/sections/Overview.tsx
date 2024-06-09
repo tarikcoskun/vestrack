@@ -8,6 +8,7 @@ import Image from "next/image";
 import { Icon } from "@/components/Icon";
 import { Button } from "@/components/Button";
 import { Skeleton } from "@/components/Skeleton";
+import { Expandable } from "@/components/Expandable";
 
 // Styles
 import style from "./Overview.module.scss";
@@ -128,7 +129,7 @@ export function MediaInfoOverview({ data }: { data: MediaInfo & SeriesInfo | nul
               </div>
               )}
           {data
-            ? <p>{data?.overview}</p>
+            ? <Expandable>{data?.overview}</Expandable>
             : <Skeleton.Paragraph height={94.5} lines={4} />}
         </section>
       </div>

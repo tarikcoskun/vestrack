@@ -9,6 +9,7 @@ import { MediaCard, MediaCardSkeleton } from "@/components/cards/Media";
 // Styles
 import style from "./Industry.module.scss";
 import classNames from "classnames/bind";
+import { Expandable } from "@/components/Expandable";
 
 const cx = classNames.bind(style);
 
@@ -36,10 +37,12 @@ export function PersonInfoIndustry({ data }: { data: PersonInfo | null }) {
 
           {data
             ? (
-              <p dangerouslySetInnerHTML={{ __html: snarkdown(data?.biography.replace(/\r?\n|\r/g, "<br>")) }} />
+              <Expandable>
+                <p dangerouslySetInnerHTML={{ __html: snarkdown(data?.biography.replace(/\r?\n|\r/g, "<br>")) }} />
+              </Expandable>
               )
             : (
-              <Skeleton.Paragraph height={162.75} lines={7} />
+              <Skeleton.Paragraph height={72} lines={3} />
               )}
         </Section>
       )}

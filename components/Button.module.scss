@@ -1,7 +1,7 @@
 @use "sass:color" as sass-color;
 @use "@/styles/colors";
 
-$variants: "solid", "soft", "ghost";
+$variants: "solid", "soft", "ghost", "link";
 $colors: (
   "white": (
     text: colors.$gray-900,
@@ -63,7 +63,12 @@ $colors: (
       background-color: transparent;
       color: map-get($colors, $color, "text");
 
-      &:hover {background-color: sass-color.scale(map-get($colors, $color, "base"), $alpha: -85%); }
+      &:hover { background-color: sass-color.scale(map-get($colors, $color, "base"), $alpha: -85%); }
+    } @else if $variant == "link" {
+      background-color: transparent;
+      color: map-get($colors, $color, "text");
+
+      &:hover { text-decoration: underline }
     } @else {
       @error "Unsupported variant: #{$variant}";
     }

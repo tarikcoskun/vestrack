@@ -1,0 +1,17 @@
+@use "@/styles/util";
+
+.expandable {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: max-height 300ms;
+
+  p {
+    display: inline;
+    line-height: 24px;
+
+    &[data-state="initial"] {
+      @include util.line-clamp(3);
+    }
+  }
+}

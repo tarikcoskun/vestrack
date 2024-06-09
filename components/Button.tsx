@@ -11,7 +11,7 @@ import classNames from "classnames/bind";
 
 interface Props {
   color?: "white" | "gray" | "blue";
-  variant?: "solid" | "soft" | "ghost";
+  variant?: "solid" | "soft" | "ghost" | "link";
   size?: "sm" | "lg";
   padding?: boolean | "square";
   rounded?: boolean | "full";

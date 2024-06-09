@@ -59,7 +59,7 @@ export function PersonInfoPersonal({ data }: { data: PersonInfo | null }) {
           {data ? data.known_for_department : <Skeleton width={100} height={16.09} type="text" />}
         </div>
         <div className={cx("factGroup")}>
-          <div className={cx("title")}>Birth</div>
+          <div className={cx("title")}>Born</div>
           {data
             ? (
               <>
