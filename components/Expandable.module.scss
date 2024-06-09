@@ -11,7 +11,9 @@
     line-height: 24px;
 
     &[data-state="initial"] {
-      @include util.line-clamp(3);
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
     }
   }
 }

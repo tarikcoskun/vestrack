@@ -26,7 +26,7 @@ export function Expandable(props: ExpandableProps) {
   useEffect(() => {
     if (!textRef.current) return;
 
-    const isLonger = Number(textRef.current.offsetHeight) / lineHeight >= lineClamp;
+    const isLonger = Number(textRef.current.scrollHeight) / lineHeight > lineClamp;
 
     setOverflowing(isLonger);
   }, []);
