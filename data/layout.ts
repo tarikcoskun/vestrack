@@ -7,6 +7,11 @@ export interface GenericLink {
 
 export const navbarLinks: (GenericLink & { icon: IconList })[] = [
   {
+    label: "Home",
+    href: "/",
+    icon: "home",
+  },
+  {
     label: "Movies",
     href: "/movie",
     icon: "film",
