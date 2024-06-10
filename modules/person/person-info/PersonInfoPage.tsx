@@ -147,12 +147,12 @@ export function PersonInfoPage({ params: { id } }: { params: { id: string } }) {
             <div className={cx("biography")}>
               {data
                 ? (
-                  <Expandable>
+                  <Expandable lineClamp={5}>
                     <p dangerouslySetInnerHTML={{ __html: snarkdown(data?.biography.replace(/\r?\n|\r/g, "<br>")) }} />
                   </Expandable>
                   )
                 : (
-                  <Skeleton.Paragraph height={96} lines={4} />
+                  <Skeleton.Paragraph height={144} lines={6} />
                   )}
             </div>
           )}
@@ -162,12 +162,12 @@ export function PersonInfoPage({ params: { id } }: { params: { id: string } }) {
       <div className={cx("mbBiography")}>
         {data
           ? (
-            <Expandable>
+            <Expandable lineClamp={5}>
               <p dangerouslySetInnerHTML={{ __html: snarkdown(data?.biography.replace(/\r?\n|\r/g, "<br>")) }} />
             </Expandable>
             )
           : (
-            <Skeleton.Paragraph height={96} lines={4} />
+            <Skeleton.Paragraph height={144} lines={6} />
             )}
       </div>
 
