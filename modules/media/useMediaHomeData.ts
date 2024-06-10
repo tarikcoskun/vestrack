@@ -14,7 +14,7 @@ export function useMediaHomeData(type: "movie" | "tv") {
         notifyError(err);
       });
 
-    axios.get<Result[]>("/getTrending", { params: { type: "all", timeWindow: "day" } })
+    axios.get<Result[]>("/getTrending", { params: { type, timeWindow: "day" } })
       .then((res) => {
         setTrendingData(res.data);
       }).catch((err) => {
