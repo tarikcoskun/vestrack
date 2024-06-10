@@ -42,19 +42,12 @@ class TmdbHandler {
   }
 
   async getPersonInfo(personId: string) {
-    const { combined_credits, ...data } = await this.fetch<PersonInfo>(`/person/${personId}?append_to_response=combined_credits`);
-
-    const filteredCast = (combined_credits.cast || []).reduce((arr: PersonCast[], curr) => {
-      if (!arr.map((item) => item.name).includes(curr.name)) arr.push(curr);
-      return arr;
-    }, []);
-
-    const sortedCast = filteredCast.sort((a, b) => b.popularity - a.popularity);
+    const { combined_credits, ...data } = await this.fetch<PersonInfo>(`/person/${personId}?append_to_response=combined_credits,external_ids`);
 
     return {
       ...data,
       combined_credits: {
-        cast: sortedCast,
+        cast: combined_credits.cast,
         crew: combined_credits.crew,
       },
     };

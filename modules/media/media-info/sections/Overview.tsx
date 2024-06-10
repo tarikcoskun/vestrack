@@ -130,7 +130,7 @@ export function MediaInfoOverview({ data }: { data: MediaInfo & SeriesInfo | nul
               )}
           {data
             ? <Expandable>{data?.overview}</Expandable>
-            : <Skeleton.Paragraph height={94.5} lines={4} />}
+            : <Skeleton.Paragraph height={96} lines={4} />}
         </section>
       </div>
     </section>

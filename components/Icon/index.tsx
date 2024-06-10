@@ -19,14 +19,19 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {
   size?: number | string;
 }
 
+export interface StandaloneIconProps extends React.SVGProps<SVGSVGElement> {
+  size?: number | string;
+}
+
 export type IconList = keyof typeof icons.line;
 
-export function Icon({ icon, size = 16, variant = "line", ...props }: IconProps) {
+export function Icon(props: IconProps) {
+  const { icon, size = 16, variant = "line", ...iconProps } = props;
   const body = icons[variant][icon];
 
   return (
     <svg
-      {...props}
+      {...iconProps}
       role="img"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 256 256"

@@ -10,8 +10,77 @@
     align-items: flex-start;
     gap: var(--layout-gap);
     padding-block: var(--section-spacing);
-    @include media("<lg") {
-      flex-direction: column;
+    @include media("<md") { --layout-gap: 1rem }
+
+    .columnLeft {
+      display: flex;
+      width: var(--poster-width);
+      height: 100%;
+      flex-shrink: 0;
+
+      .personPhotoFallback {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-gray-400);
+      }
+
+      .personPhoto,
+      .personPhotoFallback,
+      .personPhotoSkeleton {
+        width: 100%;
+        height: 100%;
+        border-radius: var(--rounded-base);
+        aspect-ratio: 2/3;
+        background-color: var(--color-gray-200);
+        @include media("<md") {
+          align-self: center;
+          object-fit: cover;
+          object-position: top;
+        }
+      }
     }
+
+    .columnRight {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      gap: 2rem;
+      @include media("<md") {
+        gap: 1rem;
+        padding-block: 1rem;
+      }
+
+      .facts {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        @include media("<phone") { gap: 1.5rem }
+
+        .factItem {
+          display: flex;
+          gap: 0.5rem 1rem;
+          @include media("<phone") { flex-direction: column; }
+
+          .title {
+            flex-shrink: 0;
+          }
+        }
+      }
+
+      .socials {
+        display: flex;
+        gap: 0.75rem;
+      }
+
+      .biography {
+        @include media("<md") { display: none; }
+      }
+    }
+  }
+
+  .mbBiography {
+    padding-bottom: var(--section-spacing);
+    @include media(">md") { display: none; }
   }
 }
