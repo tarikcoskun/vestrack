@@ -189,7 +189,7 @@ export function PersonInfoPage({ params: { id } }: { params: { id: string } }) {
                       withRating={false}
                     />
                   ))
-                  : Array(5)
+                  : Array(6)
                     .fill(0)
                     .map((_, idx) => (
                       <MediaCardSkeleton key={idx} />
