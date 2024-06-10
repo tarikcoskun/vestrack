@@ -35,6 +35,7 @@
         height: 100vh;
         background-color: colors.$gray-950;
         opacity: 0;
+        padding-inline: calc(var(--content-spacing) / 2);
         pointer-events: none;
 
         &[data-menu-state="active"] {
@@ -49,13 +50,21 @@
         @include media("<md") { flex-direction: column; }
 
         .link {
+          position: relative;
           display: flex;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.75rem;
+          padding-block: 0.75rem;
           padding-inline: 1rem;
           @include media("<md") {
-            padding-block: 1.5rem;
-            padding-inline: var(--content-spacing);
+            padding-block: 1.25rem;
+            padding-inline: calc(var(--content-spacing) / 2);
+          }
+
+          &[data-state="active"] {
+            border-radius: var(--rounded-lg);
+            background-color: colors.$gray-800;
+            color: colors.$gray-100;
           }
         }
       }
