@@ -59,7 +59,7 @@ export function MediaCard(props: MediaCardProps) {
               <span>{media.vote_average.toFixed(1).replace(".0", "")}</span>
             </span>
           )}
-          <span>{new Date(media.release_date! || media.first_air_date!).getFullYear()}</span>
+          {(media.release_date || media.first_air_date) && (<span>{new Date(media.release_date! || media.first_air_date!).getFullYear()}</span>)}
         </div>
       </div>
     </article>
