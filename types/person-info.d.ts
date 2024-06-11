@@ -40,7 +40,7 @@ interface PersonCast {
   backdrop_path: null | string;
   genre_ids: number[];
   id: number;
-  original_language: OriginalLanguage;
+  original_language: string;
   original_title?: string;
   overview: string;
   popularity: number;
@@ -79,5 +79,5 @@ interface PersonCrew {
   credit_id: string;
   department: string;
   job: string;
-  media_type: MediaType;
+  media_type: "movie" | "tv";
 }

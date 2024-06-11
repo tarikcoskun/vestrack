@@ -1,5 +1,9 @@
 import axios from "axios";
 
+export interface ExtendedPersonInfo extends PersonInfo {
+  known_for: (PersonCast & PersonCrew)[];
+}
+
 class TmdbHandler {
   apiKey = process.env.TMDB_API_KEY;
 
@@ -44,12 +48,14 @@ class TmdbHandler {
   async getPersonInfo(personId: string) {
     const { combined_credits, ...data } = await this.fetch<PersonInfo>(`/person/${personId}?append_to_response=combined_credits,external_ids`);
 
+    const knownFor = [...combined_credits.cast, ...combined_credits.crew].reduce((arr: Partial<(PersonCast & PersonCrew)>[], curr: Partial<(PersonCast & PersonCrew)>) => {
+      if (!arr.map((item) => (item.title || item.name)).includes(curr.title || curr.name)) arr.push(curr);
+      return arr;
+    }, []);
+
     return {
       ...data,
-      combined_credits: {
-        cast: combined_credits.cast,
-        crew: combined_credits.crew,
-      },
+      known_for: knownFor,
     };
   }
 

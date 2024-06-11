@@ -69,25 +69,29 @@ export function PersonInfoPage({ params: { id } }: { params: { id: string } }) {
               />
               )}
 
-          <div className={cx("facts")}>
-            {data
-              ? (
-                <div className={cx("factItem")}>
-                  <span className={cx("title")}>Born</span>
-                  {data?.birthday && (
-                    <span>
-                      {new Date(data?.birthday).toLocaleDateString("en-US", { ...DATE_FORMAT, month: "long" })} ({calculateAge(new Date(data?.birthday))} years old)
-                    </span>
+          {(data === null || data.birthday) && (
+            <div className={cx("facts")}>
+              {data
+                ? (
+                  <div className={cx("factItem")}>
+                    <span className={cx("title")}>Born</span>
+                    {data?.birthday
+                      ? (
+                        <span>
+                          {new Date(data?.birthday).toLocaleDateString("en-US", { ...DATE_FORMAT, month: "long" })} ({calculateAge(new Date(data?.birthday))} years old)
+                        </span>
+                        )
+                      : "-"}
+                  </div>
+                  )
+                : (
+                  <div className={cx("factItem", "skeleton")}>
+                    <Skeleton width={30} height={16.09} />
+                    <Skeleton height={16.09} style={{ maxWidth: "180px", width: "100%" }} />
+                  </div>
                   )}
-                </div>
-                )
-              : (
-                <div className={cx("factItem", "skeleton")}>
-                  <Skeleton width={30} height={16.09} />
-                  <Skeleton height={16.09} style={{ maxWidth: "180px", width: "100%" }} />
-                </div>
-                )}
-          </div>
+            </div>
+          )}
 
           {(data === null || (data.external_ids.facebook_id || data.external_ids.instagram_id || data.external_ids.twitter_id))
           && (
@@ -143,19 +147,19 @@ export function PersonInfoPage({ params: { id } }: { params: { id: string } }) {
             </div>
           )}
 
-          {(data === null || data.biography) && (
-            <div className={cx("biography")}>
-              {data
-                ? (
-                  <Expandable lineClamp={5}>
-                    <p dangerouslySetInnerHTML={{ __html: snarkdown(data?.biography.replace(/\r?\n|\r/g, "<br>")) }} />
-                  </Expandable>
-                  )
-                : (
-                  <Skeleton.Paragraph height={144} lines={6} />
-                  )}
-            </div>
-          )}
+          <div className={cx("biography")}>
+            {data
+              ? (
+                <Expandable lineClamp={5}>
+                  {data.biography
+                    ? <p dangerouslySetInnerHTML={{ __html: snarkdown(data?.biography.replace(/\r?\n|\r/g, "<br>")) }} />
+                    : <p>We don't have a biography for {data.name}</p>}
+                </Expandable>
+                )
+              : (
+                <Skeleton.Paragraph height={144} lines={6} />
+                )}
+          </div>
         </div>
       </div>
 
@@ -163,7 +167,9 @@ export function PersonInfoPage({ params: { id } }: { params: { id: string } }) {
         {data
           ? (
             <Expandable lineClamp={5}>
-              <p dangerouslySetInnerHTML={{ __html: snarkdown(data?.biography.replace(/\r?\n|\r/g, "<br>")) }} />
+              {data.biography
+                ? <p dangerouslySetInnerHTML={{ __html: snarkdown(data?.biography.replace(/\r?\n|\r/g, "<br>")) }} />
+                : <p>We don't have a biography for {data.name}</p>}
             </Expandable>
             )
           : (
@@ -171,7 +177,7 @@ export function PersonInfoPage({ params: { id } }: { params: { id: string } }) {
             )}
       </div>
 
-      {(data === null || data?.combined_credits.cast.length)
+      {(data === null || data.known_for.length)
         ? (
           <Section>
             <Scroller columns={6}>
@@ -181,7 +187,7 @@ export function PersonInfoPage({ params: { id } }: { params: { id: string } }) {
 
               <Scroller.Track>
                 {data
-                  ? data.combined_credits.cast.map((media) => (
+                  ? data.known_for.map((media) => (
                     <MediaCard
                       key={media.id}
                       media={media as Result}
