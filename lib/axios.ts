@@ -1,6 +1,4 @@
 import axios from "axios";
-
-// Data
 import { API_BASE_URL } from "@/constants/misc";
 
 const instance = axios.create({

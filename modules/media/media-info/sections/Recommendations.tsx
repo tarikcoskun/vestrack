@@ -1,9 +1,7 @@
-"use client";
-
 // Components
-import { MediaCard, MediaCardSkeleton } from "@/components/cards/Media";
 import { Section } from "@/components/Section";
 import { Scroller } from "@/components/Scroller";
+import { MediaCard, MediaCardSkeleton } from "@/components/cards/Media";
 
 export function MediaInfoRecommendations({ data }: { data: MediaInfo & SeriesInfo | null }) {
   return data === null || data?.recommendations.total_results > 0

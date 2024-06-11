@@ -1,6 +1,5 @@
-"use state";
-
 import { DATE_FORMAT } from "@/constants/misc";
+import { YOUTUBE_THUMBNAIL_BASE_URL, YOUTUBE_THUMBNAIL_QUALITY } from "@/constants/image";
 
 // Components
 import { Skeleton } from "../Skeleton";
@@ -8,7 +7,6 @@ import { Skeleton } from "../Skeleton";
 // Styles
 import style from "./Video.module.scss";
 import classNames from "classnames/bind";
-import { YOUTUBE_THUMBNAIL_BASE_URL, YOUTUBE_THUMBNAIL_QUALITY } from "@/constants/image";
 
 interface VideoCardProps extends React.HTMLAttributes<HTMLElement> {
   video: Video;

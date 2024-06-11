@@ -1,7 +1,4 @@
-import type {
-  PolymorphicComponentPropsWithRef,
-  PolymorphicRef,
-} from "@/types/polymorphic";
+import type { PolymorphicComponentPropsWithRef, PolymorphicRef } from "@/types/polymorphic";
 
 import React, { forwardRef } from "react";
 

@@ -1,3 +1,4 @@
+// Styles
 import style from "./Skeleton.module.scss";
 import classNames from "classnames/bind";
 

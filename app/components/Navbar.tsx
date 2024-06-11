@@ -2,8 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-
-// Data
 import { navbarLinks } from "@/data/layout";
 
 // Components

@@ -3,15 +3,15 @@
 import { useMediaHomeData } from "./useMediaHomeData";
 
 // Components
+import { Icon } from "@/components/Icon";
 import { Section } from "@/components/Section";
+import { Scroller } from "@/components/Scroller";
 import { MediaCard, MediaCardSkeleton } from "@/components/cards/Media";
+import { MediaCardHorizontalSkeleton, MediaHorizontalCard } from "@/components/cards/MediaHorizontal";
 
 // Styles
 import style from "./MediaHomePage.module.scss";
 import classNames from "classnames/bind";
-import { Scroller } from "@/components/Scroller";
-import { Icon } from "@/components/Icon";
-import { MediaCardHorizontalSkeleton, MediaHorizontalCard } from "@/components/cards/MediaHorizontal";
 
 const cx = classNames.bind(style);
 

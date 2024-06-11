@@ -9,6 +9,7 @@ import { TMDB_IMAGE_BASE_POSTER } from "@/constants/image";
 // Components
 import Image from "next/image";
 import { Icon } from "@/components/Icon";
+import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
 import { Scroller } from "@/components/Scroller";
 import { Skeleton } from "@/components/Skeleton";
@@ -21,7 +22,6 @@ import { BrandIconTwitter } from "@/components/Icon/standalone/BrandIconTwitter"
 // Styles
 import style from "./PersonInfoPage.module.scss";
 import classNames from "classnames/bind";
-import { Button } from "@/components/Button";
 
 const cx = classNames.bind(style);
 

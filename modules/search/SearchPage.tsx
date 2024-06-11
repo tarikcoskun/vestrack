@@ -1,70 +1,49 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
-import { notifyError } from "@/util/notifyError";
-import { type SearchResponse, getSearchData } from "./getSearchData";
+import { useSearchData } from "./useSearchData";
 
 // Components
-import { SearchMediaCard } from "./components/Card/Media";
+import { Skeleton } from "@/components/Skeleton";
+import { SearchMediaCard } from "./components/cards/Media";
+import { SearchPersonCard } from "./components/cards/Person";
 
 // Styles
 import style from "./SearchPage.module.scss";
 import classNames from "classnames/bind";
-import { SearchPersonCard } from "./components/Card/Person";
-import { Skeleton } from "@/components/Skeleton";
 
 const cx = classNames.bind(style);
 
 export function SearchPage() {
-  const searchParams = useSearchParams();
-  const query = searchParams.get("q")!;
-  const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState<SearchResponse | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => await getSearchData(query);
-
-    fetchData()
-      .then((res) => {
-        setData(res);
-      })
-      .catch((err) => {
-        notifyError(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [query]);
+  const { data } = useSearchData();
 
   return (
     <main className={cx("searchPage")}>
       <section className={cx("resultContainer")}>
         <h1>Titles</h1>
         <div className={cx("resultList")}>
-          {isLoading
-            ? Array(6).fill(0).map((_, idx) => <SearchCardSkeleton key={idx} />)
-            : data?.titles.length
+          {data
+            ? data?.titles.length
               ? data?.titles.map((title) => (
                 <SearchMediaCard key={title.id} media={title} type={title.media_type as "movie" | "tv"} />
               ))
               : (
                 <h3>No results</h3>
-                )}
+                )
+            : Array(6).fill(0).map((_, idx) => <SearchCardSkeleton key={idx} />)}
         </div>
       </section>
       <section className={cx("resultContainer")}>
         <h1>People</h1>
         <div className={cx("resultList")}>
-          {isLoading
-            ? Array(6).fill(0).map((_, idx) => <SearchCardSkeleton key={idx} />)
-            : data?.people.length
+          {data
+            ? data?.people.length
               ? data?.people.map((person) => (
                 <SearchPersonCard key={person.id} person={person} />
               ))
               : (
                 <h3>No results</h3>
-                )}
+                )
+            : Array(6).fill(0).map((_, idx) => <SearchCardSkeleton key={idx} />)}
         </div>
       </section>
     </main>

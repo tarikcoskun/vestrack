@@ -2,11 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 
+// Components
+import { Icon } from "./Icon";
+import { Button } from "./Button";
+
 // Style
 import style from "./Expandable.module.scss";
 import classNames from "classnames/bind";
-import { Button } from "./Button";
-import { Icon } from "./Icon";
 
 interface ExpandableProps extends React.HTMLAttributes<HTMLParagraphElement> {
   lineClamp?: number;

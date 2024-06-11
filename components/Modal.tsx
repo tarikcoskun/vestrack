@@ -1,4 +1,5 @@
 import { forwardRef, useEffect, useRef } from "react";
+import { composeRefs } from "@/util/composeRefs";
 
 // Components
 import { Button } from "./Button";
@@ -7,7 +8,6 @@ import { Icon } from "./Icon";
 // Styles
 import style from "./Modal.module.scss";
 import classNames from "classnames/bind";
-import { composeRefs } from "@/util/composeRefs";
 
 const cx = classNames.bind(style);
 

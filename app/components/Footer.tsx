@@ -1,4 +1,3 @@
-// Data
 import { footerLinks } from "@/data/layout";
 
 // Components

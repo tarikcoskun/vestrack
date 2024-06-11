@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { TMDB_IMAGE_BASE_PERSON_PHOTO } from "@/constants/image";
 
 // Components
 import { Icon } from "@/components/Icon";
@@ -8,12 +9,11 @@ import { Button } from "@/components/Button";
 import { Section } from "@/components/Section";
 import { Scroller } from "@/components/Scroller";
 import { MediaInfoModal } from "../components/Modal";
+import { PersonCard, PersonCardSkeleton } from "@/components/cards/Person";
 
 // Styles
 import style from "./Cast.module.scss";
 import classNames from "classnames/bind";
-import { PersonCard, PersonCardSkeleton } from "@/components/cards/Person";
-import { TMDB_IMAGE_BASE_PERSON_PHOTO } from "@/constants/image";
 
 const cx = classNames.bind(style);
 

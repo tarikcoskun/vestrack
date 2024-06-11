@@ -1,11 +1,4 @@
-import {
-  createContext,
-  forwardRef,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { createContext, forwardRef, useContext, useEffect, useRef, useState } from "react";
 import { composeRefs } from "@/util/composeRefs";
 
 // Styles
