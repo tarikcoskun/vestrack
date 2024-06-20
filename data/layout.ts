@@ -29,18 +29,6 @@ export const navbarLinks: (GenericLink & { icon: IconList })[] = [
 ];
 
 export const footerLinks: Record<string, (GenericLink & { external?: boolean })[]> = {
-  Community: [
-    {
-      label: "Twitter",
-      href: "https://twitter.com",
-      external: true,
-    },
-    {
-      label: "Discord",
-      href: "https://discord.com",
-      external: true,
-    },
-  ],
   Links: [
     {
       label: "Movies",

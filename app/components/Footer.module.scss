@@ -16,7 +16,7 @@
     gap: var(--section-spacing);
     grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
     margin-inline: auto;
-    @include media(">md") { --grid-cols: 4; }
+    @include media(">md") { --grid-cols: 3; }
 
     .footerSection {
       display: flex;
