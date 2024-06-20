@@ -59,6 +59,7 @@
     > * {
       width: var(--scroller-item-width);
       scroll-snap-align: start;
+      scroll-snap-stop: always;
     }
   }
 }
